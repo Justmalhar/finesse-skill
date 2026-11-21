@@ -35,6 +35,95 @@ Each pair below was built by the same model (Claude Opus, high effort) from the 
 </tr>
 </table>
 
+## Twenty briefs, twenty directions
+
+Twenty niches, each built by an agent from a one-paragraph brief with finesse loaded. No two share a palette or a type pairing, because the dealer was told what it had already dealt. Every page is static HTML in [`examples/`](examples/README.md), with its brief.
+
+<table>
+<tr>
+<td width="50%"><a href="examples/kubewatch/"><img src="docs/images/gallery/kubewatch.jpg" alt="Kubewatch, built with finesse"></a></td>
+<td width="50%"><a href="examples/casa-salina/"><img src="docs/images/gallery/casa-salina.jpg" alt="Casa Salina, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Kubewatch</b>. Kubernetes observability dashboard where request rate, errors, latency and per service deploy lanes share one 24 hour axis, set in a basalt and lime ledger.</td>
+<td><b>Casa Salina</b>. Website for an eleven room hotel in a Sicilian salt warehouse, in pale sage and terracotta with a stencilled mono type, spine labels and dot leaders.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/nachtwerk/"><img src="docs/images/gallery/nachtwerk.jpg" alt="Nachtwerk, built with finesse"></a></td>
+<td width="50%"><a href="examples/petal/"><img src="docs/images/gallery/petal.jpg" alt="Petal & Stem, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Nachtwerk</b>. Event page for a monthly techno night in a Leipzig power station, set like a darkroom contact sheet with the running order drawn as a ruler.</td>
+<td><b>Petal &amp; Stem</b>. Online shop for an Edinburgh florist in mint and coral, with a newspaper serif, mono margin notes pinned to the bouquet and a same day cut-off counter.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/pennywise/"><img src="docs/images/gallery/pennywise.jpg" alt="Pennywise, built with finesse"></a></td>
+<td width="50%"><a href="examples/atelier-vos/"><img src="docs/images/gallery/atelier-vos.jpg" alt="Atelier Vos, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Pennywise</b>. Budgeting dashboard in night navy and hot tangerine that leads with what is left this month and runs the balance against a dashed plan line.</td>
+<td><b>Atelier Vos</b>. Portfolio for a Rotterdam timber housing studio, printed like a risograph zine in blue and fluorescent pink, each project told through its own drawing.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/quinta/"><img src="docs/images/gallery/quinta.jpg" alt="Quinta do Vale Alto, built with finesse"></a></td>
+<td width="50%"><a href="examples/quill-ai/"><img src="docs/images/gallery/quill-ai.jpg" alt="Quill, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Quinta do Vale Alto</b>. A Douro wine estate printed like a theatre programme in plum black and gold leaf, with drawn bottles, a vintage sheet and a slope section to scale.</td>
+<td><b>Quill</b>. Landing page for an AI support reply tool on pistachio paper in Fraunces, with the drafted reply laid out like a letter and dotted leaders through every spec.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/cragline/"><img src="docs/images/gallery/cragline.jpg" alt="Cragline, built with finesse"></a></td>
+<td width="50%"><a href="examples/hollowlight/"><img src="docs/images/gallery/hollowlight.jpg" alt="Hollowlight, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Cragline</b>. A climbing gym logbook in overcast grey and jade, with hard printed outlines, perforated route tickets and a rubber stamp on the project you just sent.</td>
+<td><b>Hollowlight</b>. Launch page for a lighthouse puzzle game in mahogany and lamp gold, with a live three.js beam sweeping the sky.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/marginalia/"><img src="docs/images/gallery/marginalia.jpg" alt="Marginalia, built with finesse"></a></td>
+<td width="50%"><a href="examples/orbit-kids/"><img src="docs/images/gallery/orbit-kids.jpg" alt="Orbit, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Marginalia</b>. A Norwich bookshop and its Friday newsletter, set like a broadsheet front page in champagne Clarendon on oxblood, with drawn book covers.</td>
+<td><b>Orbit</b>. A children's science museum in ice white with a cobalt nav band, the building drawn as an orbit map and the five galleries switched with folder tabs.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/soundcheck/"><img src="docs/images/gallery/soundcheck.jpg" alt="Soundcheck, built with finesse"></a></td>
+<td width="50%"><a href="examples/pasteis/"><img src="docs/images/gallery/pasteis.jpg" alt="Nata & Co., built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Soundcheck</b>. Artist analytics in carbon and electric blue with condensed signage type, built around a full width listener chart, heat strips per track and a release countdown.</td>
+<td><b>Nata &amp; Co.</b>. Landing page for a Lisbon pastéis de nata bakery in peach and raspberry, with cut paper shapes around a tray straight from the oven.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/vector-cli/"><img src="docs/images/gallery/vector-cli.jpg" alt="Vector, built with finesse"></a></td>
+<td width="50%"><a href="examples/stride/"><img src="docs/images/gallery/stride.jpg" alt="Stride, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Vector</b>. Landing page for an open source schema diff tool in bottle green and brass, with a wide mono headline and an annotated terminal as the hero.</td>
+<td><b>Stride</b>. A running shoe drop set like a vermilion and black ink broadsheet, with the shoe drawn as an annotated technical proof inside printer's crop marks.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/modular/"><img src="docs/images/gallery/modular.jpg" alt="Fieldform M8, built with finesse"></a></td>
+<td width="50%"><a href="examples/clinic/"><img src="docs/images/gallery/clinic.jpg" alt="Northside Family Clinic, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Fieldform M8</b>. Launch page for a compact analogue synth on cool slate, with a live three.js model, a pinned scope that walks the signal path and patterns you can play.</td>
+<td><b>Northside Family Clinic</b>. Appointment booking laid out as a calm board of six panels, A1 to C2, with validation, a fully booked day and a confirmation screen.</td>
+</tr>
+<tr>
+<td width="50%"><a href="examples/deepwater/"><img src="docs/images/gallery/deepwater.jpg" alt="Deepwater Trust, built with finesse"></a></td>
+<td width="50%"><a href="examples/ramen/"><img src="docs/images/gallery/ramen.jpg" alt="Kaedama, built with finesse"></a></td>
+</tr>
+<tr>
+<td><b>Deepwater Trust</b>. Annual report for a marine research charity in Klein blue and chartreuse, with a warming chart, a sonar map and every claim footnoted to its source.</td>
+<td><b>Kaedama</b>. Website for a fourteen seat Melbourne ramen counter in olive drab and blaze orange, with the sections cut on a diagonal and order tags on the bowl.</td>
+</tr>
+</table>
+
+Photographs are from Wikimedia Commons and Unsplash under their licences, credited in each page's `CREDITS.md`. Everything else is drawn in HTML, CSS, SVG or three.js. Names, places and figures are invented.
+
 ## More built with finesse
 
 <table>

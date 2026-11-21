@@ -2,6 +2,17 @@
 
 All notable changes to finesse are recorded here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Twenty gallery pages under `examples/`, one niche each, with no palette or type pairing shared between them, and their screenshots in the README.
+
+### Changed
+
+- Tell 10 now also covers a single accent coloured word in a hero headline.
+- New tell 14: food photography pushed through a duotone or halftone until it stops looking appetising.
+
 ## [0.1.0] - 2026-11-21
 
 First public release.
