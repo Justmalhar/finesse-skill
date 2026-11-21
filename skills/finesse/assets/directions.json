@@ -1,0 +1,6339 @@
+{
+  "version": 1,
+  "registers": [
+    "marketing",
+    "product"
+  ],
+  "tags": {
+    "calm": [
+      "calm",
+      "quiet",
+      "focus",
+      "meditation",
+      "meditate",
+      "wellness",
+      "sleep",
+      "mindful",
+      "mindfulness",
+      "gentle",
+      "soft",
+      "serene",
+      "slow",
+      "relaxing"
+    ],
+    "bold": [
+      "bold",
+      "loud",
+      "striking",
+      "statement",
+      "launch",
+      "brave",
+      "daring",
+      "punchy",
+      "confident"
+    ],
+    "warm": [
+      "warm",
+      "cozy",
+      "cosy",
+      "home",
+      "craft",
+      "crafted",
+      "human",
+      "hospitality",
+      "welcoming",
+      "handmade"
+    ],
+    "cool": [
+      "cool",
+      "clinical",
+      "crisp",
+      "ice",
+      "icy",
+      "arctic",
+      "precise",
+      "sterile"
+    ],
+    "playful": [
+      "playful",
+      "fun",
+      "game",
+      "gaming",
+      "toy",
+      "quirky",
+      "whimsical",
+      "cheerful",
+      "kid",
+      "children",
+      "party",
+      "silly"
+    ],
+    "serious": [
+      "serious",
+      "legal",
+      "law",
+      "lawyer",
+      "enterprise",
+      "compliance",
+      "government",
+      "insurance",
+      "institution",
+      "institutional",
+      "audit",
+      "regulated",
+      "regulatory"
+    ],
+    "editorial": [
+      "editorial",
+      "magazine",
+      "journal",
+      "blog",
+      "publication",
+      "publishing",
+      "publisher",
+      "newsletter",
+      "essay",
+      "writing",
+      "story",
+      "stories",
+      "news",
+      "reading",
+      "article"
+    ],
+    "technical": [
+      "technical",
+      "engineering",
+      "engineer",
+      "api",
+      "infrastructure",
+      "devops",
+      "science",
+      "scientific",
+      "scientist",
+      "lab",
+      "research",
+      "hardware",
+      "robot",
+      "robotics",
+      "sensor",
+      "telemetry"
+    ],
+    "luxury": [
+      "luxury",
+      "premium",
+      "boutique",
+      "hotel",
+      "couture",
+      "wine",
+      "spirits",
+      "exclusive",
+      "concierge",
+      "jewellery",
+      "jewelry"
+    ],
+    "organic": [
+      "organic",
+      "natural",
+      "plant",
+      "garden",
+      "gardening",
+      "farm",
+      "farming",
+      "eco",
+      "sustainable",
+      "sustainability",
+      "botanical",
+      "herbal",
+      "climate"
+    ],
+    "industrial": [
+      "industrial",
+      "manufacturing",
+      "manufacturer",
+      "logistics",
+      "construction",
+      "freight",
+      "warehouse",
+      "factory",
+      "shipping",
+      "fleet",
+      "supply chain",
+      "delivery",
+      "courier",
+      "dispatch"
+    ],
+    "retro": [
+      "retro",
+      "vintage",
+      "nostalgic",
+      "nostalgia",
+      "70s",
+      "80s",
+      "90s",
+      "analog",
+      "analogue",
+      "heritage",
+      "classic",
+      "print"
+    ],
+    "minimal": [
+      "minimal",
+      "minimalist",
+      "simple",
+      "essential",
+      "understated",
+      "sparse",
+      "clean"
+    ],
+    "energetic": [
+      "energetic",
+      "fitness",
+      "sport",
+      "gym",
+      "festival",
+      "event",
+      "dynamic",
+      "fast",
+      "active",
+      "running",
+      "race",
+      "racing"
+    ],
+    "friendly": [
+      "friendly",
+      "approachable",
+      "community",
+      "social",
+      "family",
+      "families",
+      "neighbour",
+      "neighbor",
+      "neighbourhood",
+      "local",
+      "kind"
+    ],
+    "trustworthy": [
+      "trust",
+      "trusted",
+      "trustworthy",
+      "security",
+      "secure",
+      "safe",
+      "safety",
+      "reliable",
+      "reliability",
+      "privacy",
+      "verified",
+      "verification",
+      "compliant"
+    ],
+    "creative": [
+      "creative",
+      "studio",
+      "agency",
+      "design",
+      "designer",
+      "portfolio",
+      "artist",
+      "art",
+      "gallery",
+      "photo",
+      "photography",
+      "illustration",
+      "illustrator"
+    ],
+    "data": [
+      "data",
+      "analytics",
+      "dashboard",
+      "metric",
+      "monitoring",
+      "report",
+      "reporting",
+      "chart",
+      "observability",
+      "insight",
+      "statistics",
+      "kpi"
+    ],
+    "developer": [
+      "developer",
+      "code",
+      "coding",
+      "cli",
+      "sdk",
+      "open source",
+      "terminal",
+      "git",
+      "docs",
+      "documentation",
+      "programming",
+      "programmer"
+    ],
+    "finance": [
+      "finance",
+      "financial",
+      "invoice",
+      "invoicing",
+      "accounting",
+      "accountant",
+      "bookkeeping",
+      "budget",
+      "budgeting",
+      "payment",
+      "money",
+      "ledger",
+      "tax",
+      "billing",
+      "fintech",
+      "payroll",
+      "expense",
+      "bank",
+      "banking",
+      "cash flow",
+      "revenue",
+      "investing",
+      "investment",
+      "trading",
+      "crypto"
+    ],
+    "health": [
+      "health",
+      "healthcare",
+      "clinic",
+      "medical",
+      "medicine",
+      "doctor",
+      "therapy",
+      "therapist",
+      "care",
+      "patient",
+      "dental",
+      "dentist",
+      "pharma",
+      "pharmacy",
+      "nurse",
+      "nursing",
+      "wellbeing"
+    ],
+    "food": [
+      "food",
+      "restaurant",
+      "cafe",
+      "coffee",
+      "bakery",
+      "recipe",
+      "kitchen",
+      "menu",
+      "grocery",
+      "groceries",
+      "brewery",
+      "brew",
+      "roaster",
+      "roastery",
+      "cocktail bar",
+      "wine bar",
+      "pub"
+    ],
+    "outdoor": [
+      "outdoor",
+      "outdoors",
+      "travel",
+      "hiking",
+      "hike",
+      "adventure",
+      "camping",
+      "camp",
+      "nature",
+      "bike",
+      "cycling",
+      "surf",
+      "surfing",
+      "surfer",
+      "sailing",
+      "sailor",
+      "mountain",
+      "trail",
+      "tide",
+      "swell",
+      "ocean",
+      "sea",
+      "marine",
+      "weather"
+    ],
+    "culture": [
+      "culture",
+      "museum",
+      "theatre",
+      "theater",
+      "book",
+      "library",
+      "film",
+      "music",
+      "literature",
+      "poetry",
+      "concert",
+      "record shop",
+      "record store",
+      "vinyl"
+    ],
+    "fashion": [
+      "fashion",
+      "apparel",
+      "clothing",
+      "beauty",
+      "cosmetic",
+      "cosmetics",
+      "skincare",
+      "style",
+      "wear",
+      "shoe",
+      "streetwear"
+    ],
+    "education": [
+      "education",
+      "school",
+      "course",
+      "learn",
+      "learning",
+      "student",
+      "teach",
+      "teaching",
+      "teacher",
+      "tutor",
+      "tutoring",
+      "university",
+      "class"
+    ]
+  },
+  "palettes": [
+    {
+      "id": "P01",
+      "name": "Vermilion press",
+      "character": "Black ink and one vermilion on unbleached white; a printed broadsheet.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "editorial",
+        "bold",
+        "culture",
+        "serious"
+      ],
+      "base": "light",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.975 0.004 90)",
+        "surface": "oklch(0.987 0.002 90)",
+        "surface-raised": "oklch(0.995 0.001 90)",
+        "border": "oklch(0.19 0.01 60 / 0.12)",
+        "border-strong": "oklch(0.643 0.01 60)",
+        "text": "oklch(0.19 0.01 60)",
+        "text-muted": "oklch(0.49 0.01 60)",
+        "accent": "oklch(0.57 0.21 33)",
+        "accent-text": "oklch(0.985 0.007 33)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.53 0.14 150)",
+        "warning": "oklch(0.55 0.119 70)",
+        "focus": "oklch(0.57 0.21 33)",
+        "chart-1": "oklch(0.59 0.16 48)",
+        "chart-2": "oklch(0.46 0.104 240)",
+        "chart-3": "oklch(0.53 0.1 170)",
+        "chart-4": "oklch(0.46 0.17 300)",
+        "chart-5": "oklch(0.6 0.118 170)",
+        "chart-6": "oklch(0.46 0.17 270)"
+      },
+      "dark": {
+        "background": "oklch(0.165 0.006 60)",
+        "surface": "oklch(0.195 0.006 60)",
+        "surface-raised": "oklch(0.225 0.006 60)",
+        "border": "oklch(0.95 0.006 80 / 0.14)",
+        "border-strong": "oklch(0.517 0.01 80)",
+        "text": "oklch(0.95 0.006 80)",
+        "text-muted": "oklch(0.67 0.01 80)",
+        "accent": "oklch(0.68 0.18 35)",
+        "accent-text": "oklch(0.18 0.03 35)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.68 0.18 35)",
+        "chart-1": "oklch(0.68 0.18 48)",
+        "chart-2": "oklch(0.84 0.144 210)",
+        "chart-3": "oklch(0.59 0.17 140)",
+        "chart-4": "oklch(0.82 0.112 305)",
+        "chart-5": "oklch(0.64 0.17 5)",
+        "chart-6": "oklch(0.8 0.1 260)"
+      }
+    },
+    {
+      "id": "P02",
+      "name": "Sage and terracotta",
+      "character": "Pale sage walls, deep green ink, terracotta pots; a glasshouse.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "landing",
+        "article",
+        "app",
+        "settings"
+      ],
+      "tags": [
+        "organic",
+        "calm",
+        "health",
+        "food",
+        "warm"
+      ],
+      "base": "light",
+      "strategy": "tinted",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.95 0.022 140)",
+        "surface": "oklch(0.975 0.011 140)",
+        "surface-raised": "oklch(0.985 0.006 140)",
+        "border": "oklch(0.23 0.03 150 / 0.12)",
+        "border-strong": "oklch(0.622 0.03 150)",
+        "text": "oklch(0.23 0.03 150)",
+        "text-muted": "oklch(0.476 0.03 150)",
+        "accent": "oklch(0.55 0.13 42)",
+        "accent-text": "oklch(0.985 0.007 42)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.514 0.14 150)",
+        "warning": "oklch(0.534 0.115 70)",
+        "focus": "oklch(0.55 0.13 42)",
+        "chart-1": "oklch(0.6 0.157 50)",
+        "chart-2": "oklch(0.46 0.115 245)",
+        "chart-3": "oklch(0.6 0.17 320)",
+        "chart-4": "oklch(0.46 0.09 170)",
+        "chart-5": "oklch(0.6 0.17 275)",
+        "chart-6": "oklch(0.46 0.16 6)"
+      },
+      "dark": {
+        "background": "oklch(0.17 0.015 150)",
+        "surface": "oklch(0.2 0.015 150)",
+        "surface-raised": "oklch(0.23 0.015 150)",
+        "border": "oklch(0.94 0.015 130 / 0.14)",
+        "border-strong": "oklch(0.521 0.015 130)",
+        "text": "oklch(0.94 0.015 130)",
+        "text-muted": "oklch(0.683 0.015 130)",
+        "accent": "oklch(0.7 0.12 45)",
+        "accent-text": "oklch(0.18 0.03 45)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.7 0.12 45)",
+        "chart-1": "oklch(0.7 0.12 48)",
+        "chart-2": "oklch(0.84 0.106 225)",
+        "chart-3": "oklch(0.64 0.17 300)",
+        "chart-4": "oklch(0.84 0.17 130)",
+        "chart-5": "oklch(0.64 0.17 270)",
+        "chart-6": "oklch(0.84 0.17 96)"
+      }
+    },
+    {
+      "id": "P03",
+      "name": "Signal yellow",
+      "character": "The whole page is safety yellow with ink-blue type; impossible to miss.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "bold",
+        "energetic",
+        "playful",
+        "education"
+      ],
+      "base": "light",
+      "strategy": "committed",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.91 0.16 100)",
+        "surface": "oklch(0.945 0.1 100)",
+        "surface-raised": "oklch(0.975 0.05 100)",
+        "border": "oklch(0.2 0.02 100 / 0.12)",
+        "border-strong": "oklch(0.597 0.02 100)",
+        "text": "oklch(0.2 0.02 100)",
+        "text-muted": "oklch(0.432 0.02 100)",
+        "accent": "oklch(0.36 0.16 265)",
+        "accent-text": "oklch(0.985 0.006 265)",
+        "danger": "oklch(0.526 0.2 27)",
+        "success": "oklch(0.486 0.133 150)",
+        "warning": "oklch(0.506 0.109 70)",
+        "focus": "oklch(0.36 0.16 265)",
+        "chart-1": "oklch(0.36 0.16 265)",
+        "chart-2": "oklch(0.6 0.14 50)",
+        "chart-3": "oklch(0.46 0.17 295)",
+        "chart-4": "oklch(0.6 0.17 355)",
+        "chart-5": "oklch(0.46 0.09 170)",
+        "chart-6": "oklch(0.6 0.17 325)"
+      },
+      "dark": {
+        "background": "oklch(0.18 0.02 100)",
+        "surface": "oklch(0.21 0.02 100)",
+        "surface-raised": "oklch(0.24 0.02 100)",
+        "border": "oklch(0.95 0.03 100 / 0.14)",
+        "border-strong": "oklch(0.527 0.03 100)",
+        "text": "oklch(0.95 0.03 100)",
+        "text-muted": "oklch(0.739 0.03 100)",
+        "accent": "oklch(0.9 0.17 100)",
+        "accent-text": "oklch(0.18 0.03 100)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.9 0.17 100)",
+        "chart-1": "oklch(0.9 0.17 100)",
+        "chart-2": "oklch(0.64 0.17 285)",
+        "chart-3": "oklch(0.82 0.09 6)",
+        "chart-4": "oklch(0.64 0.109 190)",
+        "chart-5": "oklch(0.84 0.145 325)",
+        "chart-6": "oklch(0.59 0.17 144)"
+      }
+    },
+    {
+      "id": "P04",
+      "name": "Tomato",
+      "character": "A tomato-red field with near-black type and black buttons; a market poster.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "food",
+        "playful",
+        "bold",
+        "warm"
+      ],
+      "base": "light",
+      "strategy": "committed",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.75 0.15 35)",
+        "surface": "oklch(0.79 0.12 38)",
+        "surface-raised": "oklch(0.86 0.075 42)",
+        "border": "oklch(0.16 0.02 35 / 0.12)",
+        "border-strong": "oklch(0.413 0.02 35)",
+        "text": "oklch(0.16 0.02 35)",
+        "text-muted": "oklch(0.28 0.02 35)",
+        "accent": "oklch(0.2 0.03 35)",
+        "accent-text": "oklch(0.96 0.021 45)",
+        "danger": "oklch(0.326 0.132 27)",
+        "success": "oklch(0.302 0.083 150)",
+        "warning": "oklch(0.314 0.068 70)",
+        "focus": "oklch(0.2 0.03 35)",
+        "chart-1": "oklch(0.46 0.129 250)",
+        "chart-2": "oklch(0.41 0.08 170)",
+        "chart-3": "oklch(0.48 0.17 325)",
+        "chart-4": "oklch(0.4 0.08 230)",
+        "chart-5": "oklch(0.48 0.17 295)",
+        "chart-6": "oklch(0.36 0.147 355)"
+      },
+      "dark": {
+        "background": "oklch(0.2 0.04 35)",
+        "surface": "oklch(0.23 0.04 35)",
+        "surface-raised": "oklch(0.26 0.04 35)",
+        "border": "oklch(0.95 0.02 50 / 0.14)",
+        "border-strong": "oklch(0.541 0.02 50)",
+        "text": "oklch(0.95 0.02 50)",
+        "text-muted": "oklch(0.706 0.02 50)",
+        "accent": "oklch(0.7 0.17 35)",
+        "accent-text": "oklch(0.18 0.03 35)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.7 0.17 35)",
+        "chart-1": "oklch(0.7 0.17 48)",
+        "chart-2": "oklch(0.84 0.144 210)",
+        "chart-3": "oklch(0.59 0.17 140)",
+        "chart-4": "oklch(0.82 0.112 305)",
+        "chart-5": "oklch(0.64 0.17 5)",
+        "chart-6": "oklch(0.8 0.1 260)"
+      }
+    },
+    {
+      "id": "P05",
+      "name": "Klein and chartreuse",
+      "character": "A deep ultramarine field with chartreuse marks; gallery wall, opening night.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "creative",
+        "bold",
+        "culture",
+        "energetic"
+      ],
+      "base": "dark",
+      "strategy": "committed",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.965 0.015 265)",
+        "surface": "oklch(0.977 0.009 265)",
+        "surface-raised": "oklch(0.985 0.006 265)",
+        "border": "oklch(0.25 0.12 265 / 0.12)",
+        "border-strong": "oklch(0.638 0.12 265)",
+        "text": "oklch(0.25 0.12 265)",
+        "text-muted": "oklch(0.474 0.035 265)",
+        "accent": "oklch(0.42 0.22 265)",
+        "accent-text": "oklch(0.985 0.006 265)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.522 0.14 150)",
+        "warning": "oklch(0.546 0.118 70)",
+        "focus": "oklch(0.42 0.22 265)",
+        "chart-1": "oklch(0.42 0.22 265)",
+        "chart-2": "oklch(0.6 0.14 50)",
+        "chart-3": "oklch(0.46 0.17 350)",
+        "chart-4": "oklch(0.6 0.112 175)",
+        "chart-5": "oklch(0.46 0.17 300)",
+        "chart-6": "oklch(0.53 0.1 170)"
+      },
+      "dark": {
+        "background": "oklch(0.29 0.17 265)",
+        "surface": "oklch(0.33 0.16 265)",
+        "surface-raised": "oklch(0.37 0.15 265)",
+        "border": "oklch(0.97 0.01 265 / 0.14)",
+        "border-strong": "oklch(0.674 0.01 265)",
+        "text": "oklch(0.97 0.01 265)",
+        "text-muted": "oklch(0.84 0.01 265)",
+        "accent": "oklch(0.9 0.19 120)",
+        "accent-text": "oklch(0.25 0.1 265)",
+        "danger": "oklch(0.796 0.117 27)",
+        "success": "oklch(0.764 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.9 0.19 120)",
+        "chart-1": "oklch(0.9 0.19 120)",
+        "chart-2": "oklch(0.7 0.17 295)",
+        "chart-3": "oklch(0.84 0.144 210)",
+        "chart-4": "oklch(0.7 0.17 50)",
+        "chart-5": "oklch(0.84 0.16 170)",
+        "chart-6": "oklch(0.7 0.17 345)"
+      }
+    },
+    {
+      "id": "P06",
+      "name": "Bottle green and brass",
+      "character": "Bottle-green panelling with brass fittings; an old reading room or a members club.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "luxury",
+        "organic",
+        "outdoor",
+        "serious"
+      ],
+      "base": "dark",
+      "strategy": "committed",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.965 0.012 150)",
+        "surface": "oklch(0.977 0.007 150)",
+        "surface-raised": "oklch(0.985 0.004 150)",
+        "border": "oklch(0.22 0.04 160 / 0.12)",
+        "border-strong": "oklch(0.633 0.04 160)",
+        "text": "oklch(0.22 0.04 160)",
+        "text-muted": "oklch(0.475 0.035 160)",
+        "accent": "oklch(0.4 0.08 160)",
+        "accent-text": "oklch(0.985 0.015 160)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.526 0.14 150)",
+        "warning": "oklch(0.546 0.118 70)",
+        "focus": "oklch(0.4 0.08 160)",
+        "chart-1": "oklch(0.41 0.08 170)",
+        "chart-2": "oklch(0.6 0.17 305)",
+        "chart-3": "oklch(0.4 0.16 30)",
+        "chart-4": "oklch(0.6 0.17 255)",
+        "chart-5": "oklch(0.46 0.17 0)",
+        "chart-6": "oklch(0.6 0.101 205)"
+      },
+      "dark": {
+        "background": "oklch(0.28 0.06 160)",
+        "surface": "oklch(0.31 0.06 160)",
+        "surface-raised": "oklch(0.34 0.06 160)",
+        "border": "oklch(0.95 0.02 95 / 0.14)",
+        "border-strong": "oklch(0.617 0.02 95)",
+        "text": "oklch(0.95 0.02 95)",
+        "text-muted": "oklch(0.81 0.02 95)",
+        "accent": "oklch(0.82 0.12 80)",
+        "accent-text": "oklch(0.22 0.049 160)",
+        "danger": "oklch(0.736 0.161 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.82 0.12 80)",
+        "chart-1": "oklch(0.82 0.12 96)",
+        "chart-2": "oklch(0.64 0.17 260)",
+        "chart-3": "oklch(0.84 0.104 350)",
+        "chart-4": "oklch(0.64 0.126 170)",
+        "chart-5": "oklch(0.82 0.112 305)",
+        "chart-6": "oklch(0.71 0.14 170)"
+      }
+    },
+    {
+      "id": "P07",
+      "name": "Oxblood and champagne",
+      "character": "Oxblood walls and champagne type; a wine list after dark.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "luxury",
+        "fashion",
+        "food",
+        "editorial"
+      ],
+      "clashes": [
+        "T14",
+        "T24"
+      ],
+      "base": "dark",
+      "strategy": "committed",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.97 0.008 30)",
+        "surface": "oklch(0.982 0.004 30)",
+        "surface-raised": "oklch(0.99 0.003 30)",
+        "border": "oklch(0.2 0.03 20 / 0.12)",
+        "border-strong": "oklch(0.643 0.03 20)",
+        "text": "oklch(0.2 0.03 20)",
+        "text-muted": "oklch(0.476 0.03 20)",
+        "accent": "oklch(0.42 0.14 20)",
+        "accent-text": "oklch(0.985 0.007 20)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.526 0.14 150)",
+        "warning": "oklch(0.546 0.118 70)",
+        "focus": "oklch(0.42 0.14 20)",
+        "chart-1": "oklch(0.4 0.14 20)",
+        "chart-2": "oklch(0.6 0.101 200)",
+        "chart-3": "oklch(0.46 0.17 290)",
+        "chart-4": "oklch(0.64 0.12 170)",
+        "chart-5": "oklch(0.46 0.17 260)",
+        "chart-6": "oklch(0.6 0.14 50)"
+      },
+      "dark": {
+        "background": "oklch(0.25 0.08 20)",
+        "surface": "oklch(0.28 0.08 20)",
+        "surface-raised": "oklch(0.31 0.08 20)",
+        "border": "oklch(0.95 0.015 60 / 0.14)",
+        "border-strong": "oklch(0.572 0.015 60)",
+        "text": "oklch(0.95 0.015 60)",
+        "text-muted": "oklch(0.779 0.015 60)",
+        "accent": "oklch(0.86 0.07 80)",
+        "accent-text": "oklch(0.22 0.06 20)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.86 0.07 80)",
+        "chart-1": "oklch(0.84 0.1 54)",
+        "chart-2": "oklch(0.64 0.17 255)",
+        "chart-3": "oklch(0.84 0.143 330)",
+        "chart-4": "oklch(0.59 0.17 144)",
+        "chart-5": "oklch(0.8 0.104 285)",
+        "chart-6": "oklch(0.64 0.16 48)"
+      }
+    },
+    {
+      "id": "P08",
+      "name": "Graphite and safety orange",
+      "character": "Cool graphite instrument panels with one safety-orange control.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "app",
+        "dashboard",
+        "table",
+        "settings"
+      ],
+      "tags": [
+        "industrial",
+        "technical",
+        "data",
+        "serious"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.925 0.004 250)",
+        "surface": "oklch(0.945 0.002 250)",
+        "surface-raised": "oklch(0.965 0.001 250)",
+        "border": "oklch(0.2 0.006 250 / 0.12)",
+        "border-strong": "oklch(0.607 0.01 250)",
+        "text": "oklch(0.2 0.006 250)",
+        "text-muted": "oklch(0.471 0.01 250)",
+        "accent": "oklch(0.62 0.168 48)",
+        "accent-text": "oklch(0.18 0.03 48)",
+        "danger": "oklch(0.534 0.2 27)",
+        "success": "oklch(0.494 0.136 150)",
+        "warning": "oklch(0.518 0.112 70)",
+        "focus": "oklch(0.62 0.168 48)",
+        "chart-1": "oklch(0.62 0.168 48)",
+        "chart-2": "oklch(0.46 0.15 255)",
+        "chart-3": "oklch(0.53 0.1 170)",
+        "chart-4": "oklch(0.46 0.17 315)",
+        "chart-5": "oklch(0.6 0.118 170)",
+        "chart-6": "oklch(0.46 0.17 285)"
+      },
+      "dark": {
+        "background": "oklch(0.17 0.004 250)",
+        "surface": "oklch(0.2 0.004 250)",
+        "surface-raised": "oklch(0.23 0.004 250)",
+        "border": "oklch(0.94 0.003 250 / 0.14)",
+        "border-strong": "oklch(0.521 0.01 250)",
+        "text": "oklch(0.94 0.003 250)",
+        "text-muted": "oklch(0.683 0.01 250)",
+        "accent": "oklch(0.72 0.18 50)",
+        "accent-text": "oklch(0.18 0.03 50)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.72 0.18 50)",
+        "chart-1": "oklch(0.72 0.18 50)",
+        "chart-2": "oklch(0.84 0.144 210)",
+        "chart-3": "oklch(0.59 0.17 140)",
+        "chart-4": "oklch(0.84 0.128 320)",
+        "chart-5": "oklch(0.64 0.15 48)",
+        "chart-6": "oklch(0.8 0.1 275)"
+      }
+    },
+    {
+      "id": "P09",
+      "name": "Riso",
+      "character": "Fluorescent pink and blue ink on white stock; a risograph zine.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "creative",
+        "playful",
+        "culture",
+        "retro"
+      ],
+      "base": "light",
+      "strategy": "tinted",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.975 0.006 260)",
+        "surface": "oklch(0.987 0.003 260)",
+        "surface-raised": "oklch(0.995 0.002 260)",
+        "border": "oklch(0.3 0.13 262 / 0.12)",
+        "border-strong": "oklch(0.648 0.13 262)",
+        "text": "oklch(0.3 0.13 262)",
+        "text-muted": "oklch(0.49 0.035 262)",
+        "accent": "oklch(0.62 0.23 0)",
+        "accent-text": "oklch(0.18 0.03 0)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.53 0.14 150)",
+        "warning": "oklch(0.55 0.119 70)",
+        "focus": "oklch(0.62 0.23 0)",
+        "chart-1": "oklch(0.62 0.23 0)",
+        "chart-2": "oklch(0.46 0.09 170)",
+        "chart-3": "oklch(0.6 0.12 50)",
+        "chart-4": "oklch(0.46 0.17 270)",
+        "chart-5": "oklch(0.6 0.16 6)",
+        "chart-6": "oklch(0.46 0.104 240)"
+      },
+      "dark": {
+        "background": "oklch(0.29 0.05 205)",
+        "surface": "oklch(0.33 0.055 205)",
+        "surface-raised": "oklch(0.37 0.06 205)",
+        "border": "oklch(0.97 0.01 205 / 0.14)",
+        "border-strong": "oklch(0.69 0.01 205)",
+        "text": "oklch(0.97 0.01 205)",
+        "text-muted": "oklch(0.85 0.01 205)",
+        "accent": "oklch(0.82 0.114 355)",
+        "accent-text": "oklch(0.25 0.042 205)",
+        "danger": "oklch(0.812 0.106 27)",
+        "success": "oklch(0.784 0.15 150)",
+        "warning": "oklch(0.804 0.14 75)",
+        "focus": "oklch(0.82 0.114 355)",
+        "chart-1": "oklch(0.82 0.114 355)",
+        "chart-2": "oklch(0.63 0.16 152)",
+        "chart-3": "oklch(0.84 0.17 96)",
+        "chart-4": "oklch(0.7 0.156 260)",
+        "chart-5": "oklch(0.82 0.111 50)",
+        "chart-6": "oklch(0.68 0.123 220)"
+      }
+    },
+    {
+      "id": "P10",
+      "name": "Ice and cobalt",
+      "character": "Ice-white surfaces and one saturated cobalt; a precise instrument, not a bank.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "landing",
+        "pricing",
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "docs"
+      ],
+      "tags": [
+        "trustworthy",
+        "technical",
+        "cool",
+        "data",
+        "finance"
+      ],
+      "base": "light",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": false
+      },
+      "light": {
+        "background": "oklch(0.96 0.012 235)",
+        "surface": "oklch(0.98 0.007 235)",
+        "surface-raised": "oklch(1 0 235)",
+        "border": "oklch(0.21 0.03 255 / 0.12)",
+        "border-strong": "oklch(0.637 0.03 255)",
+        "text": "oklch(0.21 0.03 255)",
+        "text-muted": "oklch(0.477 0.03 255)",
+        "accent": "oklch(0.5 0.21 262)",
+        "accent-text": "oklch(0.985 0.007 262)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.521 0.14 150)",
+        "warning": "oklch(0.545 0.114 70)",
+        "focus": "oklch(0.5 0.21 262)",
+        "chart-1": "oklch(0.5 0.21 262)",
+        "chart-2": "oklch(0.6 0.14 50)",
+        "chart-3": "oklch(0.46 0.09 170)",
+        "chart-4": "oklch(0.6 0.17 330)",
+        "chart-5": "oklch(0.4 0.16 30)",
+        "chart-6": "oklch(0.6 0.17 295)"
+      },
+      "dark": {
+        "background": "oklch(0.16 0.006 255)",
+        "surface": "oklch(0.19 0.006 255)",
+        "surface-raised": "oklch(0.22 0.006 255)",
+        "border": "oklch(0.95 0.006 255 / 0.14)",
+        "border-strong": "oklch(0.517 0.01 255)",
+        "text": "oklch(0.95 0.006 255)",
+        "text-muted": "oklch(0.647 0.01 255)",
+        "accent": "oklch(0.55 0.2 262)",
+        "accent-text": "oklch(0.985 0.005 262)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.55 0.2 262)",
+        "chart-1": "oklch(0.55 0.2 262)",
+        "chart-2": "oklch(0.84 0.17 96)",
+        "chart-3": "oklch(0.64 0.126 170)",
+        "chart-4": "oklch(0.84 0.104 350)",
+        "chart-5": "oklch(0.59 0.17 140)",
+        "chart-6": "oklch(0.82 0.112 305)"
+      }
+    },
+    {
+      "id": "P11",
+      "name": "Peach and raspberry",
+      "character": "Peach-skin background, raspberry accent, cocoa type; a summer fruit stall.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "landing",
+        "app",
+        "settings"
+      ],
+      "tags": [
+        "friendly",
+        "fashion",
+        "food",
+        "warm",
+        "playful"
+      ],
+      "base": "light",
+      "strategy": "tinted",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.95 0.027 50)",
+        "surface": "oklch(0.975 0.013 50)",
+        "surface-raised": "oklch(0.985 0.008 50)",
+        "border": "oklch(0.22 0.03 30 / 0.12)",
+        "border-strong": "oklch(0.627 0.03 30)",
+        "text": "oklch(0.22 0.03 30)",
+        "text-muted": "oklch(0.465 0.03 30)",
+        "accent": "oklch(0.5 0.19 5)",
+        "accent-text": "oklch(0.985 0.007 5)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.51 0.14 150)",
+        "warning": "oklch(0.534 0.115 70)",
+        "focus": "oklch(0.5 0.19 5)",
+        "chart-1": "oklch(0.5 0.19 5)",
+        "chart-2": "oklch(0.6 0.105 185)",
+        "chart-3": "oklch(0.46 0.17 280)",
+        "chart-4": "oklch(0.53 0.1 170)",
+        "chart-5": "oklch(0.46 0.129 250)",
+        "chart-6": "oklch(0.6 0.157 50)"
+      },
+      "dark": {
+        "background": "oklch(0.19 0.008 20)",
+        "surface": "oklch(0.22 0.008 20)",
+        "surface-raised": "oklch(0.25 0.008 20)",
+        "border": "oklch(0.94 0.02 55 / 0.14)",
+        "border-strong": "oklch(0.535 0.02 55)",
+        "text": "oklch(0.94 0.02 55)",
+        "text-muted": "oklch(0.7 0.02 55)",
+        "accent": "oklch(0.72 0.15 5)",
+        "accent-text": "oklch(0.18 0.03 5)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.72 0.15 5)",
+        "chart-1": "oklch(0.72 0.15 5)",
+        "chart-2": "oklch(0.84 0.147 185)",
+        "chart-3": "oklch(0.64 0.17 280)",
+        "chart-4": "oklch(0.84 0.17 95)",
+        "chart-5": "oklch(0.64 0.17 250)",
+        "chart-6": "oklch(0.82 0.111 50)"
+      }
+    },
+    {
+      "id": "P12",
+      "name": "Mint and coral",
+      "character": "Cool mint with a coral accent; a seaside pharmacy, clean and cheerful.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "landing",
+        "app",
+        "settings"
+      ],
+      "tags": [
+        "friendly",
+        "health",
+        "playful",
+        "outdoor",
+        "cool"
+      ],
+      "base": "light",
+      "strategy": "tinted",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.955 0.035 175)",
+        "surface": "oklch(0.98 0.017 175)",
+        "surface-raised": "oklch(0.99 0.01 175)",
+        "border": "oklch(0.23 0.035 190 / 0.12)",
+        "border-strong": "oklch(0.629 0.035 190)",
+        "text": "oklch(0.23 0.035 190)",
+        "text-muted": "oklch(0.484 0.035 190)",
+        "accent": "oklch(0.62 0.17 28)",
+        "accent-text": "oklch(0.18 0.03 28)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.518 0.14 150)",
+        "warning": "oklch(0.542 0.117 70)",
+        "focus": "oklch(0.62 0.17 28)",
+        "chart-1": "oklch(0.62 0.16 6)",
+        "chart-2": "oklch(0.46 0.104 240)",
+        "chart-3": "oklch(0.61 0.12 170)",
+        "chart-4": "oklch(0.46 0.17 300)",
+        "chart-5": "oklch(0.6 0.14 50)",
+        "chart-6": "oklch(0.46 0.17 270)"
+      },
+      "dark": {
+        "background": "oklch(0.19 0.02 175)",
+        "surface": "oklch(0.22 0.02 175)",
+        "surface-raised": "oklch(0.25 0.02 175)",
+        "border": "oklch(0.94 0.015 175 / 0.14)",
+        "border-strong": "oklch(0.535 0.015 175)",
+        "text": "oklch(0.94 0.015 175)",
+        "text-muted": "oklch(0.695 0.015 175)",
+        "accent": "oklch(0.72 0.15 30)",
+        "accent-text": "oklch(0.18 0.03 30)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.72 0.15 30)",
+        "chart-1": "oklch(0.72 0.14 48)",
+        "chart-2": "oklch(0.84 0.144 210)",
+        "chart-3": "oklch(0.59 0.17 140)",
+        "chart-4": "oklch(0.82 0.105 300)",
+        "chart-5": "oklch(0.64 0.149 60)",
+        "chart-6": "oklch(0.8 0.101 255)"
+      }
+    },
+    {
+      "id": "P13",
+      "name": "Darkroom",
+      "character": "Red-black like a darkroom under the safelight; one red for the shutter.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "creative",
+        "culture",
+        "bold"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.93 0.006 40)",
+        "surface": "oklch(0.942 0.003 40)",
+        "surface-raised": "oklch(0.95 0.002 40)",
+        "border": "oklch(0.18 0.01 30 / 0.12)",
+        "border-strong": "oklch(0.609 0.01 30)",
+        "text": "oklch(0.18 0.01 30)",
+        "text-muted": "oklch(0.454 0.01 30)",
+        "accent": "oklch(0.52 0.2 28)",
+        "accent-text": "oklch(0.985 0.007 28)",
+        "danger": "oklch(0.538 0.2 27)",
+        "success": "oklch(0.498 0.137 150)",
+        "warning": "oklch(0.518 0.112 70)",
+        "focus": "oklch(0.52 0.2 28)",
+        "chart-1": "oklch(0.53 0.19 6)",
+        "chart-2": "oklch(0.6 0.103 210)",
+        "chart-3": "oklch(0.46 0.08 6)",
+        "chart-4": "oklch(0.6 0.17 295)",
+        "chart-5": "oklch(0.46 0.17 0)",
+        "chart-6": "oklch(0.6 0.17 255)"
+      },
+      "dark": {
+        "background": "oklch(0.17 0.045 25)",
+        "surface": "oklch(0.2 0.045 25)",
+        "surface-raised": "oklch(0.23 0.045 25)",
+        "border": "oklch(0.93 0.01 40 / 0.14)",
+        "border-strong": "oklch(0.518 0.01 40)",
+        "text": "oklch(0.93 0.01 40)",
+        "text-muted": "oklch(0.669 0.01 40)",
+        "accent": "oklch(0.64 0.2 28)",
+        "accent-text": "oklch(0.18 0.03 28)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.64 0.2 28)",
+        "chart-1": "oklch(0.64 0.19 6)",
+        "chart-2": "oklch(0.84 0.144 210)",
+        "chart-3": "oklch(0.59 0.17 140)",
+        "chart-4": "oklch(0.82 0.105 300)",
+        "chart-5": "oklch(0.64 0.149 60)",
+        "chart-6": "oklch(0.8 0.101 255)"
+      }
+    },
+    {
+      "id": "P14",
+      "name": "Phosphor",
+      "character": "Green-black with phosphor-green type; an old terminal that still works.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "docs",
+        "app",
+        "table"
+      ],
+      "tags": [
+        "developer",
+        "technical",
+        "retro"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.97 0.01 140)",
+        "surface": "oklch(0.982 0.006 140)",
+        "surface-raised": "oklch(0.99 0.004 140)",
+        "border": "oklch(0.2 0.03 150 / 0.12)",
+        "border-strong": "oklch(0.639 0.03 150)",
+        "text": "oklch(0.2 0.03 150)",
+        "text-muted": "oklch(0.488 0.03 150)",
+        "accent": "oklch(0.5 0.144 148)",
+        "accent-text": "oklch(0.985 0.015 148)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.526 0.14 150)",
+        "warning": "oklch(0.55 0.119 70)",
+        "focus": "oklch(0.5 0.144 148)",
+        "chart-1": "oklch(0.51 0.1 170)",
+        "chart-2": "oklch(0.6 0.17 300)",
+        "chart-3": "oklch(0.4 0.16 30)",
+        "chart-4": "oklch(0.6 0.168 250)",
+        "chart-5": "oklch(0.46 0.17 0)",
+        "chart-6": "oklch(0.6 0.101 195)"
+      },
+      "dark": {
+        "background": "oklch(0.16 0.015 150)",
+        "surface": "oklch(0.19 0.015 150)",
+        "surface-raised": "oklch(0.22 0.015 150)",
+        "border": "oklch(0.92 0.04 145 / 0.14)",
+        "border-strong": "oklch(0.512 0.04 145)",
+        "text": "oklch(0.92 0.04 145)",
+        "text-muted": "oklch(0.713 0.035 145)",
+        "accent": "oklch(0.85 0.2 142)",
+        "accent-text": "oklch(0.18 0.03 150)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.85 0.2 142)",
+        "chart-1": "oklch(0.89 0.2 142)",
+        "chart-2": "oklch(0.64 0.17 315)",
+        "chart-3": "oklch(0.84 0.17 96)",
+        "chart-4": "oklch(0.64 0.17 255)",
+        "chart-5": "oklch(0.84 0.104 350)",
+        "chart-6": "oklch(0.64 0.112 185)"
+      }
+    },
+    {
+      "id": "P15",
+      "name": "Amber terminal",
+      "character": "Warm brown-black with amber readouts; a 1980s data terminal.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "docs",
+        "app",
+        "table",
+        "dashboard"
+      ],
+      "tags": [
+        "retro",
+        "technical",
+        "data",
+        "industrial"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.006 95)",
+        "surface": "oklch(0.98 0.003 95)",
+        "surface-raised": "oklch(1 0 95)",
+        "border": "oklch(0.2 0.02 65 / 0.12)",
+        "border-strong": "oklch(0.638 0.02 65)",
+        "text": "oklch(0.2 0.02 65)",
+        "text-muted": "oklch(0.492 0.02 65)",
+        "accent": "oklch(0.6 0.125 78)",
+        "accent-text": "oklch(0.18 0.03 78)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.521 0.14 150)",
+        "warning": "oklch(0.545 0.114 70)",
+        "focus": "oklch(0.6 0.125 78)",
+        "chart-1": "oklch(0.6 0.14 50)",
+        "chart-2": "oklch(0.46 0.17 260)",
+        "chart-3": "oklch(0.6 0.17 330)",
+        "chart-4": "oklch(0.46 0.09 170)",
+        "chart-5": "oklch(0.6 0.17 290)",
+        "chart-6": "oklch(0.4 0.16 30)"
+      },
+      "dark": {
+        "background": "oklch(0.15 0.012 85)",
+        "surface": "oklch(0.18 0.012 85)",
+        "surface-raised": "oklch(0.21 0.012 85)",
+        "border": "oklch(0.92 0.04 80 / 0.14)",
+        "border-strong": "oklch(0.513 0.04 80)",
+        "text": "oklch(0.92 0.04 80)",
+        "text-muted": "oklch(0.691 0.035 80)",
+        "accent": "oklch(0.8 0.15 72)",
+        "accent-text": "oklch(0.18 0.03 72)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.8 0.15 72)",
+        "chart-1": "oklch(0.8 0.13 54)",
+        "chart-2": "oklch(0.64 0.17 255)",
+        "chart-3": "oklch(0.84 0.118 340)",
+        "chart-4": "oklch(0.59 0.17 148)",
+        "chart-5": "oklch(0.82 0.1 295)",
+        "chart-6": "oklch(0.64 0.17 48)"
+      }
+    },
+    {
+      "id": "P16",
+      "name": "Pistachio and cinnamon",
+      "character": "Pistachio ground with chocolate type and cinnamon accents; a gelato counter.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "food",
+        "organic",
+        "playful",
+        "warm"
+      ],
+      "base": "light",
+      "strategy": "tinted",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.94 0.045 125)",
+        "surface": "oklch(0.965 0.022 125)",
+        "surface-raised": "oklch(0.975 0.013 125)",
+        "border": "oklch(0.25 0.04 50 / 0.12)",
+        "border-strong": "oklch(0.625 0.04 50)",
+        "text": "oklch(0.25 0.04 50)",
+        "text-muted": "oklch(0.473 0.035 50)",
+        "accent": "oklch(0.5 0.14 45)",
+        "accent-text": "oklch(0.985 0.007 45)",
+        "danger": "oklch(0.546 0.2 14)",
+        "success": "oklch(0.51 0.14 150)",
+        "warning": "oklch(0.53 0.114 70)",
+        "focus": "oklch(0.5 0.14 45)",
+        "chart-1": "oklch(0.47 0.17 34)",
+        "chart-2": "oklch(0.6 0.103 210)",
+        "chart-3": "oklch(0.46 0.08 34)",
+        "chart-4": "oklch(0.6 0.17 300)",
+        "chart-5": "oklch(0.46 0.17 354)",
+        "chart-6": "oklch(0.6 0.17 255)"
+      },
+      "dark": {
+        "background": "oklch(0.21 0.035 55)",
+        "surface": "oklch(0.24 0.035 55)",
+        "surface-raised": "oklch(0.27 0.035 55)",
+        "border": "oklch(0.94 0.03 120 / 0.14)",
+        "border-strong": "oklch(0.545 0.03 120)",
+        "text": "oklch(0.94 0.03 120)",
+        "text-muted": "oklch(0.742 0.03 120)",
+        "accent": "oklch(0.82 0.12 125)",
+        "accent-text": "oklch(0.18 0.03 125)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.82 0.12 125)",
+        "chart-1": "oklch(0.82 0.12 125)",
+        "chart-2": "oklch(0.64 0.17 295)",
+        "chart-3": "oklch(0.84 0.128 215)",
+        "chart-4": "oklch(0.64 0.17 48)",
+        "chart-5": "oklch(0.84 0.165 170)",
+        "chart-6": "oklch(0.64 0.17 350)"
+      }
+    },
+    {
+      "id": "P17",
+      "name": "Plum and gold",
+      "character": "Plum-black with gold leaf; a theatre programme.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "luxury",
+        "culture",
+        "fashion"
+      ],
+      "clashes": [
+        "T14",
+        "T24"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.955 0.02 340)",
+        "surface": "oklch(0.98 0.01 340)",
+        "surface-raised": "oklch(0.99 0.006 340)",
+        "border": "oklch(0.22 0.04 340 / 0.12)",
+        "border-strong": "oklch(0.63 0.04 340)",
+        "text": "oklch(0.22 0.04 340)",
+        "text-muted": "oklch(0.473 0.035 340)",
+        "accent": "oklch(0.45 0.15 350)",
+        "accent-text": "oklch(0.985 0.008 350)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.514 0.14 150)",
+        "warning": "oklch(0.538 0.116 70)",
+        "focus": "oklch(0.45 0.15 350)",
+        "chart-1": "oklch(0.45 0.15 350)",
+        "chart-2": "oklch(0.6 0.101 200)",
+        "chart-3": "oklch(0.4 0.08 34)",
+        "chart-4": "oklch(0.6 0.17 270)",
+        "chart-5": "oklch(0.4 0.16 30)",
+        "chart-6": "oklch(0.6 0.136 240)"
+      },
+      "dark": {
+        "background": "oklch(0.2 0.06 340)",
+        "surface": "oklch(0.23 0.06 340)",
+        "surface-raised": "oklch(0.26 0.06 340)",
+        "border": "oklch(0.94 0.015 340 / 0.14)",
+        "border-strong": "oklch(0.538 0.015 340)",
+        "text": "oklch(0.94 0.015 340)",
+        "text-muted": "oklch(0.731 0.015 340)",
+        "accent": "oklch(0.82 0.13 85)",
+        "accent-text": "oklch(0.18 0.03 85)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.82 0.13 85)",
+        "chart-1": "oklch(0.82 0.13 96)",
+        "chart-2": "oklch(0.64 0.17 265)",
+        "chart-3": "oklch(0.84 0.157 175)",
+        "chart-4": "oklch(0.64 0.17 355)",
+        "chart-5": "oklch(0.84 0.17 130)",
+        "chart-6": "oklch(0.64 0.17 310)"
+      }
+    },
+    {
+      "id": "P18",
+      "name": "Newsprint",
+      "character": "Grey newsprint and black ink only; colour comes from photographs.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "docs"
+      ],
+      "tags": [
+        "editorial",
+        "minimal",
+        "serious"
+      ],
+      "base": "light",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.945 0.003 95)",
+        "surface": "oklch(0.957 0.001 95)",
+        "surface-raised": "oklch(0.965 0.001 95)",
+        "border": "oklch(0.17 0 0 / 0.12)",
+        "border-strong": "oklch(0.624 0.01 0)",
+        "text": "oklch(0.17 0 0)",
+        "text-muted": "oklch(0.442 0.01 0)",
+        "accent": "oklch(0.17 0 0)",
+        "accent-text": "oklch(0.97 0.003 95)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.51 0.14 150)",
+        "warning": "oklch(0.53 0.114 70)",
+        "focus": "oklch(0.5 0.2 28)",
+        "chart-1": "oklch(0.6 0.168 250)",
+        "chart-2": "oklch(0.4 0.16 30)",
+        "chart-3": "oklch(0.61 0.12 170)",
+        "chart-4": "oklch(0.46 0.17 340)",
+        "chart-5": "oklch(0.6 0.14 50)",
+        "chart-6": "oklch(0.46 0.17 295)"
+      },
+      "dark": {
+        "background": "oklch(0.16 0 0)",
+        "surface": "oklch(0.19 0 0)",
+        "surface-raised": "oklch(0.22 0 0)",
+        "border": "oklch(0.93 0.003 95 / 0.14)",
+        "border-strong": "oklch(0.515 0.01 95)",
+        "text": "oklch(0.93 0.003 95)",
+        "text-muted": "oklch(0.732 0.01 95)",
+        "accent": "oklch(0.93 0.003 95)",
+        "accent-text": "oklch(0.16 0 0)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.7 0.17 28)",
+        "chart-1": "oklch(0.64 0.17 250)",
+        "chart-2": "oklch(0.84 0.17 96)",
+        "chart-3": "oklch(0.66 0.13 170)",
+        "chart-4": "oklch(0.84 0.143 330)",
+        "chart-5": "oklch(0.64 0.149 60)",
+        "chart-6": "oklch(0.82 0.1 295)"
+      }
+    },
+    {
+      "id": "P19",
+      "name": "Asphalt and hot pink",
+      "character": "Neutral asphalt with a hot-pink accent; a club flyer.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "bold",
+        "energetic",
+        "fashion",
+        "culture"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.975 0 0)",
+        "surface": "oklch(0.987 0 0)",
+        "surface-raised": "oklch(0.995 0 0)",
+        "border": "oklch(0.18 0 0 / 0.12)",
+        "border-strong": "oklch(0.644 0.01 0)",
+        "text": "oklch(0.18 0 0)",
+        "text-muted": "oklch(0.485 0.01 0)",
+        "accent": "oklch(0.576 0.23 355)",
+        "accent-text": "oklch(0.985 0.008 355)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.53 0.14 150)",
+        "warning": "oklch(0.55 0.119 70)",
+        "focus": "oklch(0.576 0.23 355)",
+        "chart-1": "oklch(0.576 0.23 355)",
+        "chart-2": "oklch(0.46 0.09 170)",
+        "chart-3": "oklch(0.6 0.17 265)",
+        "chart-4": "oklch(0.4 0.16 30)",
+        "chart-5": "oklch(0.6 0.108 220)",
+        "chart-6": "oklch(0.46 0.17 325)"
+      },
+      "dark": {
+        "background": "oklch(0.25 0.004 250)",
+        "surface": "oklch(0.28 0.004 250)",
+        "surface-raised": "oklch(0.31 0.004 250)",
+        "border": "oklch(0.96 0.003 250 / 0.14)",
+        "border-strong": "oklch(0.579 0.01 250)",
+        "text": "oklch(0.96 0.003 250)",
+        "text-muted": "oklch(0.747 0.01 250)",
+        "accent": "oklch(0.72 0.199 355)",
+        "accent-text": "oklch(0.18 0.03 355)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.72 0.199 355)",
+        "chart-1": "oklch(0.72 0.199 355)",
+        "chart-2": "oklch(0.84 0.16 170)",
+        "chart-3": "oklch(0.64 0.17 265)",
+        "chart-4": "oklch(0.84 0.17 96)",
+        "chart-5": "oklch(0.64 0.115 220)",
+        "chart-6": "oklch(0.82 0.1 48)"
+      }
+    },
+    {
+      "id": "P20",
+      "name": "Air mail",
+      "character": "Pale sky paper, navy ink and air-mail red; a letter that crossed an ocean.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "trustworthy",
+        "outdoor",
+        "retro",
+        "friendly"
+      ],
+      "base": "light",
+      "strategy": "tinted",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.955 0.023 240)",
+        "surface": "oklch(0.98 0.01 240)",
+        "surface-raised": "oklch(0.99 0.005 240)",
+        "border": "oklch(0.26 0.08 262 / 0.12)",
+        "border-strong": "oklch(0.63 0.08 262)",
+        "text": "oklch(0.26 0.08 262)",
+        "text-muted": "oklch(0.468 0.035 262)",
+        "accent": "oklch(0.53 0.2 27)",
+        "accent-text": "oklch(0.985 0.007 27)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.518 0.14 150)",
+        "warning": "oklch(0.538 0.116 70)",
+        "focus": "oklch(0.53 0.2 27)",
+        "chart-1": "oklch(0.53 0.19 6)",
+        "chart-2": "oklch(0.6 0.103 210)",
+        "chart-3": "oklch(0.4 0.08 34)",
+        "chart-4": "oklch(0.6 0.17 295)",
+        "chart-5": "oklch(0.46 0.17 355)",
+        "chart-6": "oklch(0.6 0.17 255)"
+      },
+      "dark": {
+        "background": "oklch(0.17 0.03 262)",
+        "surface": "oklch(0.2 0.03 262)",
+        "surface-raised": "oklch(0.23 0.03 262)",
+        "border": "oklch(0.95 0.015 240 / 0.14)",
+        "border-strong": "oklch(0.52 0.015 240)",
+        "text": "oklch(0.95 0.015 240)",
+        "text-muted": "oklch(0.673 0.015 240)",
+        "accent": "oklch(0.7 0.17 27)",
+        "accent-text": "oklch(0.18 0.03 27)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.7 0.17 27)",
+        "chart-1": "oklch(0.7 0.16 6)",
+        "chart-2": "oklch(0.84 0.144 210)",
+        "chart-3": "oklch(0.59 0.17 140)",
+        "chart-4": "oklch(0.82 0.1 295)",
+        "chart-5": "oklch(0.64 0.149 60)",
+        "chart-6": "oklch(0.8 0.104 250)"
+      }
+    },
+    {
+      "id": "P21",
+      "name": "Process cyan",
+      "character": "Cyan stock with magenta and black ink; the CMYK plates of a print shop.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "creative",
+        "playful",
+        "retro",
+        "bold"
+      ],
+      "base": "light",
+      "strategy": "tinted",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.92 0.055 210)",
+        "surface": "oklch(0.95 0.035 210)",
+        "surface-raised": "oklch(0.975 0.02 210)",
+        "border": "oklch(0.18 0.02 230 / 0.12)",
+        "border-strong": "oklch(0.606 0.02 230)",
+        "text": "oklch(0.18 0.02 230)",
+        "text-muted": "oklch(0.438 0.02 230)",
+        "accent": "oklch(0.52 0.216 350)",
+        "accent-text": "oklch(0.985 0.008 350)",
+        "danger": "oklch(0.534 0.2 27)",
+        "success": "oklch(0.498 0.137 150)",
+        "warning": "oklch(0.518 0.112 70)",
+        "focus": "oklch(0.52 0.216 350)",
+        "chart-1": "oklch(0.52 0.216 350)",
+        "chart-2": "oklch(0.6 0.168 250)",
+        "chart-3": "oklch(0.46 0.09 170)",
+        "chart-4": "oklch(0.6 0.17 280)",
+        "chart-5": "oklch(0.46 0.16 6)",
+        "chart-6": "oklch(0.6 0.105 215)"
+      },
+      "dark": {
+        "background": "oklch(0.17 0.025 220)",
+        "surface": "oklch(0.2 0.025 220)",
+        "surface-raised": "oklch(0.23 0.025 220)",
+        "border": "oklch(0.95 0.02 210 / 0.14)",
+        "border-strong": "oklch(0.52 0.02 210)",
+        "text": "oklch(0.95 0.02 210)",
+        "text-muted": "oklch(0.683 0.02 210)",
+        "accent": "oklch(0.74 0.18 350)",
+        "accent-text": "oklch(0.18 0.03 350)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.74 0.18 350)",
+        "chart-1": "oklch(0.74 0.18 350)",
+        "chart-2": "oklch(0.66 0.13 170)",
+        "chart-3": "oklch(0.84 0.17 96)",
+        "chart-4": "oklch(0.64 0.17 260)",
+        "chart-5": "oklch(0.84 0.102 55)",
+        "chart-6": "oklch(0.64 0.112 215)"
+      }
+    },
+    {
+      "id": "P22",
+      "name": "Olive drab and blaze",
+      "character": "Olive-drab canvas with blaze-orange tags; field gear.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "outdoor",
+        "industrial",
+        "bold"
+      ],
+      "base": "dark",
+      "strategy": "committed",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.955 0.015 115)",
+        "surface": "oklch(0.967 0.009 115)",
+        "surface-raised": "oklch(0.975 0.006 115)",
+        "border": "oklch(0.22 0.03 115 / 0.12)",
+        "border-strong": "oklch(0.626 0.03 115)",
+        "text": "oklch(0.22 0.03 115)",
+        "text-muted": "oklch(0.484 0.03 115)",
+        "accent": "oklch(0.6 0.163 48)",
+        "accent-text": "oklch(0.168 0.03 48)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.518 0.14 150)",
+        "warning": "oklch(0.538 0.116 70)",
+        "focus": "oklch(0.6 0.163 48)",
+        "chart-1": "oklch(0.6 0.163 48)",
+        "chart-2": "oklch(0.46 0.104 240)",
+        "chart-3": "oklch(0.6 0.17 315)",
+        "chart-4": "oklch(0.46 0.09 170)",
+        "chart-5": "oklch(0.6 0.17 270)",
+        "chart-6": "oklch(0.46 0.16 6)"
+      },
+      "dark": {
+        "background": "oklch(0.26 0.045 115)",
+        "surface": "oklch(0.29 0.045 115)",
+        "surface-raised": "oklch(0.32 0.045 115)",
+        "border": "oklch(0.95 0.02 100 / 0.14)",
+        "border-strong": "oklch(0.591 0.02 100)",
+        "text": "oklch(0.95 0.02 100)",
+        "text-muted": "oklch(0.772 0.02 100)",
+        "accent": "oklch(0.76 0.157 50)",
+        "accent-text": "oklch(0.2 0.04 115)",
+        "danger": "oklch(0.712 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.76 0.157 50)",
+        "chart-1": "oklch(0.76 0.157 50)",
+        "chart-2": "oklch(0.64 0.17 250)",
+        "chart-3": "oklch(0.84 0.128 320)",
+        "chart-4": "oklch(0.59 0.17 140)",
+        "chart-5": "oklch(0.8 0.102 280)",
+        "chart-6": "oklch(0.64 0.16 6)"
+      }
+    },
+    {
+      "id": "P23",
+      "name": "Overcast and jade",
+      "character": "Soft overcast grey with a jade accent; a calm clinic or a quiet tool.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "landing",
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "docs"
+      ],
+      "tags": [
+        "calm",
+        "health",
+        "data",
+        "minimal"
+      ],
+      "base": "light",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.004 200)",
+        "surface": "oklch(0.98 0.002 200)",
+        "surface-raised": "oklch(1 0 200)",
+        "border": "oklch(0.22 0.01 200 / 0.12)",
+        "border-strong": "oklch(0.637 0.01 200)",
+        "text": "oklch(0.22 0.01 200)",
+        "text-muted": "oklch(0.484 0.01 200)",
+        "accent": "oklch(0.52 0.109 165)",
+        "accent-text": "oklch(0.985 0.015 165)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.522 0.14 150)",
+        "warning": "oklch(0.546 0.118 70)",
+        "focus": "oklch(0.52 0.109 165)",
+        "chart-1": "oklch(0.52 0.1 170)",
+        "chart-2": "oklch(0.6 0.17 305)",
+        "chart-3": "oklch(0.4 0.16 30)",
+        "chart-4": "oklch(0.6 0.17 255)",
+        "chart-5": "oklch(0.46 0.17 0)",
+        "chart-6": "oklch(0.6 0.103 210)"
+      },
+      "dark": {
+        "background": "oklch(0.18 0.006 90)",
+        "surface": "oklch(0.21 0.006 90)",
+        "surface-raised": "oklch(0.24 0.006 90)",
+        "border": "oklch(0.94 0.006 90 / 0.14)",
+        "border-strong": "oklch(0.528 0.01 90)",
+        "text": "oklch(0.94 0.006 90)",
+        "text-muted": "oklch(0.709 0.01 90)",
+        "accent": "oklch(0.76 0.11 165)",
+        "accent-text": "oklch(0.18 0.03 165)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.76 0.11 165)",
+        "chart-1": "oklch(0.76 0.11 170)",
+        "chart-2": "oklch(0.64 0.17 345)",
+        "chart-3": "oklch(0.84 0.17 96)",
+        "chart-4": "oklch(0.64 0.17 255)",
+        "chart-5": "oklch(0.82 0.1 48)",
+        "chart-6": "oklch(0.64 0.11 210)"
+      }
+    },
+    {
+      "id": "P24",
+      "name": "Lime field",
+      "character": "A highlighter-lime field with forest-green type; a sports pitch in sun.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "energetic",
+        "outdoor",
+        "bold",
+        "education"
+      ],
+      "base": "light",
+      "strategy": "committed",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.89 0.17 125)",
+        "surface": "oklch(0.93 0.11 125)",
+        "surface-raised": "oklch(0.965 0.05 125)",
+        "border": "oklch(0.2 0.03 140 / 0.12)",
+        "border-strong": "oklch(0.587 0.03 140)",
+        "text": "oklch(0.2 0.03 140)",
+        "text-muted": "oklch(0.425 0.03 140)",
+        "accent": "oklch(0.32 0.07 155)",
+        "accent-text": "oklch(0.985 0.015 155)",
+        "danger": "oklch(0.518 0.2 27)",
+        "success": "oklch(0.478 0.131 150)",
+        "warning": "oklch(0.498 0.107 70)",
+        "focus": "oklch(0.32 0.07 155)",
+        "chart-1": "oklch(0.46 0.09 170)",
+        "chart-2": "oklch(0.6 0.17 340)",
+        "chart-3": "oklch(0.46 0.17 260)",
+        "chart-4": "oklch(0.6 0.14 50)",
+        "chart-5": "oklch(0.46 0.17 290)",
+        "chart-6": "oklch(0.6 0.16 6)"
+      },
+      "dark": {
+        "background": "oklch(0.18 0.02 130)",
+        "surface": "oklch(0.21 0.02 130)",
+        "surface-raised": "oklch(0.24 0.02 130)",
+        "border": "oklch(0.95 0.03 125 / 0.14)",
+        "border-strong": "oklch(0.527 0.03 125)",
+        "text": "oklch(0.95 0.03 125)",
+        "text-muted": "oklch(0.739 0.03 125)",
+        "accent": "oklch(0.89 0.19 125)",
+        "accent-text": "oklch(0.18 0.03 125)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.89 0.19 125)",
+        "chart-1": "oklch(0.89 0.19 125)",
+        "chart-2": "oklch(0.64 0.17 295)",
+        "chart-3": "oklch(0.84 0.128 215)",
+        "chart-4": "oklch(0.64 0.168 50)",
+        "chart-5": "oklch(0.84 0.165 170)",
+        "chart-6": "oklch(0.64 0.17 350)"
+      }
+    },
+    {
+      "id": "P25",
+      "name": "Cocoa and blush",
+      "character": "Cocoa-dark ground with a blush-pink accent; a skincare counter at night.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "fashion",
+        "luxury",
+        "warm",
+        "calm"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.97 0.008 40)",
+        "surface": "oklch(0.982 0.004 40)",
+        "surface-raised": "oklch(0.99 0.003 40)",
+        "border": "oklch(0.24 0.03 40 / 0.12)",
+        "border-strong": "oklch(0.643 0.03 40)",
+        "text": "oklch(0.24 0.03 40)",
+        "text-muted": "oklch(0.491 0.03 40)",
+        "accent": "oklch(0.5 0.12 10)",
+        "accent-text": "oklch(0.985 0.007 10)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.526 0.14 150)",
+        "warning": "oklch(0.546 0.118 70)",
+        "focus": "oklch(0.5 0.12 10)",
+        "chart-1": "oklch(0.5 0.12 6)",
+        "chart-2": "oklch(0.6 0.101 205)",
+        "chart-3": "oklch(0.4 0.08 34)",
+        "chart-4": "oklch(0.6 0.17 280)",
+        "chart-5": "oklch(0.46 0.17 340)",
+        "chart-6": "oklch(0.6 0.168 250)"
+      },
+      "dark": {
+        "background": "oklch(0.24 0.035 40)",
+        "surface": "oklch(0.27 0.035 40)",
+        "surface-raised": "oklch(0.3 0.035 40)",
+        "border": "oklch(0.94 0.02 30 / 0.14)",
+        "border-strong": "oklch(0.57 0.02 30)",
+        "text": "oklch(0.94 0.02 30)",
+        "text-muted": "oklch(0.772 0.02 30)",
+        "accent": "oklch(0.83 0.08 15)",
+        "accent-text": "oklch(0.18 0.03 15)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.83 0.08 15)",
+        "chart-1": "oklch(0.83 0.08 6)",
+        "chart-2": "oklch(0.64 0.108 195)",
+        "chart-3": "oklch(0.84 0.17 110)",
+        "chart-4": "oklch(0.64 0.17 290)",
+        "chart-5": "oklch(0.86 0.11 96)",
+        "chart-6": "oklch(0.64 0.17 250)"
+      }
+    },
+    {
+      "id": "P26",
+      "name": "Marigold",
+      "character": "Clean white with marigold-orange buttons and warm black type; cheerful and useful.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "landing",
+        "app",
+        "settings"
+      ],
+      "tags": [
+        "friendly",
+        "warm",
+        "food",
+        "education"
+      ],
+      "base": "light",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.98 0.004 85)",
+        "surface": "oklch(0.992 0.002 85)",
+        "surface-raised": "oklch(0.997 0.001 85)",
+        "border": "oklch(0.2 0.02 60 / 0.12)",
+        "border-strong": "oklch(0.65 0.02 60)",
+        "text": "oklch(0.2 0.02 60)",
+        "text-muted": "oklch(0.512 0.02 60)",
+        "accent": "oklch(0.656 0.15 62)",
+        "accent-text": "oklch(0.18 0.03 62)",
+        "danger": "oklch(0.55 0.2 27)",
+        "success": "oklch(0.534 0.14 150)",
+        "warning": "oklch(0.55 0.119 70)",
+        "focus": "oklch(0.656 0.15 62)",
+        "chart-1": "oklch(0.66 0.15 50)",
+        "chart-2": "oklch(0.46 0.17 260)",
+        "chart-3": "oklch(0.6 0.17 330)",
+        "chart-4": "oklch(0.46 0.09 170)",
+        "chart-5": "oklch(0.6 0.17 290)",
+        "chart-6": "oklch(0.4 0.16 30)"
+      },
+      "dark": {
+        "background": "oklch(0.17 0.008 60)",
+        "surface": "oklch(0.2 0.008 60)",
+        "surface-raised": "oklch(0.23 0.008 60)",
+        "border": "oklch(0.94 0.01 80 / 0.14)",
+        "border-strong": "oklch(0.521 0.01 80)",
+        "text": "oklch(0.94 0.01 80)",
+        "text-muted": "oklch(0.708 0.01 80)",
+        "accent": "oklch(0.8 0.15 72)",
+        "accent-text": "oklch(0.18 0.03 72)",
+        "danger": "oklch(0.7 0.17 27)",
+        "success": "oklch(0.74 0.15 150)",
+        "warning": "oklch(0.8 0.14 75)",
+        "focus": "oklch(0.8 0.15 72)",
+        "chart-1": "oklch(0.8 0.13 54)",
+        "chart-2": "oklch(0.64 0.17 255)",
+        "chart-3": "oklch(0.84 0.118 340)",
+        "chart-4": "oklch(0.59 0.17 148)",
+        "chart-5": "oklch(0.82 0.1 295)",
+        "chart-6": "oklch(0.64 0.17 48)"
+      }
+    },
+    {
+      "id": "P27",
+      "name": "Carbon and electric blue",
+      "character": "Near-black carbon, neutral greys and one electric blue; a trading desk after the close.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "data",
+        "finance",
+        "technical",
+        "bold"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": false
+      },
+      "light": {
+        "background": "oklch(0.96 0.003 260)",
+        "surface": "oklch(0.98 0.001 260)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.006 260 / 0.11)",
+        "border-strong": "oklch(0.635 0.006 260)",
+        "text": "oklch(0.19 0.007 260)",
+        "text-muted": "oklch(0.48 0.006 260)",
+        "accent": "oklch(0.54 0.219 260)",
+        "accent-text": "oklch(0.99 0.004 260)",
+        "focus": "oklch(0.54 0.219 260)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.545 0.121 65)",
+        "chart-1": "oklch(0.54 0.219 260)",
+        "chart-2": "oklch(0.4 0.16 30)",
+        "chart-3": "oklch(0.62 0.12 172)",
+        "chart-4": "oklch(0.46 0.21 325)",
+        "chart-5": "oklch(0.56 0.08 172)",
+        "chart-6": "oklch(0.46 0.21 295)"
+      },
+      "dark": {
+        "background": "oklch(0.15 0.006 260)",
+        "surface": "oklch(0.185 0.006 260)",
+        "surface-raised": "oklch(0.22 0.006 260)",
+        "border": "oklch(0.96 0.006 260 / 0.1)",
+        "border-strong": "oklch(0.51 0.006 260)",
+        "text": "oklch(0.965 0.002 260)",
+        "text-muted": "oklch(0.71 0.004 260)",
+        "accent": "oklch(0.6 0.21 258)",
+        "accent-text": "oklch(0.17 0.03 258)",
+        "focus": "oklch(0.6 0.21 258)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.6 0.21 258)",
+        "chart-2": "oklch(0.84 0.17 98)",
+        "chart-3": "oklch(0.64 0.12 172)",
+        "chart-4": "oklch(0.84 0.143 330)",
+        "chart-5": "oklch(0.61 0.2 142)",
+        "chart-6": "oklch(0.78 0.131 300)"
+      }
+    },
+    {
+      "id": "P28",
+      "name": "Obsidian and emerald",
+      "character": "Deep neutral black with an emerald lead; money that is growing, read at a glance.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "finance",
+        "data",
+        "trustworthy",
+        "calm"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.003 165)",
+        "surface": "oklch(0.98 0.001 165)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.005 165 / 0.11)",
+        "border-strong": "oklch(0.635 0.005 165)",
+        "text": "oklch(0.19 0.006 165)",
+        "text-muted": "oklch(0.49 0.005 165)",
+        "accent": "oklch(0.57 0.128 160)",
+        "accent-text": "oklch(0.17 0.03 160)",
+        "focus": "oklch(0.57 0.128 160)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.545 0.121 65)",
+        "chart-1": "oklch(0.57 0.11 172)",
+        "chart-2": "oklch(0.46 0.208 330)",
+        "chart-3": "oklch(0.6 0.21 260)",
+        "chart-4": "oklch(0.4 0.16 30)",
+        "chart-5": "oklch(0.6 0.21 290)",
+        "chart-6": "oklch(0.46 0.185 0)"
+      },
+      "dark": {
+        "background": "oklch(0.145 0.005 165)",
+        "surface": "oklch(0.18 0.005 165)",
+        "surface-raised": "oklch(0.215 0.005 165)",
+        "border": "oklch(0.96 0.005 165 / 0.1)",
+        "border-strong": "oklch(0.51 0.005 165)",
+        "text": "oklch(0.965 0.002 165)",
+        "text-muted": "oklch(0.71 0.004 165)",
+        "accent": "oklch(0.76 0.17 160)",
+        "accent-text": "oklch(0.17 0.03 160)",
+        "focus": "oklch(0.76 0.17 160)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.78 0.15 172)",
+        "chart-2": "oklch(0.64 0.21 300)",
+        "chart-3": "oklch(0.78 0.124 240)",
+        "chart-4": "oklch(0.64 0.149 60)",
+        "chart-5": "oklch(0.84 0.142 205)",
+        "chart-6": "oklch(0.64 0.2 4)"
+      }
+    },
+    {
+      "id": "P29",
+      "name": "Navy and tangerine",
+      "character": "Night navy under a hot tangerine, like a cockpit panel; dispatch boards and live operations.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "industrial",
+        "energetic",
+        "data",
+        "bold"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.008 258)",
+        "surface": "oklch(0.98 0.004 258)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.02 258 / 0.11)",
+        "border-strong": "oklch(0.635 0.015 258)",
+        "text": "oklch(0.19 0.02 258)",
+        "text-muted": "oklch(0.49 0.02 258)",
+        "accent": "oklch(0.6 0.17 45)",
+        "accent-text": "oklch(0.17 0.03 45)",
+        "focus": "oklch(0.6 0.17 45)",
+        "danger": "oklch(0.55 0.21 22)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.545 0.121 65)",
+        "chart-1": "oklch(0.6 0.17 45)",
+        "chart-2": "oklch(0.46 0.15 255)",
+        "chart-3": "oklch(0.62 0.12 172)",
+        "chart-4": "oklch(0.46 0.21 315)",
+        "chart-5": "oklch(0.6 0.1 42)",
+        "chart-6": "oklch(0.46 0.21 285)"
+      },
+      "dark": {
+        "background": "oklch(0.155 0.034 258)",
+        "surface": "oklch(0.19 0.034 258)",
+        "surface-raised": "oklch(0.225 0.037 258)",
+        "border": "oklch(0.96 0.01 258 / 0.1)",
+        "border-strong": "oklch(0.515 0.034 258)",
+        "text": "oklch(0.965 0.008 258)",
+        "text-muted": "oklch(0.71 0.02 258)",
+        "accent": "oklch(0.72 0.189 50)",
+        "accent-text": "oklch(0.17 0.03 50)",
+        "focus": "oklch(0.72 0.189 50)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.72 0.189 50)",
+        "chart-2": "oklch(0.84 0.144 210)",
+        "chart-3": "oklch(0.61 0.2 142)",
+        "chart-4": "oklch(0.84 0.128 320)",
+        "chart-5": "oklch(0.64 0.18 46)",
+        "chart-6": "oklch(0.78 0.124 240)"
+      }
+    },
+    {
+      "id": "P30",
+      "name": "Slate and raspberry",
+      "character": "Cool slate with a magenta-red lead; a commerce console that puts one number first.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "bold",
+        "fashion",
+        "data",
+        "energetic"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.008 250)",
+        "surface": "oklch(0.98 0.004 250)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.016 250 / 0.11)",
+        "border-strong": "oklch(0.635 0.015 250)",
+        "text": "oklch(0.19 0.019 250)",
+        "text-muted": "oklch(0.47 0.016 250)",
+        "accent": "oklch(0.56 0.22 8)",
+        "accent-text": "oklch(0.99 0.004 8)",
+        "focus": "oklch(0.56 0.22 8)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.545 0.121 65)",
+        "chart-1": "oklch(0.56 0.21 6)",
+        "chart-2": "oklch(0.46 0.129 250)",
+        "chart-3": "oklch(0.6 0.21 310)",
+        "chart-4": "oklch(0.47 0.09 172)",
+        "chart-5": "oklch(0.6 0.21 280)",
+        "chart-6": "oklch(0.46 0.198 340)"
+      },
+      "dark": {
+        "background": "oklch(0.165 0.016 250)",
+        "surface": "oklch(0.2 0.016 250)",
+        "surface-raised": "oklch(0.235 0.017 250)",
+        "border": "oklch(0.96 0.01 250 / 0.1)",
+        "border-strong": "oklch(0.52 0.016 250)",
+        "text": "oklch(0.965 0.006 250)",
+        "text-muted": "oklch(0.71 0.012 250)",
+        "accent": "oklch(0.66 0.22 6)",
+        "accent-text": "oklch(0.17 0.03 6)",
+        "focus": "oklch(0.66 0.22 6)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.66 0.21 4)",
+        "chart-2": "oklch(0.84 0.16 172)",
+        "chart-3": "oklch(0.64 0.21 295)",
+        "chart-4": "oklch(0.84 0.17 98)",
+        "chart-5": "oklch(0.64 0.145 240)",
+        "chart-6": "oklch(0.8 0.126 50)"
+      }
+    },
+    {
+      "id": "P31",
+      "name": "Basalt and lime",
+      "character": "Green-black basalt with an acid lime lead; build pipelines and growth numbers.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "developer",
+        "technical",
+        "energetic",
+        "data"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.008 145)",
+        "surface": "oklch(0.98 0.004 145)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.014 145 / 0.11)",
+        "border-strong": "oklch(0.635 0.014 145)",
+        "text": "oklch(0.19 0.016 145)",
+        "text-muted": "oklch(0.495 0.014 145)",
+        "accent": "oklch(0.6 0.17 135)",
+        "accent-text": "oklch(0.17 0.03 135)",
+        "focus": "oklch(0.6 0.17 135)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.116 160)",
+        "warning": "oklch(0.545 0.121 65)",
+        "chart-1": "oklch(0.6 0.192 140)",
+        "chart-2": "oklch(0.46 0.21 320)",
+        "chart-3": "oklch(0.6 0.08 180)",
+        "chart-4": "oklch(0.46 0.186 260)",
+        "chart-5": "oklch(0.6 0.2 6)",
+        "chart-6": "oklch(0.46 0.21 290)"
+      },
+      "dark": {
+        "background": "oklch(0.15 0.014 145)",
+        "surface": "oklch(0.185 0.014 145)",
+        "surface-raised": "oklch(0.22 0.015 145)",
+        "border": "oklch(0.96 0.01 145 / 0.1)",
+        "border-strong": "oklch(0.51 0.014 145)",
+        "text": "oklch(0.965 0.005 145)",
+        "text-muted": "oklch(0.72 0.011 145)",
+        "accent": "oklch(0.88 0.21 128)",
+        "accent-text": "oklch(0.17 0.03 128)",
+        "focus": "oklch(0.88 0.21 128)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.88 0.21 128)",
+        "chart-2": "oklch(0.64 0.21 300)",
+        "chart-3": "oklch(0.84 0.17 98)",
+        "chart-4": "oklch(0.64 0.145 240)",
+        "chart-5": "oklch(0.84 0.129 335)",
+        "chart-6": "oklch(0.61 0.14 158)"
+      }
+    },
+    {
+      "id": "P32",
+      "name": "Abyss and cyan",
+      "character": "Deep-sea navy with a cyan lead; telemetry, sensors and anything that streams.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "technical",
+        "data",
+        "cool",
+        "outdoor"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.008 248)",
+        "surface": "oklch(0.98 0.004 248)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.02 248 / 0.11)",
+        "border-strong": "oklch(0.635 0.015 248)",
+        "text": "oklch(0.19 0.02 248)",
+        "text-muted": "oklch(0.485 0.02 248)",
+        "accent": "oklch(0.55 0.103 225)",
+        "accent-text": "oklch(0.99 0.006 225)",
+        "focus": "oklch(0.55 0.103 225)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.545 0.121 65)",
+        "chart-1": "oklch(0.55 0.103 225)",
+        "chart-2": "oklch(0.4 0.16 30)",
+        "chart-3": "oklch(0.6 0.21 305)",
+        "chart-4": "oklch(0.47 0.09 172)",
+        "chart-5": "oklch(0.6 0.21 265)",
+        "chart-6": "oklch(0.46 0.185 0)"
+      },
+      "dark": {
+        "background": "oklch(0.155 0.03 248)",
+        "surface": "oklch(0.19 0.03 248)",
+        "surface-raised": "oklch(0.225 0.033 248)",
+        "border": "oklch(0.96 0.01 248 / 0.1)",
+        "border-strong": "oklch(0.515 0.03 248)",
+        "text": "oklch(0.965 0.008 248)",
+        "text-muted": "oklch(0.71 0.02 248)",
+        "accent": "oklch(0.8 0.13 212)",
+        "accent-text": "oklch(0.17 0.029 212)",
+        "focus": "oklch(0.8 0.13 212)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.8 0.13 212)",
+        "chart-2": "oklch(0.68 0.19 46)",
+        "chart-3": "oklch(0.84 0.145 325)",
+        "chart-4": "oklch(0.61 0.2 142)",
+        "chart-5": "oklch(0.78 0.124 295)",
+        "chart-6": "oklch(0.64 0.149 60)"
+      }
+    },
+    {
+      "id": "P33",
+      "name": "Graphite and amber",
+      "character": "Lighter graphite greys with an amber lead; a control room that runs all night.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "industrial",
+        "serious",
+        "data",
+        "warm"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.001 80)",
+        "surface": "oklch(0.98 0 80)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.002 80 / 0.11)",
+        "border-strong": "oklch(0.635 0.002 80)",
+        "text": "oklch(0.19 0.002 80)",
+        "text-muted": "oklch(0.495 0.002 80)",
+        "accent": "oklch(0.65 0.154 58)",
+        "accent-text": "oklch(0.17 0.03 58)",
+        "focus": "oklch(0.65 0.154 58)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.535 0.111 78)",
+        "chart-1": "oklch(0.65 0.154 58)",
+        "chart-2": "oklch(0.46 0.21 265)",
+        "chart-3": "oklch(0.62 0.12 172)",
+        "chart-4": "oklch(0.46 0.21 325)",
+        "chart-5": "oklch(0.6 0.08 244)",
+        "chart-6": "oklch(0.46 0.21 295)"
+      },
+      "dark": {
+        "background": "oklch(0.2 0.002 80)",
+        "surface": "oklch(0.235 0.002 80)",
+        "surface-raised": "oklch(0.27 0.002 80)",
+        "border": "oklch(0.96 0.002 80 / 0.1)",
+        "border-strong": "oklch(0.545 0.002 80)",
+        "text": "oklch(0.965 0 80)",
+        "text-muted": "oklch(0.745 0.001 80)",
+        "accent": "oklch(0.82 0.16 80)",
+        "accent-text": "oklch(0.17 0.03 80)",
+        "focus": "oklch(0.82 0.16 80)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.82 0.15 98)",
+        "chart-2": "oklch(0.64 0.145 240)",
+        "chart-3": "oklch(0.84 0.16 172)",
+        "chart-4": "oklch(0.64 0.21 350)",
+        "chart-5": "oklch(0.84 0.21 125)",
+        "chart-6": "oklch(0.64 0.21 300)"
+      }
+    },
+    {
+      "id": "P34",
+      "name": "Espresso and sky",
+      "character": "Warm espresso blacks with a clear sky blue; a calm tool for people who sell and serve.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "friendly",
+        "warm",
+        "finance",
+        "calm"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.008 55)",
+        "surface": "oklch(0.98 0.004 55)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.014 55 / 0.11)",
+        "border-strong": "oklch(0.64 0.014 55)",
+        "text": "oklch(0.19 0.016 55)",
+        "text-muted": "oklch(0.485 0.014 55)",
+        "accent": "oklch(0.55 0.137 245)",
+        "accent-text": "oklch(0.99 0.005 245)",
+        "focus": "oklch(0.55 0.137 245)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.545 0.121 65)",
+        "chart-1": "oklch(0.55 0.137 245)",
+        "chart-2": "oklch(0.4 0.16 30)",
+        "chart-3": "oklch(0.62 0.12 172)",
+        "chart-4": "oklch(0.46 0.21 320)",
+        "chart-5": "oklch(0.56 0.08 172)",
+        "chart-6": "oklch(0.46 0.21 290)"
+      },
+      "dark": {
+        "background": "oklch(0.155 0.014 55)",
+        "surface": "oklch(0.19 0.014 55)",
+        "surface-raised": "oklch(0.225 0.015 55)",
+        "border": "oklch(0.96 0.01 55 / 0.1)",
+        "border-strong": "oklch(0.515 0.014 55)",
+        "text": "oklch(0.965 0.005 55)",
+        "text-muted": "oklch(0.71 0.011 55)",
+        "accent": "oklch(0.74 0.13 238)",
+        "accent-text": "oklch(0.17 0.03 238)",
+        "focus": "oklch(0.74 0.13 238)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.74 0.13 238)",
+        "chart-2": "oklch(0.64 0.157 55)",
+        "chart-3": "oklch(0.84 0.2 132)",
+        "chart-4": "oklch(0.64 0.21 325)",
+        "chart-5": "oklch(0.84 0.173 100)",
+        "chart-6": "oklch(0.64 0.21 295)"
+      }
+    },
+    {
+      "id": "P35",
+      "name": "Mahogany and gold",
+      "character": "Near-black mahogany with a gold lead; private banking and portfolio reports.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "finance",
+        "luxury",
+        "serious",
+        "trustworthy"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": false,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.008 25)",
+        "surface": "oklch(0.98 0.004 25)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.02 25 / 0.11)",
+        "border-strong": "oklch(0.64 0.015 25)",
+        "text": "oklch(0.19 0.02 25)",
+        "text-muted": "oklch(0.5 0.02 25)",
+        "accent": "oklch(0.64 0.133 78)",
+        "accent-text": "oklch(0.17 0.03 78)",
+        "focus": "oklch(0.64 0.133 78)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.535 0.111 80)",
+        "chart-1": "oklch(0.6 0.14 60)",
+        "chart-2": "oklch(0.46 0.15 255)",
+        "chart-3": "oklch(0.6 0.21 315)",
+        "chart-4": "oklch(0.47 0.09 172)",
+        "chart-5": "oklch(0.6 0.21 285)",
+        "chart-6": "oklch(0.4 0.16 30)"
+      },
+      "dark": {
+        "background": "oklch(0.15 0.02 25)",
+        "surface": "oklch(0.185 0.02 25)",
+        "surface-raised": "oklch(0.22 0.022 25)",
+        "border": "oklch(0.96 0.01 25 / 0.1)",
+        "border-strong": "oklch(0.51 0.02 25)",
+        "text": "oklch(0.965 0.008 25)",
+        "text-muted": "oklch(0.71 0.016 25)",
+        "accent": "oklch(0.85 0.15 92)",
+        "accent-text": "oklch(0.17 0.03 92)",
+        "focus": "oklch(0.85 0.15 92)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.85 0.15 98)",
+        "chart-2": "oklch(0.64 0.21 295)",
+        "chart-3": "oklch(0.8 0.123 0)",
+        "chart-4": "oklch(0.64 0.12 175)",
+        "chart-5": "oklch(0.84 0.145 325)",
+        "chart-6": "oklch(0.61 0.2 142)"
+      }
+    },
+    {
+      "id": "P36",
+      "name": "Charcoal and teal",
+      "character": "Warm charcoal with a deep teal lead; clinics, care teams and quiet operations.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "health",
+        "calm",
+        "trustworthy",
+        "data"
+      ],
+      "base": "dark",
+      "strategy": "restrained",
+      "accent_text_safe": {
+        "light": true,
+        "dark": true
+      },
+      "light": {
+        "background": "oklch(0.96 0.004 50)",
+        "surface": "oklch(0.98 0.002 50)",
+        "surface-raised": "oklch(1 0 0)",
+        "border": "oklch(0.2 0.008 50 / 0.11)",
+        "border-strong": "oklch(0.635 0.008 50)",
+        "text": "oklch(0.19 0.009 50)",
+        "text-muted": "oklch(0.485 0.008 50)",
+        "accent": "oklch(0.52 0.089 190)",
+        "accent-text": "oklch(0.99 0.006 190)",
+        "focus": "oklch(0.52 0.089 190)",
+        "danger": "oklch(0.55 0.21 27)",
+        "success": "oklch(0.52 0.136 152)",
+        "warning": "oklch(0.545 0.121 65)",
+        "chart-1": "oklch(0.52 0.089 190)",
+        "chart-2": "oklch(0.58 0.2 6)",
+        "chart-3": "oklch(0.46 0.21 290)",
+        "chart-4": "oklch(0.62 0.12 172)",
+        "chart-5": "oklch(0.46 0.186 260)",
+        "chart-6": "oklch(0.6 0.1 6)"
+      },
+      "dark": {
+        "background": "oklch(0.18 0.008 50)",
+        "surface": "oklch(0.215 0.008 50)",
+        "surface-raised": "oklch(0.25 0.008 50)",
+        "border": "oklch(0.96 0.008 50 / 0.1)",
+        "border-strong": "oklch(0.53 0.008 50)",
+        "text": "oklch(0.965 0.003 50)",
+        "text-muted": "oklch(0.715 0.006 50)",
+        "accent": "oklch(0.76 0.12 188)",
+        "accent-text": "oklch(0.17 0.029 188)",
+        "focus": "oklch(0.76 0.12 188)",
+        "danger": "oklch(0.7 0.189 25)",
+        "success": "oklch(0.76 0.17 152)",
+        "warning": "oklch(0.82 0.16 78)",
+        "chart-1": "oklch(0.76 0.12 188)",
+        "chart-2": "oklch(0.64 0.2 4)",
+        "chart-3": "oklch(0.78 0.124 295)",
+        "chart-4": "oklch(0.61 0.2 142)",
+        "chart-5": "oklch(0.78 0.13 235)",
+        "chart-6": "oklch(0.64 0.157 55)"
+      }
+    }
+  ],
+  "type": [
+    {
+      "id": "T01",
+      "name": "Fraunces and Commissioner",
+      "character": "A soft, slightly wonky serif over a calm humanist text face; feels made by hand.",
+      "classification": "soft old-style serif with humanist sans",
+      "suits": "food, hospitality, independent publishing, crafted consumer goods",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "warm",
+        "friendly",
+        "food",
+        "editorial",
+        "organic"
+      ],
+      "display": {
+        "family": "Fraunces",
+        "fallback": "Georgia, serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Commissioner",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Commissioner:wght@400;500&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T02",
+      "name": "Newsreader and IBM Plex Mono",
+      "character": "A newspaper text serif for reading, with a typewriter-like mono for dates, notes and data.",
+      "classification": "text serif with mono notes",
+      "suits": "newsletters, research, long-form, documentation with a voice",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "docs",
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "editorial",
+        "serious",
+        "culture",
+        "calm"
+      ],
+      "display": {
+        "family": "Newsreader",
+        "fallback": "Georgia, serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Newsreader",
+        "fallback": "Georgia, serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": {
+        "family": "IBM Plex Mono",
+        "fallback": "ui-monospace, monospace",
+        "weights": [
+          400
+        ]
+      },
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T03",
+      "name": "Bricolage Grotesque and Hanken Grotesk",
+      "character": "A grotesque with ink traps and personality at display sizes, a quiet grotesque underneath.",
+      "classification": "expressive grotesque",
+      "suits": "creative studios, consumer apps, community products",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing",
+        "app",
+        "settings"
+      ],
+      "tags": [
+        "playful",
+        "creative",
+        "friendly",
+        "bold"
+      ],
+      "display": {
+        "family": "Bricolage Grotesque",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Hanken Grotesk",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.03,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600&family=Hanken+Grotesk:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T04",
+      "name": "Big Shoulders Display and Public Sans",
+      "character": "Tall, condensed headlines like stadium signage over a sturdy civic text face.",
+      "classification": "condensed display with neo-grotesque",
+      "suits": "sport, events, transit, civic services",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "app",
+        "pricing"
+      ],
+      "tags": [
+        "bold",
+        "energetic",
+        "industrial",
+        "outdoor"
+      ],
+      "display": {
+        "family": "Big Shoulders Display",
+        "fallback": "\"Arial Narrow\", sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Public Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600&family=Public+Sans:wght@400;500&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T05",
+      "name": "Zilla Slab and Karla",
+      "character": "A bookish slab with blunt serifs, warm and dependable, over a compact grotesque.",
+      "classification": "slab serif with grotesque",
+      "suits": "hardware, tools, education, approachable B2B",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "friendly",
+        "retro",
+        "trustworthy",
+        "education",
+        "industrial"
+      ],
+      "display": {
+        "family": "Zilla Slab",
+        "fallback": "Rockwell, Georgia, serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Karla",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500&family=Karla:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T06",
+      "name": "IBM Plex Mono and IBM Plex Sans",
+      "character": "Monospaced headings and labels with a matching engineered sans for reading.",
+      "classification": "mono-led superfamily",
+      "suits": "infrastructure, APIs, data tools, engineering documentation",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "docs",
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "pricing"
+      ],
+      "tags": [
+        "technical",
+        "developer",
+        "data",
+        "serious",
+        "industrial"
+      ],
+      "display": {
+        "family": "IBM Plex Mono",
+        "fallback": "ui-monospace, monospace",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "IBM Plex Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": {
+        "family": "IBM Plex Mono",
+        "fallback": "ui-monospace, monospace",
+        "weights": [
+          500
+        ]
+      },
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.125,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T07",
+      "name": "Martian Mono and Inter",
+      "character": "A wide, squared mono that makes headlines read like a spec, with Inter doing the quiet work.",
+      "classification": "wide mono-led",
+      "suits": "developer tools, CLIs, launch pages for technical products",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "docs",
+        "app",
+        "dashboard",
+        "table",
+        "pricing"
+      ],
+      "tags": [
+        "developer",
+        "technical",
+        "bold",
+        "minimal"
+      ],
+      "display": {
+        "family": "Martian Mono",
+        "fallback": "ui-monospace, monospace",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Inter",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": {
+        "family": "Martian Mono",
+        "fallback": "ui-monospace, monospace",
+        "weights": [
+          500
+        ]
+      },
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.125,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Martian+Mono:wght@500&family=Inter:wght@400;500;600&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T08",
+      "name": "Nunito and Atkinson Hyperlegible Next",
+      "character": "Rounded terminals that feel kind, over a text face designed for low-vision readers.",
+      "classification": "rounded display with legibility-first sans",
+      "suits": "health, education, children's products, accessibility-led services",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "app",
+        "settings",
+        "pricing"
+      ],
+      "tags": [
+        "friendly",
+        "health",
+        "education",
+        "calm",
+        "playful"
+      ],
+      "clashes": [
+        "S01",
+        "S07"
+      ],
+      "display": {
+        "family": "Nunito",
+        "fallback": "\"Arial Rounded MT Bold\", system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Atkinson Hyperlegible Next",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Atkinson+Hyperlegible+Next:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T09",
+      "name": "Alegreya and Alegreya Sans",
+      "character": "Pen-shaped serif and sans from one designer; literary and alive.",
+      "classification": "calligraphic humanist superfamily",
+      "suits": "books, museums, cultural institutions, NGOs",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "culture",
+        "editorial",
+        "organic",
+        "warm"
+      ],
+      "display": {
+        "family": "Alegreya",
+        "fallback": "Georgia, serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Alegreya Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Alegreya+Sans:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T10",
+      "name": "Bodoni Moda and Jost",
+      "character": "Hairline serifs and hard stress like a fashion masthead, with a geometric sans in support.",
+      "classification": "Didone with geometric sans",
+      "suits": "fashion, beauty, luxury retail",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "luxury",
+        "fashion",
+        "editorial"
+      ],
+      "clashes": [
+        "S04",
+        "S06"
+      ],
+      "display": {
+        "family": "Bodoni Moda",
+        "fallback": "\"Didot\", \"Bodoni 72\", serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Jost",
+        "fallback": "\"Futura\", system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Jost:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T11",
+      "name": "Cormorant Garamond and Libre Franklin",
+      "character": "A tall, elegant Garamond for display only, grounded by an American gothic text face.",
+      "classification": "Garalde display with gothic sans",
+      "suits": "hotels, wine, architecture, quiet luxury",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "luxury",
+        "calm",
+        "culture",
+        "editorial"
+      ],
+      "clashes": [
+        "S04",
+        "S06"
+      ],
+      "display": {
+        "family": "Cormorant Garamond",
+        "fallback": "Garamond, Georgia, serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Libre Franklin",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Libre+Franklin:wght@400;500&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T12",
+      "name": "Libre Caslon Text and Work Sans",
+      "character": "A sturdy eighteenth-century Caslon used large, with a plain grotesque for everything else.",
+      "classification": "Caslon text cut with grotesque",
+      "suits": "law, heritage brands, publishing, foundations",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "pricing"
+      ],
+      "tags": [
+        "serious",
+        "editorial",
+        "retro",
+        "trustworthy"
+      ],
+      "display": {
+        "family": "Libre Caslon Text",
+        "fallback": "\"Big Caslon\", Georgia, serif",
+        "weights": [
+          400
+        ]
+      },
+      "text": {
+        "family": "Work Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Libre+Caslon+Text&family=Work+Sans:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T13",
+      "name": "Schibsted Grotesk",
+      "character": "A grotesque built for a newsroom: dense, direct, good in tables and headlines alike.",
+      "classification": "news grotesque, single family",
+      "suits": "news, media, civic data, reporting tools",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "app",
+        "docs",
+        "pricing"
+      ],
+      "tags": [
+        "editorial",
+        "serious",
+        "data",
+        "minimal"
+      ],
+      "display": {
+        "family": "Schibsted Grotesk",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Schibsted Grotesk",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.03,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T14",
+      "name": "Shrikhand and Golos Text",
+      "character": "A fat, upright-italic display with swash energy like a soda label, over a neutral screen grotesque.",
+      "classification": "heavy italic display with grotesque",
+      "suits": "drinks, snacks, games, youth brands, summer events",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "playful",
+        "retro",
+        "food",
+        "energetic"
+      ],
+      "clashes": [
+        "S01",
+        "S07",
+        "P07",
+        "P17"
+      ],
+      "display": {
+        "family": "Shrikhand",
+        "fallback": "Georgia, serif",
+        "weights": [
+          400
+        ]
+      },
+      "text": {
+        "family": "Golos Text",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Shrikhand&family=Golos+Text:wght@400;500&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T15",
+      "name": "Young Serif and Figtree",
+      "character": "A heavy, friendly old-style serif like a shop sign, with a clean geometric sans.",
+      "classification": "chunky old-style serif with geometric sans",
+      "suits": "bakeries, cafes, craft goods, children's books",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "warm",
+        "food",
+        "friendly",
+        "retro"
+      ],
+      "display": {
+        "family": "Young Serif",
+        "fallback": "Georgia, serif",
+        "weights": [
+          400
+        ]
+      },
+      "text": {
+        "family": "Figtree",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T16",
+      "name": "Marcellus and Mulish",
+      "character": "Flared, chiselled capitals in the Roman inscription tradition, with a soft minimalist sans.",
+      "classification": "flared glyphic serif with sans",
+      "suits": "spas, wellness, architecture studios, galleries",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "luxury",
+        "calm",
+        "culture",
+        "health"
+      ],
+      "display": {
+        "family": "Marcellus",
+        "fallback": "\"Optima\", Georgia, serif",
+        "weights": [
+          400
+        ]
+      },
+      "text": {
+        "family": "Mulish",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:wght@400;500&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T17",
+      "name": "Familjen Grotesk and Literata",
+      "character": "Reversed roles: a crisp grotesque for headings and a warm book serif for reading.",
+      "classification": "grotesque display with book serif text",
+      "suits": "essays, research labs, newsletters with a technical edge",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "docs",
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "editorial",
+        "technical",
+        "culture",
+        "calm"
+      ],
+      "display": {
+        "family": "Familjen Grotesk",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Literata",
+        "fallback": "Georgia, serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.03,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T18",
+      "name": "Red Hat Display and Red Hat Text",
+      "character": "Open, slightly geometric forms with optical display and text cuts; corporate without coldness.",
+      "classification": "geometric-humanist superfamily",
+      "suits": "enterprise software, open source foundations, B2B platforms",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "docs",
+        "pricing"
+      ],
+      "tags": [
+        "trustworthy",
+        "technical",
+        "serious",
+        "minimal"
+      ],
+      "display": {
+        "family": "Red Hat Display",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Red Hat Text",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&family=Red+Hat+Text:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T19",
+      "name": "Syne and Manrope",
+      "character": "Idiosyncratic, wide display forms from a gallery identity, over a smooth modern grotesque.",
+      "classification": "art-school display with grotesque",
+      "suits": "galleries, agencies, music labels, art events",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "creative",
+        "culture",
+        "bold"
+      ],
+      "display": {
+        "family": "Syne",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Manrope",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Syne:wght@600&family=Manrope:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T20",
+      "name": "Barlow Condensed and Barlow",
+      "character": "Road-sign and rail-signage grotesque; condensed for headings and labels, regular for text.",
+      "classification": "signage grotesque, condensed and regular",
+      "suits": "logistics, transit, fleet and operations dashboards",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "app",
+        "dashboard",
+        "table",
+        "pricing"
+      ],
+      "tags": [
+        "industrial",
+        "data",
+        "technical",
+        "outdoor"
+      ],
+      "display": {
+        "family": "Barlow Condensed",
+        "fallback": "\"Arial Narrow\", sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Barlow",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow:wght@400;500;600&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T21",
+      "name": "Source Serif 4 and Source Sans 3",
+      "character": "An unshowy serif and humanist sans pair that reads as institutional and careful.",
+      "classification": "neutral serif with humanist sans",
+      "suits": "healthcare, government, insurance, documentation",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "docs",
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "trustworthy",
+        "serious",
+        "health",
+        "calm",
+        "education"
+      ],
+      "display": {
+        "family": "Source Serif 4",
+        "fallback": "Georgia, serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Source Sans 3",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Source+Sans+3:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T22",
+      "name": "Darker Grotesque and Funnel Sans",
+      "character": "Tall, tight, small-x-height grotesque headlines that look set by hand, over a plain modern sans.",
+      "classification": "compressed small-x-height grotesque",
+      "suits": "independent fashion, record shops, studios, consumer fintech with attitude",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "bold",
+        "fashion",
+        "creative",
+        "finance"
+      ],
+      "display": {
+        "family": "Darker Grotesque",
+        "fallback": "\"Arial Narrow\", sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Funnel Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@600&family=Funnel+Sans:wght@400;500&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T23",
+      "name": "Besley and Rethink Sans",
+      "character": "A bracketed Clarendon like a seed-packet or poster heading, with a plain modern grotesque.",
+      "classification": "Clarendon with grotesque",
+      "suits": "craft drinks, outdoor gear, americana, general stores",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "retro",
+        "warm",
+        "outdoor",
+        "food"
+      ],
+      "display": {
+        "family": "Besley",
+        "fallback": "Georgia, serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Rethink Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Besley:wght@500&family=Rethink+Sans:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T24",
+      "name": "Bowlby One and Onest",
+      "character": "A fat, compact poster face for few words at large sizes, with a neutral grotesque.",
+      "classification": "heavy poster display with grotesque",
+      "suits": "music, festivals, sport, launches that should shout",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "bold",
+        "energetic",
+        "playful"
+      ],
+      "clashes": [
+        "S07",
+        "P07",
+        "P17"
+      ],
+      "display": {
+        "family": "Bowlby One",
+        "fallback": "Impact, sans-serif",
+        "weights": [
+          400
+        ]
+      },
+      "text": {
+        "family": "Onest",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "marketing": 1.333
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Bowlby+One&family=Onest:wght@400;500&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T25",
+      "name": "Krona One and Albert Sans",
+      "character": "Wide, flat-sided display letters with a lot of air, over a Scandinavian grotesque.",
+      "classification": "extended display with grotesque",
+      "suits": "architecture, mobility, fashion-tech, design objects",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "minimal",
+        "technical",
+        "fashion",
+        "cool"
+      ],
+      "display": {
+        "family": "Krona One",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400
+        ]
+      },
+      "text": {
+        "family": "Albert Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.03,
+      "ratio": {
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Krona+One&family=Albert+Sans:wght@400;500&display=swap",
+      "tabular": false
+    },
+    {
+      "id": "T26",
+      "name": "Spline Sans Mono and Spline Sans",
+      "character": "A soft mono with round shapes for headings and data, and its proportional sibling for text.",
+      "classification": "friendly mono-led superfamily",
+      "suits": "developer tools with warmth, data notebooks, indie software",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "docs",
+        "app",
+        "dashboard",
+        "table",
+        "pricing"
+      ],
+      "tags": [
+        "developer",
+        "friendly",
+        "data",
+        "playful"
+      ],
+      "display": {
+        "family": "Spline Sans Mono",
+        "fallback": "ui-monospace, monospace",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Spline Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": {
+        "family": "Spline Sans Mono",
+        "fallback": "ui-monospace, monospace",
+        "weights": [
+          500
+        ]
+      },
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:wght@500&family=Spline+Sans:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T27",
+      "name": "Brygada 1918",
+      "character": "A revived Polish book face from 1918; sober, literate, slightly unfamiliar.",
+      "classification": "transitional serif revival, single family",
+      "suits": "literary sites, academic presses, archives, documentation",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "docs"
+      ],
+      "tags": [
+        "editorial",
+        "culture",
+        "serious",
+        "retro"
+      ],
+      "display": {
+        "family": "Brygada 1918",
+        "fallback": "Georgia, serif",
+        "weights": [
+          500
+        ]
+      },
+      "text": {
+        "family": "Brygada 1918",
+        "fallback": "Georgia, serif",
+        "weights": [
+          400,
+          500
+        ]
+      },
+      "mono": null,
+      "tracking": -0.02,
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "css": "https://fonts.googleapis.com/css2?family=Brygada+1918:wght@400;500&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T28",
+      "name": "Geist and Geist Mono",
+      "character": "A cool, exact grotesque with a mono cut for ids and code; the default voice of modern developer tools, used on purpose.",
+      "classification": "neo-grotesque with matching mono",
+      "suits": "developer platforms, infrastructure consoles, analytics",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing",
+        "docs"
+      ],
+      "tags": [
+        "technical",
+        "developer",
+        "minimal",
+        "data"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Geist",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Geist",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": {
+        "family": "Geist Mono",
+        "fallback": "ui-monospace, \"SF Mono\", Menlo, monospace",
+        "weights": [
+          400
+        ]
+      },
+      "tracking": -0.03,
+      "css": "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T29",
+      "name": "Manrope and JetBrains Mono",
+      "character": "Open, round-shouldered letters with sturdy figures, and a plain mono for references and amounts in tables.",
+      "classification": "geometric-grotesque hybrid with mono",
+      "suits": "fintech, invoicing, banking and SaaS admin",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "finance",
+        "friendly",
+        "data",
+        "technical"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Manrope",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Manrope",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": {
+        "family": "JetBrains Mono",
+        "fallback": "ui-monospace, \"SF Mono\", Menlo, monospace",
+        "weights": [
+          400
+        ]
+      },
+      "tracking": -0.03,
+      "css": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T30",
+      "name": "Plus Jakarta Sans",
+      "character": "Rounded geometry with tall, clear figures; friendly in a sidebar, confident in a 40 px total.",
+      "classification": "geometric-humanist sans, single family",
+      "suits": "consumer finance, marketplaces, team tools",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "friendly",
+        "finance",
+        "data",
+        "minimal"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Plus Jakarta Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Plus Jakarta Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": null,
+      "tracking": -0.03,
+      "css": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T31",
+      "name": "Instrument Sans and Fragment Mono",
+      "character": "A precise grotesque with slightly condensed caps, and a mono cut from Helvetica for data labels.",
+      "classification": "contemporary grotesque with neo-grotesque mono",
+      "suits": "design tools, analytics, agency dashboards",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing",
+        "docs"
+      ],
+      "tags": [
+        "minimal",
+        "creative",
+        "technical",
+        "data"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Instrument Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Instrument Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": {
+        "family": "Fragment Mono",
+        "fallback": "ui-monospace, \"SF Mono\", Menlo, monospace",
+        "weights": [
+          400
+        ]
+      },
+      "tracking": -0.025,
+      "css": "https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Fragment+Mono&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T32",
+      "name": "Mona Sans",
+      "character": "A strong, slightly squared grotesque with heavy-shouldered figures; reads like a well-made instrument panel.",
+      "classification": "industrial grotesque, single family",
+      "suits": "developer platforms, security, observability",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing",
+        "docs"
+      ],
+      "tags": [
+        "developer",
+        "technical",
+        "bold",
+        "data"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Mona Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Mona Sans",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": null,
+      "tracking": -0.03,
+      "css": "https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T33",
+      "name": "Space Grotesk and Space Mono",
+      "character": "A grotesque grown from a mono, with idiosyncratic a, g and figures; technical with some personality.",
+      "classification": "quirky grotesque with its mono parent",
+      "suits": "crypto, hardware, telemetry, developer tools",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing",
+        "docs"
+      ],
+      "tags": [
+        "technical",
+        "developer",
+        "bold",
+        "creative"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Space Grotesk",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Space Grotesk",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": {
+        "family": "Space Mono",
+        "fallback": "ui-monospace, \"SF Mono\", Menlo, monospace",
+        "weights": [
+          400
+        ]
+      },
+      "tracking": -0.03,
+      "css": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Space+Mono&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T34",
+      "name": "Chivo and Chivo Mono",
+      "character": "A sturdy, slightly condensed grotesque with a matching mono; plain, dependable, made for figures.",
+      "classification": "grotesque superfamily with mono",
+      "suits": "logistics, operations, insurance and public data",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing",
+        "docs"
+      ],
+      "tags": [
+        "industrial",
+        "serious",
+        "data",
+        "finance"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Chivo",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Chivo",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": {
+        "family": "Chivo Mono",
+        "fallback": "ui-monospace, \"SF Mono\", Menlo, monospace",
+        "weights": [
+          400
+        ]
+      },
+      "tracking": -0.025,
+      "css": "https://fonts.googleapis.com/css2?family=Chivo:wght@400;500;600&family=Chivo+Mono:wght@400&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T35",
+      "name": "Sora and Onest",
+      "character": "A wide, open geometric face for headline figures over a compact grotesque that stays readable at 12 px.",
+      "classification": "wide geometric display with grotesque text",
+      "suits": "fintech, growth and sales dashboards, crypto",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "bold",
+        "finance",
+        "energetic",
+        "data"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Sora",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Onest",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": null,
+      "tracking": -0.03,
+      "css": "https://fonts.googleapis.com/css2?family=Sora:wght@600&family=Onest:wght@400;500;600&display=swap",
+      "tabular": true
+    },
+    {
+      "id": "T36",
+      "name": "Figtree",
+      "character": "Clean geometric letters with soft terminals and clear figures; calm enough for health, warm enough for people.",
+      "classification": "friendly geometric sans, single family",
+      "suits": "health, education, booking and care tools",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "friendly",
+        "health",
+        "education",
+        "calm"
+      ],
+      "source": "Google Fonts",
+      "license": "OFL-1.1",
+      "ratio": {
+        "product": 1.2,
+        "marketing": 1.25
+      },
+      "display": {
+        "family": "Figtree",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          600
+        ]
+      },
+      "text": {
+        "family": "Figtree",
+        "fallback": "system-ui, sans-serif",
+        "weights": [
+          400,
+          500,
+          600
+        ]
+      },
+      "mono": null,
+      "tracking": -0.025,
+      "css": "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&display=swap",
+      "tabular": true
+    }
+  ],
+  "shape": [
+    {
+      "id": "S01",
+      "name": "Ledger hairline",
+      "character": "Near-square corners, 1 px rules, no shadows; information sits on lines, not cards.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "table",
+        "dashboard",
+        "settings"
+      ],
+      "tags": [
+        "technical",
+        "data",
+        "finance",
+        "serious",
+        "editorial"
+      ],
+      "clashes": [
+        "T08",
+        "T14"
+      ],
+      "radius": "square",
+      "elevation": "hairline",
+      "density": "compact",
+      "tokens": {
+        "--r-control": "2px",
+        "--r-card": "2px",
+        "--r-modal": "4px",
+        "--border-width": "1px",
+        "--control-h": "32px",
+        "--pad-card": "16px",
+        "--gap-group": "24px"
+      },
+      "light": {
+        "--elevation-1": "0 0 0 1px var(--border)",
+        "--elevation-2": "0 0 0 1px var(--border-strong)",
+        "--elevation-3": "0 0 0 1px var(--border-strong), 0 4px 12px color-mix(in oklch, var(--shadow-color) 10%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "0 0 0 1px var(--border)",
+        "--elevation-2": "0 0 0 1px var(--border-strong)",
+        "--elevation-3": "0 0 0 1px var(--border-strong), 0 4px 12px color-mix(in oklch, var(--shadow-color) 40%, transparent)"
+      }
+    },
+    {
+      "id": "S02",
+      "name": "Machined",
+      "character": "Small radii and an inset top highlight, like milled aluminium keys.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing",
+        "docs"
+      ],
+      "tags": [
+        "technical",
+        "developer",
+        "industrial",
+        "cool"
+      ],
+      "radius": "tight",
+      "elevation": "inset",
+      "density": "regular",
+      "tokens": {
+        "--r-control": "4px",
+        "--r-card": "6px",
+        "--r-modal": "8px",
+        "--border-width": "1px",
+        "--control-h": "40px",
+        "--pad-card": "24px",
+        "--gap-group": "32px"
+      },
+      "light": {
+        "--elevation-1": "inset 0 1px 0 color-mix(in oklch, white 70%, transparent), 0 1px 2px color-mix(in oklch, var(--shadow-color) 8%, transparent)",
+        "--elevation-2": "inset 0 1px 0 color-mix(in oklch, white 70%, transparent), 0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 8%, transparent)",
+        "--elevation-3": "inset 0 1px 0 color-mix(in oklch, white 70%, transparent), 0 2px 4px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 12px 32px color-mix(in oklch, var(--shadow-color) 10%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "inset 0 1px 0 color-mix(in oklch, white 8%, transparent)",
+        "--elevation-2": "inset 0 1px 0 color-mix(in oklch, white 10%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 40%, transparent)",
+        "--elevation-3": "inset 0 1px 0 color-mix(in oklch, white 12%, transparent), 0 12px 32px color-mix(in oklch, var(--shadow-color) 50%, transparent)"
+      }
+    },
+    {
+      "id": "S03",
+      "name": "Soft stack",
+      "character": "Moderate radii and small layered shadows; familiar, quiet, dependable.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "trustworthy",
+        "friendly",
+        "calm",
+        "health"
+      ],
+      "radius": "moderate",
+      "elevation": "shadow",
+      "density": "regular",
+      "tokens": {
+        "--r-control": "8px",
+        "--r-card": "12px",
+        "--r-modal": "16px",
+        "--border-width": "1px",
+        "--control-h": "40px",
+        "--pad-card": "24px",
+        "--gap-group": "32px"
+      },
+      "light": {
+        "--elevation-1": "0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent)",
+        "--elevation-2": "0 1px 2px color-mix(in oklch, var(--shadow-color) 4%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 6%, transparent)",
+        "--elevation-3": "0 2px 4px color-mix(in oklch, var(--shadow-color) 4%, transparent), 0 12px 32px color-mix(in oklch, var(--shadow-color) 8%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "0 1px 2px color-mix(in oklch, var(--shadow-color) 30%, transparent)",
+        "--elevation-2": "0 1px 2px color-mix(in oklch, var(--shadow-color) 30%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 30%, transparent)",
+        "--elevation-3": "0 2px 4px color-mix(in oklch, var(--shadow-color) 30%, transparent), 0 12px 32px color-mix(in oklch, var(--shadow-color) 40%, transparent)"
+      }
+    },
+    {
+      "id": "S04",
+      "name": "Pillow",
+      "character": "Pill controls, generous cards and soft lift; roomy and approachable.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing",
+        "app",
+        "settings"
+      ],
+      "tags": [
+        "friendly",
+        "playful",
+        "health",
+        "calm"
+      ],
+      "clashes": [
+        "T10",
+        "T11"
+      ],
+      "radius": "pill",
+      "elevation": "shadow",
+      "density": "airy",
+      "tokens": {
+        "--r-control": "9999px",
+        "--r-card": "16px",
+        "--r-modal": "20px",
+        "--border-width": "1px",
+        "--control-h": "48px",
+        "--pad-card": "32px",
+        "--gap-group": "48px"
+      },
+      "light": {
+        "--elevation-1": "0 1px 2px color-mix(in oklch, var(--shadow-color) 5%, transparent), 0 2px 8px color-mix(in oklch, var(--shadow-color) 4%, transparent)",
+        "--elevation-2": "0 2px 4px color-mix(in oklch, var(--shadow-color) 4%, transparent), 0 8px 24px color-mix(in oklch, var(--shadow-color) 8%, transparent)",
+        "--elevation-3": "0 4px 8px color-mix(in oklch, var(--shadow-color) 5%, transparent), 0 16px 40px color-mix(in oklch, var(--shadow-color) 10%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "0 1px 2px color-mix(in oklch, var(--shadow-color) 30%, transparent)",
+        "--elevation-2": "0 2px 4px color-mix(in oklch, var(--shadow-color) 30%, transparent), 0 8px 24px color-mix(in oklch, var(--shadow-color) 35%, transparent)",
+        "--elevation-3": "0 4px 8px color-mix(in oklch, var(--shadow-color) 30%, transparent), 0 16px 40px color-mix(in oklch, var(--shadow-color) 45%, transparent)"
+      }
+    },
+    {
+      "id": "S05",
+      "name": "Colour block",
+      "character": "No borders, no card shadows; panels separate by fills of the palette's surfaces.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "bold",
+        "playful",
+        "creative",
+        "minimal"
+      ],
+      "radius": "moderate",
+      "elevation": "block",
+      "density": "airy",
+      "tokens": {
+        "--r-control": "10px",
+        "--r-card": "16px",
+        "--r-modal": "20px",
+        "--border-width": "0px",
+        "--control-h": "48px",
+        "--pad-card": "32px",
+        "--gap-group": "48px"
+      },
+      "light": {
+        "--elevation-1": "none",
+        "--elevation-2": "0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 8%, transparent)",
+        "--elevation-3": "0 2px 4px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 12px 32px color-mix(in oklch, var(--shadow-color) 12%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "none",
+        "--elevation-2": "0 4px 12px color-mix(in oklch, var(--shadow-color) 40%, transparent)",
+        "--elevation-3": "0 12px 32px color-mix(in oklch, var(--shadow-color) 50%, transparent)"
+      }
+    },
+    {
+      "id": "S06",
+      "name": "Hard offset",
+      "character": "2 px outlines and solid offset shadows with no blur; printed, physical, a little loud.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing",
+        "app",
+        "settings"
+      ],
+      "tags": [
+        "playful",
+        "retro",
+        "bold",
+        "creative",
+        "education"
+      ],
+      "clashes": [
+        "T10",
+        "T11"
+      ],
+      "radius": "tight",
+      "elevation": "offset",
+      "density": "regular",
+      "tokens": {
+        "--r-control": "6px",
+        "--r-card": "8px",
+        "--r-modal": "12px",
+        "--border-width": "2px",
+        "--control-h": "40px",
+        "--pad-card": "24px",
+        "--gap-group": "32px"
+      },
+      "light": {
+        "--elevation-1": "2px 2px 0 var(--text)",
+        "--elevation-2": "4px 4px 0 var(--text)",
+        "--elevation-3": "6px 6px 0 var(--text)"
+      },
+      "dark": {
+        "--elevation-1": "2px 2px 0 var(--accent)",
+        "--elevation-2": "4px 4px 0 var(--accent)",
+        "--elevation-3": "6px 6px 0 var(--accent)"
+      }
+    },
+    {
+      "id": "S07",
+      "name": "Print rule",
+      "character": "Square corners, heavy top rules over sections, no shadows; set like a printed page.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article",
+        "docs"
+      ],
+      "tags": [
+        "editorial",
+        "serious",
+        "culture",
+        "minimal",
+        "luxury"
+      ],
+      "clashes": [
+        "T08",
+        "T14",
+        "T24"
+      ],
+      "radius": "square",
+      "elevation": "hairline",
+      "density": "airy",
+      "tokens": {
+        "--r-control": "0px",
+        "--r-card": "0px",
+        "--r-modal": "0px",
+        "--border-width": "1px",
+        "--rule-width": "2px",
+        "--control-h": "48px",
+        "--pad-card": "32px",
+        "--gap-group": "48px"
+      },
+      "light": {
+        "--elevation-1": "none",
+        "--elevation-2": "0 0 0 1px var(--border-strong)",
+        "--elevation-3": "0 0 0 1px var(--text)"
+      },
+      "dark": {
+        "--elevation-1": "none",
+        "--elevation-2": "0 0 0 1px var(--border-strong)",
+        "--elevation-3": "0 0 0 1px var(--text)"
+      }
+    },
+    {
+      "id": "S08",
+      "name": "Pill and hairline",
+      "character": "Pill controls with flat, hairline cards; precise and light on its feet.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "app",
+        "dashboard",
+        "table",
+        "settings",
+        "landing",
+        "docs"
+      ],
+      "tags": [
+        "minimal",
+        "cool",
+        "technical",
+        "trustworthy"
+      ],
+      "radius": "pill",
+      "elevation": "hairline",
+      "density": "regular",
+      "tokens": {
+        "--r-control": "9999px",
+        "--r-card": "12px",
+        "--r-modal": "16px",
+        "--border-width": "1px",
+        "--control-h": "40px",
+        "--pad-card": "24px",
+        "--gap-group": "32px"
+      },
+      "light": {
+        "--elevation-1": "0 0 0 1px var(--border)",
+        "--elevation-2": "0 0 0 1px var(--border), 0 4px 12px color-mix(in oklch, var(--shadow-color) 6%, transparent)",
+        "--elevation-3": "0 0 0 1px var(--border), 0 8px 12px color-mix(in oklch, var(--shadow-color) 10%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "0 0 0 1px var(--border)",
+        "--elevation-2": "0 0 0 1px var(--border-strong)",
+        "--elevation-3": "0 0 0 1px var(--border-strong), 0 8px 12px color-mix(in oklch, var(--shadow-color) 40%, transparent)"
+      }
+    },
+    {
+      "id": "S09",
+      "name": "Thick frame",
+      "character": "2 px strong outlines, rounded but sturdy, no shadows; reads like a well-made toy or a form you trust.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "app",
+        "settings",
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "friendly",
+        "education",
+        "playful",
+        "trustworthy"
+      ],
+      "radius": "moderate",
+      "elevation": "hairline",
+      "density": "regular",
+      "tokens": {
+        "--r-control": "10px",
+        "--r-card": "16px",
+        "--r-modal": "20px",
+        "--border-width": "2px",
+        "--control-h": "44px",
+        "--pad-card": "24px",
+        "--gap-group": "32px"
+      },
+      "light": {
+        "--elevation-1": "0 0 0 2px var(--border-strong)",
+        "--elevation-2": "0 0 0 2px var(--text)",
+        "--elevation-3": "0 0 0 2px var(--text), 0 4px 12px color-mix(in oklch, var(--shadow-color) 12%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "0 0 0 2px var(--border-strong)",
+        "--elevation-2": "0 0 0 2px var(--text)",
+        "--elevation-3": "0 0 0 2px var(--text), 0 4px 12px color-mix(in oklch, var(--shadow-color) 40%, transparent)"
+      }
+    },
+    {
+      "id": "S10",
+      "name": "Deep float",
+      "character": "Borderless panels on tall, soft, layered shadows; objects resting on a lit table.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "luxury",
+        "calm",
+        "fashion"
+      ],
+      "radius": "moderate",
+      "elevation": "shadow",
+      "density": "airy",
+      "tokens": {
+        "--r-control": "10px",
+        "--r-card": "16px",
+        "--r-modal": "20px",
+        "--border-width": "0px",
+        "--control-h": "48px",
+        "--pad-card": "32px",
+        "--gap-group": "48px"
+      },
+      "light": {
+        "--elevation-1": "0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 2px 6px color-mix(in oklch, var(--shadow-color) 4%, transparent)",
+        "--elevation-2": "0 2px 4px color-mix(in oklch, var(--shadow-color) 5%, transparent), 0 8px 20px color-mix(in oklch, var(--shadow-color) 8%, transparent)",
+        "--elevation-3": "0 4px 8px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 24px 48px color-mix(in oklch, var(--shadow-color) 14%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "0 1px 2px color-mix(in oklch, var(--shadow-color) 35%, transparent)",
+        "--elevation-2": "0 2px 4px color-mix(in oklch, var(--shadow-color) 35%, transparent), 0 8px 20px color-mix(in oklch, var(--shadow-color) 40%, transparent)",
+        "--elevation-3": "0 4px 8px color-mix(in oklch, var(--shadow-color) 35%, transparent), 0 24px 48px color-mix(in oklch, var(--shadow-color) 55%, transparent)"
+      }
+    },
+    {
+      "id": "S11",
+      "name": "Tile grid",
+      "character": "Dense 12 px tiles on 1 px hairlines with a faint top highlight; the grid of a trading desk.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "table",
+        "settings"
+      ],
+      "tags": [
+        "data",
+        "technical",
+        "finance",
+        "minimal"
+      ],
+      "radius": "moderate",
+      "elevation": "hairline",
+      "density": "compact",
+      "tokens": {
+        "--r-control": "8px",
+        "--r-card": "12px",
+        "--r-modal": "16px",
+        "--border-width": "1px",
+        "--control-h": "36px",
+        "--pad-card": "16px",
+        "--gap-group": "16px"
+      },
+      "light": {
+        "--elevation-1": "0 0 0 1px var(--border), 0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent)",
+        "--elevation-2": "0 0 0 1px var(--border), 0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 8%, transparent)",
+        "--elevation-3": "0 0 0 1px var(--border), 0 2px 4px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 12px 32px color-mix(in oklch, var(--shadow-color) 14%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "0 0 0 1px var(--border), inset 0 1px 0 oklch(1 0 0 / 0.04)",
+        "--elevation-2": "0 0 0 1px var(--border), inset 0 1px 0 oklch(1 0 0 / 0.05), 0 4px 12px color-mix(in oklch, var(--shadow-color) 40%, transparent)",
+        "--elevation-3": "0 0 0 1px var(--border), inset 0 1px 0 oklch(1 0 0 / 0.06), 0 16px 32px color-mix(in oklch, var(--shadow-color) 50%, transparent)"
+      }
+    },
+    {
+      "id": "S12",
+      "name": "Stepped fill",
+      "character": "Borderless 16 px panels that separate by stepped surface fills, with charts set into darker wells.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "data",
+        "calm",
+        "minimal",
+        "friendly"
+      ],
+      "radius": "moderate",
+      "elevation": "fill",
+      "density": "regular",
+      "tokens": {
+        "--r-control": "10px",
+        "--r-card": "16px",
+        "--r-modal": "20px",
+        "--border-width": "0px",
+        "--control-h": "36px",
+        "--pad-card": "24px",
+        "--gap-group": "24px"
+      },
+      "light": {
+        "--elevation-1": "0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent)",
+        "--elevation-2": "0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 6px 16px color-mix(in oklch, var(--shadow-color) 8%, transparent)",
+        "--elevation-3": "0 2px 4px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 16px 40px color-mix(in oklch, var(--shadow-color) 14%, transparent)"
+      },
+      "dark": {
+        "--elevation-1": "inset 0 1px 0 oklch(1 0 0 / 0.05)",
+        "--elevation-2": "inset 0 1px 0 oklch(1 0 0 / 0.06), 0 8px 24px color-mix(in oklch, var(--shadow-color) 45%, transparent)",
+        "--elevation-3": "inset 0 1px 0 oklch(1 0 0 / 0.07), 0 16px 48px color-mix(in oklch, var(--shadow-color) 55%, transparent)"
+      }
+    }
+  ],
+  "signature": [
+    {
+      "id": "G01",
+      "name": "Baseline rules",
+      "what": "Faint horizontal rules at the body line height that show through section edges.",
+      "build": "Draw the rules with a repeating-linear-gradient every calc(var(--lh-body) * 1rem) in var(--border) and give body text the same line height so lines sit on them. Stop the pattern at section boundaries with a solid band so it reads as ruled paper, not texture.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "article",
+        "docs",
+        "landing"
+      ],
+      "tags": [
+        "editorial",
+        "technical",
+        "calm"
+      ]
+    },
+    {
+      "id": "G02",
+      "name": "Tabular hero numeral",
+      "what": "One oversized tabular figure is the hero of a data card, its label small beneath.",
+      "build": "Set the number in the display face at 3 to 4 times body size with font-variant-numeric: tabular-nums and the unit at text size on the same baseline. Use a real number from the product; if there is none, leave the card out.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "dashboard",
+        "landing",
+        "pricing"
+      ],
+      "tags": [
+        "data",
+        "finance",
+        "technical",
+        "bold"
+      ]
+    },
+    {
+      "id": "G03",
+      "name": "Bleeding display word",
+      "what": "One hand-set display word runs off the edge of the container.",
+      "build": "Put the word in its own element with white-space: nowrap, size it in vw so it overflows by 10 to 20 percent, and clip it with overflow: hidden on the section, never the page. Keep the full message in readable text elsewhere so nothing important is cut.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "bold",
+        "editorial",
+        "creative",
+        "fashion"
+      ]
+    },
+    {
+      "id": "G04",
+      "name": "Duotone crops",
+      "what": "Product photos or screenshots mapped to two palette colours.",
+      "build": "Apply an SVG filter (feColorMatrix to greyscale, then feComponentTransfer) that maps shadows to --text and highlights to --accent, or multiply a greyscale image over an accent layer. Keep one unfiltered image on the page so the treatment reads as a choice.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "creative",
+        "bold",
+        "retro"
+      ],
+      "needs": [
+        "photo"
+      ]
+    },
+    {
+      "id": "G05",
+      "name": "Mono margin notes",
+      "what": "Short annotations in the mono face beside the paragraph they explain.",
+      "build": "Use a two-column grid with a 200 to 240 px note column and place each aside on the same row as its paragraph. Below 1024 px fold each note inline under its paragraph with a hairline above.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "docs",
+        "article"
+      ],
+      "tags": [
+        "editorial",
+        "technical",
+        "developer"
+      ]
+    },
+    {
+      "id": "G06",
+      "name": "Scroll progress rule",
+      "what": "A 2 px rule along the top of the viewport that fills with reading progress.",
+      "build": "Drive transform: scaleX() from 0 to 1 with animation-timeline: scroll() on a fixed element with transform-origin: left, and leave it hidden where scroll timelines are unsupported. It moves only with the reader's own scroll, so it may stay under reduced motion.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "article",
+        "docs",
+        "landing"
+      ],
+      "tags": [
+        "editorial",
+        "minimal"
+      ]
+    },
+    {
+      "id": "G07",
+      "name": "Registration marks",
+      "what": "Thin corner crop marks around images and video.",
+      "build": "Draw four 12 px L-shaped marks from two background gradients per corner, offset 8 px outside the media box, in --border-strong. Use them on media only, never on cards.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "creative",
+        "editorial",
+        "technical",
+        "industrial"
+      ]
+    },
+    {
+      "id": "G08",
+      "name": "Colour-block nav band",
+      "what": "A solid band in the accent that carries the navigation and the product name.",
+      "build": "Make the header a full-width block in --accent with --accent-text links, 56 to 64 px tall, with no shadow. Start the hero directly below on --background so the band is the only colour field above the fold.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "app"
+      ],
+      "tags": [
+        "bold",
+        "playful",
+        "friendly"
+      ]
+    },
+    {
+      "id": "G09",
+      "name": "Gutter section numerals",
+      "what": "Each section is numbered in the left gutter in the display face.",
+      "build": "Place the numeral in a narrow first grid column, aligned to the heading's cap height, in --text-muted. Number only content that is truly sequential, and never a page with one section.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "editorial",
+        "technical",
+        "serious"
+      ]
+    },
+    {
+      "id": "G10",
+      "name": "Ticking contents rail",
+      "what": "A sticky table of contents where one short tick marks the current section.",
+      "build": "Track sections with IntersectionObserver and move a single 2 px tick with translateY at 200 ms ease-out. Set aria-current on the active link so the state does not rely on colour. Show the rail at 1024 px and wider; below that the page needs no rail.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "docs",
+        "article"
+      ],
+      "tags": [
+        "editorial",
+        "developer",
+        "calm"
+      ]
+    },
+    {
+      "id": "G11",
+      "name": "Footnoted claims",
+      "what": "Claims carry superscript note numbers that link to sources at the foot of the section.",
+      "build": "Mark each claim with sup and a link to its note, and give every note a link back, set at 14 px in --text-muted. Footnote only real sources; without them the page does not get this signature.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "pricing",
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "serious",
+        "trustworthy",
+        "editorial",
+        "finance"
+      ]
+    },
+    {
+      "id": "G12",
+      "name": "Colophon footer",
+      "what": "A footer that lists the typefaces, colours and build of the site like a book colophon.",
+      "build": "Set a short definition list in the mono face: typefaces, palette swatches as 12 px squares with their OKLCH values, and the stack. Keep it to 6 lines or fewer.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "creative",
+        "editorial",
+        "developer"
+      ]
+    },
+    {
+      "id": "G13",
+      "name": "Dot leaders",
+      "what": "Label and value joined by a dotted leader, like a menu or a spec sheet.",
+      "build": "Use a flex row of label, a flexible spacer with a radial-gradient dot background on the baseline, and the value in tabular figures. Below 390 px stack the value under its label and drop the leader.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "pricing",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "food",
+        "retro",
+        "editorial",
+        "finance"
+      ]
+    },
+    {
+      "id": "G14",
+      "name": "Running head",
+      "what": "A slim book-style running head that names the current section.",
+      "build": "Add a 32 px sticky bar under the nav whose text swaps as sections pass, tracked by IntersectionObserver, in caps at 12 to 13 px with +0.06em tracking. Swap with a 150 ms opacity fade, and instantly under reduced motion.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "article",
+        "docs"
+      ],
+      "tags": [
+        "editorial",
+        "culture",
+        "calm"
+      ]
+    },
+    {
+      "id": "G15",
+      "name": "Edge ruler",
+      "what": "A measurement ruler with ticks along one edge of the hero or a product shot.",
+      "build": "Draw ticks with a repeating-linear-gradient every 8 px and a longer tick every 64 px, with mono labels at each long tick. Align it to the 4 px grid so the ruler is truthful.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "technical",
+        "industrial",
+        "creative"
+      ]
+    },
+    {
+      "id": "G16",
+      "name": "Marker underline",
+      "what": "One phrase per page underlined with a hand-drawn marker stroke.",
+      "build": "Place an inline SVG path with a slight wobble under the phrase, stroke var(--accent), stroke-linecap round, behind the text inside an isolated inline-block. Draw it once with stroke-dashoffset on load, and show it static under reduced motion.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "playful",
+        "friendly",
+        "education"
+      ]
+    },
+    {
+      "id": "G17",
+      "name": "Cut-paper shapes",
+      "what": "Flat geometric shapes in palette colours collaged behind and beside photos.",
+      "build": "Cut 2 or 3 shapes with clip-path: polygon() or SVG in --accent and a surface colour, placed on the grid and overlapping image edges by 16 to 32 px. No blur, no gradients, no looping animation.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "playful",
+        "creative",
+        "education",
+        "food"
+      ]
+    },
+    {
+      "id": "G18",
+      "name": "Halftone images",
+      "what": "Photos rendered with a visible halftone dot screen.",
+      "build": "Layer a radial-gradient dot pattern with a 4 to 6 px pitch over a high-contrast greyscale photo, blended with multiply in light and screen in dark. Keep the plain photo underneath so the page degrades to a normal image.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing",
+        "article"
+      ],
+      "tags": [
+        "retro",
+        "editorial",
+        "bold"
+      ],
+      "needs": [
+        "photo"
+      ]
+    },
+    {
+      "id": "G19",
+      "name": "Contact sheet",
+      "what": "Images laid out as a photographic contact sheet with frame numbers.",
+      "build": "Use a dense grid of equal frames with 4 px gaps on a dark strip, frame numbers in mono at 12 px under each, and one chosen frame circled in --accent. Open a frame in a dialog on click.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "creative",
+        "culture",
+        "retro"
+      ],
+      "needs": [
+        "photo"
+      ]
+    },
+    {
+      "id": "G20",
+      "name": "Keycap shortcuts",
+      "what": "Keyboard shortcuts shown as real keycaps inline in copy and menus.",
+      "build": "Style kbd with --surface-raised, a 1 px --border-strong edge and a 2 px inset bottom shadow, mono at 12 to 13 px. Show only shortcuts that exist in the product.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "docs",
+        "landing"
+      ],
+      "tags": [
+        "developer",
+        "technical",
+        "minimal"
+      ],
+      "clashes": [
+        "G41"
+      ]
+    },
+    {
+      "id": "G21",
+      "name": "Annotated screenshot",
+      "what": "A real product screenshot with numbered callout dots and short notes.",
+      "build": "Position 3 to 5 numbered 24 px dots by percentage over the image and list the matching notes beside it. On phones move the notes under the image and keep the dots.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "docs",
+        "app"
+      ],
+      "tags": [
+        "technical",
+        "education",
+        "developer"
+      ]
+    },
+    {
+      "id": "G22",
+      "name": "Grid coordinates",
+      "what": "Panels and figures labelled with chart coordinates such as A1 and B3.",
+      "build": "Label each panel in mono at 12 px in its top-left corner and refer to the labels in copy. Label the content rather than the columns so the references survive every breakpoint.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "dashboard",
+        "article"
+      ],
+      "tags": [
+        "technical",
+        "data",
+        "industrial"
+      ]
+    },
+    {
+      "id": "G23",
+      "name": "Double-rule totals",
+      "what": "Accounting-style double rules under totals and key figures.",
+      "build": "Put border-bottom: 3px double var(--text) under the total row and a single hairline above it. Right-align every amount in tabular figures.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "table",
+        "pricing"
+      ],
+      "tags": [
+        "finance",
+        "data",
+        "serious",
+        "retro"
+      ]
+    },
+    {
+      "id": "G24",
+      "name": "Hanging pull quote",
+      "what": "A pull quote in the display face with its opening mark hanging into the margin.",
+      "build": "Use hanging-punctuation: first where supported, with a negative text-indent of about 0.45em as the fallback. Attribute it with name and role at text size, and skip the signature when no real quote exists.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "article",
+        "landing"
+      ],
+      "tags": [
+        "editorial",
+        "culture",
+        "luxury"
+      ]
+    },
+    {
+      "id": "G25",
+      "name": "Drop cap",
+      "what": "A three-line drop cap on the first paragraph of long text.",
+      "build": "Use initial-letter: 3 where supported, with a float and font-size fallback, set in the display face and --accent. Use one per page.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "article"
+      ],
+      "tags": [
+        "editorial",
+        "culture",
+        "luxury",
+        "retro"
+      ]
+    },
+    {
+      "id": "G26",
+      "name": "Angled section cut",
+      "what": "Coloured sections end on a shallow 3 to 4 degree diagonal.",
+      "build": "Clip the coloured section with clip-path: polygon() so its bottom edge is the diagonal, and add bottom padding equal to the cut height. Use one angle and one direction for the whole page.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "energetic",
+        "bold",
+        "outdoor"
+      ]
+    },
+    {
+      "id": "G27",
+      "name": "Ticket perforation",
+      "what": "Cards with a perforated tear line and notched edges like a ticket stub.",
+      "build": "Cut the notches with a radial-gradient mask at both ends of the tear line and draw the perforation as a dotted border. Put the code or the key detail on the stub side.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "landing",
+        "app"
+      ],
+      "tags": [
+        "playful",
+        "culture",
+        "energetic"
+      ]
+    },
+    {
+      "id": "G28",
+      "name": "Receipt summary",
+      "what": "An order or plan summary styled as a printed receipt with a zigzag bottom edge.",
+      "build": "Set the summary in the mono face on --surface-raised and cut the bottom edge into an 8 px zigzag with a conic-gradient mask. Show the real totals and taxes; the style never carries invented data.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "pricing",
+        "settings"
+      ],
+      "tags": [
+        "food",
+        "playful",
+        "finance",
+        "retro"
+      ]
+    },
+    {
+      "id": "G29",
+      "name": "Row image peek",
+      "what": "A list of projects or products where hovering a row shows its image beside the pointer.",
+      "build": "Render one absolutely positioned image that follows the pointer with transform and swaps its source per row, gated by @media (hover: hover) and (pointer: fine). On touch, show a small thumbnail inside each row instead.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "creative",
+        "fashion",
+        "culture"
+      ],
+      "needs": [
+        "photo"
+      ]
+    },
+    {
+      "id": "G30",
+      "name": "Rolling digits",
+      "what": "One changing number that rolls digit by digit like an odometer.",
+      "build": "Render each digit as a vertical strip of 0 to 9 inside a window 1em tall with overflow hidden and line-height 1. Give the window align-items: flex-start and the strip flex: none, or flex stretches the strip and the digits sit off their rows. Move the strip with translateY over 300 to 400 ms on the travel curve, in tabular figures. Put the plain value in an aria-live polite region; when scroll drives the value, write it there once the value settles, never per frame. Swap instantly under reduced motion.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "dashboard",
+        "landing"
+      ],
+      "tags": [
+        "data",
+        "finance",
+        "energetic"
+      ]
+    },
+    {
+      "id": "G31",
+      "name": "Masthead nameplate",
+      "what": "A newspaper-style nameplate with date line, issue number and rules above and below.",
+      "build": "Set the name in the display face between a 3 px and a 1 px rule, with the date and issue in caps at 12 px at either end. Use the real publish date and the real issue count.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "article",
+        "docs"
+      ],
+      "tags": [
+        "editorial",
+        "culture",
+        "retro"
+      ]
+    },
+    {
+      "id": "G32",
+      "name": "Section colour shift",
+      "what": "The page background changes colour as the reader enters each major section.",
+      "build": "Stack one fixed full-viewport layer per tone behind the content and fade the matching layer's opacity over 400 ms when IntersectionObserver reports a new chapter, swapping the text colour at the same threshold. Check contrast for every tone, and swap instantly under reduced motion.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "bold",
+        "creative",
+        "energetic"
+      ]
+    },
+    {
+      "id": "G33",
+      "name": "Folder tabs",
+      "what": "Section switchers drawn as file-folder tabs that join the panel below.",
+      "build": "Give the active tab the panel's surface colour and no bottom border so it merges with the panel, and set inactive tabs on --background with a hairline. Use role tablist with arrow-key navigation.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "pricing",
+        "settings",
+        "landing"
+      ],
+      "tags": [
+        "retro",
+        "friendly",
+        "education"
+      ]
+    },
+    {
+      "id": "G34",
+      "name": "Accent underline links",
+      "what": "Every text link carries a thick offset underline in the accent.",
+      "build": "Set text-decoration-thickness: 2px, text-underline-offset: 0.2em and text-decoration-color: var(--accent) while the link text stays --text. On hover switch the underline to --text with no transition.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "article",
+        "docs",
+        "landing",
+        "app",
+        "settings"
+      ],
+      "tags": [
+        "minimal",
+        "editorial",
+        "friendly"
+      ]
+    },
+    {
+      "id": "G35",
+      "name": "Spine label",
+      "what": "A section title set vertically along the left edge like a book spine.",
+      "build": "Use writing-mode: vertical-rl with rotate(180deg), in caps at 12 to 14 px, sticky within its section. Hide it below 1024 px, where the normal heading carries the name.",
+      "registers": [
+        "marketing"
+      ],
+      "surfaces": [
+        "landing"
+      ],
+      "tags": [
+        "editorial",
+        "fashion",
+        "creative"
+      ]
+    },
+    {
+      "id": "G36",
+      "name": "Stamped status",
+      "what": "One key status shown as an outlined rubber stamp, slightly rotated.",
+      "build": "Draw a 2 px outlined box in the status colour with caps at +0.08em tracking, rotated 4 to 6 degrees, once per view. Keep a plain-text status beside it for screen readers.",
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "surfaces": [
+        "table",
+        "app",
+        "landing"
+      ],
+      "tags": [
+        "finance",
+        "retro",
+        "playful"
+      ]
+    },
+    {
+      "id": "G37",
+      "name": "Edge-bleed sparkline tile",
+      "what": "Each KPI tile ends in a sparkline that runs out to its left, right and bottom edges, an area fading from the series colour to nothing.",
+      "build": "Make the SVG the tile's last child with margin: 0 calc(var(--pad-card) * -1) calc(var(--pad-card) * -1) and overflow: hidden on the tile so it meets the rounded corners. Draw the line in var(--chart-1) at 1.5 px with vector-effect: non-scaling-stroke and fill the area with a linearGradient from the same colour at 24 percent to 0. Plot the real last 30 points, no axes, and give the svg role=\"img\" with an aria-label that states the trend.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard"
+      ],
+      "tags": [
+        "data",
+        "finance",
+        "bold"
+      ],
+      "clashes": [
+        "G48"
+      ]
+    },
+    {
+      "id": "G38",
+      "name": "Composition bar",
+      "what": "A segmented bar under the lead figure splits the total into its parts in the chart colours, with a value legend beneath.",
+      "build": "A flex row 8 px tall with 2 px gaps and rounded ends; each segment gets flex-grow equal to its share and background var(--chart-N). Under it, a legend grid of swatch, label, amount and percent in tabular figures. Show at most six parts; with more, keep the five largest and fold the tail into one Other segment in --border-strong, listed last.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard"
+      ],
+      "tags": [
+        "data",
+        "finance"
+      ],
+      "clashes": [
+        "G47"
+      ]
+    },
+    {
+      "id": "G39",
+      "name": "Live status dot",
+      "what": "A small dot with a soft ring that pulses outward, beside anything that updates live.",
+      "build": "An 8 px dot in var(--success) with an ::after ring of the same colour that scales from 1 to 2.4 while fading from 0.5 to 0 over 1600 ms, linear and infinite. Put the word Live or the last update time beside it, stop the pulse when the feed pauses, and under prefers-reduced-motion keep the dot and drop the ring.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard",
+        "app",
+        "table"
+      ],
+      "tags": [
+        "data",
+        "technical",
+        "energetic"
+      ]
+    },
+    {
+      "id": "G40",
+      "name": "Usage meter card",
+      "what": "A compact card at the foot of the sidebar shows real usage against the plan limit as a ticked meter, with one upgrade action.",
+      "build": "Sit it above the account row on --surface-raised with --elevation-1: a label, used over limit in tabular figures, a meter of 24 to 40 ticks filled in --accent up to the share and --wash-strong after, and one full-width button. Show it only past about 60 percent of the limit, let it be dismissed, and switch the fill to --warning above 90 percent. Use the limit the brief states; the dealer deals this signature only when the brief names a plan, limit, quota or usage, so never invent one.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard"
+      ],
+      "tags": [
+        "finance",
+        "data",
+        "friendly"
+      ],
+      "requires": [
+        "plan",
+        "plans",
+        "limit",
+        "quota",
+        "allowance",
+        "usage",
+        "credits",
+        "seats",
+        "subscription",
+        "tier"
+      ]
+    },
+    {
+      "id": "G41",
+      "name": "Command search field",
+      "what": "The top bar search reads as a command palette: a wide field with a search glyph and a keycap hint at its right end.",
+      "build": "A 36 px field on --well with a 1 px --border edge, a 16 px search icon, placeholder text that names what it finds, and a kbd pair showing the real shortcut (Cmd K on Apple platforms, Ctrl K elsewhere) in mono at 12 px. The shortcut opens a dialog of recent items and grouped results; hide the keycap on touch devices.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "app",
+        "dashboard"
+      ],
+      "tags": [
+        "developer",
+        "technical",
+        "minimal"
+      ],
+      "clashes": [
+        "G20"
+      ]
+    },
+    {
+      "id": "G42",
+      "name": "Benchmark line",
+      "what": "The main chart draws a dashed benchmark or target series behind the real one and labels the latest point where the line ends.",
+      "build": "Draw the benchmark as a 1.5 px line with stroke-dasharray: 4 4 in var(--chart-2) under the real series in var(--chart-1) and its area gradient. End the real line on a 4 px dot with a 2 px var(--surface) ring and the value beside it in tabular figures. Name both series in a legend; the dash, not colour alone, tells them apart.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard"
+      ],
+      "tags": [
+        "data",
+        "finance"
+      ]
+    },
+    {
+      "id": "G43",
+      "name": "Thirty-day heat strip",
+      "what": "A row of the last 30 days as small squares whose fill steps with volume, beside a name or under a count.",
+      "build": "A grid of 30 cells, 10 px square with 2 px gaps and 2 px radius, filled with color-mix(in oklab, var(--chart-1) N%, var(--surface)) at 20, 45, 70 and 100 percent, and empty days on --wash-strong. Give each cell a title with its date and value and label the strip with its range. One hue only; the steps of lightness carry the data.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard",
+        "table",
+        "app"
+      ],
+      "tags": [
+        "data",
+        "technical",
+        "energetic"
+      ]
+    },
+    {
+      "id": "G44",
+      "name": "Avatar stack",
+      "what": "Overlapping avatars of the people on a record, capped by a count chip.",
+      "build": "Three or four 24 px circles overlapping by 8 px, each with a 2 px ring in the colour of the surface beneath so the edges stay crisp, then a chip of the same size on --surface-raised with +N in tabular figures at 12 px. Use initials on a chart colour at 20 percent when there is no photo, and list every name in the accessible label.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard",
+        "table",
+        "app"
+      ],
+      "tags": [
+        "friendly",
+        "data"
+      ]
+    },
+    {
+      "id": "G45",
+      "name": "Delta chips",
+      "what": "Every headline figure carries its change as a chip: an arrow, the signed percent and the comparison period.",
+      "build": "Inline flex, 20 px tall, a 12 px arrow icon and 12 px text in tabular figures, coloured var(--success) or var(--danger) on a 12 percent tint of the same colour, then \"vs last month\" in --text-muted. The sign and arrow carry direction as well as colour. When falling is good (costs, churn) swap the colours, never the arrow.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard",
+        "table"
+      ],
+      "tags": [
+        "data",
+        "finance"
+      ]
+    },
+    {
+      "id": "G46",
+      "name": "Tile corner action",
+      "what": "Each KPI tile names its metric top left and carries a small raised button top right that opens the detail.",
+      "build": "A 28 px square button on --surface-raised with --elevation-1, a 16 px icon at 1.5 px stroke and a radius one step below the tile's. It is a real control: it links to the metric's page or opens its menu, with an aria-label that names the metric.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard"
+      ],
+      "tags": [
+        "minimal",
+        "data"
+      ]
+    },
+    {
+      "id": "G47",
+      "name": "Donut with centre total",
+      "what": "A ring chart with the total set large in its centre and a legend that carries the values and shares.",
+      "build": "An SVG of circles with one stroke-dasharray segment per part in var(--chart-1) to var(--chart-6), 12 to 16 px thick with 2 px gaps and round caps, starting at 12 o'clock. Centre the total in the display face at 28 to 40 px over a 12 px label. The legend rows hold swatch, name, amount and percent in tabular figures so the ring never has to be read alone.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard"
+      ],
+      "tags": [
+        "data",
+        "finance"
+      ],
+      "clashes": [
+        "G38"
+      ]
+    },
+    {
+      "id": "G48",
+      "name": "Period bar ticks",
+      "what": "A KPI tile with a strip of thin bars for the last 12 periods, the latest bar in full colour and the rest held back.",
+      "build": "Twelve bars 4 to 6 px wide with 3 px gaps and 2 px radius, heights from real values, bottom-aligned in a 32 px row beside the figure. Fill them with var(--chart-1) at 35 percent and the latest at 100 percent. The figure repeats the latest value, so mark the strip aria-hidden.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard"
+      ],
+      "tags": [
+        "data",
+        "energetic"
+      ],
+      "clashes": [
+        "G37"
+      ]
+    },
+    {
+      "id": "G49",
+      "name": "Joined range control",
+      "what": "The page header joins the date range and the granularity into one segmented control beside the primary action.",
+      "build": "Two buttons inside one 36 px outline with a 1 px divider: a calendar icon and the real range (18 Feb to 18 Mar) that opens a range picker, and the granularity (Daily, Weekly, Monthly) that opens a menu. A change refetches every tile and shows skeletons in place, never a page spinner.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard",
+        "table"
+      ],
+      "tags": [
+        "data",
+        "minimal"
+      ]
+    },
+    {
+      "id": "G50",
+      "name": "Dot-grid chart ground",
+      "what": "Charts sit on a faint dot grid instead of gridlines, with axis labels in muted tabular figures.",
+      "build": "Paint the plot area with radial-gradient(circle, var(--wash-strong) 1px, transparent 1.5px) sized to the tick spacing so the dots land on the ticks, masked to fade at the edges, and keep one solid baseline at zero. Axis labels at 12 px in --text-muted with tabular figures.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard"
+      ],
+      "tags": [
+        "data",
+        "technical",
+        "minimal"
+      ]
+    },
+    {
+      "id": "G51",
+      "name": "Attention chips",
+      "what": "Under the page title, chips name the few things that need action now, each a link to the filtered list.",
+      "build": "Pills 32 px tall with an icon, a count in tabular figures and a short phrase (\"3 renewals due this week\"). The urgent one sits on var(--warning) at 14 percent with --warning text; the rest sit on --surface-raised. Show at most three, only from real counts, and hide the row when nothing needs action.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard",
+        "app"
+      ],
+      "tags": [
+        "data",
+        "friendly",
+        "trustworthy"
+      ]
+    },
+    {
+      "id": "G52",
+      "name": "Crosshair readout",
+      "what": "Hovering a time chart draws a vertical guide and a tooltip that stacks every series value at that point.",
+      "build": "Track pointermove on the plot, snap to the nearest point, draw a 1 px var(--border-strong) guide with a 6 px dot on each series, and show a tooltip on --surface-raised with --elevation-2 listing swatch, name and value in tabular figures. When the chart has focus the arrow keys move the point, and the same values go to an aria-live region.",
+      "registers": [
+        "product"
+      ],
+      "surfaces": [
+        "dashboard"
+      ],
+      "tags": [
+        "data",
+        "technical"
+      ]
+    }
+  ],
+  "surfaces": {
+    "dashboard": {
+      "registers": [
+        "product"
+      ],
+      "keywords": [
+        "dashboard",
+        "analytics",
+        "overview",
+        "metrics",
+        "admin",
+        "kpi",
+        "reporting",
+        "console",
+        "control panel",
+        "monitoring",
+        "insights",
+        "cockpit"
+      ]
+    },
+    "app": {
+      "registers": [
+        "product"
+      ],
+      "keywords": [
+        "app shell",
+        "app screen",
+        "app ui",
+        "product ui",
+        "web app",
+        "sidebar",
+        "workspace",
+        "inbox",
+        "editor",
+        "onboarding",
+        "crm",
+        "portal",
+        "back office"
+      ]
+    },
+    "table": {
+      "registers": [
+        "product"
+      ],
+      "keywords": [
+        "table",
+        "data table",
+        "data grid",
+        "spreadsheet",
+        "list view",
+        "rows",
+        "records",
+        "transactions",
+        "queue"
+      ]
+    },
+    "settings": {
+      "registers": [
+        "product"
+      ],
+      "keywords": [
+        "settings",
+        "preferences",
+        "account settings",
+        "profile",
+        "permissions",
+        "form",
+        "checkout",
+        "sign up",
+        "signup"
+      ]
+    },
+    "landing": {
+      "registers": [
+        "marketing"
+      ],
+      "keywords": [
+        "landing",
+        "landing page",
+        "homepage",
+        "home page",
+        "website",
+        "site",
+        "marketing site",
+        "product page",
+        "launch page",
+        "waitlist",
+        "hero"
+      ]
+    },
+    "pricing": {
+      "registers": [
+        "marketing"
+      ],
+      "keywords": [
+        "pricing",
+        "pricing page",
+        "plans"
+      ]
+    },
+    "article": {
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "keywords": [
+        "article",
+        "blog",
+        "blog post",
+        "essay",
+        "newsletter",
+        "story",
+        "magazine",
+        "journal",
+        "reader",
+        "reading view"
+      ]
+    },
+    "docs": {
+      "registers": [
+        "marketing",
+        "product"
+      ],
+      "keywords": [
+        "docs",
+        "documentation",
+        "guide",
+        "help center",
+        "knowledge base",
+        "changelog",
+        "api reference"
+      ]
+    }
+  },
+  "default_surfaces": {
+    "product": [
+      "app",
+      "dashboard"
+    ],
+    "marketing": [
+      "landing"
+    ]
+  }
+}

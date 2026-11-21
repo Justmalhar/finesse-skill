@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en" data-palette="clay" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surfaces, a finesse exemplar</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<script>
+  /* Runs before first paint so the page never flashes the wrong palette. */
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    var home = { clay: "light", cobalt: "light", moss: "dark" };
+    var p = home[q.get("palette")] ? q.get("palette") : "clay";
+    var t = q.get("theme") === "light" || q.get("theme") === "dark" ? q.get("theme") : home[p];
+    root.dataset.palette = p;
+    root.dataset.theme = t;
+    if (q.get("state")) root.dataset.state = q.get("state");
+  })();
+</script>
+<style>
+
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+.card { position: relative; display: flex; flex-direction: column; min-width: 0; border-radius: 16px; background: var(--surface); box-shadow: var(--lift-1); }
+.card h3 { font-size: var(--fs-base); font-weight: var(--fw-semibold); line-height: 24px; letter-spacing: -0.01em; }
+.card__kicker { font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.card__head { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding: 24px 24px 16px; }
+.card__head h3 { margin-top: 4px; }
+
+/* Status without a pill: a glyph that carries the meaning, then plain words. */
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-sm); line-height: 20px; white-space: nowrap; }
+.ring { width: 16px; height: 16px; flex: none; fill: none; stroke-width: 2; transform: rotate(-90deg); }
+.ring__track { stroke: var(--wash-strong); }
+.ring__fill { stroke: var(--accent); stroke-linecap: round; }
+.live { position: relative; width: 8px; height: 8px; margin: 0 4px; border-radius: 50%; background: var(--success); }
+.live::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--success); animation: ping 1800ms var(--curve-out) infinite; }
+@keyframes ping { from { opacity: 0.6; transform: scale(1); } to { opacity: 0; transform: scale(2.8); } }
+
+/* 1. Layered card: ring, four tight shadows, a top highlight, and a footer one step darker. */
+.card--layered { grid-column: span 4; background: var(--surface-raised); box-shadow: var(--lift-2); overflow: hidden; }
+.spec3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0 24px 24px; }
+.spec3 > div { padding-inline: 16px; border-inline-start: 1px solid var(--border); }
+.spec3 > div:first-child { padding-inline-start: 0; border: 0; }
+.spec3 dt { font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.spec3 dd { margin-top: 4px; font-size: var(--fs-lg); font-weight: var(--fw-medium); line-height: 24px; letter-spacing: -0.01em; white-space: nowrap; }
+.spec3 small, .readout small { font-size: inherit; color: var(--text-muted); }
+.spec3 .unit { font-size: var(--fs-sm); font-weight: var(--fw-regular); }
+.card__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding: 12px 12px 12px 24px; border-top: 1px solid var(--border); background: var(--wash); font-size: var(--fs-sm); color: var(--text-muted); }
+
+/* 2. Stat card: the figure is the layout. Decimal and unit step back. */
+.card--stat { grid-column: span 2; overflow: hidden; }
+.card--stat .card__kicker { padding: 24px 24px 0; }
+.stat { display: flex; align-items: flex-start; padding: 8px 24px 0; font: var(--fw-medium) 4.5rem / 1 var(--family-display); letter-spacing: -0.035em; }
+.stat small { font-size: inherit; color: var(--text-muted); }
+.stat__unit { margin: 8px 0 0 4px; font: var(--fw-medium) var(--fs-xl) / 1 var(--family-sans); letter-spacing: 0; color: var(--text-muted); }
+.delta { display: flex; align-items: center; gap: 4px; padding: 12px 24px 0; font-size: var(--fs-sm); line-height: 20px; }
+.delta .icon { color: var(--success); }
+.delta span { color: var(--text-muted); }
+.spark { display: block; width: 100%; height: 72px; margin-top: auto; overflow: visible; }
+.spark path { vector-effect: non-scaling-stroke; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.spark__area { fill: url(#spark-fill); stroke: none; }
+.spark__line { stroke: var(--accent); stroke-width: 1.5; }
+.spark__target { stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 2 4; }
+.spark__dot { stroke: var(--accent); stroke-width: 7; }
+.spark__halo { stroke: var(--surface); stroke-width: 11; }
+
+/* 3. Media card: the frame is 4px, so the image radius is 16 minus 4. The hairline sits inside the image. */
+.card--media { grid-column: span 2; padding: 4px; transition: transform var(--dur-state) var(--curve-out), box-shadow var(--dur-state) var(--curve-out); }
+.media { position: relative; aspect-ratio: 3 / 2; border-radius: 12px; overflow: hidden; background: var(--well); }
+.media svg { display: block; width: 100%; height: 100%; transition: transform var(--dur-layout) var(--curve-out); }
+.media::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--border), inset 0 1px 0 oklch(1 0 0 / 0.12); pointer-events: none; }
+.media__tag { position: absolute; left: 8px; bottom: 8px; padding: 0 8px; border-radius: 6px; line-height: 24px; color: var(--text); background: color-mix(in oklab, var(--surface-raised) 78%, transparent); backdrop-filter: blur(8px) saturate(1.4); box-shadow: 0 0 0 1px var(--border); }
+.card--media .card__body { padding: 12px 12px 16px; }
+.card--media p { margin-top: 4px; font-size: var(--fs-sm); line-height: 20px; color: var(--text-muted); text-wrap: pretty; }
+.stretch { text-decoration: none; }
+.stretch::after { content: ""; position: absolute; inset: 0; border-radius: 16px; }
+.stretch:focus-visible { outline: 0; }
+.stretch:focus-visible::after { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ridge-sky-a { stop-color: var(--surface); }
+.ridge-sky-b { stop-color: color-mix(in oklab, var(--accent) 34%, var(--surface)); }
+.media svg { --near: light-dark(color-mix(in oklab, var(--text) 82%, var(--accent)), color-mix(in oklab, var(--background) 70%, oklch(0 0 0))); --far: color-mix(in oklab, var(--accent) 30%, var(--surface)); }
+.ridge-sun { fill: color-mix(in oklab, var(--accent) 55%, var(--surface)); }
+.ridge-1 { fill: var(--far); }
+.ridge-2 { fill: color-mix(in oklab, var(--near) 28%, var(--far)); }
+.ridge-3 { fill: color-mix(in oklab, var(--near) 58%, var(--far)); }
+.ridge-4 { fill: var(--near); }
+.ridge-rows { fill: none; stroke: color-mix(in oklab, var(--far) 34%, transparent); stroke-width: 1; }
+.grain { opacity: 0.5; mix-blend-mode: soft-light; }
+@media (hover: hover) and (pointer: fine) {
+  .card--media:hover { transform: translateY(var(--hover-lift)); box-shadow: var(--lift-2); }
+  .card--media:hover .media svg { transform: scale(1.03); }
+}
+
+/* 4. Inset well: lit from above, so the shadow is on the inside top and the highlight on the outside bottom. */
+.card--well { grid-column: span 4; padding: 4px; }
+.card--well .card__head { padding: 20px 20px 16px; }
+.well { border-radius: 12px; background: var(--well); box-shadow: inset 0 1px 2px var(--cast-sm), inset 0 0 0 1px var(--border), 0 1px 0 var(--top-edge); }
+.readouts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.readouts > div { padding: 16px 20px 20px; }
+.readouts > div + div { border-inline-start: 1px solid var(--border); box-shadow: -1px 0 0 var(--top-edge); }
+.readout__label { display: block; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.readout { display: block; margin-top: 8px; font: var(--fw-medium) var(--fs-2xl) / 32px var(--family-mono); letter-spacing: -0.03em; white-space: nowrap; }
+.readout .unit { font: var(--fw-regular) var(--fs-sm) / 1 var(--family-sans); }
+/* Milestones: one ruled line. Solid is done, the accent segment is now, the faint part is still to come. */
+.marks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: auto; padding: 24px 20px 20px; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.marks li { position: relative; padding: 12px 8px 0 0; border-top: 2px solid var(--wash-strong); }
+.marks li::before { content: ""; position: absolute; left: 0; top: -5px; width: 8px; height: 8px; border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 2px var(--border-strong); }
+.marks .num { display: block; font-size: var(--fs-sm); line-height: 20px; color: var(--text); }
+.marks .is-done { border-color: var(--text); }
+.marks .is-done::before { background: var(--text); box-shadow: none; }
+.marks .is-now { border-image: linear-gradient(to right, var(--accent) 40%, var(--wash-strong) 40%) 1; }
+.marks .is-now::before { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-wash); }
+
+/* 5. List rows: hover is a tint inset 4px from the card edge. Separators start at the text, not the edge. */
+.card--list { grid-column: span 6; padding: 4px; }
+.card--list .card__head { padding: 20px 20px 12px; align-items: center; }
+.card--list .card__head h3 { margin: 0; }
+.rowitem { position: relative; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 96px auto; align-items: center; gap: 24px; min-height: 64px; padding: 8px 8px 8px 20px; border-radius: 12px; transition: background-color var(--dur-press) var(--curve-out); }
+.rowitem + .rowitem::before { content: ""; position: absolute; inset: 0 8px auto 20px; height: 1px; background: var(--border); }
+.rowitem__title { font-size: var(--fs-sm); font-weight: var(--fw-medium); line-height: 20px; }
+.rowitem__sub { font-size: var(--fs-sm); line-height: 20px; color: var(--text-muted); }
+.rowitem__num { font-size: var(--fs-sm); line-height: 20px; text-align: right; }
+.meter { display: grid; gap: 8px; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.meter__track { height: 4px; border-radius: var(--r-pill); background: var(--wash-strong); box-shadow: inset 0 1px 1px var(--cast-xs); overflow: hidden; }
+.meter__fill { display: block; height: 100%; border-radius: inherit; background: var(--text); transform-origin: left; transform: scaleX(var(--v)); }
+.meter--low .meter__fill { background: var(--warning); }
+.meter--low b { font-weight: var(--fw-medium); color: var(--warning); }
+.rowitem__act { display: flex; gap: 4px; }
+.rowitem.is-hover, .rowitem:focus-within { background: var(--wash); }
+.rowitem.is-hover::before, .rowitem.is-hover + .rowitem::before, .rowitem:focus-within::before, .rowitem:focus-within + .rowitem::before { opacity: 0; }
+@media (hover: hover) and (pointer: fine) {
+  .rowitem:hover { background: var(--wash); }
+  .rowitem:hover::before, .rowitem:hover + .rowitem::before { opacity: 0; }
+}
+
+/* Overlay stages: a dotted ground marks a canvas, and fades out before it reaches the edge. */
+.stages { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+.stage { position: relative; grid-column: span 6; display: grid; place-items: center; min-height: 360px; padding: 56px 24px; border-radius: 16px; background: var(--well); box-shadow: inset 0 0 0 1px var(--border); overflow: hidden; }
+.stage::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 1px 1px, color-mix(in oklab, var(--text) 16%, transparent) 1px, transparent 0) 7px 7px / 16px 16px; mask-image: radial-gradient(ellipse 70% 70% at center, oklch(0 0 0), transparent); pointer-events: none; }
+.stage--half { grid-column: span 3; }
+.stage--short { min-height: 200px; }
+.stage__cap { position: absolute; left: 16px; top: 12px; }
+.stage__try { position: absolute; right: 12px; top: 8px; }
+.stage > :not(.stage__cap, .stage__try) { position: relative; }
+
+/* Dialog */
+.dialog { width: min(440px, 100%); padding: 0; border: 0; border-radius: var(--r-modal); background: var(--surface-raised); color: var(--text); box-shadow: var(--lift-3); overflow: hidden; }
+.dialog:not(:modal) { position: relative; margin: 0; }
+.dialog:modal { width: min(440px, 100vw - 32px); animation: pop var(--dur-overlay) var(--curve-out); }
+.dialog::backdrop, .sheet::backdrop { background: light-dark(color-mix(in oklab, var(--text) 36%, transparent), oklch(0 0 0 / 0.56)); backdrop-filter: blur(3px); animation: fade var(--dur-overlay) var(--curve-out); }
+.dialog[data-closing], .sheet[data-closing] { opacity: 0; transform: scale(0.98); transition: opacity var(--dur-overlay-exit) var(--curve-out), transform var(--dur-overlay-exit) var(--curve-out); }
+.dialog[data-closing]::backdrop, .sheet[data-closing]::backdrop { opacity: 0; transition: opacity var(--dur-overlay-exit) var(--curve-out); }
+@keyframes pop { from { opacity: 0; transform: translateY(var(--enter-y)) scale(var(--enter-scale)); } }
+@keyframes fade { from { opacity: 0; } }
+.dialog__body { padding: 24px 24px 20px; }
+.dialog__body h3 { padding-inline-end: 32px; font: var(--fw-semibold) var(--fs-lg) / 24px var(--family-display); letter-spacing: var(--ls-display); text-wrap: balance; }
+.dialog__body > p { margin-top: 8px; font-size: var(--fs-sm); line-height: 22px; color: var(--text-muted); text-wrap: pretty; }
+.dialog__body .opt { margin-top: 12px; }
+.dialog__close { position: absolute; top: 12px; right: 12px; }
+.dialog__foot { display: flex; justify-content: flex-end; gap: 8px; padding: 12px; border-top: 1px solid var(--border); background: var(--wash); }
+
+/* Sheet: floats 8px inside the viewport edge, so it keeps all four corners. */
+.sheet { display: flex; flex-direction: column; width: min(376px, 100% - 24px); max-width: none; max-height: none; padding: 0; border: 0; border-radius: var(--r-modal); background: var(--surface-raised); color: var(--text); box-shadow: var(--lift-3); overflow: hidden; }
+.sheet:not([open]) { display: none; }
+.sheet:not(:modal) { position: absolute; inset: 12px 12px 12px auto; margin: 0; height: auto; }
+.sheet:modal { position: fixed; inset: 8px 8px 8px auto; margin: 0; height: auto; width: min(420px, 100vw - 16px); animation: slide var(--dur-layout) var(--curve-move); }
+@keyframes slide { from { transform: translateX(calc(100% + 8px)); } }
+.sheet__grab { display: none; }
+.sheet__head { display: flex; justify-content: space-between; align-items: start; gap: 16px; padding: 20px 12px 16px 24px; }
+.sheet__head h3 { margin-top: 4px; font: var(--fw-semibold) var(--fs-lg) / 24px var(--family-display); letter-spacing: var(--ls-display); }
+.sheet__body { flex: 1; display: grid; align-content: start; gap: 20px; padding: 0 24px 24px; overflow-y: auto; overscroll-behavior: contain; }
+.sheet__body .facts dd { text-align: right; }
+.sheet__foot { display: flex; justify-content: flex-end; gap: 8px; padding: 12px; border-top: 1px solid var(--border); background: var(--wash); }
+.input--area { height: auto; }
+.input--area textarea { display: block; width: 100%; min-height: 88px; padding: 8px 12px; border: 0; border-radius: inherit; background: transparent; outline: 0; resize: vertical; font-size: var(--fs-base); line-height: 24px; }
+.stage--sheet { min-height: 576px; place-items: center start; padding-inline-start: 48px; }
+.stage__hint { display: grid; gap: 16px; justify-items: start; max-width: 28ch; font-size: var(--fs-sm); color: var(--text-muted); }
+
+/* Menu: radius 12, padding 4, item radius 8. Separators run edge to edge. */
+.menu-wrap { position: relative; align-self: start; }
+.menu { position: absolute; top: calc(100% + 8px); left: 0; z-index: var(--z-dropdown); width: 248px; padding: 4px; border-radius: 12px; background: var(--surface-raised); box-shadow: var(--lift-2); transform-origin: top left; transition: opacity var(--dur-overlay) var(--curve-out), transform var(--dur-overlay) var(--curve-out), visibility 0s; }
+.menu:not([data-open]) { opacity: 0; transform: scale(var(--enter-scale)); visibility: hidden; transition-duration: var(--dur-overlay-exit); transition-delay: 0s, 0s, var(--dur-overlay-exit); }
+.menu__label { padding: 8px 8px 4px; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.menu__item { display: flex; align-items: center; gap: 8px; width: 100%; height: 32px; padding: 0 8px; border: 0; border-radius: 8px; background: none; font-size: var(--fs-sm); text-align: start; cursor: default; }
+.menu__item .icon:first-child { color: var(--text-muted); }
+.menu__item > :nth-child(3) { margin-inline-start: auto; }
+.menu__item .icon:last-child { color: var(--text-muted); }
+.menu__item:focus-visible { outline-offset: -2px; background: var(--wash); }
+.menu__item.is-hover { background: var(--wash); }
+.menu__item--danger, .menu__item--danger .icon:first-child { color: var(--danger); }
+.menu__item--danger:focus-visible { background: color-mix(in oklab, var(--danger) 10%, transparent); }
+.menu__sep { height: 1px; margin: 4px -4px; background: var(--border); }
+.keys { display: inline-flex; gap: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .menu__item:hover { background: var(--wash); }
+  .menu__item--danger:hover { background: color-mix(in oklab, var(--danger) 10%, transparent); }
+}
+.stage--menu { place-items: start; padding: 56px 24px 24px; min-height: 384px; }
+
+/* Toasts: newest in front. Older ones step back 8px and 0.05 of scale each. In an app this region is position: fixed at --z-toast. */
+.toasts { position: absolute; right: 16px; bottom: 16px; z-index: var(--z-toast); display: grid; width: min(344px, calc(100% - 32px)); }
+.stage .toasts { position: absolute; }
+.toast { position: relative; grid-area: 1 / 1; align-self: end; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 12px; padding: 12px 8px 12px 16px; border-radius: 12px; background: var(--surface-raised); box-shadow: var(--lift-2); font-size: var(--fs-sm); line-height: 20px; transform-origin: top center; transition: transform var(--dur-overlay) var(--curve-out), opacity var(--dur-overlay) var(--curve-out); }
+.toast:last-child { z-index: 1; }
+@starting-style { .toast { opacity: 0; transform: translateY(16px); } }
+.toast > .icon { margin-top: 2px; color: var(--success); }
+.toast--error > .icon { color: var(--danger); }
+.toast__title { font-weight: var(--fw-medium); }
+.toast__text { color: var(--text-muted); }
+.toast__act { grid-column: 2; justify-self: start; margin: 8px 0 0 -8px; }
+.toast__close { grid-column: 3; grid-row: 1; margin-top: -4px; }
+.toast:nth-last-child(n + 2) { align-self: stretch; }
+.toast:nth-last-child(n + 2) > * { opacity: 0; }
+.toast:nth-last-child(2) { transform: translateY(-8px) scale(0.95); }
+.toast:nth-last-child(3) { transform: translateY(-16px) scale(0.9); }
+.toast:nth-last-child(n + 4) { opacity: 0; transform: translateY(-16px) scale(0.9); }
+.toast[data-leaving] { opacity: 0; transform: translateY(8px); transition-duration: var(--dur-overlay-exit); }
+
+/* Tooltip: the inverse of the page, so it needs no border in either theme. */
+.tip-wrap { position: relative; display: inline-flex; }
+.tip { position: absolute; bottom: calc(100% + 12px); left: 50%; translate: -50% 0; z-index: var(--z-tooltip); display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 6px; background: var(--text); color: var(--background); font-size: var(--fs-xs); line-height: 20px; white-space: nowrap; pointer-events: none; box-shadow: 0 1px 2px var(--cast-sm), 0 4px 8px -2px var(--cast-sm); opacity: 0; transform: translateY(2px) scale(0.97); transform-origin: bottom center; transition: opacity var(--dur-state) var(--curve-out), transform var(--dur-state) var(--curve-out); }
+.tip::after { content: ""; position: absolute; left: 50%; bottom: -4px; width: 8px; height: 8px; margin-left: -4px; border-radius: 1px; background: inherit; transform: rotate(45deg); }
+.tip kbd { color: inherit; background: color-mix(in oklab, var(--background) 20%, transparent); box-shadow: none; }
+.tip-wrap:focus-within .tip, .tip.is-open { opacity: 1; transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .tip-wrap:hover .tip { opacity: 1; transform: none; transition-delay: 500ms; }
+  .tips:has(.tip-wrap:hover) .tip-wrap:hover .tip { transition-delay: 500ms; }
+}
+[data-tips-off] .tip:not(.is-open) { opacity: 0; }
+.tips { display: flex; gap: 8px; padding: 4px; border-radius: 12px; background: var(--surface); box-shadow: var(--lift-1); }
+
+@media (width < 900px) {
+  .card--layered, .card--stat, .card--media, .card--well, .card--list, .stage--half { grid-column: span 6; }
+  .card--media { flex-direction: row; }
+  .card--media .media { flex: none; width: 40%; aspect-ratio: 1; }
+  .rowitem { grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; padding: 12px 8px 12px 16px; }
+  .rowitem .meter { grid-column: 1; grid-row: 2; }
+  .rowitem__num { display: none; }
+  .rowitem__act { grid-column: 2; grid-row: 1 / span 2; }
+  .rowitem + .rowitem::before { left: 16px; }
+  .spec3 { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .spec3 > div { display: flex; justify-content: space-between; align-items: baseline; padding: 0; border: 0; }
+  .spec3 dd { margin: 0; }
+  .readouts { grid-template-columns: minmax(0, 1fr); }
+  .readouts > div { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 16px; }
+  .readouts > div + div { border-inline-start: 0; border-top: 1px solid var(--border); box-shadow: 0 -1px 0 var(--top-edge); }
+  .readout { margin: 0; }
+  .stage { padding: 56px 16px 16px; }
+  .stage--sheet { min-height: 648px; padding: 56px 16px 16px; place-items: start; }
+  .stage--sheet .stage__hint { position: absolute; right: 12px; top: 8px; }
+  .stage--half:not(.stage--menu) { min-height: 264px; }
+  .stage--sheet .stage__hint p { display: none; }
+  .marks { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
+  /* On a phone the sheet comes from the bottom and gets a grab handle. */
+  .sheet:not(:modal) { inset: auto 0 0 0; width: 100%; max-height: calc(100% - 48px); border-radius: 20px 20px 0 0; }
+  .sheet:modal { inset: auto 0 0 0; width: 100%; max-height: 88dvh; border-radius: 20px 20px 0 0; animation-name: rise; }
+  .sheet__grab { display: block; flex: none; width: 36px; height: 4px; margin: 8px auto 0; border-radius: var(--r-pill); background: var(--border-strong); }
+  .sheet__head { padding-top: 12px; }
+}
+@keyframes rise { from { transform: translateY(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .live::after { animation: none; opacity: 0; }
+  .sheet:modal { animation: fade 200ms var(--curve-out); }
+  .dialog[data-closing], .sheet[data-closing] { transform: none; }
+  .toast, .toast[data-leaving] { transition-property: opacity; }
+  .tip { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-chevrons" viewBox="0 0 16 16"><path d="M5 6.25l3-3 3 3M5 9.75l3 3 3-3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 16 16"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.5 8.5h6l.5-8.5M6.75 7v3.5M9.25 7v3.5"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><path d="M3.5 8h.01M8 8h.01M12.5 8h.01" stroke-width="2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.75"/><path d="M10.5 5.5V4.25A1.75 1.75 0 0 0 8.75 2.5h-4.5A1.75 1.75 0 0 0 2.5 4.25v4.5c0 .97.78 1.75 1.75 1.75H5.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="M10.25 10.25l3.25 3.25"/></symbol>
+  <symbol id="i-retry" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.6-3.67M13 2.75v2.5h-2.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 16 16"><path d="M6 3.5L10.5 8 6 12.5"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 16 16"><path d="M3.5 6L8 10.5 12.5 6"/></symbol>
+  <symbol id="i-arrow-down" viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></symbol>
+  <symbol id="i-open" viewBox="0 0 16 16"><path d="M6.5 3.5h-3v9h9v-3M9.5 3.5h3v3M12.5 3.5l-5 5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 10.5V14M5.25 2.5h5.5l-.75 4 2 3H4l2-3z"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 16 16"><path d="M2.5 4.5v7.25c0 .41.34.75.75.75h9.5c.41 0 .75-.34.75-.75v-5.5a.75.75 0 0 0-.75-.75H8L6.5 3.75H3.25a.75.75 0 0 0-.75.75z"/></symbol>
+  <symbol id="i-curve" viewBox="0 0 16 16"><path d="M2.5 12.5c2-1 2.5-7.5 5-7.5s2 4.5 3.5 4.5 1.5-3 2.5-5.5"/></symbol>
+  <symbol id="i-help" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M6.4 6.4a1.7 1.7 0 1 1 2.4 1.55c-.5.3-.8.6-.8 1.15M8 11v.01"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 16 16"><path d="M4 11.25V7.5a4 4 0 0 1 8 0v3.75l1 1H3zM6.75 13.75a1.3 1.3 0 0 0 2.5 0"/></symbol>
+</svg>
+
+<header class="bar">
+  <div class="wrap bar__in">
+    <a class="bar__brand" href="controls.html">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 17V9a6 6 0 0 1 6-6h8"/><path d="M8 17v-6a3 3 0 0 1 3-3h6"/></svg>
+      finesse <span>exemplars</span>
+    </a>
+    <nav class="bar__nav" aria-label="Exemplar files">
+      <a href="controls.html">Controls</a>
+      <a href="surfaces.html" aria-current="page">Surfaces</a>
+      <a href="data.html">Data</a>
+      <a href="marketing.html">Marketing</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+    <div class="bar__tools">
+      <div class="swatches" role="group" aria-label="Palette">
+        <a href="?palette=clay" data-palette-link="clay" style="--chip: oklch(0.53 0.14 42)">Clay</a>
+        <a href="?palette=cobalt" data-palette-link="cobalt" style="--chip: oklch(0.48 0.22 264)">Cobalt</a>
+        <a href="?palette=moss" data-palette-link="moss" style="--chip: oklch(0.87 0.19 125)">Moss</a>
+      </div>
+      <a class="theme-link" href="?theme=dark" data-theme-link aria-label="Switch theme">
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <div>
+      <p class="intro__eyebrow">Exemplar 2 of 5</p>
+      <h1>Surfaces</h1>
+      <p class="intro__lede">Cards that are not the flat bordered box, and the five overlays, each drawn open. Match this level of finish. Take the structure, palette and type from your own project.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Elevation</dt><dd>Three levels, lit from above</dd></div>
+      <div><dt>Overlays</dt><dd>Drawn open, and live</dd></div>
+      <div><dt>Keyboard</dt><dd>Escape closes, focus returns</dd></div>
+    </dl>
+  </div>
+
+  <section class="spec" id="cards" aria-labelledby="cards-h">
+    <div class="spec__note">
+      <p class="spec__no">01</p>
+      <h2 id="cards-h">Cards</h2>
+      <p>Five ways to hold content. None of them is a hairline box with a soft glow.</p>
+      <ol class="notes">
+        <li>Raised: a ring, then shadows that double in size and never pass 12&nbsp;px of blur.</li>
+        <li>The stat card has no chrome. The figure does the work, and its decimal and unit step back.</li>
+        <li>The image sits in a 4&nbsp;px frame, so its radius is 16 minus 4. Its hairline is drawn inside it.</li>
+        <li>A well is lit from above: shadow inside the top edge, highlight under the bottom edge.</li>
+        <li>Row hover is a tint inset from the card edge. Separators start where the text starts.</li>
+        <li>Status is a glyph that means something, then plain words. No pills.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="cards">
+
+        <article class="card card--layered" aria-labelledby="card-next">
+          <header class="card__head">
+            <div>
+              <p class="card__kicker">Up next on the Probat</p>
+              <h3 id="card-next">Finca El Paraíso, washed</h3>
+            </div>
+            <p class="status">
+              <svg class="ring" viewBox="0 0 16 16" aria-hidden="true"><circle class="ring__track" cx="8" cy="8" r="6"/><circle class="ring__fill" cx="8" cy="8" r="6" pathLength="100" stroke-dasharray="67 100"/></svg>
+              <span>Preheat in <span class="num">40</span> min</span>
+            </p>
+          </header>
+          <dl class="spec3">
+            <div><dt>Batch</dt><dd class="num">0413</dd></div>
+            <div><dt>Charge</dt><dd class="num">11<small>.80</small> <span class="unit">kg</span></dd></div>
+            <div><dt>Profile</dt><dd>City plus, <span class="num">10:40</span></dd></div>
+          </dl>
+          <footer class="card__foot">
+            <span>Planned by Ines, today at <span class="num">08:12</span></span>
+            <div class="row">
+              <button class="btn btn--sm btn--quiet" type="button">Edit plan</button>
+              <button class="btn btn--sm btn--primary" type="button">Start preheat</button>
+            </div>
+          </footer>
+        </article>
+
+        <article class="card card--stat" aria-label="Weight loss over the last 30 batches">
+          <p class="card__kicker">Weight loss, last 30 batches</p>
+          <p class="stat num">14<small>.2</small><span class="stat__unit">%</span></p>
+          <p class="delta"><svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg><span class="num">0.6</span> <span>points under target</span></p>
+          <svg class="spark" viewBox="0 0 280 72" preserveAspectRatio="none" role="img" aria-label="Loss has stayed between 13.6 and 15.1 percent, under the 15 percent target.">
+            <defs><linearGradient id="spark-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity="0.2"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+            <path class="spark__target" d="M0 18H280"/>
+            <path class="spark__area" d="M0 38L24 44 48 32 72 40 96 28 120 46 144 38 168 34 192 42 216 31 240 37 262 40V72H0Z"/>
+            <path class="spark__line" d="M0 38L24 44 48 32 72 40 96 28 120 46 144 38 168 34 192 42 216 31 240 37 262 40"/>
+            <path class="spark__halo" d="M262 40h.01"/>
+            <path class="spark__dot" d="M262 40h.01"/>
+          </svg>
+        </article>
+
+        <article class="card card--media">
+          <div class="media">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Layered ridgelines above a terraced slope at sunrise.">
+              <defs>
+                <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop class="ridge-sky-a" offset="0"/><stop class="ridge-sky-b" offset="0.62"/></linearGradient>
+                <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+              </defs>
+              <rect width="400" height="300" fill="url(#sky)"/>
+              <circle class="ridge-sun" cx="286" cy="128" r="30"/>
+              <path class="ridge-1" d="M0 172C40 150 70 168 110 150S170 112 210 138 280 150 320 132 380 150 400 142V300H0Z"/>
+              <path class="ridge-2" d="M0 205C50 180 90 200 140 178S220 190 260 170 340 200 400 176V300H0Z"/>
+              <path class="ridge-3" d="M0 236C60 214 110 240 170 216S270 232 320 212 380 228 400 220V300H0Z"/>
+              <path class="ridge-4" d="M0 266C70 244 130 270 200 250S320 268 400 246V300H0Z"/>
+              <path class="ridge-rows" d="M0 278C70 256 130 282 200 262S320 280 400 258M0 290C70 268 130 294 200 274S320 292 400 270"/>
+              <rect class="grain" width="400" height="300" filter="url(#grain)"/>
+            </svg>
+            <span class="media__tag mono num">1,750 m</span>
+          </div>
+          <div class="card__body">
+            <h3><a class="stretch" href="#cards">Huila, Colombia</a></h3>
+            <p>Caturra, harvested October to January.</p>
+          </div>
+        </article>
+
+        <article class="card card--well" aria-labelledby="card-link">
+          <header class="card__head">
+            <h3 id="card-link">Roaster link</h3>
+            <p class="status"><span class="live" aria-hidden="true"></span><span>Live, sampled every <span class="num">2</span> s</span></p>
+          </header>
+          <div class="well readouts">
+            <div><span class="readout__label">Bean temperature</span><span class="readout num">196<small>.4</small> <span class="unit">°C</span></span></div>
+            <div><span class="readout__label">Rate of rise</span><span class="readout num">8<small>.2</small> <span class="unit">°C/min</span></span></div>
+            <div><span class="readout__label">Gas</span><span class="readout num">45 <span class="unit">%</span></span></div>
+          </div>
+          <ol class="marks" aria-label="Roast milestones">
+            <li class="is-done"><span class="num">0:00</span> Charge</li>
+            <li class="is-done"><span class="num">1:18</span> Turning point</li>
+            <li class="is-now"><span class="num">6:42</span> Now, drying done</li>
+            <li><span class="num">8:50</span> First crack, expected</li>
+          </ol>
+        </article>
+
+        <section class="card card--list" aria-labelledby="card-stock">
+          <header class="card__head">
+            <h3 id="card-stock">Green stock</h3>
+            <button class="btn btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Receive a lot</button>
+          </header>
+          <ul>
+            <li class="rowitem">
+              <div><p class="rowitem__title">Finca El Paraíso</p><p class="rowitem__sub">Huila, washed, lot 14</p></div>
+              <div class="meter"><span><span class="num">38.0</span> <span class="unit">kg</span> left, about 3 roasts</span><span class="meter__track"><span class="meter__fill" style="--v: 0.63"></span></span></div>
+              <p class="rowitem__num num">$<span>9.40</span><span class="unit"> /kg</span></p>
+              <div class="rowitem__act"><button class="btn btn--sm btn--quiet" type="button">Reorder</button><button class="btn btn--sm btn--icon btn--quiet" type="button" aria-label="More for Finca El Paraíso"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></div>
+            </li>
+            <li class="rowitem is-hover">
+              <div><p class="rowitem__title">Gedeb Chelbesa</p><p class="rowitem__sub">Yirgacheffe, natural, lot 3</p></div>
+              <div class="meter"><span><span class="num">52.5</span> <span class="unit">kg</span> left, about 4 roasts</span><span class="meter__track"><span class="meter__fill" style="--v: 0.88"></span></span></div>
+              <p class="rowitem__num num">$<span>11.20</span><span class="unit"> /kg</span></p>
+              <div class="rowitem__act"><button class="btn btn--sm" type="button">Reorder</button><button class="btn btn--sm btn--icon btn--quiet" type="button" aria-label="More for Gedeb Chelbesa"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></div>
+            </li>
+            <li class="rowitem">
+              <div><p class="rowitem__title">Fazenda Sertão</p><p class="rowitem__sub">Carmo de Minas, pulped natural</p></div>
+              <div class="meter meter--low"><span><b><span class="num">9.5</span> <span class="unit">kg</span> left</b>, less than one roast</span><span class="meter__track"><span class="meter__fill" style="--v: 0.16"></span></span></div>
+              <p class="rowitem__num num">$<span>7.85</span><span class="unit"> /kg</span></p>
+              <div class="rowitem__act"><button class="btn btn--sm btn--quiet" type="button">Reorder</button><button class="btn btn--sm btn--icon btn--quiet" type="button" aria-label="More for Fazenda Sertão"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></div>
+            </li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="overlays" aria-labelledby="overlays-h">
+    <div class="spec__note">
+      <p class="spec__no">02</p>
+      <h2 id="overlays-h">Overlays</h2>
+      <p>Each one is drawn open on a canvas. The button in the corner opens the live version.</p>
+      <ol class="notes">
+        <li>Dialog and sheet share one footer: a tinted strip with the actions, flush to the edge.</li>
+        <li>The sheet floats 8&nbsp;px inside the viewport and keeps four corners. On a phone it rises from the bottom with a handle.</li>
+        <li>Menu radii are concentric: 12 outside, 4 of padding, 8 on the items. Separators run edge to edge.</li>
+        <li>Stacked toasts step back 8&nbsp;px and 0.05 of scale each, and hide their text.</li>
+        <li>The tooltip inverts the page colours, so it needs no border in either theme.</li>
+        <li>The dotted ground fades out before the edge. Texture marks the canvas and stops there.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="stages">
+
+        <div class="stage">
+          <span class="caption stage__cap">Dialog</span>
+          <button class="btn btn--sm stage__try" type="button" data-open="dialog">Open as modal</button>
+          <dialog class="dialog" id="dialog" open aria-labelledby="dialog-h" aria-describedby="dialog-p">
+            <div class="dialog__body">
+              <h3 id="dialog-h">Discard batch 0412?</h3>
+              <p id="dialog-p">The roast log, the curve and 3 cupping notes will be deleted. 12 orders that draw on this batch will need a new source.</p>
+              <label class="opt"><input class="check" type="checkbox" checked><span>Return 11.80 kg to green stock</span></label>
+            </div>
+            <button class="btn btn--sm btn--icon btn--quiet dialog__close" type="button" aria-label="Close" data-close><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+            <div class="dialog__foot">
+              <button class="btn" type="button" data-close autofocus>Keep batch</button>
+              <button class="btn btn--danger" type="button" data-close>Discard batch</button>
+            </div>
+          </dialog>
+        </div>
+
+        <div class="stage stage--sheet">
+          <span class="caption stage__cap">Sheet</span>
+          <div class="stage__hint">
+            <p>A sheet keeps the page in view. Use it for detail and short edits, not for a second page.</p>
+            <button class="btn btn--sm" type="button" data-open="sheet">Open as modal</button>
+          </div>
+          <dialog class="sheet" id="sheet" open aria-labelledby="sheet-h">
+            <span class="sheet__grab" aria-hidden="true"></span>
+            <header class="sheet__head">
+              <div>
+                <p class="card__kicker mono">Batch 0412</p>
+                <h3 id="sheet-h">Finca El Paraíso, washed</h3>
+              </div>
+              <button class="btn btn--sm btn--icon btn--quiet" type="button" aria-label="Close" data-close><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+            </header>
+            <div class="sheet__body">
+              <dl class="facts">
+                <div><dt>Roasted</dt><dd class="num">18 Nov 2026, 09:14</dd></div>
+                <div><dt>Charge</dt><dd class="num">11.80 <span class="unit">kg</span></dd></div>
+                <div><dt>Yield</dt><dd class="num">10.12 <span class="unit">kg</span></dd></div>
+                <div><dt>First crack</dt><dd class="num">8:56 <span class="unit">min</span></dd></div>
+              </dl>
+              <div class="field">
+                <div class="field__top"><label for="note">Roaster’s note</label><span class="field__opt">Optional</span></div>
+                <div class="input input--area"><textarea id="note" rows="3">Stretched the middle by 20 s. Sweeter on day 7, a touch flat on day 3.</textarea></div>
+              </div>
+              <label class="opt opt--switch"><span>Offer to wholesale buyers</span><span class="opt__desc">10.12 kg will show as available.</span><input class="switch" type="checkbox" role="switch" checked></label>
+            </div>
+            <footer class="sheet__foot">
+              <button class="btn" type="button" data-close>Close</button>
+              <button class="btn btn--primary" type="button" data-close>Save note</button>
+            </footer>
+          </dialog>
+        </div>
+
+        <div class="stage stage--half stage--menu">
+          <span class="caption stage__cap">Popover menu</span>
+          <div class="menu-wrap">
+            <button class="btn" type="button" id="menu-btn" aria-haspopup="menu" aria-expanded="true" aria-controls="menu">Batch actions<svg class="icon" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
+            <div class="menu" id="menu" role="menu" aria-labelledby="menu-btn" data-open>
+              <p class="menu__label">Batch 0412</p>
+              <button class="menu__item" type="button" role="menuitem" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-curve"/></svg><span>Open curve</span><kbd>O</kbd></button>
+              <button class="menu__item is-hover" type="button" role="menuitem" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span>Duplicate</span><kbd>D</kbd></button>
+              <button class="menu__item" type="button" role="menuitemcheckbox" aria-checked="true" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>Pinned to dashboard</span><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></button>
+              <div class="menu__sep" role="separator"></div>
+              <button class="menu__item" type="button" role="menuitem" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg><span>Move to a blend</span><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+              <button class="menu__item" type="button" role="menuitem" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-open"/></svg><span>Share label</span><span class="keys"><kbd>⇧</kbd><kbd>L</kbd></span></button>
+              <div class="menu__sep" role="separator"></div>
+              <button class="menu__item menu__item--danger" type="button" role="menuitem" tabindex="-1"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg><span>Discard batch</span><kbd>⌫</kbd></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage stage--half">
+          <span class="caption stage__cap">Toast stack</span>
+          <button class="btn btn--sm stage__try" type="button" id="toast-add">Add a toast</button>
+          <div class="toasts" id="toasts" role="region" aria-label="Notifications">
+            <div class="toast" role="status"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><p class="toast__title">Label sent to the printer</p></div><button class="btn btn--sm btn--icon btn--quiet toast__close" type="button" aria-label="Dismiss"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+            <div class="toast" role="status"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><div><p class="toast__title">Note saved</p></div><button class="btn btn--sm btn--icon btn--quiet toast__close" type="button" aria-label="Dismiss"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+            <div class="toast" role="status">
+              <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+              <div><p class="toast__title">Batch 0412 published</p><p class="toast__text">Wholesale buyers can order it now.</p></div>
+              <button class="btn btn--sm btn--icon btn--quiet toast__close" type="button" aria-label="Dismiss"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+              <button class="btn btn--sm btn--quiet toast__act" type="button">Undo</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage stage--short">
+          <span class="caption stage__cap">Tooltip</span>
+          <div class="tips">
+            <span class="tip-wrap"><button class="btn btn--icon btn--quiet" type="button" aria-label="Copy batch link" aria-describedby="tip-1"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg></button><span class="tip" role="tooltip" id="tip-1">Copy link<kbd>C</kbd></span></span>
+            <span class="tip-wrap"><button class="btn btn--icon btn--quiet" type="button" aria-label="Alerts" aria-describedby="tip-2"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></button><span class="tip is-open" role="tooltip" id="tip-2">Alerts for this batch<kbd>A</kbd></span></span>
+            <span class="tip-wrap"><button class="btn btn--icon btn--quiet" type="button" aria-label="Help" aria-describedby="tip-3"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg></button><span class="tip" role="tooltip" id="tip-3">Help<kbd>?</kbd></span></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">Exemplars set a level of finish. They are not a kit: do not copy a layout or a look from them.</footer>
+</main>
+
+<script>
+(function () {
+  /* shared:start */
+  var root = document.documentElement;
+
+  /* Switcher links keep the other parameter; file links keep both. */
+  document.querySelectorAll("[data-palette-link]").forEach(function (a) {
+    var p = a.dataset.paletteLink;
+    a.href = "?palette=" + p;
+    if (p === root.dataset.palette) a.setAttribute("aria-current", "true");
+  });
+  var other = root.dataset.theme === "dark" ? "light" : "dark";
+  var themeLink = document.querySelector("[data-theme-link]");
+  themeLink.href = "?palette=" + root.dataset.palette + "&theme=" + other;
+  themeLink.setAttribute("aria-label", "Switch to " + other + " theme");
+  document.querySelectorAll(".bar__nav a, .bar__brand").forEach(function (a) {
+    a.href = a.getAttribute("href") + "?palette=" + root.dataset.palette + "&theme=" + root.dataset.theme;
+  });
+
+  /* shared:end */
+
+  /* Dialog and sheet: one element each. It rests open in its stage and moves to the top layer as a modal.
+     Native showModal() gives the focus trap, the inert page and Escape. close() returns focus to the opener. */
+  function shut(d) {
+    if (!d.matches(":modal") || "closing" in d.dataset) return;
+    d.dataset.closing = "";
+    setTimeout(function () {
+      delete d.dataset.closing;
+      d.close();
+      d.setAttribute("open", "");
+    }, parseFloat(getComputedStyle(d).transitionDuration) * 1000 || 0);
+  }
+  document.querySelectorAll("dialog").forEach(function (d) {
+    d.addEventListener("cancel", function (e) { e.preventDefault(); shut(d); });
+    d.addEventListener("click", function (e) {
+      if (e.target === d || e.target.closest("[data-close]")) shut(d);
+    });
+  });
+  function openModal(id) {
+    var d = document.getElementById(id);
+    d.close();
+    d.showModal();
+  }
+  document.querySelectorAll("[data-open]").forEach(function (b) {
+    if (b.tagName === "BUTTON") b.addEventListener("click", function () { openModal(b.dataset.open); });
+  });
+  if (root.dataset.state === "dialog" || root.dataset.state === "sheet") openModal(root.dataset.state);
+
+  /* Menu: click or Enter opens, arrows move, Home and End jump, a letter jumps to its item, Escape closes and refocuses the trigger. */
+  var menuBtn = document.getElementById("menu-btn"), menu = document.getElementById("menu");
+  var items = Array.prototype.slice.call(menu.querySelectorAll(".menu__item"));
+  function setMenu(open, focusItem) {
+    menu.toggleAttribute("data-open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    if (open && focusItem) items[0].focus();
+  }
+  menuBtn.addEventListener("click", function (e) { setMenu(!menu.hasAttribute("data-open"), e.detail === 0); });
+  menu.addEventListener("keydown", function (e) {
+    var i = items.indexOf(document.activeElement), n = items.length, next;
+    if (e.key === "Escape") { setMenu(false); menuBtn.focus(); return; }
+    if (e.key === "ArrowDown") next = (i + 1) % n;
+    else if (e.key === "ArrowUp") next = (i - 1 + n) % n;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = n - 1;
+    else if (e.key.length === 1) next = items.findIndex(function (it) { return it.textContent.trim().toLowerCase().indexOf(e.key.toLowerCase()) === 0; });
+    if (next === undefined || next < 0) return;
+    e.preventDefault();
+    items[next].focus();
+  });
+  menu.addEventListener("click", function (e) {
+    var it = e.target.closest(".menu__item");
+    if (!it) return;
+    if (it.getAttribute("role") === "menuitemcheckbox") {
+      var on = it.getAttribute("aria-checked") !== "true";
+      it.setAttribute("aria-checked", String(on));
+      it.lastElementChild.style.visibility = on ? "" : "hidden";
+      return;
+    }
+    setMenu(false);
+    menuBtn.focus();
+  });
+  document.addEventListener("pointerdown", function (e) { if (!e.target.closest(".menu-wrap")) setMenu(false); });
+  if (root.dataset.state === "menu-closed") setMenu(false);
+
+  /* Toasts: at most 3, newest in front, 5 s to read, the clock stops while the pointer or focus is on the stack. */
+  var region = document.getElementById("toasts"), lines = ["Curve exported as CSV", "Alert set for stalled rise", "Label queued for printing"], count = 0;
+  function dismiss(t) {
+    clearTimeout(t.timer);
+    t.dataset.leaving = "";
+    setTimeout(function () { t.remove(); }, 200);
+  }
+  function arm(t) { clearTimeout(t.timer); t.timer = setTimeout(function () { dismiss(t); }, 5000); }
+  region.addEventListener("click", function (e) { var b = e.target.closest(".toast__close"); if (b) dismiss(b.closest(".toast")); });
+  ["pointerenter", "focusin"].forEach(function (ev) { region.addEventListener(ev, function () { Array.prototype.forEach.call(region.children, function (t) { clearTimeout(t.timer); }); }); });
+  ["pointerleave", "focusout"].forEach(function (ev) { region.addEventListener(ev, function () { Array.prototype.forEach.call(region.children, function (t) { if (t.timer) arm(t); }); }); });
+  document.getElementById("toast-add").addEventListener("click", function () {
+    var t = region.lastElementChild.cloneNode(true);
+    t.querySelector(".toast__title").textContent = lines[count++ % lines.length];
+    var extra = t.querySelector(".toast__text"), act = t.querySelector(".toast__act");
+    if (extra) extra.remove();
+    if (act) act.remove();
+    region.appendChild(t);
+    arm(t);
+    while (region.children.length > 4) region.firstElementChild.remove();
+  });
+
+  /* Tooltips: CSS shows them on hover and focus. Escape hides them until the pointer or focus moves on. */
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") root.dataset.tipsOff = ""; });
+  ["pointermove", "focusin"].forEach(function (ev) { document.addEventListener(ev, function () { delete root.dataset.tipsOff; }, { passive: true }); });
+})();
+</script>
+</body>
+</html>

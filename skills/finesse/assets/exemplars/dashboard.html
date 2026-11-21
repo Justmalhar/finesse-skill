@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="en" data-palette="graphite" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard, a finesse exemplar</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<script>
+  /* Runs before first paint so the page never flashes the wrong palette. */
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    var home = { graphite: "dark", linen: "light", spruce: "dark" };
+    var p = home[q.get("palette")] ? q.get("palette") : "graphite";
+    var t = q.get("theme") === "light" || q.get("theme") === "dark" ? q.get("theme") : home[p];
+    root.dataset.palette = p;
+    root.dataset.theme = t;
+    if (q.get("state")) root.dataset.state = q.get("state");
+  })();
+</script>
+<style>
+
+/* Three palettes. Each sets the roles from tokens.css plus six series colours.
+   Series rule: --chart-1 is the lead hue; the rest step round the wheel with lightness alternating.
+   Dark themes hold series at L 0.67 to 0.86, light themes at L 0.47 to 0.63, so every one clears 3:1 on a tile. */
+[data-palette="graphite"][data-theme="dark"] {
+  --background: oklch(0.145 0.004 260); --surface: oklch(0.188 0.005 260); --surface-raised: oklch(0.228 0.006 260);
+  --border: oklch(0.98 0.004 260 / 0.09); --border-strong: oklch(0.53 0.01 260);
+  --text: oklch(0.965 0.003 260); --text-muted: oklch(0.725 0.01 260);
+  --accent: oklch(0.56 0.2 258); --accent-text: oklch(0.99 0.004 258); --focus: oklch(0.74 0.135 255);
+  --danger: oklch(0.71 0.17 24); --success: oklch(0.77 0.15 155); --warning: oklch(0.82 0.14 80);
+  --chart-1: oklch(0.69 0.165 255); --chart-2: oklch(0.8 0.13 185); --chart-3: oklch(0.82 0.15 78);
+  --chart-4: oklch(0.67 0.18 300); --chart-5: oklch(0.73 0.17 352); --chart-6: oklch(0.86 0.16 125);
+}
+[data-palette="graphite"][data-theme="light"] {
+  --background: oklch(0.972 0.003 260); --surface: oklch(0.995 0.002 260); --surface-raised: oklch(0.998 0.001 260);
+  --border: oklch(0.2 0.01 260 / 0.1); --border-strong: oklch(0.6 0.012 260);
+  --text: oklch(0.2 0.012 260); --text-muted: oklch(0.47 0.014 260);
+  --accent: oklch(0.52 0.19 258); --accent-text: oklch(0.99 0.004 258); --focus: oklch(0.52 0.19 258);
+  --danger: oklch(0.52 0.2 26); --success: oklch(0.5 0.13 152); --warning: oklch(0.53 0.115 70);
+  --chart-1: oklch(0.56 0.195 257); --chart-2: oklch(0.6 0.1 190); --chart-3: oklch(0.63 0.135 68);
+  --chart-4: oklch(0.54 0.2 300); --chart-5: oklch(0.6 0.2 355); --chart-6: oklch(0.62 0.16 130);
+}
+[data-palette="linen"][data-theme="light"] {
+  --background: oklch(0.962 0.012 85); --surface: oklch(0.985 0.008 85); --surface-raised: oklch(0.995 0.005 85);
+  --border: oklch(0.25 0.03 60 / 0.11); --border-strong: oklch(0.6 0.025 70);
+  --text: oklch(0.23 0.02 55); --text-muted: oklch(0.47 0.025 65);
+  --accent: oklch(0.53 0.15 42); --accent-text: oklch(0.99 0.008 85); --focus: oklch(0.53 0.15 42);
+  --danger: oklch(0.5 0.2 18); --success: oklch(0.5 0.12 150); --warning: oklch(0.53 0.11 75);
+  --chart-1: oklch(0.58 0.16 45); --chart-2: oklch(0.54 0.09 200); --chart-3: oklch(0.62 0.125 85);
+  --chart-4: oklch(0.47 0.14 340); --chart-5: oklch(0.56 0.12 135); --chart-6: oklch(0.52 0.1 262);
+}
+[data-palette="linen"][data-theme="dark"] {
+  --background: oklch(0.165 0.008 60); --surface: oklch(0.2 0.01 60); --surface-raised: oklch(0.238 0.011 60);
+  --border: oklch(0.95 0.01 75 / 0.1); --border-strong: oklch(0.53 0.015 65);
+  --text: oklch(0.95 0.01 80); --text-muted: oklch(0.73 0.016 72);
+  --accent: oklch(0.74 0.13 52); --accent-text: oklch(0.18 0.02 50); --focus: oklch(0.78 0.12 52);
+  --danger: oklch(0.7 0.18 18); --success: oklch(0.76 0.13 150); --warning: oklch(0.82 0.13 85);
+  --chart-1: oklch(0.74 0.14 50); --chart-2: oklch(0.76 0.09 200); --chart-3: oklch(0.84 0.13 90);
+  --chart-4: oklch(0.68 0.13 340); --chart-5: oklch(0.78 0.13 135); --chart-6: oklch(0.7 0.1 262);
+}
+[data-palette="spruce"][data-theme="dark"] {
+  --background: oklch(0.155 0.012 175); --surface: oklch(0.195 0.014 175); --surface-raised: oklch(0.235 0.016 175);
+  --border: oklch(0.95 0.02 165 / 0.1); --border-strong: oklch(0.53 0.02 170);
+  --text: oklch(0.955 0.012 160); --text-muted: oklch(0.735 0.022 168);
+  --accent: oklch(0.82 0.15 165); --accent-text: oklch(0.17 0.03 170); --focus: oklch(0.82 0.15 165);
+  --danger: oklch(0.72 0.16 22); --success: oklch(0.8 0.16 145); --warning: oklch(0.83 0.13 85);
+  --chart-1: oklch(0.82 0.15 165); --chart-2: oklch(0.72 0.13 268); --chart-3: oklch(0.84 0.14 88);
+  --chart-4: oklch(0.72 0.16 350); --chart-5: oklch(0.76 0.11 225); --chart-6: oklch(0.68 0.15 305);
+}
+[data-palette="spruce"][data-theme="light"] {
+  --background: oklch(0.968 0.008 165); --surface: oklch(0.988 0.006 165); --surface-raised: oklch(0.996 0.003 165);
+  --border: oklch(0.2 0.03 170 / 0.1); --border-strong: oklch(0.6 0.025 170);
+  --text: oklch(0.2 0.025 172); --text-muted: oklch(0.47 0.028 170);
+  --accent: oklch(0.45 0.09 168); --accent-text: oklch(0.985 0.012 160); --focus: oklch(0.45 0.09 168);
+  --danger: oklch(0.52 0.19 25); --success: oklch(0.5 0.13 148); --warning: oklch(0.53 0.11 72);
+  --chart-1: oklch(0.52 0.105 168); --chart-2: oklch(0.52 0.17 270); --chart-3: oklch(0.62 0.125 82);
+  --chart-4: oklch(0.56 0.19 352); --chart-5: oklch(0.55 0.105 230); --chart-6: oklch(0.5 0.17 305);
+}
+
+/* Data layer: derived once from the roles, so every palette gets it for free. */
+:root, [data-theme] {
+  --grid-dot: color-mix(in oklab, var(--text) 26%, transparent);
+  --track: color-mix(in oklab, var(--text) 10%, transparent);
+  --ink-mix: 76%;
+  --tile: linear-gradient(to bottom, color-mix(in oklab, var(--surface-raised) 55%, var(--surface)), var(--surface) 72px);
+}
+body { font-size: var(--fs-sm); line-height: 20px; }
+h1, h2, h3 { font-weight: var(--fw-semibold); }
+.muted { color: var(--text-muted); }
+:root:not([data-state="empty"]) .only-empty, :root[data-state="empty"] .only-live { display: none; }
+
+/* Shell: a fixed sidebar and a scrolling main column. The sidebar is a rail at 1024 and a tab bar on phones. */
+.app { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100dvh; }
+.side { position: sticky; top: 0; display: flex; flex-direction: column; height: 100dvh; padding: 12px; border-inline-end: 1px solid var(--border); overflow-y: auto; scrollbar-width: none; }
+.org { display: flex; align-items: center; gap: 12px; width: 100%; height: 44px; padding: 0 8px; border: 0; border-radius: var(--r-control); background: none; text-align: start; cursor: pointer; transition: background-color var(--dur-press) var(--curve-out); }
+.org__mark { display: grid; place-items: center; width: 28px; height: 28px; flex: none; border-radius: 8px; color: var(--accent-text); background: var(--accent) linear-gradient(to bottom, oklch(1 0 0 / 0.18), transparent 60%); box-shadow: 0 0 0 1px var(--accent-edge), 0 1px 2px var(--cast-md), inset 0 1px 0 oklch(1 0 0 / 0.26); }
+.org__mark svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.org__name { display: grid; flex: 1; min-width: 0; line-height: 16px; }
+.org__name b { font-size: var(--fs-sm); font-weight: var(--fw-semibold); letter-spacing: -0.01em; line-height: 20px; }
+.org__name span { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.org > .icon { color: var(--text-muted); }
+
+.nav { display: grid; gap: 2px; }
+.nav__label { padding: 20px 8px 4px; font-size: var(--fs-xs); font-weight: var(--fw-medium); line-height: 16px; color: var(--text-muted); }
+.nav a { display: flex; align-items: center; gap: 12px; height: 36px; padding: 0 8px; border-radius: var(--r-control); font-weight: var(--fw-medium); color: var(--text-muted); text-decoration: none; transition: color var(--dur-press) var(--curve-out), background-color var(--dur-press) var(--curve-out); }
+/* Selected changes fill, ink and icon colour. The weight stays, so labels never shift. */
+.nav a[aria-current="page"] { color: var(--text); background: var(--surface-raised); box-shadow: var(--lift-1); }
+.nav a[aria-current="page"] .icon { color: var(--chart-1); }
+.count { display: grid; place-items: center; min-width: 24px; height: 20px; margin-inline-start: auto; padding: 0 4px; border-radius: 6px; font-size: var(--fs-xs); font-variant-numeric: tabular-nums; color: var(--text-muted); background: var(--wash); box-shadow: inset 0 0 0 1px var(--border); }
+.count--warn { color: color-mix(in oklab, var(--warning) var(--ink-mix), var(--text)); background: color-mix(in oklab, var(--warning) 14%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--warning) 30%, transparent); }
+
+.quota { display: grid; gap: 12px; margin-top: auto; padding: 12px; border-radius: var(--r-card); background: var(--tile); box-shadow: var(--lift-1); }
+.quota__top { display: grid; gap: 4px; font-size: var(--fs-xs); line-height: 16px; font-weight: var(--fw-medium); color: var(--text-muted); }
+.quota__top b { font-size: var(--fs-base); line-height: 24px; font-weight: var(--fw-semibold); color: var(--text); }
+.quota__top b span { font-size: var(--fs-sm); font-weight: var(--fw-regular); }
+.quota p { font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+/* Striped progress: the stripe says "in progress", the width says how far. */
+.stripe { height: 8px; border-radius: var(--r-pill); background: var(--well); box-shadow: inset 0 0 0 1px var(--border); overflow: hidden; }
+.stripe i { display: block; width: var(--p); height: 100%; border-radius: inherit; background: repeating-linear-gradient(-45deg, var(--chart-1) 0 4px, color-mix(in oklab, var(--chart-1) 62%, var(--surface)) 4px 8px); }
+.quota + .me { margin-top: 12px; }
+.me { display: flex; align-items: center; gap: 12px; margin-top: auto; padding: 8px; border-radius: var(--r-control); }
+.avatar { display: grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 50%; font-size: var(--fs-xs); font-weight: var(--fw-semibold); color: var(--chart-4); background: color-mix(in oklab, var(--chart-4) 18%, var(--surface)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--chart-4) 36%, transparent); }
+.me__name { display: grid; flex: 1; min-width: 0; line-height: 16px; }
+.me__name b { font-weight: var(--fw-medium); line-height: 20px; }
+.me__name span { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.top { position: sticky; top: 0; z-index: var(--z-sticky); display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 24px; border-bottom: 1px solid var(--border); background: color-mix(in oklab, var(--background) 82%, transparent); backdrop-filter: blur(12px) saturate(1.4); }
+.crumbs { display: flex; align-items: center; gap: 8px; margin-inline-end: auto; color: var(--text-muted); white-space: nowrap; }
+.crumbs b { font-weight: var(--fw-medium); color: var(--text); }
+.search { width: 264px; height: 36px; }
+.search > input { font-size: var(--fs-sm); padding-inline-end: 4px; }
+.search kbd { margin-inline-end: 4px; }
+.search kbd:last-child { margin-inline-end: 8px; }
+.top .seg { padding: 2px; border-radius: 8px; }
+.top .seg label { height: 32px; padding: 0 12px; }
+.top .seg__thumb { inset: 2px auto 2px 2px; width: calc((100% - 4px) / var(--n)); }
+.top .btn { --h: 36px; }
+.bell { position: relative; }
+.bell::after { content: ""; position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--danger); box-shadow: 0 0 0 2px var(--background); }
+.top__brand, .tabbar { display: none; }
+
+.col { min-width: 0; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 24px; }
+.head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; }
+.head > div:first-child { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.head h1 { font-size: var(--fs-xl); line-height: 28px; letter-spacing: -0.02em; text-wrap: balance; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Header chips: a neutral outline for facts, a tint only for the one that needs action. */
+.chip { display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 12px 0 8px; border-radius: var(--r-pill); font-weight: var(--fw-medium); white-space: nowrap; box-shadow: inset 0 0 0 1px var(--border); }
+.chip .icon { color: var(--text-muted); }
+.chip--ok .icon { color: var(--success); }
+.chip--warn { color: color-mix(in oklab, var(--warning) var(--ink-mix), var(--text)); background: color-mix(in oklab, var(--warning) 13%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--warning) 32%, transparent); text-decoration: none; }
+.chip--warn .icon { color: inherit; }
+.head__side { display: flex; align-items: center; gap: 12px; color: var(--text-muted); font-size: var(--fs-xs); }
+.head__side .btn { --h: 32px; }
+.head__side .seg { display: none; padding: 2px; border-radius: 8px; }
+.head__side .seg label { height: 32px; padding: 0 8px; }
+.head__side .seg__thumb { inset: 2px auto 2px 2px; width: calc((100% - 4px) / var(--n)); }
+
+
+/* Bento: twelve columns, 16px gutters. Tiles take 3, 4, 8 or 12 columns and nothing else. */
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+.c3 { grid-column: span 3; } .c4 { grid-column: span 4; } .c8 { grid-column: span 8; } .c12 { grid-column: 1 / -1; }
+.stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-content: start; min-width: 0; }
+.tile { position: relative; min-width: 0; border-radius: var(--r-card); background: var(--tile); box-shadow: var(--lift-1); }
+.tile__head { display: flex; flex-wrap: wrap; align-items: start; gap: 8px 16px; padding: 16px 16px 0; }
+.tile__head > :first-child { margin-inline-end: auto; }
+.tile__head h2 { font-size: var(--fs-base); line-height: 24px; letter-spacing: -0.01em; }
+.tile__head p { font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.tile__head .btn { --h: 32px; }
+.plotted { display: grid; grid-template-rows: auto 1fr auto; }
+
+/* Delta: the arrow gives direction, the colour says whether that direction is good. */
+.delta { display: inline-flex; align-items: center; gap: 4px; height: 20px; padding: 0 8px 0 4px; border-radius: var(--r-pill); font-size: var(--fs-xs); font-weight: var(--fw-medium); font-variant-numeric: tabular-nums; white-space: nowrap; color: color-mix(in oklab, var(--d, var(--text-muted)) var(--ink-mix), var(--text)); background: color-mix(in oklab, var(--d, var(--text)) 14%, transparent); }
+.delta svg { width: 12px; height: 12px; }
+.delta--good { --d: var(--success); }
+.delta--bad { --d: var(--danger); }
+.delta--info { --d: var(--chart-1); padding-inline-start: 8px; }
+
+/* KPI tile: label, figure, then one visual. The four visuals are four different types on purpose. */
+.kpi { display: flex; flex-direction: column; padding: 16px; --c: var(--chart-1); }
+.kpi__top { display: flex; align-items: center; gap: 8px; height: 20px; font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--text-muted); }
+.kpi__top .icon { color: var(--c); }
+.kpi__top .delta { margin-inline-start: auto; }
+.kpi__mid { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 12px; height: 32px; }
+.kpi__fig { font-size: 1.75rem; line-height: 32px; font-weight: var(--fw-semibold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+.kpi__fig .unit { margin-inline-start: 2px; font-size: var(--fs-base); font-weight: var(--fw-medium); letter-spacing: 0.02em; }
+.kpi__ctx { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
+.kpi__none { margin-top: 12px; line-height: 32px; color: var(--text-muted); }
+.kpi__viz { position: relative; height: 44px; margin-top: 16px; }
+.kpi__cap { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; }
+.kpi__cap b { font-weight: var(--fw-medium); color: var(--text); }
+.key { display: inline-flex; align-items: center; gap: 4px; margin-inline-end: 8px; }
+.key::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--k); }
+
+/* Small visuals. Each reads its numbers from data-values and its colour from --c. */
+[data-viz] svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+[data-viz] path { vector-effect: non-scaling-stroke; fill: none; }
+.v-line { stroke: var(--c); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.v-ghost { stroke: var(--border-strong); stroke-width: 1.5; stroke-dasharray: 2 4; }
+.v-dot { position: absolute; width: 8px; height: 8px; margin: -4px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2px var(--surface), 0 0 0 5px color-mix(in oklab, var(--c) 24%, transparent); }
+.v-bars { display: grid; grid-template-rows: 1fr 1fr; grid-auto-columns: minmax(0, 1fr); column-gap: 3px; }
+.v-bars::after { content: ""; position: absolute; inset: 50% 0 auto; border-top: 1px solid var(--border-strong); }
+.v-bars i { align-self: end; height: calc(var(--v) * 100%); min-height: 2px; border-radius: 2px 2px 0 0; background: var(--c); transform-origin: bottom; }
+.v-bars i.neg { align-self: start; border-radius: 0 0 2px 2px; background: var(--c2); transform-origin: top; }
+.v-strip { display: flex; align-items: end; gap: 3px; }
+.v-strip i { flex: 1; height: 100%; border-radius: 2px; background: color-mix(in oklab, var(--success) 52%, var(--surface)); transform-origin: bottom; }
+/* Height carries the state as well as hue: a short red bar still reads without colour. */
+.v-strip i.s1 { height: 62%; background: var(--warning); }
+.v-strip i.s2 { height: 28%; background: var(--danger); }
+/* Segmented meter: one gradient for the fill, one repeating mask for the gaps. No element per segment. */
+.segbar { height: 20px; border-radius: 3px; background: linear-gradient(to right, var(--c) var(--p), var(--track) 0); -webkit-mask: linear-gradient(to right, oklch(0 0 0) calc(100% - 3px), transparent 0) 0 0 / calc(100% / var(--n)) 100%; mask: linear-gradient(to right, oklch(0 0 0) calc(100% - 3px), transparent 0) 0 0 / calc(100% / var(--n)) 100%; }
+.kpi__viz .segbar { position: absolute; inset: auto 0 0; }
+.target { position: absolute; top: 0; left: var(--at); display: flex; flex-direction: column; align-items: center; translate: -50% 0; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); white-space: nowrap; }
+.target::after { content: ""; width: 1px; height: 28px; margin-top: -2px; margin-inline-end: 3px; background: var(--text); }
+
+/* Main chart: SVG for the lines, HTML for every label, so text never scales with the drawing. */
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; padding-top: 2px; color: var(--text-muted); }
+.legend li { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.legend b { font-weight: var(--fw-semibold); color: var(--text); font-variant-numeric: tabular-nums; }
+.sw { width: 12px; height: 12px; flex: none; border-radius: 3px; background: var(--c, var(--chart-1)); }
+.sw--dash { height: 0; border-radius: 0; background: none; border-top: 2px dashed var(--chart-2); }
+.chart { display: grid; grid-template-columns: 48px minmax(0, 1fr); grid-template-rows: minmax(204px, 1fr) 24px; padding: 16px 16px 0 8px; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); font-variant-numeric: tabular-nums lining-nums; }
+.chart__y { position: relative; margin-block: 2px; }
+.chart__y span { position: absolute; right: 12px; translate: 0 -50%; }
+.chart__x b { font-weight: var(--fw-medium); color: var(--text); }
+.chart__x { grid-column: 2; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); align-items: end; text-align: center; white-space: nowrap; }
+/* Dotted grid drawn as a background: a dot every 8px along each tick value, a rule at each midnight. */
+.plot { position: relative; padding-block: 2px; border-radius: 2px; outline-offset: 4px; cursor: crosshair; touch-action: pan-y;
+  background: radial-gradient(circle, var(--grid-dot) 0.75px, transparent 1.25px) 4px -16.667% / 8px 25% content-box,
+    linear-gradient(to right, var(--border) 1px, transparent 1px) -1px 0 / calc(100% / 7) 100%; }
+.plot svg { position: absolute; inset: 2px 0; width: 100%; height: calc(100% - 4px); overflow: visible; }
+.plot path { vector-effect: non-scaling-stroke; fill: none; }
+.plot .p-area { fill: url(#fill-main); }
+.plot .p-line { stroke: var(--chart-1); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.plot .p-cmp { stroke: var(--chart-2); stroke-width: 1.5; stroke-dasharray: 5 4; stroke-linecap: round; }
+#fill-main stop { stop-color: var(--chart-1); }
+.plot .series { animation: draw 800ms var(--curve-out) both; }
+@keyframes draw { from { clip-path: inset(-8px 100% -8px -8px); } to { clip-path: inset(-8px); } }
+.peak { position: absolute; left: var(--x); top: calc(2px + (100% - 4px) * var(--y) / 100); display: grid; justify-items: center; translate: -50% -100%; padding-bottom: 8px; white-space: nowrap; color: var(--text); pointer-events: none; }
+.peak::after { content: ""; position: absolute; bottom: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 2px var(--chart-1); }
+.cross { position: absolute; top: 2px; bottom: 2px; left: var(--x); width: 1px; background: var(--border-strong); pointer-events: none; }
+.pt { position: absolute; left: var(--x); top: calc(2px + (100% - 4px) * var(--y) / 100); width: 8px; height: 8px; margin: -4px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2px var(--surface); pointer-events: none; }
+/* A chart tooltip is a raised surface, not an inverted one: the series swatches keep the contrast they were tuned for. */
+.tip { position: absolute; z-index: 1; left: min(var(--x) + 12px, 100% - 208px); top: 8px; display: grid; gap: 4px; width: 208px; padding: 8px 12px 12px; border-radius: var(--r-control); color: var(--text); background: var(--surface-raised); box-shadow: var(--lift-3); pointer-events: none; transition: opacity 100ms linear; }
+.tip.is-left { left: max(var(--x) - 220px, 0px); }
+.plot.is-live .peak { opacity: 0; }
+.tip__t { color: var(--text-muted); }
+.tip__r { display: flex; align-items: center; gap: 8px; font-size: var(--fs-sm); line-height: 20px; }
+.tip__r b { margin-inline-start: auto; font-weight: var(--fw-semibold); white-space: nowrap; }
+.tip__d { padding-top: 4px; border-top: 1px solid var(--border); color: var(--text-muted); }
+.plot:not(.is-live) :is(.cross, .pt, .tip) { opacity: 0; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 12px 16px 0; padding-block: 12px 16px; border-top: 1px solid var(--border); }
+.stats div { display: grid; gap: 4px; padding-inline: 16px; border-inline-start: 1px solid var(--border); }
+.stats div:first-child { padding-inline-start: 0; border: 0; }
+.stats dt { font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.stats dd { font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); white-space: nowrap; }
+.stats dd:first-of-type { font-size: var(--fs-lg); line-height: 24px; font-weight: var(--fw-semibold); letter-spacing: -0.01em; color: var(--text); font-variant-numeric: tabular-nums lining-nums; }
+.stats .unit { margin-inline-start: 2px; font-size: var(--fs-sm); font-weight: var(--fw-medium); }
+/* Empty: the message and its one action take the slot the summary strip had. The plot keeps its axes and shows a ghost curve. */
+.blank { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; min-height: 92px; margin: 12px 16px 0; padding-block: 12px 16px; border-top: 1px solid var(--border); }
+.blank h3 { font-size: var(--fs-sm); line-height: 20px; }
+.blank p { max-width: 56ch; color: var(--text-muted); text-wrap: pretty; }
+.mix__none { color: var(--text-muted); text-wrap: pretty; }
+
+/* Donut: four arcs cut from one circle with stroke-dasharray, drawn from the table beside it. */
+.mix { display: grid; grid-template-rows: auto 1fr; }
+.mix__body { display: grid; align-content: space-between; gap: 12px; padding: 12px 16px 16px; }
+.donut { position: relative; width: 192px; height: 192px; margin-inline: auto; }
+.donut svg { position: absolute; inset: 24px; width: 144px; height: 144px; rotate: -90deg; overflow: visible; }
+.donut circle { fill: none; stroke-width: 18; transition: opacity var(--dur-state) var(--curve-out); }
+.donut .d-track { stroke: var(--track); }
+.donut.has-active circle[data-i]:not(.is-active), .donut.has-active .d-lab:not(.is-active) { opacity: 0.28; }
+.donut__c { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; text-align: center; }
+.donut__c b { font-size: var(--fs-2xl); line-height: 32px; font-weight: var(--fw-semibold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums lining-nums; }
+.donut__c span { font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.d-lab { position: absolute; left: calc(50% + var(--dx) * 50%); top: calc(50% + var(--dy) * 50%); translate: -50% -50%; font-size: var(--fs-xs); line-height: 16px; font-weight: var(--fw-medium); font-variant-numeric: tabular-nums; color: var(--text-muted); transition: opacity var(--dur-state) var(--curve-out); }
+.mixtable { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums lining-nums; }
+.mixtable tr { box-shadow: inset 0 1px 0 var(--border); }
+.mixtable th, .mixtable td { height: 32px; padding: 0; font-weight: var(--fw-regular); text-align: end; white-space: nowrap; }
+.mixtable th { display: flex; align-items: center; gap: 8px; text-align: start; font-weight: var(--fw-medium); }
+.mixtable td:last-child { width: 56px; color: var(--text-muted); }
+.mixtable tbody tr.is-active { background: var(--wash); box-shadow: inset 0 1px 0 var(--border), 8px 0 0 var(--wash), -8px 0 0 var(--wash); }
+/* Marker shape repeats the series: square, round, diamond, ring. Colour is never the only key. */
+.mixtable tr:nth-child(2) .sw { border-radius: 50%; }
+.mixtable tr:nth-child(3) .sw { rotate: 45deg; scale: 0.82; border-radius: 2px; }
+.mixtable tr:nth-child(4) .sw { background: none; box-shadow: inset 0 0 0 3px var(--c); border-radius: 50%; }
+.mix__foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: var(--fs-xs); line-height: 16px; }
+
+/* Site cards: an icon tile coloured by energy type, a tinted status badge, one reading, one meter. */
+.sect { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; min-height: 32px; }
+.sect h2 { font-size: var(--fs-base); line-height: 24px; letter-spacing: -0.01em; }
+.sect p { margin-inline-end: auto; color: var(--text-muted); }
+.sect .btn { --h: 32px; }
+.sites { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 216px), 1fr)); gap: 16px; }
+.site { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 12px; transition: transform var(--dur-state) var(--curve-out), box-shadow var(--dur-state) var(--curve-out); }
+.site[data-kind="wind"] { --c: var(--chart-2); } .site[data-kind="solar"] { --c: var(--chart-3); } .site[data-kind="store"] { --c: var(--chart-4); }
+.site__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.site__ico { display: grid; place-items: center; width: 32px; height: 32px; flex: none; border-radius: 8px; color: var(--c); background: color-mix(in oklab, var(--c) 15%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--c) 26%, transparent); }
+.site__id { min-width: 0; line-height: 16px; }
+.site__id h3 { font-size: var(--fs-sm); line-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site__id h3 a { text-decoration: none; outline-color: transparent; }
+.site__id h3 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--r-card); }
+.site__id h3 a:focus-visible::after { outline: 2px solid var(--focus); outline-offset: 2px; }
+.site__id p { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site__read { display: flex; align-items: end; justify-content: space-between; gap: 12px; height: 32px; }
+.site__fig { font-size: var(--fs-xl); line-height: 28px; font-weight: var(--fw-semibold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+.site__fig .unit { margin-inline-start: 2px; font-size: var(--fs-sm); font-weight: var(--fw-medium); }
+.site__fig--none { font-size: var(--fs-base); font-weight: var(--fw-medium); color: var(--text-muted); letter-spacing: 0; }
+.site__spark { position: relative; width: 88px; height: 28px; flex: none; }
+.site__spark .v-line { stroke-width: 1.5; }
+.meter { height: 4px; border-radius: var(--r-pill); background: var(--track); overflow: hidden; }
+.meter i { display: block; width: var(--p); height: 100%; border-radius: inherit; background: var(--c); }
+.meter--none { background: repeating-linear-gradient(-45deg, var(--track) 0 3px, transparent 3px 6px); }
+.site .segbar { height: 8px; border-radius: 2px; }
+.site__foot { display: flex; justify-content: space-between; gap: 8px; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.site__foot b { font-weight: var(--fw-medium); color: var(--text); }
+.site__foot span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+/* Status badge: 14% tint, a 30% ring, ink that is the role colour pulled a quarter of the way to the text colour, and a glyph whose shape differs per state. */
+.status { display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 8px 0 4px; border-radius: var(--r-pill); font-size: var(--fs-xs); font-weight: var(--fw-medium); white-space: nowrap; color: color-mix(in oklab, var(--s) var(--ink-mix), var(--text)); background: color-mix(in oklab, var(--s) 14%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--s) 30%, transparent); }
+.status svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.status--ok { --s: var(--success); } .status--warn { --s: var(--warning); } .status--bad { --s: var(--danger); } .status--info { --s: var(--chart-1); }
+.add { display: grid; place-content: center; justify-items: center; gap: 8px; min-height: 176px; padding: 24px; border-radius: var(--r-card); text-align: center; color: var(--text-muted); background: none; box-shadow: none; outline: 1px dashed var(--border-strong); outline-offset: -1px; }
+
+/* Insight: the one tinted tile on the page. It carries its own evidence, four labelled bars. */
+.insight { display: grid; grid-template-columns: auto minmax(0, 1fr) 168px; gap: 16px; align-items: center; padding: 16px; background: color-mix(in oklab, var(--chart-1) 8%, var(--surface)); box-shadow: 0 0 0 1px color-mix(in oklab, var(--chart-1) 28%, transparent), inset 0 1px 0 var(--top-edge); }
+.insight__ico { align-self: start; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: var(--accent-text); background: var(--accent); box-shadow: 0 0 0 1px var(--accent-edge), inset 0 1px 0 oklch(1 0 0 / 0.24); }
+.insight h2 { font-size: var(--fs-sm); line-height: 20px; }
+.insight p { margin-top: 4px; color: var(--text-muted); text-wrap: pretty; }
+.insight .row { margin-top: 12px; gap: 8px; }
+.insight .btn { --h: 32px; }
+.strings { display: grid; gap: 4px; font-size: var(--fs-xs); line-height: 16px; font-variant-numeric: tabular-nums; }
+.strings li { display: grid; grid-template-columns: 16px minmax(0, 1fr) 32px; align-items: center; gap: 8px; color: var(--text-muted); }
+.strings i { height: 8px; border-radius: 2px; background: linear-gradient(to right, var(--chart-3) var(--p), var(--track) 0); }
+.strings b { text-align: end; font-weight: var(--fw-medium); color: var(--text); }
+.strings .is-low { color: var(--text); }
+.strings .is-low i { background: linear-gradient(to right, var(--warning) var(--p), transparent 0), repeating-linear-gradient(-45deg, var(--track) 0 2px, transparent 2px 4px); }
+
+/* Feed: a timeline. The glyph says what kind of event it was, so the title can stay short. */
+.feed { display: grid; padding: 4px 16px 8px; }
+.feed__day { padding: 12px 0 4px; font-size: var(--fs-xs); line-height: 16px; font-weight: var(--fw-medium); color: var(--text-muted); }
+.feed__item { position: relative; display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; gap: 12px; padding-block: 8px; }
+.feed__item:not(:last-child)::before { content: ""; position: absolute; left: 11.5px; top: 36px; bottom: -4px; width: 1px; background: var(--border); }
+.feed__day + .feed__item:not(:last-child)::before, .feed__item:has(+ .feed__day)::before { bottom: -4px; }
+.feed__item:has(+ .feed__day)::before { display: none; }
+.glyph { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; color: var(--g, var(--text-muted)); background: color-mix(in oklab, var(--g, var(--text)) 14%, transparent); }
+.glyph svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.glyph--bad { --g: var(--danger); } .glyph--warn { --g: var(--warning); } .glyph--ok { --g: var(--success); } .glyph--info { --g: var(--chart-4); }
+.feed__item p { text-wrap: pretty; }
+.feed__item p + p { font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.feed__item b { font-weight: var(--fw-medium); }
+.feed__item time { font-size: var(--fs-xs); line-height: 20px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.feed__none { padding: 24px 16px; color: var(--text-muted); text-wrap: pretty; }
+.tile__foot { margin: 0 16px; padding-block: 8px; border-top: 1px solid var(--border); }
+
+/* Skeleton: the real content keeps its box and turns invisible, so loaded and loading are the same size. */
+[data-state="loading"] [data-skel] > :not(.skel) { visibility: hidden; opacity: 0; }
+.skel { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: start; padding: 16px; border-radius: inherit; overflow: hidden; }
+.skel i { flex: none; width: var(--w, 40%); height: var(--h, 12px); margin-top: var(--mt, 0px); border-radius: 4px; background: var(--wash-strong); }
+.skel .ring { width: 144px; height: 144px; flex: none; align-self: center; border-radius: 50%; background: none; box-shadow: inset 0 0 0 18px var(--wash-strong); }
+.skel .plotghost { width: 100%; background: radial-gradient(circle, var(--grid-dot) 0.75px, transparent 1.25px) 4px -26px / 8px 51px; border-radius: 0; }
+.skel svg { display: block; width: 100%; height: 100%; }
+.skel path { fill: none; stroke: var(--wash-strong); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.skel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 35%, color-mix(in oklab, var(--surface) 70%, transparent) 50%, transparent 65%); transform: translateX(-100%); animation: sweep 1600ms linear infinite; }
+@keyframes sweep { to { transform: translateX(100%); } }
+
+/* Exemplar notes: what to take from this file. Not part of the product. */
+.about { display: grid; grid-template-columns: minmax(0, 264px) minmax(0, 1fr); gap: 16px 48px; padding: 24px; }
+.about h2 { font-size: var(--fs-lg); line-height: 24px; letter-spacing: -0.01em; }
+.about > div > p { margin-top: 8px; color: var(--text-muted); text-wrap: pretty; }
+.about .notes { margin-top: 0; columns: 2; column-gap: 48px; display: block; }
+.about .notes li { break-inside: avoid; margin-bottom: 8px; }
+.about__tools { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 16px; }
+.about__files { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 16px; font-size: var(--fs-xs); color: var(--text-muted); }
+
+@media (hover: hover) and (pointer: fine) {
+  .org:hover, .nav a:not([aria-current]):hover { background: var(--wash); color: var(--text); }
+  .site:has(h3 a):hover { transform: translateY(var(--hover-lift)); box-shadow: var(--lift-2); }
+  .chip--warn:hover { background: color-mix(in oklab, var(--warning) 20%, transparent); }
+}
+@media (pointer: coarse) {
+  .nav a, .org { height: 44px; }
+  .top .btn, .head__side .btn, .tile__head .btn, .sect .btn, .insight .btn { --h: 44px; }
+  .search { height: 44px; }
+  .search > input { font-size: var(--fs-base); }
+  .head__side .seg label { height: 40px; }
+}
+
+/* 1024: the sidebar becomes an icon rail, tiles keep their column spans. */
+@media (width < 1180px) {
+  .app { grid-template-columns: 64px minmax(0, 1fr); }
+  .side { align-items: center; padding-inline: 8px; }
+  .side .t, .org__name, .org > .icon, .nav__label, .quota, .me__name, .me > .btn { display: none; }
+  .nav { justify-items: center; padding-top: 12px; margin-top: 12px; border-top: 1px solid var(--border); }
+  .nav:first-of-type { border: 0; margin: 0; }
+  .nav a { position: relative; width: 44px; justify-content: center; padding: 0; }
+  .org { width: 44px; justify-content: center; padding: 0; }
+  .count { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0; border-radius: 50%; color: var(--text); background: var(--surface-raised); }
+  .count:not(.count--warn) { display: none; }
+  .count--warn { color: var(--accent-text); background: var(--warning); box-shadow: 0 0 0 2px var(--background); }
+  [data-theme="dark"] .count--warn { color: var(--background); }
+  .me { margin-top: auto; padding: 0; }
+  .search { width: 200px; }
+  .kpi__ctx, .ends { display: none; }
+  .main { padding: 24px 16px; }
+  .insight { grid-template-columns: auto minmax(0, 1fr); }
+  .strings { grid-column: 2; }
+  .about { grid-template-columns: minmax(0, 1fr); }
+}
+/* Phone: one column, KPI tiles two by two, navigation in a tab bar inside the safe area. */
+@media (width < 768px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .side, .crumbs, .search, .top .btn--primary .t, .head__side p { display: none; }
+  .top { gap: 8px; padding: 0 16px; }
+  .top__brand { display: flex; align-items: center; gap: 8px; margin-inline-end: auto; font-weight: var(--fw-semibold); }
+  .top .seg { display: none; }
+  .main { padding: 16px 16px 96px; gap: 12px; }
+  .grid { gap: 12px; }
+  .c3 { grid-column: span 6; } .c4, .c8 { grid-column: 1 / -1; }
+  .kpi { padding: 12px; overflow: clip; }
+  .kpi__top { font-size: var(--fs-xs); }
+  .kpi__mid { flex-wrap: wrap; height: auto; }
+  .kpi__fig { font-size: var(--fs-xl); }
+  .kpi__fig .unit { font-size: var(--fs-sm); }
+  .ph-hide { display: none; }
+  .target span { display: none; }
+  .head h1 { font-size: var(--fs-lg); }
+  .chips { flex-wrap: nowrap; margin-inline: -16px; padding-inline: 16px; overflow-x: auto; scrollbar-width: none; }
+  .head > div:first-child { display: grid; min-width: 0; flex: 1 1 100%; }
+  .head__side { width: 100%; }
+  .head__side .seg { display: inline-grid; flex: 1; }
+  .kpi__top { white-space: nowrap; }
+  .kpi__top > .icon, .ends { display: none; }
+  .chart { grid-template-columns: 40px minmax(0, 1fr); grid-template-rows: 160px 24px; padding-inline: 4px 12px; }
+  .chart__x span b { display: none; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
+  .stats div:nth-child(odd) { padding-inline-start: 0; border: 0; }
+  .insight { grid-template-columns: minmax(0, 1fr); }
+  .insight__ico { display: none; }
+  .strings { grid-column: auto; }
+  .about { padding: 16px; }
+  .about .notes { columns: 1; }
+  .tabbar { position: fixed; inset: auto 0 0; z-index: var(--z-sticky); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 4px 8px calc(4px + env(safe-area-inset-bottom)); border-top: 1px solid var(--border); background: color-mix(in oklab, var(--background) 86%, transparent); backdrop-filter: blur(16px) saturate(1.4); }
+  .tabbar a { position: relative; display: grid; justify-items: center; gap: 4px; padding: 8px 0 4px; border-radius: var(--r-control); font-size: var(--fs-xs); line-height: 16px; font-weight: var(--fw-medium); color: var(--text-muted); text-decoration: none; }
+  .tabbar a[aria-current="page"] { color: var(--text); }
+  .tabbar a[aria-current="page"] .icon { color: var(--chart-1); }
+  .tabbar .icon { width: 20px; height: 20px; }
+  .tabbar .count { position: absolute; top: 4px; left: calc(50% + 4px); min-width: 16px; height: 16px; padding: 0 4px; border-radius: var(--r-pill); color: var(--background); background: var(--warning); box-shadow: 0 0 0 2px var(--background); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plot .series { animation: none; }
+  .skel::after { animation: none; opacity: 0; }
+  .site, .donut circle, .d-lab, .tip { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-grid" viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1"/><rect x="9" y="9" width="4.5" height="4.5" rx="1"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14s4.5-3.9 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 10.1 8 14 8 14z"/><circle cx="8" cy="6.5" r="1.5"/></symbol>
+  <symbol id="i-map" viewBox="0 0 16 16"><path d="M2.5 4.5L6 3l4 1.5L13.5 3v8.5L10 13l-4-1.5L2.5 13zM6 3v8.5M10 4.5V13"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 16 16"><path d="M4 11V7a4 4 0 0 1 8 0v4l1 1.5H3zM6.5 12.5a1.5 1.5 0 0 0 3 0"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 16 16"><path d="M10.5 2.5a3 3 0 0 0-3.4 4.1L2.5 11.2a1.6 1.6 0 0 0 2.3 2.3l4.6-4.6a3 3 0 0 0 4.1-3.4l-2 2-1.8-.5-.5-1.8z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 16 16"><path d="M2 6h7.5a2 2 0 1 0-2-2M2 9.5h10a2 2 0 1 1-2 2M2 13h4"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 16 16"><rect x="1.5" y="4.5" width="11" height="7" rx="1.5"/><path d="M14.5 7v2M4.25 7v2M6.75 7v2"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 16 16"><path d="M9 1.5L3.5 9H8l-1 5.5L12.5 7H8z"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 16 16"><path d="M2 13.5h12M4.5 11V8M8 11V4M11.5 11V6.5"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 16 16"><path d="M2 11.5l3.5-4 3 2.5 5-6M10 4h3.5v3.5"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 16 16"><path d="M4.5 12.5a3 3 0 0 1-.4-5.97A4 4 0 0 1 11.9 7.5a2.5 2.5 0 0 1-.4 5z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 16 16"><path d="M4 1.5h5l3 3v10H4zM9 1.5v3h3M6.5 8.5h3M6.5 11h3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 16 16"><circle cx="6" cy="5.5" r="2.25"/><path d="M1.5 13.5a4.5 4.5 0 0 1 9 0M10.5 3.6a2.25 2.25 0 0 1 0 3.8M12 9.9a4.5 4.5 0 0 1 2.5 3.6"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 16 16"><path d="M6 1.5v3M10 1.5v3M4 4.5h8V7a4 4 0 0 1-8 0zM8 11v3.5"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 16 16"><path d="M2 4.5h7M12 4.5h2M2 11.5h2M7 11.5h7"/><circle cx="10.5" cy="4.5" r="1.5"/><circle cx="5.5" cy="11.5" r="1.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="M10.25 10.25l3.25 3.25"/></symbol>
+  <symbol id="i-chevrons" viewBox="0 0 16 16"><path d="M5 6.25l3-3 3 3M5 9.75l3 3 3-3"/></symbol>
+  <symbol id="i-out" viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></symbol>
+  <symbol id="i-up" viewBox="0 0 12 12"><path d="M6 9.5v-7M3 5.5l3-3 3 3"/></symbol>
+  <symbol id="i-dn" viewBox="0 0 12 12"><path d="M6 2.5v7M3 6.5l3 3 3-3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2.5v8M4.75 7.5L8 10.75l3.25-3.25M3 13.25h10"/></symbol>
+  <symbol id="i-x" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><path d="M3.5 8h.01M8 8h.01M12.5 8h.01" stroke-width="2"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 4.75V8l2.25 1.5"/></symbol>
+  <symbol id="s-ok" viewBox="0 0 12 12"><circle cx="6" cy="6" r="3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="s-warn" viewBox="0 0 12 12"><path d="M6 2L1.5 10h9zM6 5.25v2"/></symbol>
+  <symbol id="s-bad" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4"/><path d="M3.2 3.2l5.6 5.6"/></symbol>
+  <symbol id="s-bolt" viewBox="0 0 12 12"><path d="M6.75 1.5L3 6.75h3L5.25 10.5 9 5.25H6z"/></symbol>
+  <symbol id="s-check" viewBox="0 0 12 12"><path d="M2.5 6.5l2.25 2.25L9.5 3.5"/></symbol>
+  <symbol id="s-wrench" viewBox="0 0 12 12"><path d="M7.9 1.9a2.2 2.2 0 0 0-2.6 3L2 8.3A1.2 1.2 0 0 0 3.7 10l3.4-3.3a2.2 2.2 0 0 0 3-2.6L8.6 5.6 7.3 5.2 6.9 3.9z"/></symbol>
+</svg>
+
+<div class="app">
+
+<aside class="side" aria-label="Sidebar">
+  <button class="org" type="button" aria-label="Fieldwatt, Marram Energy Co-op. Switch workspace">
+    <span class="org__mark"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 11a5 5 0 0 1 10 0M2.5 14h15M5.5 17h9M10 2.5v1.5M3.6 5.6l1 1M16.4 5.6l-1 1"/></svg></span>
+    <span class="org__name"><b>Fieldwatt</b><span>Marram Energy Co-op</span></span>
+    <svg class="icon" aria-hidden="true"><use href="#i-chevrons"/></svg>
+  </button>
+  <!-- Inert destinations: a link to a screen this file does not build keeps role="link", drops its href and carries aria-disabled="true". It looks like its neighbours and does nothing. A real build lists each one under Open in its report. Links to sections on this page use their fragment. -->
+  <nav class="nav" aria-label="Operate">
+    <p class="nav__label" aria-hidden="true">Operate</p>
+    <a href="#main" aria-current="page" title="Overview"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span class="t">Overview</span></a>
+    <a href="#sites-h" title="Sites"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span class="t">Sites</span><span class="count only-live">6</span></a>
+    <a role="link" aria-disabled="true" title="Live map"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg><span class="t">Live map</span></a>
+    <a role="link" aria-disabled="true" title="Alerts"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg><span class="t">Alerts</span><span class="count count--warn only-live">2<span class="sr-only"> open</span></span></a>
+    <a role="link" aria-disabled="true" title="Maintenance"><svg class="icon" aria-hidden="true"><use href="#i-wrench"/></svg><span class="t">Maintenance</span></a>
+  </nav>
+  <nav class="nav" aria-label="Analyse">
+    <p class="nav__label" aria-hidden="true">Analyse</p>
+    <a role="link" aria-disabled="true" title="Generation"><svg class="icon" aria-hidden="true"><use href="#i-bars"/></svg><span class="t">Generation</span></a>
+    <a role="link" aria-disabled="true" title="Storage"><svg class="icon" aria-hidden="true"><use href="#i-battery"/></svg><span class="t">Storage</span></a>
+    <a role="link" aria-disabled="true" title="Forecasts"><svg class="icon" aria-hidden="true"><use href="#i-cloud"/></svg><span class="t">Forecasts</span></a>
+    <a role="link" aria-disabled="true" title="Reports"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg><span class="t">Reports</span><span class="count only-live">12</span></a>
+  </nav>
+  <nav class="nav" aria-label="Co-op">
+    <p class="nav__label" aria-hidden="true">Co-op</p>
+    <a role="link" aria-disabled="true" title="Members"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg><span class="t">Members</span><span class="count only-live">212</span></a>
+    <a role="link" aria-disabled="true" title="Integrations"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg><span class="t">Integrations</span></a>
+    <a role="link" aria-disabled="true" title="Settings"><svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg><span class="t">Settings</span></a>
+  </nav>
+  <section class="quota only-live" aria-labelledby="quota-h">
+    <div class="quota__top"><span id="quota-h">Forecast runs</span><b class="num">7,140 <span class="muted">of 10,000</span></b></div>
+    <div class="stripe" role="meter" aria-labelledby="quota-h" aria-valuemin="0" aria-valuemax="10000" aria-valuenow="7140" style="--p: 71.4%"><i></i></div>
+    <p>At this rate the allowance runs out on 27 Nov. It resets on 1 Dec.</p>
+    <a class="btn btn--primary btn--sm" role="link" aria-disabled="true">Upgrade plan<svg class="icon" aria-hidden="true"><use href="#i-out"/></svg></a>
+  </section>
+  <div class="me">
+    <span class="avatar" aria-hidden="true">IO</span>
+    <span class="me__name"><b>Ines Okafor</b><span>Operations lead</span></span>
+    <button class="btn btn--quiet btn--sm btn--icon" type="button" aria-label="Account menu"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button>
+  </div>
+</aside>
+
+<div class="col">
+<header class="top">
+  <span class="top__brand"><span class="org__mark"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 11a5 5 0 0 1 10 0M2.5 14h15M5.5 17h9M10 2.5v1.5M3.6 5.6l1 1M16.4 5.6l-1 1"/></svg></span>Overview</span>
+  <p class="crumbs">Marram Energy Co-op <span aria-hidden="true">/</span> <b>Overview</b></p>
+  <label class="input search"><span class="input__lead"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span><input id="search" type="search" placeholder="Search sites" aria-label="Search" aria-keyshortcuts="Meta+K Control+K"><kbd aria-hidden="true">⌘</kbd><kbd aria-hidden="true">K</kbd></label>
+  <div class="seg" role="radiogroup" aria-label="Range" style="--n: 4">
+    <span class="seg__thumb" aria-hidden="true"></span>
+    <label><input class="sr-only" type="radio" name="range">24 h</label>
+    <label><input class="sr-only" type="radio" name="range" checked>7 d</label>
+    <label><input class="sr-only" type="radio" name="range">30 d</label>
+    <label><input class="sr-only" type="radio" name="range">12 m</label>
+  </div>
+  <a class="btn btn--quiet btn--icon" href="?theme=light" data-theme-link aria-label="Switch theme"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg></a>
+  <button class="btn btn--icon bell" type="button" aria-label="Alerts, 2 open"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></button>
+  <button class="btn btn--primary" type="button" aria-label="New report"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span class="t">New report</span></button>
+</header>
+
+<main class="main" id="main">
+  <p class="sr-only" role="status" id="live"></p>
+
+  <header class="head">
+    <div>
+      <h1>Good morning, Ines</h1>
+      <ul class="chips">
+        <li class="chip chip--ok only-live"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>5 of 6 sites reporting</li>
+        <li class="only-live"><a class="chip chip--warn" href="#sites-h"><svg class="icon" aria-hidden="true"><use href="#s-warn"/></svg>2 sites need attention</a></li>
+        <li class="chip only-live"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Next settlement Mon 30 Nov</li>
+        <li class="chip only-empty"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>No sites connected yet</li>
+      </ul>
+    </div>
+    <div class="head__side">
+      <div class="seg" role="radiogroup" aria-label="Range" style="--n: 4">
+        <span class="seg__thumb" aria-hidden="true"></span>
+        <label><input class="sr-only" type="radio" name="range-m">24 h</label>
+        <label><input class="sr-only" type="radio" name="range-m" checked>7 d</label>
+        <label><input class="sr-only" type="radio" name="range-m">30 d</label>
+        <label><input class="sr-only" type="radio" name="range-m">12 m</label>
+      </div>
+      <p class="only-live">Updated 2 min ago</p>
+      <button class="btn btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Export</button>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <article class="tile kpi c3" data-skel="kpi">
+      <h2 class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg>Generated<span class="delta delta--good only-live"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>8.4%<span class="sr-only"> up, good</span></span></h2>
+      <div class="kpi__mid only-live"><p class="kpi__fig">206.4<span class="unit">MWh</span></p><p class="kpi__ctx">190.4 prior week</p></div>
+      <p class="kpi__none only-empty">No readings yet</p>
+      <div class="kpi__viz" data-viz="area" data-values="26.8,34.6,42.0,26.7,16.8,27.2,32.2" role="img" aria-label="Daily generation, Sunday to Saturday: 26.8, 34.6, 42.0, 26.7, 16.8, 27.2 and 32.2 megawatt hours"></div>
+      <p class="kpi__cap"><span class="only-live ph-hide">Low <b>16.8</b> Thu</span><span class="only-live">High <b>42.0</b> Tue</span><span class="only-empty">7 days</span></p>
+    </article>
+
+    <article class="tile kpi c3" data-skel="kpi" style="--c: var(--chart-2)">
+      <h2 class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg>Self-supplied<span class="delta delta--good only-live"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>3 pts<span class="sr-only"> up, good</span></span></h2>
+      <div class="kpi__mid only-live"><p class="kpi__fig">84<span class="unit">%</span></p><p class="kpi__ctx">198.2 of 236.0 MWh</p></div>
+      <p class="kpi__none only-empty">No readings yet</p>
+      <div class="kpi__viz">
+        <span class="target only-live" style="--at: 80%" aria-hidden="true"><span>Target 80%</span></span>
+        <div class="segbar" role="meter" aria-label="Self-supplied share, target 80%" aria-valuemin="0" aria-valuemax="100" aria-valuenow="84" style="--p: 84%; --n: 25" data-meter></div>
+      </div>
+      <p class="kpi__cap"><span class="ph-hide">0</span><span class="only-live"><b>4 pts</b> over target</span><span>100%</span></p>
+    </article>
+
+    <article class="tile kpi c3" data-skel="kpi" style="--c: var(--chart-4); --c2: var(--chart-3)">
+      <h2 class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-battery"/></svg>Storage<span class="delta delta--info only-live">Charging</span></h2>
+      <div class="kpi__mid only-live"><p class="kpi__fig">64<span class="unit">%</span></p><p class="kpi__ctx">3.2 of 5.0 MWh</p></div>
+      <p class="kpi__none only-empty">No readings yet</p>
+      <div class="kpi__viz v-bars" data-viz="bars" data-values=".2,.5,.8,.9,.7,.4,-.1,-.5,-.8,-.6,-.2,.1,.3,.5,.4,.1,-.3,-.9,-1,-.8,-.4,.2,.6,.7" role="img" aria-label="Net charge by hour for the last 24 hours. Charging overnight and at midday, discharging across the morning and evening peaks."></div>
+      <p class="kpi__cap"><span><span class="key" style="--k: var(--chart-4)">Charge</span><span class="key" style="--k: var(--chart-3)">Discharge</span></span><span class="ph-hide">24 h</span></p>
+    </article>
+
+    <article class="tile kpi c3" data-skel="kpi" style="--c: var(--success)">
+      <h2 class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg>Availability<span class="delta delta--bad only-live"><svg class="icon" aria-hidden="true"><use href="#i-dn"/></svg>0.6 pts<span class="sr-only"> down, bad</span></span></h2>
+      <div class="kpi__mid only-live"><p class="kpi__fig">98.6<span class="unit">%</span></p><p class="kpi__ctx">99.2 last month</p></div>
+      <p class="kpi__none only-empty">No readings yet</p>
+      <div class="kpi__viz v-strip" data-viz="strip" data-values="0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,1,0,0,0" role="img" aria-label="Fleet status by day for 30 days: 27 days clear, 2 degraded, 1 outage on 8 November"></div>
+      <p class="kpi__cap"><span class="ends">23 Oct</span><span class="only-live"><b>1</b> outage, <b>2</b> degraded</span><span class="ph-hide">30 days</span></p>
+    </article>
+
+    <section class="tile plotted c8" data-skel="chart" aria-labelledby="gen-h">
+      <header class="tile__head">
+        <div><h2 id="gen-h">Generation</h2><p>kWh per hour across all sites, 15 to 21 Nov</p></div>
+        <ul class="legend only-live">
+          <li><i class="sw"></i>Actual <b>206.4</b> MWh</li>
+          <li><i class="sw sw--dash"></i>Forecast <b>205.0</b> MWh</li>
+          <li><span class="delta delta--good"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>0.7%<span class="sr-only"> over forecast</span></span></li>
+        </ul>
+      </header>
+      <div class="chart">
+        <div class="chart__y" aria-hidden="true"><span style="top: 0%">2,400</span><span style="top: 25%">1,800</span><span style="top: 50%">1,200</span><span style="top: 75%">600</span><span style="top: 100%">0</span></div>
+        <div class="plot" id="plot" tabindex="0" role="slider" aria-label="Generation by hour. Arrow keys move one hour, Page keys one day." aria-valuemin="0" aria-valuemax="167" aria-valuenow="60" aria-valuetext="">
+          <svg class="series" viewBox="0 0 167 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="fill-main" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-opacity="0.5"/><stop offset="0.7" stop-opacity="0.08"/><stop offset="1" stop-opacity="0"/></linearGradient></defs>
+            <path class="p-area" id="p-area"/><path class="p-cmp" id="p-cmp"/><path class="p-line" id="p-line"/>
+          </svg>
+          <span class="peak only-live" id="peak" aria-hidden="true">Peak 2,033</span>
+          <span class="cross" aria-hidden="true"></span>
+          <span class="pt" id="pt-cmp" style="--c: var(--chart-2)" aria-hidden="true"></span>
+          <span class="pt" id="pt-act" style="--c: var(--chart-1)" aria-hidden="true"></span>
+          <div class="tip" id="tip" aria-hidden="true">
+            <span class="tip__t" id="tip-t"></span>
+            <span class="tip__r"><i class="sw"></i>Actual<b id="tip-a"></b></span>
+            <span class="tip__r"><i class="sw sw--dash"></i>Forecast<b id="tip-f"></b></span>
+            <span class="tip__d" id="tip-d"></span>
+          </div>
+        </div>
+        <div class="chart__x" aria-hidden="true"><span>Sun <b>15</b></span><span>Mon <b>16</b></span><span>Tue <b>17</b></span><span>Wed <b>18</b></span><span>Thu <b>19</b></span><span>Fri <b>20</b></span><span>Sat <b>21</b></span></div>
+      </div>
+      <table class="sr-only" id="gen-table"><caption>Generation by day, megawatt hours</caption><thead><tr><th scope="col">Day</th><th scope="col">Actual</th><th scope="col">Forecast</th></tr></thead><tbody></tbody></table>
+      <dl class="stats only-live">
+        <div><dt>Peak output</dt><dd>2,033<span class="unit">kW</span></dd><dd>Tue 17, 12:00</dd></div>
+        <div><dt>Capacity factor</dt><dd>26.7<span class="unit">%</span></dd><dd>of 4.6 MW installed</dd></div>
+        <div><dt>Exported</dt><dd>3.1<span class="unit">MWh</span></dd><dd>£231 earned</dd></div>
+        <div><dt>Curtailed</dt><dd>1.4<span class="unit">MWh</span></dd><dd>0.7% of output</dd></div>
+      </dl>
+      <div class="blank only-empty">
+        <div><h3>No readings in this range</h3>
+        <p>Connect a site and its first hour is drawn here about 15 minutes later, with the forecast beside it.</p></div>
+        <button class="btn btn--primary" type="button"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Connect a site</button>
+      </div>
+    </section>
+
+    <section class="tile mix c4" data-skel="donut" aria-labelledby="mix-h">
+      <header class="tile__head">
+        <div><h2 id="mix-h">Supply mix</h2><p>Where members’ energy came from</p></div>
+        <a class="btn btn--quiet btn--sm btn--icon only-live" role="link" aria-disabled="true" aria-label="Open supply report"><svg class="icon" aria-hidden="true"><use href="#i-out"/></svg></a>
+      </header>
+      <div class="mix__body">
+        <div class="donut" id="donut" data-viz="donut" data-from="#mix-table" aria-hidden="true">
+          <div class="donut__c"><b class="only-live">236.0</b><b class="only-empty">0</b><span>MWh supplied</span></div>
+        </div>
+        <table class="mixtable only-live" id="mix-table">
+          <caption class="sr-only">Supply mix for 15 to 21 November</caption>
+          <thead class="sr-only"><tr><th scope="col">Source</th><th scope="col">Megawatt hours</th><th scope="col">Share</th></tr></thead>
+          <tbody>
+            <tr data-share="63" style="--c: var(--chart-2)"><th scope="row"><i class="sw"></i>Wind</th><td>148.7</td><td>63%</td></tr>
+            <tr data-share="7" style="--c: var(--chart-3)"><th scope="row"><i class="sw"></i>Solar</th><td>16.5</td><td>7%</td></tr>
+            <tr data-share="14" style="--c: var(--chart-4)"><th scope="row"><i class="sw"></i>Battery</th><td>33.0</td><td>14%</td></tr>
+            <tr data-share="16" style="--c: var(--border-strong)"><th scope="row"><i class="sw"></i>Grid import</th><td>37.8</td><td>16%</td></tr>
+          </tbody>
+        </table>
+        <p class="mix__none only-empty">Sources are listed here after the first full day of readings.</p>
+        <p class="mix__foot only-live"><span class="status status--ok"><svg aria-hidden="true"><use href="#s-check"/></svg>84% own supply</span><span>Grid import was 19% last week</span></p>
+      </div>
+    </section>
+
+    <div class="stack c8">
+      <div class="sect">
+        <h2 id="sites-h">Sites</h2>
+        <p class="only-live">6 sites, 4.6 MW generation, 5.0 MWh storage</p>
+        <a class="btn btn--sm only-live" role="link" aria-disabled="true">Manage sites<svg class="icon" aria-hidden="true"><use href="#i-out"/></svg></a>
+      </div>
+      <div class="sites only-live" role="list" aria-labelledby="sites-h">
+
+        <article class="tile site" role="listitem" data-kind="wind" data-skel="site">
+          <div class="site__top"><span class="site__ico"><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg></span><span class="status status--ok"><svg aria-hidden="true"><use href="#s-ok"/></svg>Online</span></div>
+          <div class="site__id"><h3><a role="link" aria-disabled="true">Harrow Fen</a></h3><p>Wind, 1.6 MW</p></div>
+          <div class="site__read"><p class="site__fig">1,084<span class="unit">kW</span></p><div class="site__spark" data-viz="line" data-values="62,66,71,70,64,58,55,60,66,72,70,68" aria-hidden="true"></div></div>
+          <div class="meter" role="meter" aria-label="Output against capacity" aria-valuemin="0" aria-valuemax="1600" aria-valuenow="1084" style="--p: 68%"><i></i></div>
+          <p class="site__foot"><span>68% of capacity</span><span>Today <b>9.6</b> MWh</span></p>
+        </article>
+
+        <article class="tile site" role="listitem" data-kind="solar" data-skel="site">
+          <div class="site__top"><span class="site__ico"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg></span><span class="status status--warn"><svg aria-hidden="true"><use href="#s-warn"/></svg>Degraded</span></div>
+          <div class="site__id"><h3><a role="link" aria-disabled="true">Castle Mill roof</a></h3><p>Solar, 420 kWp</p></div>
+          <div class="site__read"><p class="site__fig">74<span class="unit">kW</span></p><div class="site__spark" data-viz="line" data-values="0,0,0,0,0,0,0,2,9,14,17,18" aria-hidden="true"></div></div>
+          <div class="meter" role="meter" aria-label="Output against capacity" aria-valuemin="0" aria-valuemax="420" aria-valuenow="74" style="--p: 18%"><i></i></div>
+          <p class="site__foot"><span>String 4 down 12%</span><span>Today <b>0.11</b> MWh</span></p>
+        </article>
+
+        <article class="tile site" role="listitem" data-kind="store" data-skel="site">
+          <div class="site__top"><span class="site__ico"><svg class="icon" aria-hidden="true"><use href="#i-battery"/></svg></span><span class="status status--info"><svg aria-hidden="true"><use href="#s-bolt"/></svg>Charging</span></div>
+          <div class="site__id"><h3><a role="link" aria-disabled="true">Ashby Depot</a></h3><p>Battery, 1.5 MW, 5.0 MWh</p></div>
+          <div class="site__read"><p class="site__fig">64<span class="unit">%</span></p><p class="site__foot"><span>+420 kW</span></p></div>
+          <div class="segbar" role="meter" aria-label="State of charge" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" style="--p: 64%; --n: 20"></div>
+          <p class="site__foot"><span>3.2 of 5.0 MWh</span><span>Full by <b>14:05</b></span></p>
+        </article>
+
+        <article class="tile site" role="listitem" data-kind="wind" data-skel="site">
+          <div class="site__top"><span class="site__ico"><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg></span><span class="status status--ok"><svg aria-hidden="true"><use href="#s-ok"/></svg>Online</span></div>
+          <div class="site__id"><h3><a role="link" aria-disabled="true">Dunmore Ridge</a></h3><p>Wind, 900 kW</p></div>
+          <div class="site__read"><p class="site__fig">566<span class="unit">kW</span></p><div class="site__spark" data-viz="line" data-values="48,52,60,66,64,61,57,59,62,66,64,63" aria-hidden="true"></div></div>
+          <div class="meter" role="meter" aria-label="Output against capacity" aria-valuemin="0" aria-valuemax="900" aria-valuenow="566" style="--p: 63%"><i></i></div>
+          <p class="site__foot"><span>63% of capacity</span><span>Today <b>5.2</b> MWh</span></p>
+        </article>
+
+        <article class="tile site" role="listitem" data-kind="solar" data-skel="site">
+          <div class="site__top"><span class="site__ico"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg></span><span class="status status--ok"><svg aria-hidden="true"><use href="#s-ok"/></svg>Online</span></div>
+          <div class="site__id"><h3><a role="link" aria-disabled="true">Tolland Quay</a></h3><p>Solar, 1.2 MWp</p></div>
+          <div class="site__read"><p class="site__fig">318<span class="unit">kW</span></p><div class="site__spark" data-viz="line" data-values="0,0,0,0,0,0,0,3,11,18,23,27" aria-hidden="true"></div></div>
+          <div class="meter" role="meter" aria-label="Output against capacity" aria-valuemin="0" aria-valuemax="1200" aria-valuenow="318" style="--p: 27%"><i></i></div>
+          <p class="site__foot"><span>27% of capacity</span><span>Today <b>0.42</b> MWh</span></p>
+        </article>
+
+        <article class="tile site" role="listitem" data-kind="solar" data-skel="site">
+          <div class="site__top"><span class="site__ico"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg></span><span class="status status--bad"><svg aria-hidden="true"><use href="#s-bad"/></svg>Offline</span></div>
+          <div class="site__id"><h3><a role="link" aria-disabled="true">Wren Hill School</a></h3><p>Solar, 480 kWp</p></div>
+          <div class="site__read"><p class="site__fig site__fig--none">No data</p><div class="site__spark" data-viz="line" data-of="12" data-values="0,0,0,0,0,0,0,2,8" aria-hidden="true"></div></div>
+          <div class="meter meter--none" role="meter" aria-label="Output against capacity, unknown" aria-valuemin="0" aria-valuemax="480"></div>
+          <p class="site__foot"><span>Silent since 09:14</span><span>Today <b>0.03</b> MWh</span></p>
+        </article>
+      </div>
+      <div class="tile add only-empty">
+        <h3>No sites yet</h3>
+        <p>A site is one meter: a turbine, a roof or a battery.</p>
+      </div>
+
+      <section class="tile insight only-live" data-skel="insight" aria-labelledby="ins-h">
+        <span class="insight__ico" aria-hidden="true"><svg class="icon"><use href="#i-trend"/></svg></span>
+        <div>
+          <h2 id="ins-h">String 4 at Castle Mill is 12% under its neighbours</h2>
+          <p>It has trailed the other three since Thursday. Soiling or new shade is the usual cause. The loss is about 31 kWh a day.</p>
+          <div class="row"><a class="btn btn--primary btn--sm" role="link" aria-disabled="true">Open diagnostics</a><button class="btn btn--quiet btn--sm" type="button">Dismiss</button></div>
+        </div>
+        <ul class="strings" aria-label="Yield by string, percent of the best string">
+          <li><span>S1</span><i style="--p: 98%"></i><b>98</b></li>
+          <li><span>S2</span><i style="--p: 100%"></i><b>100</b></li>
+          <li><span>S3</span><i style="--p: 97%"></i><b>97</b></li>
+          <li class="is-low"><span>S4</span><i style="--p: 86%"></i><b>86</b></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="stack c4">
+      <div class="sect">
+        <h2 id="feed-h">Activity</h2>
+        <p class="only-live">7 events since Friday</p>
+        <button class="btn btn--sm btn--icon only-live" type="button" aria-label="Filter activity"><svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg></button>
+      </div>
+    <section class="tile" data-skel="feed" aria-labelledby="feed-h">
+      <ol class="feed only-live">
+        <li class="feed__day">Today</li>
+        <li class="feed__item"><span class="glyph glyph--bad"><svg aria-hidden="true"><use href="#s-bad"/></svg></span><div><p><b>Wren Hill School</b> stopped reporting</p><p>Logger offline. Last reading 09:14.</p></div><time datetime="2026-11-22T09:48">09:48</time></li>
+        <li class="feed__item"><span class="glyph glyph--warn"><svg aria-hidden="true"><use href="#s-warn"/></svg></span><div><p><b>Castle Mill roof</b> string 4 flagged</p><p>12% under its neighbours for 3 days.</p></div><time datetime="2026-11-22T08:20">08:20</time></li>
+        <li class="feed__item"><span class="glyph glyph--info"><svg aria-hidden="true"><use href="#s-bolt"/></svg></span><div><p><b>Ashby Depot</b> began charging</p><p>Wind surplus of 420 kW, price 4.1p.</p></div><time datetime="2026-11-22T06:02">06:02</time></li>
+        <li class="feed__day">Yesterday</li>
+        <li class="feed__item"><span class="glyph glyph--info"><svg aria-hidden="true"><use href="#s-bolt"/></svg></span><div><p><b>Ashby Depot</b> finished a full cycle</p><p>4.1 MWh discharged across the evening peak.</p></div><time datetime="2026-11-21T23:10">23:10</time></li>
+        <li class="feed__item"><span class="glyph glyph--ok"><svg aria-hidden="true"><use href="#s-check"/></svg></span><div><p>Weekly settlement posted</p><p>£3,184 credited to 212 members.</p></div><time datetime="2026-11-21T16:02">16:02</time></li>
+        <li class="feed__day">Friday 20 Nov</li>
+        <li class="feed__item"><span class="glyph"><svg aria-hidden="true"><use href="#s-wrench"/></svg></span><div><p><b>Harrow Fen</b> turbine 2 service complete</p><p>Gearbox oil sampled. Next visit 14 Jan.</p></div><time datetime="2026-11-20T15:30">15:30</time></li>
+        <li class="feed__item"><span class="glyph glyph--ok"><svg aria-hidden="true"><use href="#s-check"/></svg></span><div><p><b>Tolland Quay</b> back online</p><p>Inverter 2 restarted after a grid fault.</p></div><time datetime="2026-11-20T11:47">11:47</time></li>
+      </ol>
+      <p class="feed__none only-empty">Nothing has happened yet. Alerts, service visits and settlements are listed here as they occur.</p>
+      <p class="tile__foot only-live"><a class="btn btn--quiet btn--sm" role="link" aria-disabled="true">View all activity<svg class="icon" aria-hidden="true"><use href="#i-out"/></svg></a></p>
+    </section>
+    </div>
+
+    <section class="tile about c12" aria-labelledby="about-h">
+      <div>
+        <h2 id="about-h">What to match</h2>
+        <p>A finesse exemplar for dashboards. Match the density and the finish. Take the product, the palette, the type and the signatures from your own direction; a shared layout pattern is fine.</p>
+        <div class="about__tools">
+          <div class="swatches" role="group" aria-label="Palette">
+            <a href="?palette=graphite" data-palette-link="graphite" style="--chip: oklch(0.69 0.17 255)">Graphite</a>
+            <a href="?palette=linen" data-palette-link="linen" style="--chip: oklch(0.58 0.16 45)">Linen</a>
+            <a href="?palette=spruce" data-palette-link="spruce" style="--chip: oklch(0.82 0.15 165)">Spruce</a>
+          </div>
+        </div>
+        <p class="about__files">Other files: <a href="controls.html">Controls</a> <a href="surfaces.html">Surfaces</a> <a href="data.html">Data</a> <a href="marketing.html">Marketing</a></p>
+      </div>
+      <ol class="notes">
+        <li><span>Four KPI tiles, four visual types: a line, a segmented meter, diverging bars, a status strip.</span></li>
+        <li><span>Every figure has a unit, a comparison and a visual. None stands alone.</span></li>
+        <li><span>Series colours come from <code class="mono">--chart-1</code> to <code class="mono">--chart-6</code>. The lead hue is the accent hue.</span></li>
+        <li><span>Colour never works alone: the forecast is dashed, legend markers change shape, status badges change glyph, bad days are shorter bars.</span></li>
+        <li><span>The dotted grid sits on the tick values. Axis labels are HTML at 12px, so they never scale with the drawing.</span></li>
+        <li><span>The plot is one focusable slider. Arrow keys move an hour, Page keys a day, and a hidden table gives daily totals.</span></li>
+        <li><span>The donut is drawn from the table next to it. The table is the text alternative.</span></li>
+        <li><span>Tiles sit one step above the page: a 1px ring, a top highlight, a short gradient.</span></li>
+        <li><span>One tinted tile per screen, and it shows its evidence.</span></li>
+        <li><span>Loading keeps every tile the same size. Empty shows a ghost of the chart and one primary action. Try <code class="mono">?state=loading</code> and <code class="mono">?state=empty</code>.</span></li>
+        <li><span>At 1024 the sidebar is an icon rail. At 390 it is a tab bar and the KPI tiles sit two by two.</span></li>
+      </ol>
+    </section>
+  </div>
+</main>
+</div>
+</div>
+
+<nav class="tabbar" aria-label="Primary">
+  <a href="#main" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Overview</a>
+  <a href="#sites-h"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Sites</a>
+  <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg>Alerts<span class="count only-live">2<span class="sr-only"> open</span></span></a>
+  <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-doc"/></svg>Reports</a>
+  <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg>More</a>
+</nav>
+
+<script>
+(function () {
+  var root = document.documentElement, state = root.dataset.state || "";
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+
+  /* Switcher links keep the other parameter. */
+  $$("[data-palette-link]").forEach(function (a) {
+    a.href = "?palette=" + a.dataset.paletteLink;
+    if (a.dataset.paletteLink === root.dataset.palette) a.setAttribute("aria-current", "true");
+  });
+  var other = root.dataset.theme === "dark" ? "light" : "dark", themeLink = $("[data-theme-link]");
+  themeLink.href = "?palette=" + root.dataset.palette + "&theme=" + other;
+  themeLink.setAttribute("aria-label", "Switch to " + other + " theme");
+  $("use", themeLink).setAttribute("href", other === "light" ? "#i-sun" : "#i-moon");
+  $$(".about__files a").forEach(function (a) { a.href += "?theme=" + root.dataset.theme; });
+
+  /* The keyboard hint in the search field is true. */
+  document.addEventListener("keydown", function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); $("#search").focus(); }
+  });
+
+  /* Loading: every tile gets bars shaped like its content. Nothing below this point runs. */
+  var SKEL = {
+    kpi: '<i style="--w:44%;--mt:4px"></i><i style="--w:56%;--h:28px;--mt:18px"></i><i style="--w:100%;--h:44px;--mt:16px"></i><i style="--w:68%;--mt:10px"></i>',
+    chart: '<i style="--w:18%;--h:14px;--mt:4px"></i><i style="--w:30%;--mt:10px"></i><i class="plotghost" style="--h:204px;--mt:22px"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 62C10 58 14 40 24 36S38 20 48 24s14 36 26 44 16-10 26-14"/></svg></i><i style="--w:100%;--h:44px;--mt:44px"></i>',
+    donut: '<i style="--w:32%;--h:14px;--mt:4px"></i><i style="--w:58%;--mt:10px"></i><i class="ring" style="--mt:38px"></i><i style="--w:100%;--mt:40px"></i><i style="--w:100%;--mt:24px"></i><i style="--w:100%;--mt:24px"></i><i style="--w:100%;--mt:24px"></i>',
+    site: '<i style="--w:32px;--h:32px;--mt:-4px"></i><i style="--w:48%;--h:14px;--mt:16px"></i><i style="--w:34%;--mt:8px"></i><i style="--w:38%;--h:24px;--mt:18px"></i><i style="--w:100%;--h:4px;--mt:16px"></i><i style="--w:62%;--mt:12px"></i>',
+    insight: '<i style="--w:52%;--h:14px"></i><i style="--w:86%;--mt:12px"></i><i style="--w:70%;--mt:8px"></i><i style="--w:24%;--h:28px;--mt:16px"></i>',
+    feed: new Array(8).join('<i style="--w:74%;--mt:28px"></i><i style="--w:52%;--mt:8px"></i>')
+  };
+  if (state === "loading") {
+    $$("[data-skel]").forEach(function (el) {
+      el.setAttribute("aria-busy", "true");
+      el.insertAdjacentHTML("beforeend", '<div class="skel" aria-hidden="true">' + SKEL[el.dataset.skel] + "</div>");
+    });
+    $("#live").textContent = "Loading the overview";
+    return;
+  }
+
+  var r = function (n) { return Math.round(n * 100) / 100; };
+  /* A smooth path through [x, y] points: Catmull-Rom tangents written as cubic Béziers. */
+  function curve(p) {
+    var d = "M" + p[0][0] + " " + p[0][1];
+    for (var i = 0; i < p.length - 1; i++) {
+      var a = p[i - 1] || p[i], b = p[i], c = p[i + 1], e = p[i + 2] || c;
+      d += "C" + r(b[0] + (c[0] - a[0]) / 6) + " " + r(b[1] + (c[1] - a[1]) / 6) + " " + r(c[0] - (e[0] - b[0]) / 6) + " " + r(c[1] - (e[1] - b[1]) / 6) + " " + c[0] + " " + c[1];
+    }
+    return d;
+  }
+  var GHOST = '<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path class="v-ghost" d="M0 70H100"/></svg>', uid = 0;
+
+  /* One drawer per visual type. Markup picks the drawer with data-viz and supplies the numbers in data-values. */
+  var VIZ = {
+    area: function (el, v, fill) {
+      if (!v.length) { el.innerHTML = GHOST; return; }
+      var lo = Math.min.apply(0, v), span = (Math.max.apply(0, v) - lo) || 1, n = (+el.dataset.of || v.length) - 1, id = "vf" + uid++;
+      var p = v.map(function (y, i) { return [r(i / n * 100), r(88 - (y - lo) / span * 76)]; }), d = curve(p), end = p[p.length - 1];
+      el.innerHTML = '<svg viewBox="0 0 100 100" preserveAspectRatio="none">' +
+        (fill === false ? "" : '<defs><linearGradient id="' + id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--c);stop-opacity:.34"/><stop offset="1" style="stop-color:var(--c);stop-opacity:0"/></linearGradient></defs><path style="fill:url(#' + id + ')" d="' + d + 'L' + end[0] + ' 100L0 100Z"/>') +
+        '<path class="v-line" d="' + d + '"/>' + (end[0] < 100 ? '<path class="v-ghost" d="M' + end[0] + " " + end[1] + 'H100"/>' : "") + "</svg>" +
+        (end[0] < 100 ? "" : '<i class="v-dot" style="left:' + end[0] + "%;top:" + end[1] + '%"></i>');
+    },
+    line: function (el, v) { VIZ.area(el, v, false); },
+    bars: function (el, v) {
+      el.innerHTML = v.map(function (x, i) { return '<i' + (x < 0 ? ' class="neg"' : "") + ' style="--v:' + Math.abs(x) + ";grid-column:" + (i + 1) + ";grid-row:" + (x < 0 ? 2 : 1) + '"></i>'; }).join("");
+    },
+    strip: function (el, v) {
+      el.innerHTML = (v.length ? v : new Array(30).join("3,").split(",")).map(function (x) { return '<i class="s' + x + '"></i>'; }).join("");
+      if (!v.length) el.style.opacity = 0.3;
+    },
+    donut: function (el) {
+      var rows = state === "empty" ? [] : $$("[data-share]", $(el.dataset.from)), at = 0, gap = 1.4, h = '<circle class="d-track" r="63" cx="72" cy="72"/>', labs = "";
+      rows.forEach(function (tr, i) {
+        var s = +tr.dataset.share, mid = (at + s / 2) / 100 * 2 * Math.PI;
+        h += '<circle data-i="' + i + '" r="63" cx="72" cy="72" pathLength="100" style="stroke:' + tr.style.getPropertyValue("--c") + ";stroke-dasharray:" + (s - gap) + " " + (100 - s + gap) + ";stroke-dashoffset:" + -(at + gap / 2) + '"/>';
+        labs += '<span class="d-lab" data-i="' + i + '" style="--dx:' + r(Math.sin(mid)) + ";--dy:" + r(-Math.cos(mid)) + '">' + s + "%</span>";
+        at += s;
+        /* Hover or focus on a table row dims the other arcs. */
+        ["pointerenter", "pointerleave"].forEach(function (type) {
+          tr.addEventListener(type, function () {
+            var on = type === "pointerenter";
+            el.classList.toggle("has-active", on); tr.classList.toggle("is-active", on);
+            $$('[data-i="' + i + '"]', el).forEach(function (n) { n.classList.toggle("is-active", on); });
+          });
+        });
+      });
+      el.insertAdjacentHTML("afterbegin", '<svg viewBox="0 0 144 144">' + h + "</svg>" + labs);
+    }
+  };
+  $$("[data-viz]").forEach(function (el) {
+    var v = state === "empty" ? [] : (el.dataset.values || "").split(",").filter(Boolean).map(Number);
+    VIZ[el.dataset.viz](el, v);
+  });
+  if (state === "empty") {
+    $$("[data-meter]").forEach(function (m) { m.style.setProperty("--p", "0%"); m.removeAttribute("aria-valuenow"); });
+    $("#plot").removeAttribute("tabindex");
+    $("#p-cmp").setAttribute("d", "M0 70C30 60 50 40 80 44S130 70 167 52");
+    $("#p-cmp").style.stroke = "var(--border-strong)";
+    return;
+  }
+
+  /* Main chart: hourly kWh for seven days, as [actual, forecast]. Pointer and keys move the same index. */
+  var ACT = [849,886,920,953,958,945,957,980,1058,1225,1456,1587,1640,1615,1458,1242,1083,1015,1030,989,990,1006,991,1010,1032,1062,1062,1055,1090,1129,1159,1194,1234,1430,1611,1787,1849,1847,1708,1595,1483,1503,1572,1595,1612,1644,1652,1687,1717,1736,1714,1718,1712,1719,1726,1723,1790,1856,1927,1997,2033,1969,1932,1865,1761,1678,1656,1605,1571,1557,1512,1496,1493,1463,1410,1383,1317,1263,1183,1104,1106,1230,1435,1551,1635,1576,1341,1057,861,790,714,645,602,568,507,508,520,520,542,544,540,536,478,460,492,713,989,1150,1197,1134,933,719,557,564,604,651,714,715,764,760,730,756,770,821,863,912,953,1030,1093,1216,1369,1447,1472,1456,1374,1270,1195,1167,1160,1150,1197,1245,1281,1313,1336,1345,1318,1334,1330,1277,1271,1243,1237,1373,1593,1739,1828,1790,1626,1367,1189,1164,1158,1155,1129,1139,1152,1155];
+  var FOR = [900,902,907,916,926,938,950,962,1010,1178,1376,1530,1588,1533,1388,1202,1049,1019,1025,1031,1037,1042,1046,1049,1050,1054,1065,1081,1102,1125,1150,1175,1231,1399,1592,1740,1796,1749,1625,1469,1348,1344,1375,1406,1435,1461,1481,1495,1500,1503,1511,1523,1539,1556,1575,1594,1632,1737,1858,1951,1986,1949,1851,1722,1606,1556,1525,1494,1465,1439,1419,1405,1400,1394,1378,1353,1322,1287,1250,1213,1216,1355,1534,1676,1730,1664,1489,1261,1060,987,950,913,878,847,822,806,800,797,789,777,761,744,725,706,732,909,1127,1299,1364,1298,1124,901,719,688,700,712,724,734,743,748,750,755,769,789,815,844,875,906,971,1155,1365,1527,1588,1535,1395,1217,1075,1056,1075,1094,1111,1127,1139,1147,1150,1150,1150,1150,1150,1150,1150,1150,1188,1358,1561,1720,1780,1719,1558,1350,1175,1131,1125,1119,1113,1108,1104,1101];
+  var DAYS = ["Sun 15", "Mon 16", "Tue 17", "Wed 18", "Thu 19", "Fri 20", "Sat 21"], MAX = 2400, N = ACT.length;
+  var fmt = function (n) { return n.toLocaleString("en-GB"); }, yOf = function (v) { return r(100 - v / MAX * 100); };
+  var pts = function (a) { return a.map(function (v, i) { return [i, yOf(v)]; }); }, dAct = curve(pts(ACT));
+  $("#p-line").setAttribute("d", dAct);
+  $("#p-area").setAttribute("d", dAct + "L" + (N - 1) + " 100L0 100Z");
+  $("#p-cmp").setAttribute("d", curve(pts(FOR)));
+  var top = ACT.indexOf(Math.max.apply(0, ACT)), peak = $("#peak");
+  peak.style.setProperty("--x", top / (N - 1) * 100 + "%"); peak.style.setProperty("--y", yOf(ACT[top]));
+  DAYS.forEach(function (d, i) {
+    var sum = function (a) { return (a.slice(i * 24, i * 24 + 24).reduce(function (x, y) { return x + y; }, 0) / 1000).toFixed(1); };
+    $("#gen-table tbody").insertAdjacentHTML("beforeend", '<tr><th scope="row">' + d + " Nov</th><td>" + sum(ACT) + "</td><td>" + sum(FOR) + "</td></tr>");
+  });
+
+  var plot = $("#plot"), tip = $("#tip"), index = 60;
+  function show(i) {
+    index = Math.max(0, Math.min(N - 1, i));
+    var a = ACT[index], f = FOR[index], gapv = a - f, when = DAYS[Math.floor(index / 24)] + " Nov, " + String(index % 24).padStart(2, "0") + ":00";
+    plot.style.setProperty("--x", index / (N - 1) * 100 + "%");
+    $("#pt-act").style.setProperty("--y", yOf(a)); $("#pt-cmp").style.setProperty("--y", yOf(f));
+    tip.classList.toggle("is-left", index > N * 0.62);
+    $("#tip-t").textContent = when; $("#tip-a").textContent = fmt(a) + " kWh"; $("#tip-f").textContent = fmt(f) + " kWh";
+    $("#tip-d").textContent = gapv === 0 ? "On forecast" : fmt(Math.abs(gapv)) + " kWh " + (gapv > 0 ? "over" : "under") + " forecast";
+    plot.setAttribute("aria-valuenow", index);
+    plot.setAttribute("aria-valuetext", when + ", actual " + fmt(a) + " kilowatt hours, forecast " + fmt(f));
+  }
+  function live(on) { plot.classList.toggle("is-live", on); }
+  plot.addEventListener("pointermove", function (e) {
+    var box = plot.getBoundingClientRect();
+    show(Math.round((e.clientX - box.left) / box.width * (N - 1))); live(true);
+  });
+  plot.addEventListener("pointerleave", function () { if (document.activeElement !== plot) live(false); });
+  plot.addEventListener("focus", function () { live(true); });
+  plot.addEventListener("blur", function () { live(false); });
+  plot.addEventListener("keydown", function (e) {
+    var step = { ArrowLeft: -1, ArrowRight: 1, ArrowDown: -1, ArrowUp: 1, PageDown: -24, PageUp: 24, Home: -N, End: N }[e.key];
+    if (!step) return;
+    e.preventDefault(); show(index + step);
+  });
+  show(index);
+  if (state === "tooltip") live(true);
+})();
+</script>
+</body>
+</html>

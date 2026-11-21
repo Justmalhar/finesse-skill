@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en" data-palette="clay" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data, a finesse exemplar</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<script>
+  /* Runs before first paint so the page never flashes the wrong palette. */
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    var home = { clay: "light", cobalt: "light", moss: "dark" };
+    var p = home[q.get("palette")] ? q.get("palette") : "clay";
+    var t = q.get("theme") === "light" || q.get("theme") === "dark" ? q.get("theme") : home[p];
+    root.dataset.palette = p;
+    root.dataset.theme = t;
+    if (q.get("state")) root.dataset.state = q.get("state");
+  })();
+</script>
+<style>
+
+/* Table */
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 12px 12px 16px; }
+.toolbar h3 { margin-inline-end: auto; font-size: var(--fs-base); font-weight: var(--fw-semibold); letter-spacing: -0.01em; }
+.toolbar .input { width: 224px; height: 32px; }
+.toolbar .input > input { font-size: var(--fs-sm); }
+.toolbar .seg { padding: 2px; border-radius: 8px; }
+.toolbar .seg label { height: 28px; padding: 0 12px; }
+.toolbar .seg__thumb { inset: 2px auto 2px 2px; width: calc((100% - 4px) / var(--n)); }
+
+.tbl-frame { position: relative; isolation: isolate; }
+.tbl-wrap { max-height: 414px; overflow: auto; overscroll-behavior: contain; border-top: 1px solid var(--border); scrollbar-width: thin; }
+.tbl { width: 100%; min-width: 720px; border-collapse: separate; border-spacing: 0; font-size: var(--fs-sm); line-height: 20px; }
+.tbl th, .tbl td { padding: 0 12px; text-align: start; white-space: nowrap; }
+.tbl th:first-child, .tbl td:first-child { width: 46px; padding-inline: 16px 12px; }
+.tbl th:last-child, .tbl td:last-child { width: 48px; padding-inline: 4px 8px; }
+.tbl .r { text-align: end; font-variant-numeric: tabular-nums lining-nums; }
+
+/* Sticky header: translucent so rows show through as they pass, with a shadow that only appears once the body has scrolled. */
+.tbl thead th { position: sticky; top: 0; z-index: var(--z-sticky); height: 36px; font-size: var(--fs-xs); font-weight: var(--fw-medium); color: var(--text-muted); background: color-mix(in oklab, var(--surface) 84%, transparent); backdrop-filter: blur(12px) saturate(1.5); box-shadow: inset 0 -1px 0 var(--border); transition: box-shadow var(--dur-state) var(--curve-out); }
+.tbl-wrap[data-scrolled] thead th { box-shadow: inset 0 -1px 0 var(--border), 0 6px 8px -6px var(--cast-md); }
+.sort { display: inline-flex; align-items: center; gap: 4px; height: 24px; margin-inline: -8px; padding: 0 8px; border: 0; border-radius: 6px; background: none; font-weight: inherit; color: inherit; cursor: pointer; }
+.r .sort svg { order: -1; }
+.sort svg { width: 8px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: opacity var(--dur-press) var(--curve-out); }
+.sort svg path { opacity: 0.4; }
+th[aria-sort] .sort { color: var(--text); }
+th[aria-sort] .sort svg, .sort:focus-visible svg { opacity: 1; }
+th[aria-sort="descending"] .sort svg path:last-child, th[aria-sort="ascending"] .sort svg path:first-child { opacity: 1; stroke: var(--accent); }
+.th-unit { margin-inline-start: 4px; font-weight: var(--fw-regular); }
+
+.tbl tbody td, .tbl tbody th { height: 44px; background: var(--tint, transparent); box-shadow: inset 0 -1px 0 var(--border); }
+.tbl tbody tr:last-child > * { box-shadow: none; }
+.tbl tbody tr.is-hover, .tbl tbody tr:has(:focus-visible) { --tint: var(--wash); }
+.tbl tbody tr:has(.check:checked) { --tint: var(--accent-wash); }
+.tbl tbody tr:has(.check:checked).is-hover { --tint: color-mix(in oklab, var(--accent) 17%, transparent); }
+.tbl .check { margin: 0; vertical-align: middle; }
+.id { font-family: var(--family-mono); font-size: var(--fs-xs); color: var(--text-muted); }
+.tbl .coffee { font-weight: var(--fw-medium); }
+.coffee span, .when span { margin-inline-start: 8px; font-weight: var(--fw-regular); color: var(--text-muted); }
+.tbl small { font-size: inherit; color: var(--text-muted); }
+
+/* Loss against the 15% target: the bar grows left when under, right when over. The number stays the primary read. */
+.dev { position: relative; display: inline-block; width: 40px; height: 12px; margin-inline-start: 12px; vertical-align: -1px; }
+.dev::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--border-strong); }
+.dev i { position: absolute; left: 50%; top: 4px; width: 50%; height: 4px; border-radius: 1px; background: var(--text-muted); transform-origin: left; transform: scaleX(var(--d)); }
+.dev--over i { background: var(--warning); }
+
+/* Status: glyph plus words. Resting shows its seven days as ticks. */
+.st { display: inline-flex; align-items: center; gap: 8px; }
+.st .icon { flex: none; }
+.st--ready .icon { color: var(--success); }
+.st--flag { color: var(--warning); }
+.st--shipped { color: var(--text-muted); }
+.days { position: relative; flex: none; width: 40px; height: 10px; background: repeating-linear-gradient(to right, var(--wash-strong) 0 4px, transparent 4px 6px); }
+.days::after { content: ""; position: absolute; inset: 0 auto 0 0; width: calc(var(--n) * 6px - 2px); background: repeating-linear-gradient(to right, var(--text) 0 4px, transparent 4px 6px); }
+.rowbtn { opacity: 0; }
+tr.is-hover .rowbtn, .rowbtn:focus-visible, tr:has(:focus-visible) .rowbtn { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .tbl tbody tr:hover { --tint: var(--wash); }
+  .tbl tbody tr:has(.check:checked):hover { --tint: color-mix(in oklab, var(--accent) 17%, transparent); }
+  .tbl tbody tr:hover .rowbtn { opacity: 1; }
+  .sort:hover { color: var(--text); background: var(--wash); }
+  .sort:hover svg { opacity: 1; }
+}
+@media (hover: none) { .rowbtn { opacity: 1; } }
+
+.tbl tfoot td { height: 44px; font-weight: var(--fw-medium); box-shadow: inset 0 1px 0 var(--border-strong); }
+.tbl tfoot td:nth-child(2) { font-weight: var(--fw-regular); color: var(--text-muted); }
+.pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 16px; border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--text-muted); }
+
+/* Selection bar: floats over the table foot, inverse of the page so it reads as a separate layer. */
+.pager { position: relative; }
+.selbar { position: absolute; left: 50%; bottom: 4px; z-index: var(--z-dropdown); translate: -50% 0; display: flex; align-items: center; gap: 4px; padding: 4px 4px 4px 16px; border-radius: 12px; background: var(--text); color: var(--background); font-size: var(--fs-sm); white-space: nowrap; box-shadow: 0 2px 4px -1px var(--cast-sm), 0 8px 12px -4px var(--cast-md), inset 0 1px 0 oklch(1 0 0 / 0.12); transition: opacity var(--dur-overlay) var(--curve-out), transform var(--dur-overlay) var(--curve-out), visibility 0s; }
+.selbar[hidden] { display: flex; opacity: 0; transform: translateY(var(--enter-y)) scale(var(--enter-scale)); visibility: hidden; transition-duration: var(--dur-overlay-exit); transition-delay: 0s, 0s, var(--dur-overlay-exit); }
+.selbar__count { margin-inline-end: 8px; }
+.selbar__rule { width: 1px; height: 16px; margin-inline: 4px; background: color-mix(in oklab, var(--background) 24%, transparent); }
+.selbar .btn { color: inherit; background: none; box-shadow: none; }
+.selbar .btn:focus-visible { outline-color: var(--background); outline-offset: -2px; }
+.selbar .btn:active { background: color-mix(in oklab, var(--background) 22%, transparent); }
+@media (hover: hover) and (pointer: fine) { .selbar .btn:hover { background: color-mix(in oklab, var(--background) 14%, transparent); } }
+
+/* States */
+.states { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.state-head { display: flex; justify-content: space-between; align-items: center; height: 44px; padding: 0 16px; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); font-weight: var(--fw-medium); }
+.empty { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.empty__art { position: relative; min-height: 264px; border-inline-end: 1px solid var(--border); background: radial-gradient(circle at 1px 1px, var(--wash-strong) 1px, transparent 0) 11px 11px / 24px 24px; mask-image: linear-gradient(to right, oklch(0 0 0) 40%, transparent); }
+.empty__art svg { position: absolute; inset: 24px; width: calc(100% - 48px); height: calc(100% - 48px); fill: none; overflow: visible; }
+.empty__art path { vector-effect: non-scaling-stroke; }
+.empty__axis { stroke: var(--border-strong); stroke-width: 1; }
+.empty__ghost { stroke: var(--text-muted); stroke-width: 1.5; stroke-dasharray: 2 5; stroke-linecap: round; }
+.empty__pt { stroke: var(--accent); stroke-width: 9; stroke-linecap: round; }
+.empty__pt-ring { stroke: var(--accent-wash); stroke-width: 21; stroke-linecap: round; }
+.empty__body { display: grid; align-content: center; justify-items: start; gap: 8px; padding: 32px; }
+.empty__body h3 { font: var(--fw-semibold) var(--fs-xl) / var(--lh-heading) var(--family-display); letter-spacing: var(--ls-display); text-wrap: balance; }
+.empty__body > p { max-width: 44ch; font-size: var(--fs-sm); color: var(--text-muted); text-wrap: pretty; }
+.steps { display: grid; gap: 4px; margin-top: 8px; counter-reset: step; font-size: var(--fs-sm); line-height: 20px; }
+.steps li { display: grid; grid-template-columns: 24px 1fr; counter-increment: step; }
+.steps li::before { content: counter(step); font: var(--fs-xs) / 20px var(--family-mono); color: var(--text-muted); }
+.empty__body .row { margin-top: 16px; }
+
+/* Skeleton: bars shaped like the real row, one shared sweep so the whole block moves as one. */
+.skel { position: relative; overflow: hidden; }
+.skel__row { display: grid; grid-template-columns: 18px 40px minmax(0, 1fr) 48px 40px; align-items: center; gap: 16px; height: 44px; padding: 0 16px; border-bottom: 1px solid var(--border); }
+.skel__row:last-child { border: 0; }
+.skel__row i { height: 10px; border-radius: 4px; background: var(--wash-strong); }
+.skel__row i:first-child { height: 18px; border-radius: 5px; }
+.skel__row i:nth-child(3) { width: var(--w, 60%); }
+.skel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 35%, color-mix(in oklab, var(--surface) 70%, transparent) 50%, transparent 65%); transform: translateX(-100%); animation: sweep 1600ms linear infinite; }
+@keyframes sweep { to { transform: translateX(100%); } }
+
+.err { display: grid; justify-items: start; gap: 8px; padding: 24px; }
+.err .err__title { display: flex; align-items: center; gap: 8px; font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--danger); }
+.err p { font-size: var(--fs-sm); color: var(--text-muted); text-wrap: pretty; }
+.err code { padding: 0 4px; border-radius: 4px; background: var(--wash); font: var(--fs-xs) / 20px var(--family-mono); color: var(--text); }
+.err .row { margin-top: 8px; }
+.err a { font-size: var(--fs-sm); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.rowerr { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 8px 0 16px; border-top: 1px solid var(--border); background: color-mix(in oklab, var(--danger) 7%, transparent); font-size: var(--fs-sm); }
+.rowerr .icon { color: var(--danger); }
+.rowerr span:nth-of-type(2) { margin-inline-end: auto; color: var(--text-muted); }
+
+/* Chart */
+.chart-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; padding: 24px 24px 0; }
+.chart-head h3 { margin-top: 4px; font: var(--fw-semibold) var(--fs-lg) / 24px var(--family-display); letter-spacing: var(--ls-display); }
+.chart-head p { font-size: var(--fs-xs); color: var(--text-muted); }
+.legend { display: flex; gap: 16px; font-size: var(--fs-xs); color: var(--text-muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 16px; height: 2px; border-radius: 1px; background: var(--accent); }
+.legend span:last-child i { height: 1px; background: var(--text-muted); }
+.chart { display: grid; grid-template-columns: 48px minmax(0, 1fr); grid-template-rows: 288px 28px; padding: 32px 24px 12px 12px; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); font-variant-numeric: tabular-nums lining-nums; }
+.chart__y, .chart__x { position: relative; }
+.chart__y span { position: absolute; right: 12px; translate: 0 -50%; white-space: nowrap; }
+.chart__x { grid-column: 2; }
+.chart__x span { position: absolute; top: 12px; translate: -50% 0; white-space: nowrap; }
+.chart__x span:first-child { translate: 0 0; }
+.plot { position: relative; outline-offset: 4px; border-radius: 2px; cursor: crosshair; touch-action: pan-y; }
+.plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.plot path { vector-effect: non-scaling-stroke; fill: none; }
+.g-grid { stroke: var(--border); stroke-width: 1; }
+.g-base { stroke: var(--border-strong); stroke-width: 1; }
+.plot .g-band { fill: var(--accent-wash); stroke: none; }
+.g-ev { stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 2 3; }
+.plot .g-area { fill: url(#bt-fill); stroke: none; }
+.g-ror { stroke: var(--text-muted); stroke-width: 1; stroke-linejoin: round; }
+.g-bt { stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.ev { position: absolute; top: -24px; translate: -50% 0; white-space: nowrap; }
+.ev i { font-style: normal; }
+.ev b { margin-inline-start: 4px; font-weight: var(--fw-medium); color: var(--text); }
+.ev--band { top: 44%; color: var(--accent); }
+.cross { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--text); opacity: 0.5; pointer-events: none; }
+.dot { position: absolute; width: 10px; height: 10px; translate: -50% -50%; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--surface), 0 0 0 5px var(--accent-wash); pointer-events: none; }
+.dot--ror { width: 6px; height: 6px; background: var(--text-muted); box-shadow: 0 0 0 2px var(--surface); }
+.tt { position: absolute; z-index: var(--z-tooltip); translate: 12px calc(-100% - 12px); display: grid; grid-template-columns: auto auto; gap: 0 16px; padding: 8px 12px; border-radius: 8px; background: var(--text); color: var(--background); white-space: nowrap; pointer-events: none; box-shadow: 0 2px 4px -1px var(--cast-sm), 0 8px 12px -4px var(--cast-md); }
+.tt[data-side="left"] { translate: calc(-100% - 12px) calc(-100% - 12px); }
+.tt b { grid-column: 1 / -1; margin-bottom: 4px; font-size: var(--fs-sm); font-weight: var(--fw-medium); line-height: 20px; }
+.tt span { opacity: 0.72; }
+.tt span + span { opacity: 1; text-align: end; }
+.chart-cap { padding: 0 24px 24px 60px; font-size: var(--fs-sm); color: var(--text-muted); text-wrap: pretty; }
+
+@media (width < 900px) {
+  .toolbar { padding: 12px; }
+  .toolbar h3 { width: 100%; }
+  .toolbar .input { flex: 1; width: auto; min-width: 0; height: 44px; }
+  .toolbar .input > input { font-size: var(--fs-base); }
+  .toolbar .seg { width: 100%; }
+  .toolbar .seg label { height: 36px; padding: 0; }
+  .states { grid-template-columns: minmax(0, 1fr); }
+  .empty { grid-template-columns: minmax(0, 1fr); }
+  .empty__art { min-height: 160px; border: 0; border-bottom: 1px solid var(--border); mask-image: linear-gradient(to bottom, oklch(0 0 0) 40%, transparent); }
+  .empty__body { padding: 24px 16px; }
+  .selbar .btn span { display: none; }
+  .chart-head { padding: 16px 16px 0; }
+  .chart { grid-template-columns: 40px minmax(0, 1fr); grid-template-rows: 224px 28px; padding: 32px 16px 12px 4px; }
+  .chart__y span { right: 8px; }
+  .tt { padding: 4px 8px; }
+  .chart-cap { padding: 0 16px 16px; }
+  .ev--band, .ev i { display: none; }
+  .ev b { margin: 0; }
+  .ev--end { translate: -100% 0; }
+  /* The coffee name stays put while the numbers scroll under it. */
+  .tbl tbody td:first-child, .tbl tbody th { position: sticky; left: 0; z-index: 1; background: linear-gradient(var(--tint, transparent), var(--tint, transparent)), var(--surface); }
+  .tbl tbody th { left: 46px; box-shadow: inset 0 -1px 0 var(--border), 1px 0 0 var(--border); }
+  .tbl thead th:first-child { left: 0; z-index: calc(var(--z-sticky) + 1); }
+  .tbl thead th:nth-child(3) { left: 46px; z-index: calc(var(--z-sticky) + 1); }
+  .tbl thead th:nth-child(2), .tbl td.id, .tbl tfoot td:nth-child(2) { display: none; }
+  .coffee span { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skel::after { animation: none; opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-chevrons" viewBox="0 0 16 16"><path d="M5 6.25l3-3 3 3M5 9.75l3 3 3-3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 16 16"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.5 8.5h6l.5-8.5M6.75 7v3.5M9.25 7v3.5"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><path d="M3.5 8h.01M8 8h.01M12.5 8h.01" stroke-width="2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.75"/><path d="M10.5 5.5V4.25A1.75 1.75 0 0 0 8.75 2.5h-4.5A1.75 1.75 0 0 0 2.5 4.25v4.5c0 .97.78 1.75 1.75 1.75H5.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="M10.25 10.25l3.25 3.25"/></symbol>
+  <symbol id="i-retry" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.6-3.67M13 2.75v2.5h-2.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2.5v8M4.75 7.5L8 10.75l3.25-3.25M3 13.25h10"/></symbol>
+  <symbol id="i-left" viewBox="0 0 16 16"><path d="M10 3.5L5.5 8l4.5 4.5"/></symbol>
+  <symbol id="i-right" viewBox="0 0 16 16"><path d="M6 3.5L10.5 8 6 12.5"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 16 16"><path d="M8 2.5l6 10.5H2zM8 6.5v3M8 11.25v.01"/></symbol>
+  <symbol id="i-out" viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M6 4.5h5.5V10"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 16 16"><path d="M2.5 3.25v4.5L8.75 14l5.25-5.25L7.75 2.5h-4.5a.75.75 0 0 0-.75.75zM5.5 5.5v.01"/></symbol>
+</svg>
+
+<header class="bar">
+  <div class="wrap bar__in">
+    <a class="bar__brand" href="controls.html">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 17V9a6 6 0 0 1 6-6h8"/><path d="M8 17v-6a3 3 0 0 1 3-3h6"/></svg>
+      finesse <span>exemplars</span>
+    </a>
+    <nav class="bar__nav" aria-label="Exemplar files">
+      <a href="controls.html">Controls</a>
+      <a href="surfaces.html">Surfaces</a>
+      <a href="data.html" aria-current="page">Data</a>
+      <a href="marketing.html">Marketing</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+    <div class="bar__tools">
+      <div class="swatches" role="group" aria-label="Palette">
+        <a href="?palette=clay" data-palette-link="clay" style="--chip: oklch(0.53 0.14 42)">Clay</a>
+        <a href="?palette=cobalt" data-palette-link="cobalt" style="--chip: oklch(0.48 0.22 264)">Cobalt</a>
+        <a href="?palette=moss" data-palette-link="moss" style="--chip: oklch(0.87 0.19 125)">Moss</a>
+      </div>
+      <a class="theme-link" href="?theme=dark" data-theme-link aria-label="Switch theme">
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <div>
+      <p class="intro__eyebrow">Exemplar 3 of 5</p>
+      <h1>Data</h1>
+      <p class="intro__lede">A table that reads well, the three states it spends time in, and one chart. Match this level of finish. Take the structure, palette and type from your own project.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Numbers</dt><dd>Tabular, aligned, units quiet</dd></div>
+      <div><dt>Status</dt><dd>Glyph and words, no pills</dd></div>
+      <div><dt>Chart</dt><dd>SVG lines, HTML labels</dd></div>
+    </dl>
+  </div>
+
+  <section class="spec" id="table" aria-labelledby="table-h">
+    <div class="spec__note">
+      <p class="spec__no">01</p>
+      <h2 id="table-h">Table</h2>
+      <p>Dense, calm, and readable down a column as well as across a row.</p>
+      <ol class="notes">
+        <li>Numbers are right-aligned and tabular. Decimals are quieter than the integer, and the unit lives in the header.</li>
+        <li>Loss carries a bar against the 15% target, so a column of figures can be scanned for outliers. Over target turns amber.</li>
+        <li>Status is a glyph and words. Resting shows its seven days as ticks.</li>
+        <li>The header is translucent and gains a shadow only after the body scrolls.</li>
+        <li>Sort arrows show both directions and light the active one.</li>
+        <li>Selecting rows raises an inverse bar over the table. Nothing in the layout moves.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="panel">
+        <div class="toolbar">
+          <h3>Roast log</h3>
+          <div class="input"><span class="input__lead"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span><input type="search" placeholder="Search batches" aria-label="Search batches"></div>
+          <div class="seg" role="radiogroup" aria-label="Filter by status" style="--n: 4">
+            <span class="seg__thumb" aria-hidden="true"></span>
+            <label><input class="sr-only" type="radio" name="f" checked>All</label>
+            <label><input class="sr-only" type="radio" name="f">Resting</label>
+            <label><input class="sr-only" type="radio" name="f">Ready</label>
+            <label><input class="sr-only" type="radio" name="f">Shipped</label>
+          </div>
+          <button class="btn btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Export</button>
+        </div>
+        <div class="tbl-frame">
+          <div class="tbl-wrap" id="tbl-wrap" tabindex="0" role="region" aria-label="Roast log, scrollable">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th><input class="check" type="checkbox" id="check-all" aria-label="Select all batches"></th>
+                  <th scope="col">Batch</th>
+                  <th scope="col"><button class="sort" type="button">Coffee<svg viewBox="0 0 8 12" aria-hidden="true"><path d="M1.5 4.5L4 2l2.5 2.5"/><path d="M1.5 7.5L4 10l2.5-2.5"/></svg></button></th>
+                  <th scope="col" aria-sort="descending"><button class="sort" type="button">Roasted<svg viewBox="0 0 8 12" aria-hidden="true"><path d="M1.5 4.5L4 2l2.5 2.5"/><path d="M1.5 7.5L4 10l2.5-2.5"/></svg></button></th>
+                  <th scope="col" class="r"><button class="sort" type="button">Charge<span class="th-unit unit">kg</span><svg viewBox="0 0 8 12" aria-hidden="true"><path d="M1.5 4.5L4 2l2.5 2.5"/><path d="M1.5 7.5L4 10l2.5-2.5"/></svg></button></th>
+                  <th scope="col" class="r"><button class="sort" type="button">Loss<span class="th-unit unit">%</span><svg viewBox="0 0 8 12" aria-hidden="true"><path d="M1.5 4.5L4 2l2.5 2.5"/><path d="M1.5 7.5L4 10l2.5-2.5"/></svg></button></th>
+                  <th scope="col">Status</th>
+                  <th><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td><input class="check" type="checkbox" aria-label="Select batch 0412" checked></td>
+                <td class="id">0412</td>
+                <th scope="row" class="coffee">Finca El Paraíso<span>Huila, washed</span></th>
+                <td class="when num">18 Nov<span>09:14</span></td>
+                <td class="r">11<small>.80</small></td>
+                <td class="r">14<small>.2</small><span class="dev" style="--d: -0.4" role="img" aria-label="0.8 points under target"><i></i></span></td>
+                <td><span class="st"><span class="days" style="--n: 3" aria-hidden="true"></span>Resting, day 3 of 7</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0412"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              <tr>
+                <td><input class="check" type="checkbox" aria-label="Select batch 0411"></td>
+                <td class="id">0411</td>
+                <th scope="row" class="coffee">Gedeb Chelbesa<span>Yirgacheffe, natural</span></th>
+                <td class="when num">18 Nov<span>08:31</span></td>
+                <td class="r">10<small>.00</small></td>
+                <td class="r">13<small>.6</small><span class="dev" style="--d: -0.7" role="img" aria-label="1.4 points under target"><i></i></span></td>
+                <td><span class="st"><span class="days" style="--n: 3" aria-hidden="true"></span>Resting, day 3 of 7</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0411"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              <tr>
+                <td><input class="check" type="checkbox" aria-label="Select batch 0410" checked></td>
+                <td class="id">0410</td>
+                <th scope="row" class="coffee">Fazenda Sertão<span>Carmo de Minas</span></th>
+                <td class="when num">17 Nov<span>15:02</span></td>
+                <td class="r">12<small>.00</small></td>
+                <td class="r">15<small>.9</small><span class="dev dev--over" style="--d: 0.45" role="img" aria-label="0.9 points over target"><i></i></span></td>
+                <td><span class="st st--flag"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg>Ran hot at 7:10</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0410"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              <tr class="is-hover">
+                <td><input class="check" type="checkbox" aria-label="Select batch 0409"></td>
+                <td class="id">0409</td>
+                <th scope="row" class="coffee">Finca El Paraíso<span>Huila, washed</span></th>
+                <td class="when num">17 Nov<span>14:10</span></td>
+                <td class="r">11<small>.80</small></td>
+                <td class="r">14<small>.4</small><span class="dev" style="--d: -0.3" role="img" aria-label="0.6 points under target"><i></i></span></td>
+                <td><span class="st"><span class="days" style="--n: 4" aria-hidden="true"></span>Resting, day 4 of 7</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0409"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              <tr>
+                <td><input class="check" type="checkbox" aria-label="Select batch 0408"></td>
+                <td class="id">0408</td>
+                <th scope="row" class="coffee">Kiamabara AA<span>Nyeri, washed</span></th>
+                <td class="when num">15 Nov<span>10:22</span></td>
+                <td class="r">9<small>.50</small></td>
+                <td class="r">14<small>.9</small><span class="dev" style="--d: -0.05" role="img" aria-label="0.1 points under target"><i></i></span></td>
+                <td><span class="st"><span class="days" style="--n: 6" aria-hidden="true"></span>Resting, day 6 of 7</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0408"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              <tr>
+                <td><input class="check" type="checkbox" aria-label="Select batch 0407"></td>
+                <td class="id">0407</td>
+                <th scope="row" class="coffee">Gedeb Chelbesa<span>Yirgacheffe, natural</span></th>
+                <td class="when num">12 Nov<span>09:40</span></td>
+                <td class="r">10<small>.00</small></td>
+                <td class="r">13<small>.9</small><span class="dev" style="--d: -0.55" role="img" aria-label="1.1 points under target"><i></i></span></td>
+                <td><span class="st st--ready"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Ready to ship</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0407"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              <tr>
+                <td><input class="check" type="checkbox" aria-label="Select batch 0406"></td>
+                <td class="id">0406</td>
+                <th scope="row" class="coffee">Fazenda Sertão<span>Carmo de Minas</span></th>
+                <td class="when num">12 Nov<span>08:55</span></td>
+                <td class="r">12<small>.00</small></td>
+                <td class="r">15<small>.1</small><span class="dev dev--over" style="--d: 0.05" role="img" aria-label="0.1 points over target"><i></i></span></td>
+                <td><span class="st st--ready"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Ready to ship</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0406"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              <tr>
+                <td><input class="check" type="checkbox" aria-label="Select batch 0405"></td>
+                <td class="id">0405</td>
+                <th scope="row" class="coffee">Finca El Paraíso<span>Huila, washed</span></th>
+                <td class="when num">10 Nov<span>13:30</span></td>
+                <td class="r">11<small>.80</small></td>
+                <td class="r">14<small>.0</small><span class="dev" style="--d: -0.5" role="img" aria-label="1.0 points under target"><i></i></span></td>
+                <td><span class="st st--shipped"><svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>Shipped 14 Nov</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0405"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              <tr>
+                <td><input class="check" type="checkbox" aria-label="Select batch 0404"></td>
+                <td class="id">0404</td>
+                <th scope="row" class="coffee">Kiamabara AA<span>Nyeri, washed</span></th>
+                <td class="when num">10 Nov<span>12:41</span></td>
+                <td class="r">9<small>.50</small></td>
+                <td class="r">14<small>.6</small><span class="dev" style="--d: -0.2" role="img" aria-label="0.4 points under target"><i></i></span></td>
+                <td><span class="st st--shipped"><svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>Shipped 14 Nov</span></td>
+                <td><button class="btn btn--sm btn--icon btn--quiet rowbtn" type="button" aria-label="Actions for batch 0404"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button></td>
+              </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td></td><td></td><td colspan="2">9 batches on this page</td>
+                  <td class="r">98<small>.40</small></td>
+                  <td class="r">14<small>.5</small><span class="dev" style="--d: -0.25" role="img" aria-label="0.5 points under target"><i></i></span></td>
+                  <td></td><td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="pager">
+          <span class="num">1 to 9 of 212</span>
+          <div class="row" style="gap: 4px">
+            <button class="btn btn--sm btn--icon btn--quiet" type="button" aria-label="Previous page" disabled><svg class="icon" aria-hidden="true"><use href="#i-left"/></svg></button>
+            <button class="btn btn--sm btn--icon btn--quiet" type="button" aria-label="Next page"><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
+          </div>
+          <div class="selbar" id="selbar" role="toolbar" aria-label="Actions for selected batches">
+            <span class="selbar__count num" id="selcount" aria-live="polite">2 selected</span>
+            <span class="selbar__rule" aria-hidden="true"></span>
+            <button class="btn btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-tag"/></svg><span>Print labels</span></button>
+            <button class="btn btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg><span>Export</span></button>
+            <button class="btn btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg><span>Discard</span></button>
+            <span class="selbar__rule" aria-hidden="true"></span>
+            <button class="btn btn--sm btn--icon" type="button" id="selclear" aria-label="Clear selection"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="states" aria-labelledby="states-h">
+    <div class="spec__note">
+      <p class="spec__no">02</p>
+      <h2 id="states-h">Empty, loading, error</h2>
+      <p>The three states a table spends real time in. Each keeps the frame of the loaded view.</p>
+      <ol class="notes">
+        <li>Empty says what will appear, how to get the first row, and offers one primary action.</li>
+        <li>Its drawing is a ghost of the real chart, not a stock illustration.</li>
+        <li>Skeleton bars match the row: a square where the checkbox is, short bars where numbers are.</li>
+        <li>One sweep crosses the whole block. Under reduced motion it stops.</li>
+        <li>The error names the cause in plain words and puts the retry next to it.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="states">
+        <div class="panel empty">
+          <div class="empty__art" aria-hidden="true">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path class="empty__axis" d="M0 0V100H100"/>
+              <path class="empty__ghost" d="M0.00 14.29 0.76 32.42 1.52 46.33 2.27 57.00 3.03 65.19 3.79 71.48 4.55 76.32 5.30 80.04 6.06 82.91 6.82 85.12 7.58 86.84 8.33 88.17 9.09 89.21 9.85 90.02 10.61 90.66 11.36 91.17 12.12 90.78 12.88 89.17 13.64 87.59 14.39 86.04 15.15 84.51 15.91 83.01 16.67 81.54 17.42 80.08 18.18 78.65 18.94 77.25 19.70 75.87 20.45 74.51 21.21 73.17 21.97 71.86 22.73 70.57 23.48 69.29 24.24 68.04 25.00 66.81 25.76 65.61 26.52 64.42 27.27 63.25 28.03 62.10 28.79 60.96 29.55 59.85 30.30 58.76 31.06 57.68 31.82 56.62 32.58 55.58 33.33 54.56 34.09 53.55 34.85 52.56 35.61 51.59 36.36 50.63 37.12 49.69 37.88 48.76 38.64 47.85 39.39 46.96 40.15 46.08 40.91 45.21 41.67 44.36 42.42 43.52 43.18 42.69 43.94 41.88 44.70 41.09 45.45 40.30 46.21 39.53 46.97 38.77 47.73 38.03 48.48 37.29 49.24 36.57 50.00 35.86 50.76 35.17 51.52 34.48 52.27 33.80 53.03 33.14 53.79 32.49 54.55 31.85 55.30 31.21 56.06 30.59 56.82 29.98 57.58 29.38 58.33 28.79 59.09 28.21 59.85 27.64 60.61 27.08 61.36 26.53 62.12 25.98 62.88 25.45 63.64 24.92 64.39 24.41 65.15 23.90 65.91 23.40 66.67 22.91 67.42 22.42 68.18 21.95 68.94 21.48 69.70 21.02 70.45 20.57 71.21 20.12 71.97 19.68 72.73 19.25 73.48 18.83 74.24 18.41 75.00 18.01 75.76 17.60 76.52 17.21 77.27 16.82 78.03 16.43 78.79 16.06 79.55 15.69 80.30 15.32 81.06 14.97 81.82 14.61 82.58 14.27 83.33 13.93 84.09 13.59 84.85 13.26 85.61 12.94 86.36 12.62 87.12 12.30 87.88 12.00 88.64 11.69 89.39 11.40 90.15 11.10 90.91 10.81 91.67 10.53 92.42 10.25 93.18 9.98 93.94 9.71 94.70 9.44 95.45 9.18 96.21 8.92 96.97 8.67"/>
+              <path class="empty__pt-ring" d="M0 14.29h.01"/>
+              <path class="empty__pt" d="M0 14.29h.01"/>
+            </svg>
+          </div>
+          <div class="empty__body">
+            <h3>No roasts logged yet</h3>
+            <p>Every roast lands here with its curve, weight loss and cupping notes, so you can repeat the good ones.</p>
+            <ol class="steps">
+              <li>Connect the roaster’s probe over USB or the network.</li>
+              <li>Charge the drum. Logging starts by itself.</li>
+              <li>Weigh the batch after cooling to record the loss.</li>
+            </ol>
+            <div class="row">
+              <button class="btn btn--primary" type="button">Connect a roaster</button>
+              <button class="btn btn--quiet" type="button">Import from Artisan</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" aria-busy="true">
+          <div class="state-head"><span>Roast log</span><span class="caption">loading</span></div>
+          <div class="skel" role="status"><span class="sr-only">Loading the roast log</span>
+            <div class="skel__row"><i></i><i></i><i style="--w: 62%"></i><i></i><i></i></div>
+            <div class="skel__row"><i></i><i></i><i style="--w: 48%"></i><i></i><i></i></div>
+            <div class="skel__row"><i></i><i></i><i style="--w: 71%"></i><i></i><i></i></div>
+            <div class="skel__row"><i></i><i></i><i style="--w: 55%"></i><i></i><i></i></div>
+            <div class="skel__row"><i></i><i></i><i style="--w: 66%"></i><i></i><i></i></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="state-head"><span>Roast log</span><span class="caption">error</span></div>
+          <div class="err" role="alert">
+            <p class="err__title"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>The roast log did not load</p>
+            <p>The logger at <code>192.168.1.40</code> did not answer within 10 seconds. It may be off, or on another network.</p>
+            <div class="row"><button class="btn btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-retry"/></svg>Try again</button><a href="#states">Check the connection</a></div>
+          </div>
+          <div class="rowerr"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span>Batch 0409</span><span>Weight not saved</span><button class="btn btn--sm btn--quiet" type="button">Retry</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="chart" aria-labelledby="chart-h">
+    <div class="spec__note">
+      <p class="spec__no">03</p>
+      <h2 id="chart-h">Chart</h2>
+      <p>Drawn in SVG, labelled in HTML, so lines scale and text does not.</p>
+      <ol class="notes">
+        <li>Three gridlines, not ten. The unit appears once, on the top label.</li>
+        <li>Events are labelled on the chart where they happen, not in a legend.</li>
+        <li>The development phase is a tinted band, because the span is the story.</li>
+        <li>The tooltip is pinned to a point by default and follows pointer or arrow keys.</li>
+        <li>Strokes keep their weight at any width through non-scaling-stroke.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <figure class="panel">
+        <div class="chart-head">
+          <div>
+            <p class="mono">Batch 0412</p>
+            <h3>Roast curve</h3>
+          </div>
+          <div class="legend"><span><i></i>Bean temperature</span><span><i></i>Rate of rise</span></div>
+        </div>
+        <div class="chart">
+          <div class="chart__y" aria-hidden="true"><span style="top: 85.71%">100</span><span style="top: 50.00%">150</span><span style="top: 14.29%">200</span><span style="top: 0.00%">°C</span></div>
+          <div class="plot" id="plot" tabindex="0" role="slider" aria-label="Roast curve, time" aria-valuemin="0" aria-valuemax="32" aria-valuenow="20" aria-valuetext="">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+              <defs><linearGradient id="bt-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity="0.16"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+              <path class="g-band" d="M81.21 0H96.97V100H81.21Z"/>
+              <path class="g-grid" d="M0 85.71H100"/><path class="g-grid" d="M0 50.00H100"/><path class="g-grid" d="M0 14.29H100"/>
+              <path class="g-base" d="M0 100H100"/>
+              <path class="g-ev" d="M11.82 0V100M81.21 0V100M96.97 0V100"/>
+              <path class="g-area" d="M0.00 14.29 0.76 32.42 1.52 46.33 2.27 57.00 3.03 65.19 3.79 71.48 4.55 76.32 5.30 80.04 6.06 82.91 6.82 85.12 7.58 86.84 8.33 88.17 9.09 89.21 9.85 90.02 10.61 90.66 11.36 91.17 12.12 90.78 12.88 89.17 13.64 87.59 14.39 86.04 15.15 84.51 15.91 83.01 16.67 81.54 17.42 80.08 18.18 78.65 18.94 77.25 19.70 75.87 20.45 74.51 21.21 73.17 21.97 71.86 22.73 70.57 23.48 69.29 24.24 68.04 25.00 66.81 25.76 65.61 26.52 64.42 27.27 63.25 28.03 62.10 28.79 60.96 29.55 59.85 30.30 58.76 31.06 57.68 31.82 56.62 32.58 55.58 33.33 54.56 34.09 53.55 34.85 52.56 35.61 51.59 36.36 50.63 37.12 49.69 37.88 48.76 38.64 47.85 39.39 46.96 40.15 46.08 40.91 45.21 41.67 44.36 42.42 43.52 43.18 42.69 43.94 41.88 44.70 41.09 45.45 40.30 46.21 39.53 46.97 38.77 47.73 38.03 48.48 37.29 49.24 36.57 50.00 35.86 50.76 35.17 51.52 34.48 52.27 33.80 53.03 33.14 53.79 32.49 54.55 31.85 55.30 31.21 56.06 30.59 56.82 29.98 57.58 29.38 58.33 28.79 59.09 28.21 59.85 27.64 60.61 27.08 61.36 26.53 62.12 25.98 62.88 25.45 63.64 24.92 64.39 24.41 65.15 23.90 65.91 23.40 66.67 22.91 67.42 22.42 68.18 21.95 68.94 21.48 69.70 21.02 70.45 20.57 71.21 20.12 71.97 19.68 72.73 19.25 73.48 18.83 74.24 18.41 75.00 18.01 75.76 17.60 76.52 17.21 77.27 16.82 78.03 16.43 78.79 16.06 79.55 15.69 80.30 15.32 81.06 14.97 81.82 14.61 82.58 14.27 83.33 13.93 84.09 13.59 84.85 13.26 85.61 12.94 86.36 12.62 87.12 12.30 87.88 12.00 88.64 11.69 89.39 11.40 90.15 11.10 90.91 10.81 91.67 10.53 92.42 10.25 93.18 9.98 93.94 9.71 94.70 9.44 95.45 9.18 96.21 8.92 96.97 8.67 V100 H0Z"/>
+              <path class="g-ror" d="M12.88 46.51 13.64 47.39 14.39 48.26 15.15 49.12 15.91 49.96 16.67 50.78 17.42 51.60 18.18 52.40 18.94 53.18 19.70 53.96 20.45 54.72 21.21 55.47 21.97 56.20 22.73 56.93 23.48 57.64 24.24 58.34 25.00 59.03 25.76 59.71 26.52 60.37 27.27 61.03 28.03 61.67 28.79 62.30 29.55 62.93 30.30 63.54 31.06 64.14 31.82 64.74 32.58 65.32 33.33 65.89 34.09 66.46 34.85 67.01 35.61 67.55 36.36 68.09 37.12 68.62 37.88 69.14 38.64 69.65 39.39 70.15 40.15 70.64 40.91 71.13 41.67 71.60 42.42 72.07 43.18 72.54 43.94 72.99 44.70 73.44 45.45 73.88 46.21 74.31 46.97 74.73 47.73 75.15 48.48 75.56 49.24 75.96 50.00 76.36 50.76 76.75 51.52 77.14 52.27 77.51 53.03 77.89 53.79 78.25 54.55 78.61 55.30 78.96 56.06 79.31 56.82 79.65 57.58 79.99 58.33 80.32 59.09 80.65 59.85 80.97 60.61 81.28 61.36 81.59 62.12 81.89 62.88 82.19 63.64 82.49 64.39 82.78 65.15 83.06 65.91 83.34 66.67 83.62 67.42 83.89 68.18 84.15 68.94 84.42 69.70 84.67 70.45 84.93 71.21 85.18 71.97 85.42 72.73 85.66 73.48 85.90 74.24 86.13 75.00 86.36 75.76 86.59 76.52 86.83 77.27 87.11 78.03 87.51 78.79 88.19 79.55 89.27 80.30 90.67 81.06 91.95 81.82 92.51 82.58 92.04 83.33 90.77 84.09 89.25 84.85 88.00 85.61 87.25 86.36 87.06 87.12 87.35 87.88 87.97 88.64 88.70 89.39 89.37 90.15 89.88 90.91 90.24 91.67 90.49 92.42 90.69 93.18 90.85 93.94 91.01 94.70 91.16 95.45 91.30 96.21 91.45 96.97 91.59"/>
+              <path class="g-bt" d="M0.00 14.29 0.76 32.42 1.52 46.33 2.27 57.00 3.03 65.19 3.79 71.48 4.55 76.32 5.30 80.04 6.06 82.91 6.82 85.12 7.58 86.84 8.33 88.17 9.09 89.21 9.85 90.02 10.61 90.66 11.36 91.17 12.12 90.78 12.88 89.17 13.64 87.59 14.39 86.04 15.15 84.51 15.91 83.01 16.67 81.54 17.42 80.08 18.18 78.65 18.94 77.25 19.70 75.87 20.45 74.51 21.21 73.17 21.97 71.86 22.73 70.57 23.48 69.29 24.24 68.04 25.00 66.81 25.76 65.61 26.52 64.42 27.27 63.25 28.03 62.10 28.79 60.96 29.55 59.85 30.30 58.76 31.06 57.68 31.82 56.62 32.58 55.58 33.33 54.56 34.09 53.55 34.85 52.56 35.61 51.59 36.36 50.63 37.12 49.69 37.88 48.76 38.64 47.85 39.39 46.96 40.15 46.08 40.91 45.21 41.67 44.36 42.42 43.52 43.18 42.69 43.94 41.88 44.70 41.09 45.45 40.30 46.21 39.53 46.97 38.77 47.73 38.03 48.48 37.29 49.24 36.57 50.00 35.86 50.76 35.17 51.52 34.48 52.27 33.80 53.03 33.14 53.79 32.49 54.55 31.85 55.30 31.21 56.06 30.59 56.82 29.98 57.58 29.38 58.33 28.79 59.09 28.21 59.85 27.64 60.61 27.08 61.36 26.53 62.12 25.98 62.88 25.45 63.64 24.92 64.39 24.41 65.15 23.90 65.91 23.40 66.67 22.91 67.42 22.42 68.18 21.95 68.94 21.48 69.70 21.02 70.45 20.57 71.21 20.12 71.97 19.68 72.73 19.25 73.48 18.83 74.24 18.41 75.00 18.01 75.76 17.60 76.52 17.21 77.27 16.82 78.03 16.43 78.79 16.06 79.55 15.69 80.30 15.32 81.06 14.97 81.82 14.61 82.58 14.27 83.33 13.93 84.09 13.59 84.85 13.26 85.61 12.94 86.36 12.62 87.12 12.30 87.88 12.00 88.64 11.69 89.39 11.40 90.15 11.10 90.91 10.81 91.67 10.53 92.42 10.25 93.18 9.98 93.94 9.71 94.70 9.44 95.45 9.18 96.21 8.92 96.97 8.67"/>
+            </svg>
+            <span class="ev" style="left: 11.82%"><i>Turning point</i><b>1:18</b></span>
+            <span class="ev" style="left: 81.21%"><i>First crack</i><b>8:56</b></span>
+            <span class="ev ev--end" style="left: 96.97%"><i>Drop</i><b>10:40</b></span>
+            <span class="ev ev--band" style="left: 89.09%">Development</span>
+            <span class="cross" id="cross" style="left: 60.61%"></span>
+            <span class="dot dot--ror" id="dot-ror" style="left: 60.61%; top: 81.28%"></span>
+            <span class="dot" id="dot" style="left: 60.61%; top: 27.08%"></span>
+            <div class="tt" id="tt" data-side="left" style="left: 60.61%; top: 27.08%"><b id="tt-t">6:40</b><span>Bean</span><span id="tt-bt">182.1 °C</span><span>Rate of rise</span><span id="tt-ror">9.4 °C/min</span></div>
+          </div>
+          <div class="chart__x" aria-hidden="true"><span style="left: 0.00%">0</span><span style="left: 18.18%">2</span><span style="left: 36.36%">4</span><span style="left: 54.55%">6</span><span style="left: 72.73%">8</span><span style="left: 90.91%">10 min</span></div>
+        </div>
+        <figcaption class="chart-cap">Development ran 1:44 from first crack to drop, 16.3% of the roast. The target for this profile is 15 to 18%.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer class="foot">Exemplars set a level of finish. They are not a kit: do not copy a layout or a look from them.</footer>
+</main>
+
+<script>
+(function () {
+  /* shared:start */
+  var root = document.documentElement;
+
+  /* Switcher links keep the other parameter; file links keep both. */
+  document.querySelectorAll("[data-palette-link]").forEach(function (a) {
+    var p = a.dataset.paletteLink;
+    a.href = "?palette=" + p;
+    if (p === root.dataset.palette) a.setAttribute("aria-current", "true");
+  });
+  var other = root.dataset.theme === "dark" ? "light" : "dark";
+  var themeLink = document.querySelector("[data-theme-link]");
+  themeLink.href = "?palette=" + root.dataset.palette + "&theme=" + other;
+  themeLink.setAttribute("aria-label", "Switch to " + other + " theme");
+  document.querySelectorAll(".bar__nav a, .bar__brand").forEach(function (a) {
+    a.href = a.getAttribute("href") + "?palette=" + root.dataset.palette + "&theme=" + root.dataset.theme;
+  });
+
+  /* shared:end */
+
+  /* Table: selection drives the floating bar, scroll drives the header shadow. */
+  var wrap = document.getElementById("tbl-wrap"), selbar = document.getElementById("selbar"), all = document.getElementById("check-all");
+  var boxes = Array.prototype.slice.call(wrap.querySelectorAll("tbody .check"));
+  function sync() {
+    var n = boxes.filter(function (b) { return b.checked; }).length;
+    all.checked = n === boxes.length;
+    all.indeterminate = n > 0 && n < boxes.length;
+    selbar.hidden = n === 0;
+    if (n) document.getElementById("selcount").textContent = n + " selected";
+  }
+  wrap.addEventListener("change", function (e) {
+    if (e.target === all) boxes.forEach(function (b) { b.checked = all.checked; });
+    sync();
+  });
+  document.getElementById("selclear").addEventListener("click", function () { boxes.forEach(function (b) { b.checked = false; }); sync(); all.focus(); });
+  wrap.addEventListener("scroll", function () { wrap.toggleAttribute("data-scrolled", wrap.scrollTop > 0); }, { passive: true });
+  sync();
+  if (root.dataset.state === "scrolled") wrap.scrollTop = 120;
+  if (root.dataset.state === "none") { boxes.forEach(function (b) { b.checked = false; }); sync(); }
+
+  /* Sort affordance: the header button cycles its own column. Sorting the rows is left to the data layer. */
+  wrap.querySelectorAll(".sort").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var th = btn.closest("th"), next = th.getAttribute("aria-sort") === "descending" ? "ascending" : "descending";
+      wrap.querySelectorAll("th[aria-sort]").forEach(function (t) { t.removeAttribute("aria-sort"); });
+      th.setAttribute("aria-sort", next);
+    });
+  });
+
+  /* Chart: one sample every 20 s as [bean temperature, rate of rise]. Pointer and arrow keys move the same index. */
+  var DATA = [[200.0, null], [128.7, null], [103.9, null], [95.1, null], [92.9, null], [101.7, 25.4], [109.9, 23.8], [117.6, 22.3], [124.7, 20.8], [131.5, 19.5], [137.7, 18.2], [143.6, 17.1], [149.1, 16.0], [154.3, 14.9], [159.1, 14.0], [163.6, 13.1], [167.8, 12.2], [171.7, 11.4], [175.4, 10.7], [178.9, 10.0], [182.1, 9.4], [185.1, 8.8], [187.9, 8.2], [190.6, 7.7], [193.0, 7.2], [195.4, 6.7], [197.5, 5.9], [199.5, 3.7], [201.4, 6.0], [203.2, 6.0], [204.9, 4.9], [206.4, 4.5], [207.9, 4.2]];
+  var plot = document.getElementById("plot"), cross = document.getElementById("cross"), dot = document.getElementById("dot"), dotRor = document.getElementById("dot-ror"), tt = document.getElementById("tt");
+  var index = 20;
+  function show(i) {
+    index = Math.max(0, Math.min(DATA.length - 1, i));
+    var t = index * 20, x = t / 660 * 100, y = (220 - DATA[index][0]) / 140 * 100, r = DATA[index][1];
+    var time = Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0");
+    cross.style.left = dot.style.left = dotRor.style.left = tt.style.left = x + "%";
+    dot.style.top = tt.style.top = y + "%";
+    dotRor.hidden = r === null;
+    if (r !== null) dotRor.style.top = 100 - r / 30 * 60 + "%";
+    tt.dataset.side = x > 50 ? "left" : "right";
+    document.getElementById("tt-t").textContent = time;
+    document.getElementById("tt-bt").textContent = DATA[index][0].toFixed(1) + " °C";
+    document.getElementById("tt-ror").textContent = r === null ? "falling" : r.toFixed(1) + " °C/min";
+    plot.setAttribute("aria-valuenow", index);
+    plot.setAttribute("aria-valuetext", time + ", bean " + DATA[index][0].toFixed(1) + " degrees" + (r === null ? "" : ", rising " + r.toFixed(1) + " per minute"));
+  }
+  plot.addEventListener("pointermove", function (e) {
+    var box = plot.getBoundingClientRect();
+    show(Math.round((e.clientX - box.left) / box.width * 660 / 20));
+  });
+  plot.addEventListener("keydown", function (e) {
+    var step = { ArrowRight: 1, ArrowLeft: -1, PageUp: 3, PageDown: -3 }[e.key];
+    if (e.key === "Home") step = -index;
+    if (e.key === "End") step = DATA.length;
+    if (step === undefined) return;
+    e.preventDefault();
+    show(index + step);
+  });
+  show(index);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en" data-palette="clay" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Controls, a finesse exemplar</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<script>
+  /* Runs before first paint so the page never flashes the wrong palette. */
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    var home = { clay: "light", cobalt: "light", moss: "dark" };
+    var p = home[q.get("palette")] ? q.get("palette") : "clay";
+    var t = q.get("theme") === "light" || q.get("theme") === "dark" ? q.get("theme") : home[p];
+    root.dataset.palette = p;
+    root.dataset.theme = t;
+    if (q.get("state")) root.dataset.state = q.get("state");
+  })();
+</script>
+<style>
+
+/* Async faces share one grid cell, so the button is always as wide as its longest label. */
+.btn--async { display: inline-grid; }
+.btn__face {
+  grid-area: 1 / 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  opacity: 0; filter: blur(4px); transform: scale(var(--enter-scale)); visibility: hidden;
+  transition: opacity var(--dur-state) var(--curve-out), filter var(--dur-state) var(--curve-out), transform var(--dur-state) var(--curve-out), visibility 0s linear var(--dur-state);
+}
+.btn[data-state="idle"] [data-face="idle"], .btn[data-state="loading"] [data-face="loading"],
+.btn[data-state="success"] [data-face="success"], .btn[data-state="error"] [data-face="error"] {
+  opacity: 1; filter: none; transform: none; visibility: visible; transition-delay: 0s;
+}
+.btn[data-state="success"] [data-face="success"] .icon { animation: draw var(--dur-overlay) var(--curve-out) both; }
+@keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+.inline-error { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-sm); color: var(--danger); }
+.inline-error[hidden] { display: none; }
+
+.matrix { display: grid; grid-template-columns: 88px repeat(6, minmax(0, 1fr)); gap: 24px 12px; align-items: start; }
+.matrix__head { font-size: var(--fs-sm); line-height: 40px; color: var(--text-muted); }
+.cell { display: grid; justify-items: start; gap: 8px; }
+
+
+/* Tabs */
+.tabs { position: relative; display: flex; gap: 24px; border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+.tab { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0; border: 0; background: none; font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--text-muted); white-space: nowrap; cursor: pointer; transition: color var(--dur-state) var(--curve-out); }
+.tab[aria-selected="true"] { color: var(--text); }
+.tab:focus-visible { outline-offset: -2px; border-radius: 6px; }
+.tab__count { min-width: 20px; padding: 0 4px; border-radius: 5px; background: var(--wash); font-size: var(--fs-xs); line-height: 20px; text-align: center; color: var(--text-muted); }
+.tabs__bar { position: absolute; left: 0; bottom: 0; width: 1px; height: 2px; background: var(--accent); transform-origin: left; transform: translateX(var(--x, 0px)) scaleX(var(--w, 0)); transition: transform var(--dur-overlay) var(--curve-out); }
+.tabpanel { padding-top: 24px; min-height: 148px; font-size: var(--fs-sm); }
+.tabpanel[hidden] { display: none; }
+.tabpanel:focus-visible { outline-offset: 4px; border-radius: 4px; }
+.kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.kv dt { color: var(--text-muted); }
+.kv dd { margin-top: 4px; font-size: var(--fs-xl); font-weight: var(--fw-medium); letter-spacing: -0.02em; }
+.kv dd .unit { font-size: var(--fs-base); font-weight: var(--fw-regular); letter-spacing: 0.02em; }
+.kv dd small { font-size: inherit; color: var(--text-muted); }
+@media (hover: hover) and (pointer: fine) { .tab:hover { color: var(--text); } }
+
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cols + .panel__row { border-top: 1px solid var(--border); }
+.seg-row { display: flex; flex-wrap: wrap; gap: 24px 32px; align-items: start; }
+.seg-row .cell { gap: 12px; }
+.cols > div { padding: 24px; }
+.cols > div + div { border-inline-start: 1px solid var(--border); }
+
+@media (width < 900px) {
+  .matrix { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .matrix__head { grid-column: 1 / -1; margin-bottom: -8px; }
+  .cols { grid-template-columns: minmax(0, 1fr); }
+  .cols > div { padding: 16px; }
+  .cols > div + div { border-inline-start: 0; border-top: 1px solid var(--border); }
+  .kv { gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn__face { filter: none; transform: none; }
+  .btn[data-state="success"] [data-face="success"] .icon { animation: none; }
+  .tabs__bar { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-chevrons" viewBox="0 0 16 16"><path d="M5 6.25l3-3 3 3M5 9.75l3 3 3-3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 16 16"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.5 8.5h6l.5-8.5M6.75 7v3.5M9.25 7v3.5"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><path d="M3.5 8h.01M8 8h.01M12.5 8h.01" stroke-width="2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.75"/><path d="M10.5 5.5V4.25A1.75 1.75 0 0 0 8.75 2.5h-4.5A1.75 1.75 0 0 0 2.5 4.25v4.5c0 .97.78 1.75 1.75 1.75H5.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="M10.25 10.25l3.25 3.25"/></symbol>
+  <symbol id="i-retry" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.6-3.67M13 2.75v2.5h-2.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+</svg>
+
+<header class="bar">
+  <div class="wrap bar__in">
+    <a class="bar__brand" href="controls.html">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 17V9a6 6 0 0 1 6-6h8"/><path d="M8 17v-6a3 3 0 0 1 3-3h6"/></svg>
+      finesse <span>exemplars</span>
+    </a>
+    <nav class="bar__nav" aria-label="Exemplar files">
+      <a href="controls.html" aria-current="page">Controls</a>
+      <a href="surfaces.html">Surfaces</a>
+      <a href="data.html">Data</a>
+      <a href="marketing.html">Marketing</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+    <div class="bar__tools">
+      <div class="swatches" role="group" aria-label="Palette">
+        <a href="?palette=clay" data-palette-link="clay" style="--chip: oklch(0.53 0.14 42)">Clay</a>
+        <a href="?palette=cobalt" data-palette-link="cobalt" style="--chip: oklch(0.48 0.22 264)">Cobalt</a>
+        <a href="?palette=moss" data-palette-link="moss" style="--chip: oklch(0.87 0.19 125)">Moss</a>
+      </div>
+      <a class="theme-link" href="?theme=dark" data-theme-link aria-label="Switch theme">
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <div>
+      <p class="intro__eyebrow">Exemplar 1 of 5</p>
+      <h1>Controls</h1>
+      <p class="intro__lede">Buttons, fields and selection controls with every state drawn. Match this level of finish. Take the structure, palette and type from your own project.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Colour</dt><dd>Role variables only</dd></div>
+      <div><dt>States</dt><dd>Drawn beside each control</dd></div>
+      <div><dt>Motion</dt><dd>Has a reduced path</dd></div>
+    </dl>
+  </div>
+
+  <section class="spec" id="buttons" aria-labelledby="buttons-h">
+    <div class="spec__note">
+      <p class="spec__no">01</p>
+      <h2 id="buttons-h">Buttons</h2>
+      <p>One primary per view. Depth comes from light, not from a bigger shadow.</p>
+      <ol class="notes">
+        <li>Filled buttons carry a 1&nbsp;px top highlight and a ring one step darker than the fill.</li>
+        <li>The icon side has 12&nbsp;px of padding, the text side 16&nbsp;px.</li>
+        <li>Press scales to 0.97 and swaps the drop shadow for an inner one.</li>
+        <li>Idle, loading, success and error faces share one grid cell. The width never moves.</li>
+        <li>Disabled keeps the shape and loses the depth.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="panel">
+        <div class="panel__row">
+          <span class="panel__label">Variants</span>
+          <div class="row">
+            <button class="btn btn--primary" type="button"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>New batch</button>
+            <button class="btn" type="button">Duplicate<kbd>D</kbd></button>
+            <button class="btn btn--quiet" type="button">Cancel</button>
+            <button class="btn btn--danger-quiet" type="button"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg>Discard batch</button>
+            <button class="btn btn--danger" type="button">Delete roastery</button>
+            <button class="btn btn--icon" type="button" aria-label="Copy batch link"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg></button>
+            <button class="btn btn--icon btn--quiet" type="button" aria-label="More actions"><svg class="icon" aria-hidden="true"><use href="#i-more"/></svg></button>
+          </div>
+        </div>
+        <div class="panel__row">
+          <span class="panel__label">Sizes: 32 dense, 40 default, 48 call to action</span>
+          <div class="row">
+            <button class="btn btn--sm" type="button"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Add note</button>
+            <button class="btn" type="button">Export CSV</button>
+            <button class="btn btn--primary btn--lg" type="button">Start a roast<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+          </div>
+        </div>
+        <div class="panel__row">
+          <span class="panel__label">Async: press either one</span>
+          <div class="row">
+            <button class="btn btn--primary btn--async" type="button" data-async="ok" data-state="idle">
+              <span class="btn__face" data-face="idle">Publish profile</span>
+              <span class="btn__face" data-face="loading" aria-hidden="true"><svg class="spinner" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Publishing</span>
+              <span class="btn__face" data-face="success" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg>Published</span>
+            </button>
+            <button class="btn btn--async" type="button" data-async="fail" data-state="idle" aria-describedby="sync-error">
+              <span class="btn__face" data-face="idle">Sync scale</span>
+              <span class="btn__face" data-face="loading" aria-hidden="true"><svg class="spinner" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Syncing</span>
+              <span class="btn__face" data-face="error" aria-hidden="true"><svg class="icon"><use href="#i-retry"/></svg>Try again</span>
+            </button>
+            <span class="inline-error" id="sync-error" hidden><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>The scale did not answer within 10 seconds.</span>
+            <span class="sr-only" role="status" aria-live="polite" id="async-live"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel__row">
+          <span class="panel__label">State matrix</span>
+          <div class="matrix">
+            <span class="matrix__head">Primary</span>
+            <div class="cell"><button class="btn btn--primary" type="button">Save</button><span class="caption">default</span></div>
+            <div class="cell"><button class="btn btn--primary is-hover" type="button">Save</button><span class="caption">hover</span></div>
+            <div class="cell"><button class="btn btn--primary is-focus" type="button">Save</button><span class="caption">focus</span></div>
+            <div class="cell"><button class="btn btn--primary is-active" type="button">Save</button><span class="caption">active</span></div>
+            <div class="cell"><button class="btn btn--primary" type="button" disabled>Save</button><span class="caption">disabled</span></div>
+            <div class="cell"><button class="btn btn--primary btn--async" type="button" data-state="loading" aria-busy="true" aria-disabled="true"><span class="btn__face" data-face="idle" aria-hidden="true">Save</span><span class="btn__face" data-face="loading"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg><span class="sr-only">Saving</span></span></button><span class="caption">loading</span></div>
+
+            <span class="matrix__head">Secondary</span>
+            <div class="cell"><button class="btn" type="button">Export</button><span class="caption">default</span></div>
+            <div class="cell"><button class="btn is-hover" type="button">Export</button><span class="caption">hover</span></div>
+            <div class="cell"><button class="btn is-focus" type="button">Export</button><span class="caption">focus</span></div>
+            <div class="cell"><button class="btn is-active" type="button">Export</button><span class="caption">active</span></div>
+            <div class="cell"><button class="btn" type="button" disabled>Export</button><span class="caption">disabled</span></div>
+            <div class="cell"><button class="btn btn--async" type="button" data-state="success"><span class="btn__face" data-face="idle" aria-hidden="true">Export</span><span class="btn__face" data-face="success"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sent</span></button><span class="caption">success</span></div>
+
+            <span class="matrix__head">Quiet</span>
+            <div class="cell"><button class="btn btn--quiet" type="button">Cancel</button><span class="caption">default</span></div>
+            <div class="cell"><button class="btn btn--quiet is-hover" type="button">Cancel</button><span class="caption">hover</span></div>
+            <div class="cell"><button class="btn btn--quiet is-focus" type="button">Cancel</button><span class="caption">focus</span></div>
+            <div class="cell"><button class="btn btn--quiet is-active" type="button">Cancel</button><span class="caption">active</span></div>
+            <div class="cell"><button class="btn btn--quiet" type="button" disabled>Cancel</button><span class="caption">disabled</span></div>
+            <div class="cell"></div>
+
+            <span class="matrix__head">Destructive</span>
+            <div class="cell"><button class="btn btn--danger-quiet" type="button">Discard</button><span class="caption">default</span></div>
+            <div class="cell"><button class="btn btn--danger-quiet is-hover" type="button">Discard</button><span class="caption">hover</span></div>
+            <div class="cell"><button class="btn btn--danger-quiet is-focus" type="button">Discard</button><span class="caption">focus</span></div>
+            <div class="cell"><button class="btn btn--danger-quiet is-active" type="button">Discard</button><span class="caption">active</span></div>
+            <div class="cell"><button class="btn btn--danger-quiet" type="button" disabled>Discard</button><span class="caption">disabled</span></div>
+            <div class="cell"><button class="btn btn--danger" type="button">Delete</button><span class="caption">confirm step</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="fields" aria-labelledby="fields-h">
+    <div class="spec__note">
+      <p class="spec__no">02</p>
+      <h2 id="fields-h">Text input and select</h2>
+      <p>A field is a shallow well: it sits below the surface the buttons sit above.</p>
+      <ol class="notes">
+        <li>Inner top shadow plus a 1&nbsp;px light lip under the bottom edge.</li>
+        <li>The focus ring wraps the frame, affix included, never the bare input.</li>
+        <li>Help and error share one reserved line, so the form does not jump.</li>
+        <li>Units are small caps on a tinted affix. Numbers are tabular.</li>
+        <li>Error adds an icon and words. Colour is never the only signal.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="panel">
+        <div class="panel__row fields">
+          <div class="field">
+            <div class="field__top"><label for="f-name">Roastery name</label></div>
+            <div class="input"><input id="f-name" type="text" value="Halden Street Roasters" autocomplete="organization" aria-describedby="f-name-help"></div>
+            <p class="field__help" id="f-name-help">Printed on bag labels and invoices.</p>
+          </div>
+          <div class="field">
+            <div class="field__top"><label for="f-origin">Origin</label><span class="caption">focus</span></div>
+            <div class="input is-focus"><span class="input__lead"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></span><input id="f-origin" type="text" placeholder="Search farms and lots" aria-describedby="f-origin-help"></div>
+            <p class="field__help" id="f-origin-help">Try “Huila” or a lot number.</p>
+          </div>
+          <div class="field">
+            <div class="field__top"><label for="f-charge">Charge weight</label><span class="caption">error</span></div>
+            <div class="input"><input id="f-charge" class="num" type="text" inputmode="decimal" value="14.5" aria-invalid="true" aria-describedby="f-charge-help"><span class="input__affix unit">kg</span></div>
+            <p class="field__help field__help--error" id="f-charge-help"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>The drum holds 12 kg. Enter 12 or less.</p>
+          </div>
+          <div class="field">
+            <div class="field__top"><label for="f-slug">Public profile link</label><span class="caption">checked</span></div>
+            <div class="input"><span class="input__prefix">batchbook.app/</span><input id="f-slug" type="text" value="halden-street" autocomplete="off" spellcheck="false" aria-describedby="f-slug-help"><span class="input__status"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+            <p class="field__help field__help--ok" id="f-slug-help">This link is free.</p>
+          </div>
+          <div class="field">
+            <div class="field__top"><label for="f-roaster">Roaster</label><span class="field__opt">Optional</span></div>
+            <div class="input select">
+              <select id="f-roaster">
+                <option>Probat P12, drum</option>
+                <option>Loring S15, air</option>
+                <option>Giesen W6A, drum</option>
+              </select>
+              <svg class="icon" aria-hidden="true"><use href="#i-chevrons"/></svg>
+            </div>
+            <p class="field__help">Sets the charge limit and the default curve.</p>
+          </div>
+          <div class="field">
+            <div class="field__top"><label for="f-licence">Licence key</label><span class="caption">disabled</span></div>
+            <div class="input"><input id="f-licence" class="mono" type="text" value="BB-7H2K-41QD" disabled aria-describedby="f-licence-help"></div>
+            <p class="field__help" id="f-licence-help">Managed by the workspace owner.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="selection" aria-labelledby="selection-h">
+    <div class="spec__note">
+      <p class="spec__no">03</p>
+      <h2 id="selection-h">Checkbox, switch, segmented</h2>
+      <p>Native inputs underneath. The drawing changes, the behaviour does not.</p>
+      <ol class="notes">
+        <li>The tick wipes in with a clip-path, left to right, the way a pen draws it.</li>
+        <li>The switch thumb stretches toward its destination while held.</li>
+        <li>Segmented radii are concentric: track 10, padding 4, thumb 6.</li>
+        <li>In dark themes the thumb on a light accent turns dark, so it stays visible.</li>
+        <li>Selected text changes colour, never weight.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="panel"><div class="cols">
+        <div>
+          <span class="panel__label">Checkbox</span>
+          <label class="opt"><input class="check" type="checkbox" checked><span>Log first crack by ear</span><span class="opt__desc">Adds a marker button to the roast screen.</span></label>
+          <label class="opt"><input class="check" type="checkbox"><span>Weigh after cooling</span></label>
+          <label class="opt"><input class="check" type="checkbox" id="mixed"><span>Share with the team</span><span class="opt__desc">2 of 5 people can see this.</span></label>
+          <label class="opt"><input class="check" type="checkbox" checked disabled><span>Keep raw probe data</span></label>
+        </div>
+        <div>
+          <span class="panel__label">Switch: applies at once</span>
+          <label class="opt opt--switch"><span>Alert on stalled rise</span><span class="opt__desc">When the rate of rise stays flat for 30 s.</span><input class="switch" type="checkbox" role="switch" checked></label>
+          <label class="opt opt--switch"><span>Fahrenheit on the roast screen</span><input class="switch" type="checkbox" role="switch"></label>
+          <label class="opt opt--switch"><span>Weekly summary email</span><span class="opt__desc saving"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Saving</span><input class="switch" type="checkbox" role="switch" checked aria-busy="true"></label>
+          <label class="opt opt--switch"><span>Public profile</span><span class="opt__desc">Turned off by the owner.</span><input class="switch" type="checkbox" role="switch" disabled></label>
+        </div>
+      </div>
+        <div class="panel__row">
+          <span class="panel__label">Segmented: one choice, all options visible, fewer than five</span>
+          <div class="seg-row">
+            <div class="cell">
+              <div class="seg" role="radiogroup" aria-label="Chart range" style="--n: 3">
+                <span class="seg__thumb" aria-hidden="true"></span>
+                <label><input class="sr-only" type="radio" name="range" checked>Roast</label>
+                <label><input class="sr-only" type="radio" name="range">Day</label>
+                <label><input class="sr-only" type="radio" name="range">Week</label>
+              </div>
+              <span class="caption">default</span>
+            </div>
+            <div class="cell">
+              <div class="seg" role="radiogroup" aria-label="Temperature unit" style="--n: 2">
+                <span class="seg__thumb" aria-hidden="true"></span>
+                <label><input class="sr-only" type="radio" name="unit">°C</label>
+                <label><input class="sr-only" type="radio" name="unit" checked>°F</label>
+              </div>
+              <span class="caption">second selected</span>
+            </div>
+            <div class="cell">
+              <div class="seg" role="radiogroup" aria-label="Table density" style="--n: 3">
+                <span class="seg__thumb" aria-hidden="true"></span>
+                <label><input class="sr-only" type="radio" name="density" checked>Compact</label>
+                <label class="is-focus"><input class="sr-only" type="radio" name="density">Regular</label>
+                <label><input class="sr-only" type="radio" name="density">Roomy</label>
+              </div>
+              <span class="caption">focus, ring inset</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="tabs" aria-labelledby="tabs-h">
+    <div class="spec__note">
+      <p class="spec__no">04</p>
+      <h2 id="tabs-h">Tabs</h2>
+      <p>The indicator travels. Arrow keys move between tabs, Home and End jump.</p>
+      <ol class="notes">
+        <li>One bar slides with transform. It is never four bars fading.</li>
+        <li>Counts sit in a tabular chip so the labels do not shift as numbers change.</li>
+        <li>The panel keeps a fixed minimum height across tabs.</li>
+        <li>Decimals and units are quieter than the figure they belong to.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="panel">
+        <div class="panel__row">
+          <div class="tabs" role="tablist" aria-label="Batch 0412">
+            <button class="tab" type="button" role="tab" id="t-summary" aria-controls="p-summary" aria-selected="true">Summary</button>
+            <button class="tab" type="button" role="tab" id="t-curve" aria-controls="p-curve" aria-selected="false" tabindex="-1">Curve</button>
+            <button class="tab" type="button" role="tab" id="t-cupping" aria-controls="p-cupping" aria-selected="false" tabindex="-1">Cupping notes<span class="tab__count num">3</span></button>
+            <button class="tab" type="button" role="tab" id="t-orders" aria-controls="p-orders" aria-selected="false" tabindex="-1">Orders<span class="tab__count num">12</span></button>
+            <span class="tabs__bar" aria-hidden="true"></span>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-summary" aria-labelledby="t-summary" tabindex="0">
+            <dl class="kv">
+              <div><dt>Charge</dt><dd class="num">11<small>.80</small> <span class="unit">kg</span></dd></div>
+              <div><dt>Weight loss</dt><dd class="num">14<small>.2</small> <span class="unit">%</span></dd></div>
+              <div><dt>Total time</dt><dd class="num">10:42 <span class="unit">min</span></dd></div>
+            </dl>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-curve" aria-labelledby="t-curve" tabindex="0" hidden>
+            <dl class="kv">
+              <div><dt>Turning point</dt><dd class="num">1:18 <span class="unit">min</span></dd></div>
+              <div><dt>First crack</dt><dd class="num">8:56 <span class="unit">min</span></dd></div>
+              <div><dt>Drop</dt><dd class="num">208 <span class="unit">°C</span></dd></div>
+            </dl>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-cupping" aria-labelledby="t-cupping" tabindex="0" hidden>
+            <p>Three people cupped this batch on day 7. Read their notes side by side before you change the curve.</p>
+          </div>
+          <div class="tabpanel" role="tabpanel" id="p-orders" aria-labelledby="t-orders" tabindex="0" hidden>
+            <p>Twelve wholesale orders draw on this batch. 3.4 kg is still unallocated.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">Exemplars set a level of finish. They are not a kit: do not copy a layout or a look from them.</footer>
+</main>
+
+<script>
+(function () {
+  /* shared:start */
+  var root = document.documentElement;
+
+  /* Switcher links keep the other parameter; file links keep both. */
+  document.querySelectorAll("[data-palette-link]").forEach(function (a) {
+    var p = a.dataset.paletteLink;
+    a.href = "?palette=" + p;
+    if (p === root.dataset.palette) a.setAttribute("aria-current", "true");
+  });
+  var other = root.dataset.theme === "dark" ? "light" : "dark";
+  var themeLink = document.querySelector("[data-theme-link]");
+  themeLink.href = "?palette=" + root.dataset.palette + "&theme=" + other;
+  themeLink.setAttribute("aria-label", "Switch to " + other + " theme");
+  document.querySelectorAll(".bar__nav a, .bar__brand").forEach(function (a) {
+    a.href = a.getAttribute("href") + "?palette=" + root.dataset.palette + "&theme=" + root.dataset.theme;
+  });
+
+  /* shared:end */
+
+  var mixed = document.getElementById("mixed");
+  if (mixed) mixed.indeterminate = true;
+
+  /* Async button: spinner shows for at least 400 ms, success holds 1,800 ms, timers are cleared before re-arming. */
+  var live = document.getElementById("async-live");
+  document.querySelectorAll("[data-async]").forEach(function (btn) {
+    var timer;
+    function show(state) {
+      btn.dataset.state = state;
+      btn.querySelectorAll("[data-face]").forEach(function (f) { f.setAttribute("aria-hidden", String(f.dataset.face !== state)); });
+      var busy = state === "loading";
+      btn.toggleAttribute("aria-busy", busy);
+      if (busy) { btn.setAttribute("aria-busy", "true"); btn.setAttribute("aria-disabled", "true"); } else btn.removeAttribute("aria-disabled");
+      var err = btn.dataset.async === "fail" && document.getElementById("sync-error");
+      if (err) err.hidden = state !== "error";
+      live.textContent = state === "idle" ? "" : btn.querySelector('[data-face="' + state + '"]').textContent.trim() + (state === "error" ? ". " + err.textContent.trim() : "");
+    }
+    btn.addEventListener("click", function () {
+      if (btn.dataset.state === "loading") return;
+      clearTimeout(timer);
+      show("loading");
+      timer = setTimeout(function () {
+        if (btn.dataset.async === "fail") { show("error"); return; }
+        show("success");
+        timer = setTimeout(function () { show("idle"); }, 1800);
+      }, 1200);
+    });
+    if (root.dataset.state && btn.querySelector('[data-face="' + root.dataset.state + '"]')) show(root.dataset.state);
+  });
+
+  /* Tabs: roving tabindex, and one bar moved with transform. */
+  document.querySelectorAll('[role="tablist"]').forEach(function (list) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    var bar = list.querySelector(".tabs__bar");
+    function place(tab) {
+      bar.style.setProperty("--x", tab.offsetLeft + "px");
+      bar.style.setProperty("--w", tab.offsetWidth);
+    }
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      place(tab);
+      if (focus) tab.focus();
+    }
+    list.addEventListener("click", function (e) { var t = e.target.closest('[role="tab"]'); if (t) select(t); });
+    list.addEventListener("keydown", function (e) {
+      var i = tabs.indexOf(document.activeElement), n = tabs.length;
+      var next = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+      if (i < 0 || next === undefined) return;
+      e.preventDefault();
+      select(tabs[next], true);
+    });
+    var first = list.querySelector('[aria-selected="true"]');
+    bar.style.transition = "none";
+    place(first);
+    requestAnimationFrame(function () { bar.style.transition = ""; });
+    addEventListener("resize", function () { place(list.querySelector('[aria-selected="true"]')); });
+  });
+})();
+</script>
+</body>
+</html>

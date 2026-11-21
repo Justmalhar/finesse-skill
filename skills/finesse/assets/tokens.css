@@ -1,0 +1,270 @@
+/*
+  finesse starter tokens. Plain CSS, no build step.
+  Components use the semantic roles only, never raw oklch() values.
+  If the project already has tokens (shadcn, a design system, a DESIGN.md), port
+  these values into its names instead of importing this file. See
+  references/foundations.md.
+  Contrast ratios in comments are measured (WCAG 2) at --brand-hue 220.
+*/
+
+:root {
+  --brand-hue: 220; /* Starter values only. Paste section 2 of scripts/direct.mjs --emit <id> over the theme blocks below, and its section 1 font @import on the first line of this file. */
+
+  /* Type */
+  --family-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --family-display: var(--family-sans);
+  --family-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-display: 600;
+
+  --fs-xs: 0.75rem;     /* 12px, the floor: labels and meta only */
+  --fs-sm: 0.875rem;    /* 14px, dense secondary text in product UI */
+  --fs-base: 1rem;      /* 16px, reading text and inputs */
+  --fs-lg: 1.2rem;      /* product steps use ratio 1.2 */
+  --fs-xl: 1.44rem;
+  --fs-2xl: 1.728rem;
+  --fs-h2: clamp(1.75rem, 1.25rem + 2vw, 2.75rem);   /* marketing steps, ratio about 1.25 to 1.333 */
+  --fs-h1: clamp(2.25rem, 1.5rem + 3vw, 4rem);
+  --fs-display: clamp(2.5rem, 1.375rem + 4.6vw, 6rem); /* 40px at 390 wide to 96px at 1600 wide */
+
+  --lh-body: 1.6;
+  --lh-heading: 1.2;
+  --lh-display: 1.1;
+  --ls-display: -0.025em;
+  --ls-caps: 0.06em;
+  --measure: 68ch;
+
+  /* Space: 4px grid. Names are multiples of 4px, matching Tailwind's spacing steps. */
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-6: 1.5rem;   /* 24 */
+  --space-8: 2rem;     /* 32 */
+  --space-12: 3rem;    /* 48 */
+  --space-16: 4rem;    /* 64 */
+  --space-24: 6rem;    /* 96 */
+  --space-32: 8rem;    /* 128 */
+
+  --container-max: 1280px;
+  --gutter: 24px;
+  --section-y: var(--space-24);
+
+  /* Shape */
+  --r-control: 8px;
+  --r-card: 12px;
+  --r-modal: 16px;
+  --r-pill: 9999px;
+  --border-width: 1px;
+  --control-h: 40px;
+  --pad-card: 24px;
+  --gap-group: 32px;
+
+  /* Layers */
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-overlay: 1200;
+  --z-modal: 1300;
+  --z-toast: 1400;
+  --z-tooltip: 1500;
+
+  /* Motion */
+  --dur-press: 120ms;
+  --dur-state: 200ms;
+  --dur-overlay: 240ms;
+  --dur-overlay-exit: calc(var(--dur-overlay) * 0.7);
+  --dur-layout: 400ms;
+  --dur-entrance: 600ms;
+  --curve-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --curve-move: cubic-bezier(0.65, 0, 0.35, 1);
+  --press-scale: 0.97;
+  --hover-lift: -2px;
+  --enter-scale: 0.95;
+  --enter-y: 8px;
+  --stagger: 40ms;
+}
+
+@media (width < 768px) {
+  :root {
+    --gutter: 16px;
+    --section-y: var(--space-16);
+  }
+}
+
+/* Light theme: the default, and the explicit [data-theme="light"] override. */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --background: oklch(0.975 0.006 var(--brand-hue));
+  --surface: oklch(0.985 0.005 var(--brand-hue));
+  --surface-raised: oklch(0.99 0.005 var(--brand-hue));
+  --border: oklch(0.2 0.01 var(--brand-hue) / 0.1);
+  --border-strong: oklch(0.6 0.012 var(--brand-hue));      /* control outlines: 3.8:1 on surface */
+  --text: oklch(0.2 0.015 var(--brand-hue));                /* 16.8:1 on background */
+  --text-muted: oklch(0.48 0.015 var(--brand-hue));         /* 6.1:1 on background */
+  --accent: oklch(0.5 0.09 var(--brand-hue));               /* 5.4:1 on background, usable as link text */
+  --accent-text: oklch(0.99 0.005 var(--brand-hue));        /* 5.7:1 on accent */
+  --danger: oklch(0.52 0.19 27);                            /* 5.7:1 on background */
+  --success: oklch(0.52 0.13 150);                          /* 4.8:1 on background */
+  --warning: oklch(0.52 0.11 70);                           /* 5.3:1 on background */
+  --focus: oklch(0.52 0.09 var(--brand-hue));               /* 5.0:1 on background */
+
+  /* Chart series, in order. Neighbours alternate light and dark with a large hue step, so they stay apart with protanopia and deuteranopia; each is 3:1 on surface. */
+  --chart-1: oklch(0.52 0.095 var(--brand-hue));
+  --chart-2: oklch(0.6 0.17 45);
+  --chart-3: oklch(0.46 0.17 300);
+  --chart-4: oklch(0.6 0.15 150);
+  --chart-5: oklch(0.46 0.17 15);
+  --chart-6: oklch(0.6 0.1 190);
+
+  --shadow-color: oklch(0.2 0.02 var(--brand-hue));
+  /* Layered stacks: a tight contact layer under each wider layer. */
+  --elevation-1: 0 0 0 1px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 1px 2px color-mix(in oklch, var(--shadow-color) 8%, transparent);
+  --elevation-2: 0 0 0 1px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 1px 2px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 8%, transparent);
+  --elevation-3: 0 0 0 1px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 2px 4px color-mix(in oklch, var(--shadow-color) 6%, transparent), 0 8px 16px color-mix(in oklch, var(--shadow-color) 8%, transparent), 0 24px 48px color-mix(in oklch, var(--shadow-color) 10%, transparent);
+}
+
+/* Dark theme, written twice on purpose: once for the OS preference, once for the explicit override. Keep both blocks identical. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --background: oklch(0.16 0.01 var(--brand-hue));
+    --surface: oklch(0.19 0.01 var(--brand-hue));
+    --surface-raised: oklch(0.22 0.012 var(--brand-hue));
+    --border: oklch(0.98 0.005 var(--brand-hue) / 0.1);
+    --border-strong: oklch(0.52 0.012 var(--brand-hue));
+    --text: oklch(0.95 0.008 var(--brand-hue));
+    --text-muted: oklch(0.72 0.012 var(--brand-hue));
+    --accent: oklch(0.72 0.075 var(--brand-hue));
+    --accent-text: oklch(0.16 0.01 var(--brand-hue));
+    --danger: oklch(0.7 0.16 27);
+    --success: oklch(0.72 0.13 150);
+    --warning: oklch(0.78 0.13 75);
+    --focus: oklch(0.75 0.075 var(--brand-hue));
+
+    --chart-1: oklch(0.72 0.11 var(--brand-hue));
+    --chart-2: oklch(0.82 0.12 65);
+    --chart-3: oklch(0.64 0.17 300);
+    --chart-4: oklch(0.84 0.15 150);
+    --chart-5: oklch(0.64 0.17 15);
+    --chart-6: oklch(0.84 0.1 195);
+
+    --shadow-color: oklch(0.1 0 0);
+    /* Light shadows; the hairline carries the edge. */
+    --elevation-1: 0 0 0 1px var(--border), 0 1px 2px color-mix(in oklch, var(--shadow-color) 30%, transparent);
+    --elevation-2: 0 0 0 1px var(--border), 0 1px 2px color-mix(in oklch, var(--shadow-color) 30%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 20%, transparent);
+    --elevation-3: 0 0 0 1px var(--border), 0 2px 4px color-mix(in oklch, var(--shadow-color) 30%, transparent), 0 12px 24px color-mix(in oklch, var(--shadow-color) 25%, transparent);
+  }
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: oklch(0.16 0.01 var(--brand-hue));          /* text 16.8:1, muted 7.8:1, accent 8.0:1 */
+  --surface: oklch(0.19 0.01 var(--brand-hue));             /* text 16.0:1, muted 7.5:1 */
+  --surface-raised: oklch(0.22 0.012 var(--brand-hue));     /* text 15.0:1, muted 7.0:1 */
+  --border: oklch(0.98 0.005 var(--brand-hue) / 0.1);
+  --border-strong: oklch(0.52 0.012 var(--brand-hue));      /* 3.4:1 on surface */
+  --text: oklch(0.95 0.008 var(--brand-hue));
+  --text-muted: oklch(0.72 0.012 var(--brand-hue));
+  --accent: oklch(0.72 0.075 var(--brand-hue));              /* chroma 15% below light */
+  --accent-text: oklch(0.16 0.01 var(--brand-hue));         /* 8.0:1 on accent */
+  --danger: oklch(0.7 0.16 27);
+  --success: oklch(0.72 0.13 150);
+  --warning: oklch(0.78 0.13 75);
+  --focus: oklch(0.75 0.075 var(--brand-hue));
+
+  --chart-1: oklch(0.72 0.11 var(--brand-hue));
+  --chart-2: oklch(0.82 0.12 65);
+  --chart-3: oklch(0.64 0.17 300);
+  --chart-4: oklch(0.84 0.15 150);
+  --chart-5: oklch(0.64 0.17 15);
+  --chart-6: oklch(0.84 0.1 195);
+
+  --shadow-color: oklch(0.1 0 0);
+  /* Light shadows; the hairline carries the edge. */
+  --elevation-1: 0 0 0 1px var(--border), 0 1px 2px color-mix(in oklch, var(--shadow-color) 30%, transparent);
+  --elevation-2: 0 0 0 1px var(--border), 0 1px 2px color-mix(in oklch, var(--shadow-color) 30%, transparent), 0 4px 12px color-mix(in oklch, var(--shadow-color) 20%, transparent);
+  --elevation-3: 0 0 0 1px var(--border), 0 2px 4px color-mix(in oklch, var(--shadow-color) 30%, transparent), 0 12px 24px color-mix(in oklch, var(--shadow-color) 25%, transparent);
+}
+
+/* Focus: 2px ring, 2px offset, never transitioned. */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Components that read the motion tokens comply automatically. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --press-scale: 1;
+    --hover-lift: 0px;
+    --enter-scale: 1;
+    --enter-y: 0px;
+    --stagger: 0ms;
+    --dur-overlay: 200ms;
+    --dur-layout: 200ms;
+    --dur-entrance: 200ms;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/*
+  Tailwind v4: paste this after @import "tailwindcss" in the stylesheet that
+  imports this file. "inline" makes utilities read the live variables, so the
+  theme swap above drives bg-surface, text-fg, text-muted and the rest with no dark: variant.
+
+  @theme inline {
+    --color-background: var(--background);
+    --color-surface: var(--surface);
+    --color-surface-raised: var(--surface-raised);
+    --color-border: var(--border);
+    --color-border-strong: var(--border-strong);
+    --color-fg: var(--text);
+    --color-muted: var(--text-muted);
+    --color-accent: var(--accent);
+    --color-accent-text: var(--accent-text);
+    --color-danger: var(--danger);
+    --color-success: var(--success);
+    --color-warning: var(--warning);
+    --color-focus: var(--focus);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-chart-6: var(--chart-6);
+
+    --font-sans: var(--family-sans);
+    --font-display: var(--family-display);
+    --font-mono: var(--family-mono);
+
+    --text-xs: var(--fs-xs);
+    --text-sm: var(--fs-sm);
+    --text-base: var(--fs-base);
+    --text-lg: var(--fs-lg);
+    --text-xl: var(--fs-xl);
+    --text-2xl: var(--fs-2xl);
+    --text-h2: var(--fs-h2);
+    --text-h1: var(--fs-h1);
+    --text-display: var(--fs-display);
+
+    --radius-control: var(--r-control);
+    --radius-card: var(--r-card);
+    --radius-modal: var(--r-modal);
+
+    --shadow-1: var(--elevation-1);
+    --shadow-2: var(--elevation-2);
+    --shadow-3: var(--elevation-3);
+
+    --ease-out: var(--curve-out);
+    --ease-in-out: var(--curve-move);
+  }
+
+  @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+*/

@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en" data-palette="clay" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marketing, a finesse exemplar</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="base.css">
+<script>
+  /* Runs before first paint so the page never flashes the wrong palette. */
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    var home = { clay: "light", cobalt: "light", moss: "dark" };
+    var p = home[q.get("palette")] ? q.get("palette") : "clay";
+    var t = q.get("theme") === "light" || q.get("theme") === "dark" ? q.get("theme") : home[p];
+    root.dataset.palette = p;
+    root.dataset.theme = t;
+    if (q.get("state")) root.dataset.state = q.get("state");
+  })();
+</script>
+<style>
+
+/* This file uses the full width: notes run above each piece instead of beside it. */
+.spec { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-block: 64px; }
+.spec__note { display: grid; grid-template-columns: minmax(0, 264px) minmax(0, 1fr); gap: 16px 48px; }
+.spec__note > * { grid-column: 1; }
+.spec__note .notes { grid-column: 2; grid-row: 1 / span 3; margin: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; align-content: start; }
+.frame { position: relative; isolation: isolate; border-radius: 16px; background: var(--surface); box-shadow: var(--lift-1); overflow: hidden; }
+.frame + .frame, .frame + .frame-cap { margin-top: 32px; }
+.frame-cap { display: block; margin-bottom: -16px; }
+.frame h3 { font-family: var(--family-display); font-weight: var(--fw-semibold); letter-spacing: var(--ls-display); text-wrap: balance; }
+
+.brand { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-base); font-weight: var(--fw-semibold); letter-spacing: -0.01em; text-decoration: none; }
+.brand svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.brand svg path { stroke: var(--accent); }
+/* A text link that reads as a link: hairline underline that darkens, arrow that travels 2px. */
+.textlink { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-sm); font-weight: var(--fw-medium); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: var(--border-strong); transition: text-decoration-color var(--dur-press) var(--curve-out); }
+.textlink .icon { transition: transform var(--dur-state) var(--curve-out); }
+@media (hover: hover) and (pointer: fine) {
+  .textlink:hover { text-decoration-color: currentColor; }
+  .textlink:hover .icon { transform: translateX(2px); }
+}
+
+/* Hero A: copy on five columns, a real product fragment on seven, cropped by the frame. */
+.ha { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); background-image: radial-gradient(50% 90% at 100% 0%, var(--accent-wash), transparent 75%); }
+.ha__nav { grid-column: 1 / -1; display: flex; align-items: center; gap: 32px; padding: 20px 24px 20px 48px; font-size: var(--fs-sm); }
+.ha__nav a:not(.brand, .btn) { color: var(--text-muted); text-decoration: none; }
+.ha__nav .brand { margin-inline-end: 16px; }
+.ha__nav .btn { margin-inline-start: auto; }
+.ha__copy { align-self: center; padding: 48px 0 80px 48px; }
+.ha h3 { font-size: var(--fs-h1); line-height: 1.08; }
+.ha__sub { margin-top: 24px; max-width: 42ch; font-size: var(--fs-lg); line-height: 1.5; color: var(--text-muted); text-wrap: pretty; }
+.ha__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 32px; }
+.ha__fine { max-width: 40ch; margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--text-muted); }
+.ha__art { position: relative; min-height: 520px; }
+.shot { position: absolute; left: 64px; top: 24px; width: 720px; border-radius: 16px; background: var(--surface-raised); box-shadow: var(--lift-3); font-size: var(--fs-sm); }
+.shot__head { display: flex; align-items: center; gap: 24px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.shot__head b { margin-inline-end: 8px; font-weight: var(--fw-semibold); }
+.key { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-xs); color: var(--text-muted); }
+.key i { width: 16px; height: 0; border-top: 2px solid var(--accent); }
+.key--prev i { border-top: 1px dashed var(--text-muted); }
+.shot__plot { position: relative; height: 296px; margin: 24px 20px 0; border-bottom: 1px solid var(--border-strong); }
+.shot__plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.shot__plot path { vector-effect: non-scaling-stroke; fill: none; }
+.c-grid { stroke: var(--border); }
+.c-prev { stroke: var(--text-muted); stroke-dasharray: 3 4; }
+.c-now { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; }
+.shot__plot .c-gap { fill: var(--accent-wash); stroke: none; }
+.callout { position: absolute; padding: 4px 8px; border-radius: 6px; background: var(--text); color: var(--background); font-size: var(--fs-xs); line-height: 20px; white-space: nowrap; box-shadow: 0 2px 4px -1px var(--cast-sm), 0 8px 12px -4px var(--cast-md); }
+.callout::before { content: ""; position: absolute; left: 16px; bottom: 100%; width: 1px; height: 28px; background: var(--text); }
+.shot__stats { display: grid; grid-template-columns: repeat(3, 160px); margin-inline-start: 224px; padding: 16px 4px; }
+.shot__stats div { padding-inline: 16px; border-inline-start: 1px solid var(--border); }
+.shot__stats div:first-child { border: 0; }
+.shot__stats dt { font-size: var(--fs-xs); color: var(--text-muted); }
+.shot__stats dd { margin-top: 4px; font-size: var(--fs-lg); font-weight: var(--fw-medium); letter-spacing: -0.01em; }
+.shot__stats small { margin-inline-start: 8px; font-size: var(--fs-xs); font-weight: var(--fw-regular); letter-spacing: 0; color: var(--text-muted); }
+.cup { position: absolute; left: 16px; top: 352px; width: 264px; padding: 16px 20px 20px; border-radius: 12px; background: var(--surface-raised); box-shadow: var(--lift-3); font-size: var(--fs-sm); }
+.cup__top { display: flex; justify-content: space-between; align-items: baseline; color: var(--text-muted); font-size: var(--fs-xs); }
+.cup__score { margin-top: 4px; font: var(--fw-medium) var(--fs-h2) / 1 var(--family-display); letter-spacing: var(--ls-display); }
+.cup__score small { font-size: inherit; color: var(--text-muted); }
+.cup blockquote { margin: 12px 0 0; line-height: 1.5; text-indent: -0.42em; }
+.cup cite { display: block; margin-top: 8px; font-style: normal; font-size: var(--fs-xs); color: var(--text-muted); }
+
+/* Hero B: the headline is the image. It sits on the time axis of a roast, with the curve running behind it. */
+.hb { padding: 24px 48px 48px; }
+.hb__top { display: flex; justify-content: space-between; align-items: center; }
+.hb__stage { position: relative; margin-top: 64px; }
+.hb h3 { position: relative; z-index: 1; max-width: 12ch; font-size: var(--fs-display); line-height: 1.05; letter-spacing: -0.04em; text-wrap: initial; }
+[data-palette="clay"] .hb h3 { letter-spacing: -0.025em; font-weight: var(--fw-medium); }
+.hb h3 em { color: var(--accent); }
+.hb__curve { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hb__curve path { vector-effect: non-scaling-stroke; fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.hb__curve .hb__fill { fill: url(#hb-fill); stroke: none; }
+.hb__curve .hb__ev { stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 2 4; }
+.hb__axis { position: relative; height: 40px; margin-top: 16px; border-top: 1px solid var(--text); }
+.hb__axis span { position: absolute; top: 12px; white-space: nowrap; color: var(--text-muted); }
+.hb__axis span::before { content: ""; position: absolute; left: 0; top: -12px; width: 1px; height: 6px; background: var(--text); }
+.hb__axis .end { translate: -100% 0; }
+.hb__axis span:last-child { left: auto; right: 0; translate: 0 0; }
+.hb__axis .end::before { left: auto; right: 0; }
+.hb__axis b { margin-inline-end: 8px; font-weight: var(--fw-medium); color: var(--text); }
+.hb__axis i { font-style: normal; }
+.hb__foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px; margin-top: 48px; }
+.hb__foot p { max-width: 48ch; font-size: var(--fs-lg); line-height: 1.5; color: var(--text-muted); text-wrap: pretty; }
+.hb__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.textlink { white-space: nowrap; }
+
+/* Hero C: editorial. Six ruled columns run the full height, and every block starts on a rule. */
+.hc { position: relative; padding: 0 48px 16px; }
+.hc::before { content: ""; position: absolute; inset: 0 48px; z-index: -1; border-inline-end: 1px solid var(--border); background: repeating-linear-gradient(to right, var(--border) 0 1px, transparent 1px calc(100% / 6)); }
+.hc__mast { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; padding: 20px 16px 16px; border-bottom: 3px double var(--text); background: var(--surface); }
+.hc__mast span:nth-child(2) { text-align: center; }
+.hc__mast span:last-child { text-align: end; }
+.hc__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.hc__grid > * { padding: 32px 16px; }
+.hc__head { grid-column: span 4; padding-block: 48px 64px; }
+.hc__head h3 { font-size: var(--fs-h1); line-height: 1.1; }
+.hc__head h3 em { font-style: italic; color: var(--accent); }
+.hc__index { grid-column: span 2; padding-block: 48px 32px; }
+.hc__index h4, .hc__label { font-size: var(--fs-xs); font-weight: var(--fw-medium); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--text-muted); }
+.toc { margin-top: 12px; font-size: var(--fs-sm); }
+.toc li { display: flex; align-items: baseline; gap: 8px; padding-block: 8px; border-top: 1px solid var(--border); }
+.toc li::after { content: ""; order: 1; flex: 1; border-bottom: 1px dotted var(--border-strong); }
+.toc .num { order: 2; color: var(--text-muted); }
+.hc__dek { grid-column: span 2; border-top: 1px solid var(--text); font-size: var(--fs-base); line-height: 1.6; hanging-punctuation: first; }
+.hc__dek p::first-letter { float: left; margin: 4px 4px 0 0; font: var(--fw-medium) 3.5rem / 0.8 var(--family-display); color: var(--accent); }
+.hc__fig { grid-column: span 2; border-top: 1px solid var(--text); }
+.hc__fig .plate { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--well); }
+.hc__fig .plate::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px var(--border); }
+.hc__fig svg { display: block; width: 100%; height: 100%; --near: light-dark(color-mix(in oklab, var(--text) 82%, var(--accent)), color-mix(in oklab, var(--background) 70%, oklch(0 0 0))); --far: color-mix(in oklab, var(--accent) 30%, var(--surface)); }
+.hc__fig figcaption { margin-top: 8px; font-size: var(--fs-xs); line-height: 1.5; color: var(--text-muted); }
+.hc__fig figcaption b { font-weight: var(--fw-medium); color: var(--text); }
+.ridge-sky-a { stop-color: var(--surface); }
+.ridge-sky-b { stop-color: color-mix(in oklab, var(--accent) 34%, var(--surface)); }
+.ridge-sun { fill: color-mix(in oklab, var(--accent) 55%, var(--surface)); }
+.ridge-1 { fill: var(--far); }
+.ridge-2 { fill: color-mix(in oklab, var(--near) 28%, var(--far)); }
+.ridge-3 { fill: color-mix(in oklab, var(--near) 58%, var(--far)); }
+.ridge-4 { fill: var(--near); }
+.grain { opacity: 0.5; mix-blend-mode: soft-light; }
+.hc__cta { grid-column: span 2; display: grid; align-content: space-between; justify-items: start; gap: 24px; border-top: 1px solid var(--text); }
+.hc__cta p { font-size: var(--fs-sm); color: var(--text-muted); }
+
+/* Features: one list, three different kinds of evidence. No icon tiles. */
+.feat { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; padding: 64px 48px; }
+.feat__lead h3 { font-size: var(--fs-h2); line-height: 1.12; }
+.feat__lead p { margin-top: 16px; max-width: 36ch; color: var(--text-muted); text-wrap: pretty; }
+.feat__lead .textlink { margin-top: 24px; }
+.feat__row { display: grid; grid-template-columns: 32px minmax(0, 1fr) 240px; gap: 24px; align-items: center; padding-block: 32px; border-top: 1px solid var(--border); }
+.feat__row:first-child { padding-top: 0; border: 0; }
+.feat__row:last-child { padding-bottom: 0; }
+.feat__no { align-self: start; font: var(--fs-xs) / 28px var(--family-mono); color: var(--accent); }
+.feat__row h4 { font-size: var(--fs-lg); font-weight: var(--fw-semibold); line-height: 28px; letter-spacing: -0.01em; }
+.feat__row p { margin-top: 4px; max-width: 46ch; font-size: var(--fs-base); color: var(--text-muted); text-wrap: pretty; }
+.proof { justify-self: end; width: 100%; }
+.proof--curves { height: 72px; overflow: visible; }
+.proof--curves path { vector-effect: non-scaling-stroke; fill: none; }
+.feat__row .proof--num { margin: 0; max-width: none; color: var(--text); text-align: end; font: var(--fw-medium) var(--fs-h1) / 1 var(--family-display); letter-spacing: var(--ls-display); }
+.proof--num small { font-size: inherit; color: var(--text-muted); }
+.feat__row .proof--num span { display: block; margin-top: 8px; font: var(--fw-regular) var(--fs-xs) / 16px var(--family-sans); letter-spacing: 0; color: var(--text-muted); }
+.proof--quote { margin: 0; font: var(--fw-regular) var(--fs-lg) / 1.4 var(--family-display); text-indent: -0.42em; text-wrap: balance; }
+.proof--quote cite { display: block; margin-top: 8px; text-indent: 0; font: var(--fw-regular) var(--fs-xs) / 16px var(--family-sans); color: var(--text-muted); }
+
+/* Pricing: one surface, three columns. The plan most people need is raised, not badged. */
+.price { padding: 64px 48px; }
+.price__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; }
+.price__head h3 { font-size: var(--fs-h2); line-height: 1.12; }
+.price__head p { margin-top: 8px; color: var(--text-muted); }
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 48px; border-radius: 16px; background: var(--well); box-shadow: inset 0 0 0 1px var(--border), inset 0 1px 2px var(--cast-xs); }
+.plan { position: relative; display: flex; flex-direction: column; padding: 32px; }
+.plan + .plan { border-inline-start: 1px solid var(--border); }
+.plan--pick { margin-block: -12px; padding-block: 44px; border: 0; border-radius: 16px; background: var(--surface-raised); box-shadow: var(--lift-2); }
+.plan--pick + .plan { border: 0; }
+.plan__name { display: flex; justify-content: space-between; align-items: baseline; font-size: var(--fs-base); font-weight: var(--fw-semibold); }
+.plan__name span { font-size: var(--fs-xs); font-weight: var(--fw-medium); color: var(--accent); }
+.plan__for { margin-top: 4px; font-size: var(--fs-sm); color: var(--text-muted); }
+.plan__price { display: grid; margin-top: 24px; }
+.plan__price > span { grid-area: 1 / 1; display: flex; align-items: flex-start; font: var(--fw-medium) 3.5rem / 1 var(--family-display); letter-spacing: var(--ls-display); transition: opacity var(--dur-state) var(--curve-out), filter var(--dur-state) var(--curve-out), transform var(--dur-state) var(--curve-out); }
+.plan__price sup { margin: 8px 4px 0 0; font: var(--fw-medium) var(--fs-lg) / 1 var(--family-sans); letter-spacing: 0; color: var(--text-muted); }
+.plan__price sub { align-self: flex-end; margin: 0 0 8px 8px; font: var(--fw-regular) var(--fs-sm) / 1 var(--family-sans); letter-spacing: 0; color: var(--text-muted); }
+.plan__price .y, .price:has(#bill-y:checked) .plan__price .m { opacity: 0; filter: blur(4px); transform: scale(var(--enter-scale)); }
+.price:has(#bill-y:checked) .plan__price .y { opacity: 1; filter: none; transform: none; }
+.plan__bill { display: grid; margin-top: 8px; font-size: var(--fs-xs); color: var(--text-muted); }
+.plan__bill span { grid-area: 1 / 1; transition: opacity var(--dur-state) var(--curve-out); }
+.plan__bill .y, .price:has(#bill-y:checked) .plan__bill .m { opacity: 0; }
+.price:has(#bill-y:checked) .plan__bill .y { opacity: 1; }
+.plan .btn { margin-top: 24px; }
+.plan__list { display: grid; gap: 8px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); font-size: var(--fs-sm); line-height: 20px; }
+.plan__list li { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 12px; }
+.plan__list .icon { margin-top: 2px; color: var(--accent); }
+.plan__list .plus { grid-template-columns: minmax(0, 1fr); color: var(--text-muted); }
+.seg small { font-size: var(--fs-xs); font-weight: var(--fw-regular); color: var(--accent); }
+
+/* Footer */
+.foot2 { position: relative; padding: 64px 48px 0; }
+.foot2__grid { display: grid; grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)); gap: 32px; }
+.foot2__about p { margin-top: 12px; max-width: 32ch; font-size: var(--fs-sm); color: var(--text-muted); }
+.foot2__status { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-size: var(--fs-sm); text-decoration: none; }
+.foot2__status i { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 3px color-mix(in oklab, var(--success) 22%, transparent); }
+.foot2 h4 { font-size: var(--fs-xs); font-weight: var(--fw-medium); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--text-muted); }
+.foot2 ul { display: grid; gap: 8px; margin-top: 16px; font-size: var(--fs-sm); }
+.foot2 ul a { text-decoration: none; }
+.foot2__base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 64px; padding-block: 16px; border-top: 1px solid var(--border); font-size: var(--fs-xs); color: var(--text-muted); }
+/* The wordmark is cropped by the frame and fades into it: identity as texture, kept under 8% contrast. */
+.foot2__mark { display: block; margin: 16px 0 -0.24em; font: var(--fw-semibold) clamp(4rem, 17vw, 13.5rem) / 0.8 var(--family-display); letter-spacing: -0.04em; white-space: nowrap; color: var(--text); opacity: 0.07; mask-image: linear-gradient(to bottom, oklch(0 0 0) 30%, transparent 95%); user-select: none; }
+@media (hover: hover) and (pointer: fine) {
+  .ha__nav a:not(.brand, .btn):hover, .foot2 ul a:hover { color: var(--text); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+}
+
+@media (width < 900px) {
+  .spec { padding-block: 48px; }
+  .spec__note { grid-template-columns: minmax(0, 1fr); }
+  .spec__note .notes { grid-column: 1; grid-row: auto; grid-template-columns: minmax(0, 1fr); margin-top: 8px; }
+  .ha { grid-template-columns: minmax(0, 1fr); }
+  .ha__nav { padding: 16px; gap: 16px; }
+  .ha__nav a:not(.brand, .btn) { display: none; }
+  .ha__copy { padding: 32px 16px 48px; }
+  .ha__fine { margin-top: 32px; }
+  .ha__art { min-height: 400px; }
+  .shot { left: 16px; top: 0; width: 560px; }
+  .shot__plot { height: 200px; }
+  .shot__stats { display: none; }
+  .cup { left: 32px; top: 208px; }
+  .callout { display: none; }
+  .hb { padding: 16px 16px 32px; }
+  .hb__top .caption { display: none; }
+  .hb__stage { margin-top: 64px; }
+  .hb__axis i { display: none; }
+  .hb__axis b { margin: 0; }
+  .hb__foot { grid-template-columns: minmax(0, 1fr); margin-top: 32px; }
+  .hc { padding: 0 16px; }
+  .hc::before { inset: 0 16px; background: none; border-inline-start: 1px solid var(--border); }
+  .hc__mast { grid-template-columns: auto 1fr; padding-inline: 12px; }
+  .hc__mast span:nth-child(2) { display: none; }
+  .hc__grid { grid-template-columns: minmax(0, 1fr); }
+  .hc__grid > * { grid-column: 1; padding: 24px 12px; }
+  .hc__head { padding-block: 32px; }
+  .feat, .price { padding: 48px 16px; }
+  .feat { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .feat__row { grid-template-columns: 24px minmax(0, 1fr); gap: 16px; }
+  .proof { grid-column: 2; justify-self: start; }
+  .feat__row .proof--num { text-align: start; }
+  .plans { grid-template-columns: minmax(0, 1fr); }
+  .plan { padding: 24px; }
+  .plan + .plan { border-inline-start: 0; border-top: 1px solid var(--border); }
+  .plan--pick { margin: 0; padding: 24px; }
+  .price__head .seg { width: 100%; }
+  .foot2 { padding: 48px 16px 0; }
+  .foot2__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .foot2__about { grid-column: 1 / -1; }
+  .foot2__base { margin-top: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plan__price > span { filter: none; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-chevrons" viewBox="0 0 16 16"><path d="M5 6.25l3-3 3 3M5 9.75l3 3 3-3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 16 16"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.5 8.5h6l.5-8.5M6.75 7v3.5M9.25 7v3.5"/></symbol>
+  <symbol id="i-more" viewBox="0 0 16 16"><path d="M3.5 8h.01M8 8h.01M12.5 8h.01" stroke-width="2"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.75"/><path d="M10.5 5.5V4.25A1.75 1.75 0 0 0 8.75 2.5h-4.5A1.75 1.75 0 0 0 2.5 4.25v4.5c0 .97.78 1.75 1.75 1.75H5.5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="M10.25 10.25l3.25 3.25"/></symbol>
+  <symbol id="i-retry" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.6-3.67M13 2.75v2.5h-2.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+
+</svg>
+
+<header class="bar">
+  <div class="wrap bar__in">
+    <a class="bar__brand" href="controls.html">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 17V9a6 6 0 0 1 6-6h8"/><path d="M8 17v-6a3 3 0 0 1 3-3h6"/></svg>
+      finesse <span>exemplars</span>
+    </a>
+    <nav class="bar__nav" aria-label="Exemplar files">
+      <a href="controls.html">Controls</a>
+      <a href="surfaces.html">Surfaces</a>
+      <a href="data.html">Data</a>
+      <a href="marketing.html" aria-current="page">Marketing</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+    <div class="bar__tools">
+      <div class="swatches" role="group" aria-label="Palette">
+        <a href="?palette=clay" data-palette-link="clay" style="--chip: oklch(0.53 0.14 42)">Clay</a>
+        <a href="?palette=cobalt" data-palette-link="cobalt" style="--chip: oklch(0.48 0.22 264)">Cobalt</a>
+        <a href="?palette=moss" data-palette-link="moss" style="--chip: oklch(0.87 0.19 125)">Moss</a>
+      </div>
+      <a class="theme-link" href="?theme=dark" data-theme-link aria-label="Switch theme">
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <div>
+      <p class="intro__eyebrow">Exemplar 4 of 5</p>
+      <h1>Marketing</h1>
+      <p class="intro__lede">Three hero compositions, a feature section, pricing and a footer for one made-up product. Match this level of finish. Take the structure, palette and type from your own project.</p>
+    </div>
+    <dl class="facts">
+      <div><dt>Heroes</dt><dd>Split, type-led, editorial</dd></div>
+      <div><dt>Imagery</dt><dd>Product UI and one drawn plate</dd></div>
+      <div><dt>Copy</dt><dd>Specific, no stock phrases</dd></div>
+    </dl>
+  </div>
+
+  <section class="spec" id="heroes" aria-labelledby="heroes-h">
+    <div class="spec__note">
+      <p class="spec__no">01</p>
+      <h2 id="heroes-h">Three heroes</h2>
+      <p>None is a centred headline over two buttons. Each makes one decision and commits to it.</p>
+      <ol class="notes">
+        <li>Split: copy on five columns, product on seven. The product fragment is real UI, cropped by the frame, never a floating screenshot.</li>
+        <li>The fragment tells the headline’s story: two curves, the gap between them shaded, one callout.</li>
+        <li>Type-led: the headline sits on the time axis of a roast and the curve runs behind it. No image is needed.</li>
+        <li>Editorial: six ruled columns run the full height. Every block starts on a rule.</li>
+        <li>Real quotation marks hang outside the text edge. The drop cap takes the accent, once.</li>
+        <li>One primary button per hero. The second action is a text link.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <span class="caption frame-cap">A. Asymmetric split with a product fragment</span>
+      <div class="frame ha">
+        <nav class="ha__nav" aria-label="Batchbook">
+          <a class="brand" href="#heroes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M5.5 9.5c1 5.5 3.6 7 6 3.4S16 8 18.75 8.75"/></svg>Batchbook</a>
+          <a href="#features">Product</a><a href="#pricing">Pricing</a><a href="#heroes">Roast library</a>
+          <a class="btn btn--sm" href="#heroes">Sign in</a>
+        </nav>
+        <div class="ha__copy">
+          <h3>Know why Tuesday’s batch tasted better.</h3>
+          <p class="ha__sub">Batchbook records every roast from charge to drop, lays the curves over each other, and shows what changed.</p>
+          <div class="ha__cta">
+            <a class="btn btn--primary btn--lg" href="#pricing">Start logging free</a>
+            <a class="textlink" href="#features">See a sample roast<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          </div>
+          <p class="ha__fine">Reads Probat, Loring and Giesen probes directly, and anything else that Artisan can read.</p>
+        </div>
+        <div class="ha__art" aria-hidden="true" inert>
+          <div class="shot">
+            <div class="shot__head"><b>Compare roasts</b><span class="key"><i></i>Wed 18 Nov, batch 0412</span><span class="key key--prev"><i></i>Tue 17 Nov, batch 0409</span></div>
+            <div class="shot__plot">
+              <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path class="c-grid" d="M0 85.71H100"/><path class="c-grid" d="M0 50.00H100"/><path class="c-grid" d="M0 14.29H100"/><path class="c-gap" d="M22.73 66.58 25.00 62.35 27.27 58.38 29.55 54.68 31.82 51.22 34.09 47.99 36.36 44.96 38.64 42.13 40.91 39.49 43.18 37.02 45.45 34.71 47.73 32.56 50.00 30.54 52.27 28.65 54.55 26.89 56.82 25.24 59.09 23.70 61.36 22.27 63.64 20.92 65.91 19.66 68.18 18.49 70.45 17.39 72.73 16.36 75.00 15.40 77.27 14.50 79.55 13.67 81.82 12.88 L81.82 14.53 79.55 15.61 77.27 16.74 75.00 17.93 72.73 19.18 70.45 20.49 68.18 21.87 65.91 23.32 63.64 24.85 61.36 26.46 59.09 28.14 56.82 29.92 54.55 31.78 52.27 33.74 50.00 35.80 47.73 37.97 45.45 40.25 43.18 42.64 40.91 45.16 38.64 47.80 36.36 50.59 34.09 53.51 31.82 56.59 29.55 59.82 27.27 63.22 25.00 66.79 22.73 70.54Z"/><path class="c-prev" d="M0.00 14.29 0.76 32.42 1.52 46.33 2.27 57.00 3.03 65.19 3.79 71.48 4.55 76.32 5.30 80.04 6.06 82.91 6.82 85.12 7.58 86.84 8.33 88.17 9.09 89.21 9.85 90.02 10.61 90.66 11.36 91.17 12.12 90.62 12.88 88.64 13.64 86.71 14.39 84.82 15.15 82.97 15.91 81.16 16.67 79.39 17.42 77.66 18.18 75.97 18.94 74.31 19.70 72.70 20.45 71.12 21.21 69.57 21.97 68.06 22.73 66.58 23.48 65.14 24.24 63.73 25.00 62.35 25.76 61.00 26.52 59.68 27.27 58.38 28.03 57.12 28.79 55.89 29.55 54.68 30.30 53.50 31.06 52.35 31.82 51.22 32.58 50.12 33.33 49.04 34.09 47.99 34.85 46.95 35.61 45.95 36.36 44.96 37.12 44.00 37.88 43.06 38.64 42.13 39.39 41.23 40.15 40.35 40.91 39.49 41.67 38.65 42.42 37.83 43.18 37.02 43.94 36.24 44.70 35.47 45.45 34.71 46.21 33.98 46.97 33.26 47.73 32.56 48.48 31.87 49.24 31.20 50.00 30.54 50.76 29.90 51.52 29.27 52.27 28.65 53.03 28.05 53.79 27.47 54.55 26.89 55.30 26.33 56.06 25.78 56.82 25.24 57.58 24.72 58.33 24.21 59.09 23.70 59.85 23.21 60.61 22.73 61.36 22.27 62.12 21.81 62.88 21.36 63.64 20.92 64.39 20.49 65.15 20.07 65.91 19.66 66.67 19.26 67.42 18.87 68.18 18.49 68.94 18.11 69.70 17.75 70.45 17.39 71.21 17.04 71.97 16.70 72.73 16.36 73.48 16.03 74.24 15.71 75.00 15.40 75.76 15.10 76.52 14.80 77.27 14.50 78.03 14.22 78.79 13.94 79.55 13.67 80.30 13.40 81.06 13.14 81.82 12.88 82.58 12.63 83.33 12.39 84.09 12.15 84.85 11.92 85.61 11.69 86.36 11.46 87.12 11.25 87.88 11.03 88.64 10.82 89.39 10.62 90.15 10.42 90.91 10.23 91.67 10.03 92.42 9.85 93.18 9.67 93.94 9.49 94.70 9.31"/><path class="c-now" d="M0.00 14.29 0.76 32.42 1.52 46.33 2.27 57.00 3.03 65.19 3.79 71.48 4.55 76.32 5.30 80.04 6.06 82.91 6.82 85.12 7.58 86.84 8.33 88.17 9.09 89.21 9.85 90.02 10.61 90.66 11.36 91.17 12.12 90.78 12.88 89.17 13.64 87.59 14.39 86.04 15.15 84.51 15.91 83.00 16.67 81.53 17.42 80.07 18.18 78.64 18.94 77.23 19.70 75.85 20.45 74.49 21.21 73.15 21.97 71.84 22.73 70.54 23.48 69.27 24.24 68.02 25.00 66.79 25.76 65.58 26.52 64.39 27.27 63.22 28.03 62.06 28.79 60.93 29.55 59.82 30.30 58.72 31.06 57.65 31.82 56.59 32.58 55.54 33.33 54.52 34.09 53.51 34.85 52.52 35.61 51.55 36.36 50.59 37.12 49.64 37.88 48.72 38.64 47.80 39.39 46.91 40.15 46.03 40.91 45.16 41.67 44.31 42.42 43.47 43.18 42.64 43.94 41.83 44.70 41.03 45.45 40.25 46.21 39.48 46.97 38.72 47.73 37.97 48.48 37.23 49.24 36.51 50.00 35.80 50.76 35.10 51.52 34.42 52.27 33.74 53.03 33.08 53.79 32.42 54.55 31.78 55.30 31.15 56.06 30.53 56.82 29.92 57.58 29.32 58.33 28.72 59.09 28.14 59.85 27.57 60.61 27.01 61.36 26.46 62.12 25.91 62.88 25.38 63.64 24.85 64.39 24.33 65.15 23.82 65.91 23.32 66.67 22.83 67.42 22.35 68.18 21.87 68.94 21.40 69.70 20.94 70.45 20.49 71.21 20.04 71.97 19.61 72.73 19.18 73.48 18.75 74.24 18.34 75.00 17.93 75.76 17.52 76.52 17.13 77.27 16.74 78.03 16.35 78.79 15.98 79.55 15.61 80.30 15.24 81.06 14.88 81.82 14.53 82.58 14.18 83.33 13.84 84.09 13.51 84.85 13.18 85.61 12.85 86.36 12.53 87.12 12.22 87.88 11.91 88.64 11.61 89.39 11.31 90.15 11.01 90.91 10.73 91.67 10.44 92.42 10.16 93.18 9.89 93.94 9.62 94.70 9.35 95.45 9.09 96.21 8.83 96.97 8.58"/></svg>
+              <span class="callout num" style="left: calc(45.45% - 16px); top: calc(40.25% + 28px)">20 s longer between 150 and 180 °C</span>
+            </div>
+            <dl class="shot__stats">
+              <div><dt>First crack</dt><dd class="num">8:56<small>+0:14</small></dd></div>
+              <div><dt>Development</dt><dd class="num">16.3%<small>+1.1</small></dd></div>
+              <div><dt>Weight loss</dt><dd class="num">14.2%<small>−0.2</small></dd></div>
+            </dl>
+          </div>
+          <div class="cup">
+            <p class="cup__top"><span>Cupping, day 7</span><span>3 tasters</span></p>
+            <p class="cup__score num">86<small>.5</small></p>
+            <blockquote>“Sweeter than Tuesday’s. Apricot, then brown sugar as it cools.”</blockquote>
+          </div>
+        </div>
+      </div>
+
+      <span class="caption frame-cap">B. Type-led: the headline is the image</span>
+      <div class="frame hb">
+        <div class="hb__top"><a class="brand" href="#heroes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M5.5 9.5c1 5.5 3.6 7 6 3.4S16 8 18.75 8.75"/></svg>Batchbook</a><span class="caption">Roast logging for small roasteries</span></div>
+        <div class="hb__stage">
+          <svg class="hb__curve" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="hb-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity="0.14"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+            <path class="hb__fill" d="M0.00 14.29 0.78 32.42 1.56 46.33 2.34 57.00 3.12 65.19 3.91 71.48 4.69 76.32 5.47 80.04 6.25 82.91 7.03 85.12 7.81 86.84 8.59 88.17 9.37 89.21 10.15 90.02 10.93 90.66 11.72 91.17 12.50 90.78 13.28 89.17 14.06 87.59 14.84 86.04 15.62 84.51 16.40 83.00 17.18 81.53 17.96 80.07 18.74 78.64 19.53 77.23 20.31 75.85 21.09 74.49 21.87 73.15 22.65 71.84 23.43 70.54 24.21 69.27 24.99 68.02 25.77 66.79 26.55 65.58 27.34 64.39 28.12 63.22 28.90 62.06 29.68 60.93 30.46 59.82 31.24 58.72 32.02 57.65 32.80 56.59 33.58 55.54 34.36 54.52 35.15 53.51 35.93 52.52 36.71 51.55 37.49 50.59 38.27 49.64 39.05 48.72 39.83 47.80 40.61 46.91 41.39 46.03 42.17 45.16 42.96 44.31 43.74 43.47 44.52 42.64 45.30 41.83 46.08 41.03 46.86 40.25 47.64 39.48 48.42 38.72 49.20 37.97 49.98 37.23 50.77 36.51 51.55 35.80 52.33 35.10 53.11 34.42 53.89 33.74 54.67 33.08 55.45 32.42 56.23 31.78 57.01 31.15 57.79 30.53 58.58 29.92 59.36 29.32 60.14 28.72 60.92 28.14 61.70 27.57 62.48 27.01 63.26 26.46 64.04 25.91 64.82 25.38 65.60 24.85 66.39 24.33 67.17 23.82 67.95 23.32 68.73 22.83 69.51 22.35 70.29 21.87 71.07 21.40 71.85 20.94 72.63 20.49 73.41 20.04 74.20 19.61 74.98 19.18 75.76 18.75 76.54 18.34 77.32 17.93 78.10 17.52 78.88 17.13 79.66 16.74 80.44 16.35 81.22 15.98 82.01 15.61 82.79 15.24 83.57 14.88 84.35 14.53 85.13 14.18 85.91 13.84 86.69 13.51 87.47 13.18 88.25 12.85 89.03 12.53 89.82 12.22 90.60 11.91 91.38 11.61 92.16 11.31 92.94 11.01 93.72 10.73 94.50 10.44 95.28 10.16 96.06 9.89 96.84 9.62 97.63 9.35 98.41 9.09 99.19 8.83 99.97 8.58 V100 H0Z"/>
+            <path class="hb__ev" d="M12.18 0V100M83.69 0V100"/>
+            <path d="M0.00 14.29 0.78 32.42 1.56 46.33 2.34 57.00 3.12 65.19 3.91 71.48 4.69 76.32 5.47 80.04 6.25 82.91 7.03 85.12 7.81 86.84 8.59 88.17 9.37 89.21 10.15 90.02 10.93 90.66 11.72 91.17 12.50 90.78 13.28 89.17 14.06 87.59 14.84 86.04 15.62 84.51 16.40 83.00 17.18 81.53 17.96 80.07 18.74 78.64 19.53 77.23 20.31 75.85 21.09 74.49 21.87 73.15 22.65 71.84 23.43 70.54 24.21 69.27 24.99 68.02 25.77 66.79 26.55 65.58 27.34 64.39 28.12 63.22 28.90 62.06 29.68 60.93 30.46 59.82 31.24 58.72 32.02 57.65 32.80 56.59 33.58 55.54 34.36 54.52 35.15 53.51 35.93 52.52 36.71 51.55 37.49 50.59 38.27 49.64 39.05 48.72 39.83 47.80 40.61 46.91 41.39 46.03 42.17 45.16 42.96 44.31 43.74 43.47 44.52 42.64 45.30 41.83 46.08 41.03 46.86 40.25 47.64 39.48 48.42 38.72 49.20 37.97 49.98 37.23 50.77 36.51 51.55 35.80 52.33 35.10 53.11 34.42 53.89 33.74 54.67 33.08 55.45 32.42 56.23 31.78 57.01 31.15 57.79 30.53 58.58 29.92 59.36 29.32 60.14 28.72 60.92 28.14 61.70 27.57 62.48 27.01 63.26 26.46 64.04 25.91 64.82 25.38 65.60 24.85 66.39 24.33 67.17 23.82 67.95 23.32 68.73 22.83 69.51 22.35 70.29 21.87 71.07 21.40 71.85 20.94 72.63 20.49 73.41 20.04 74.20 19.61 74.98 19.18 75.76 18.75 76.54 18.34 77.32 17.93 78.10 17.52 78.88 17.13 79.66 16.74 80.44 16.35 81.22 15.98 82.01 15.61 82.79 15.24 83.57 14.88 84.35 14.53 85.13 14.18 85.91 13.84 86.69 13.51 87.47 13.18 88.25 12.85 89.03 12.53 89.82 12.22 90.60 11.91 91.38 11.61 92.16 11.31 92.94 11.01 93.72 10.73 94.50 10.44 95.28 10.16 96.06 9.89 96.84 9.62 97.63 9.35 98.41 9.09 99.19 8.83 99.97 8.58"/>
+          </svg>
+          <h3>Roast by the <em>curve</em>, not the clock.</h3>
+        </div>
+        <div class="hb__axis caption num" aria-hidden="true">
+          <span style="left: 0"><b>0:00</b><i>Charge</i></span>
+          <span style="left: 12.18%"><b>1:18</b><i>Turning point</i></span>
+          <span class="end" style="left: 83.69%"><b>8:56</b><i>First crack</i></span>
+          <span class="end"><b>10:40</b><i>Drop</i></span>
+        </div>
+        <div class="hb__foot">
+          <p>Time tells you when a roast ended. The curve tells you what happened in it. Batchbook logs both, every batch, without anyone holding a clipboard.</p>
+          <div class="hb__cta"><a class="textlink" href="#features">How logging works<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a><a class="btn btn--primary btn--lg" href="#pricing">Start logging free</a></div>
+        </div>
+      </div>
+
+      <span class="caption frame-cap">C. Editorial, on a ruled grid</span>
+      <div class="frame hc">
+        <div class="hc__mast caption"><a class="brand" href="#heroes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M5.5 9.5c1 5.5 3.6 7 6 3.4S16 8 18.75 8.75"/></svg>Batchbook</a><span>Field notes for roasters</span><span class="num">No. 12, November 2026</span></div>
+        <div class="hc__grid">
+          <div class="hc__head"><h3>A roast lasts ten minutes. Most of what matters happens in <em>ninety seconds</em>.</h3></div>
+          <div class="hc__index">
+            <h4>What gets logged</h4>
+            <ol class="toc">
+              <li><span>Charge</span><span class="num">0:00</span></li>
+              <li><span>Turning point</span><span class="num">1:18</span></li>
+              <li><span>First crack</span><span class="num">8:56</span></li>
+              <li><span>Drop</span><span class="num">10:40</span></li>
+            </ol>
+          </div>
+          <div class="hc__dek"><p>Between first crack and drop a batch goes from grassy to sweet to flat. Batchbook marks that window on every curve, so “pull it a little earlier” becomes a number you can repeat.</p></div>
+          <figure class="hc__fig">
+            <div class="plate"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Layered ridgelines above a terraced slope at sunrise.">
+                  <defs>
+                    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop class="ridge-sky-a" offset="0"/><stop class="ridge-sky-b" offset="0.62"/></linearGradient>
+                    <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+                  </defs>
+                  <rect width="400" height="300" fill="url(#sky)"/>
+                  <circle class="ridge-sun" cx="286" cy="128" r="30"/>
+                  <path class="ridge-1" d="M0 172C40 150 70 168 110 150S170 112 210 138 280 150 320 132 380 150 400 142V300H0Z"/>
+                  <path class="ridge-2" d="M0 205C50 180 90 200 140 178S220 190 260 170 340 200 400 176V300H0Z"/>
+                  <path class="ridge-3" d="M0 236C60 214 110 240 170 216S270 232 320 212 380 228 400 220V300H0Z"/>
+                  <path class="ridge-4" d="M0 266C70 244 130 270 200 250S320 268 400 246V300H0Z"/>
+                  <rect class="grain" width="400" height="300" filter="url(#grain)"/>
+                </svg></div>
+            <figcaption><b>Fig. 1</b> Huila at harvest, 1,750 m. This month’s lot comes from the slope on the left.</figcaption>
+          </figure>
+          <div class="hc__cta">
+            <p>Free for one roaster and thirty batches a month. No card.</p>
+            <div class="hb__cta"><a class="btn btn--primary btn--lg" href="#pricing">Start logging free</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="features" aria-labelledby="features-h">
+    <div class="spec__note">
+      <p class="spec__no">02</p>
+      <h2 id="features-h">Feature section</h2>
+      <p>Three claims, three kinds of evidence. Not three icon cards.</p>
+      <ol class="notes">
+        <li>Each row proves its claim with a different specimen: a figure, a number, a quotation.</li>
+        <li>The lead column holds one heading and one link, and stays put.</li>
+        <li>Rows are separated by hairlines, numbered in mono, with no boxes.</li>
+        <li>The pull quote is set in the display face with its opening mark hung.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="frame feat">
+        <div class="feat__lead">
+          <h3>Everything a roast leaves behind, kept in one place.</h3>
+          <p>Batchbook is a log first. It does not tell you how to roast. It makes sure you can find out what you did.</p>
+          <a class="textlink" href="#pricing">See what each plan logs<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+        <div>
+          <div class="feat__row">
+            <span class="feat__no">01</span>
+            <div><h4>Curves you can lay over each other</h4><p>Pick any two batches of the same coffee. The gap between them is shaded and timed.</p></div>
+            <svg class="proof proof--curves" viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Two roast curves that part in the middle of the roast."><path class="c-prev" d="M0.00 14.29 0.78 32.42 1.56 46.33 2.34 57.00 3.12 65.19 3.91 71.48 4.69 76.32 5.47 80.04 6.25 82.91 7.03 85.12 7.81 86.84 8.59 88.17 9.37 89.21 10.15 90.02 10.93 90.66 11.72 91.17 12.50 90.62 13.28 88.64 14.06 86.71 14.84 84.82 15.62 82.97 16.40 81.16 17.18 79.39 17.96 77.66 18.74 75.97 19.53 74.31 20.31 72.70 21.09 71.12 21.87 69.57 22.65 68.06 23.43 66.58 24.21 65.14 24.99 63.73 25.77 62.35 26.55 61.00 27.34 59.68 28.12 58.38 28.90 57.12 29.68 55.89 30.46 54.68 31.24 53.50 32.02 52.35 32.80 51.22 33.58 50.12 34.36 49.04 35.15 47.99 35.93 46.95 36.71 45.95 37.49 44.96 38.27 44.00 39.05 43.06 39.83 42.13 40.61 41.23 41.39 40.35 42.17 39.49 42.96 38.65 43.74 37.83 44.52 37.02 45.30 36.24 46.08 35.47 46.86 34.71 47.64 33.98 48.42 33.26 49.20 32.56 49.98 31.87 50.77 31.20 51.55 30.54 52.33 29.90 53.11 29.27 53.89 28.65 54.67 28.05 55.45 27.47 56.23 26.89 57.01 26.33 57.79 25.78 58.58 25.24 59.36 24.72 60.14 24.21 60.92 23.70 61.70 23.21 62.48 22.73 63.26 22.27 64.04 21.81 64.82 21.36 65.60 20.92 66.39 20.49 67.17 20.07 67.95 19.66 68.73 19.26 69.51 18.87 70.29 18.49 71.07 18.11 71.85 17.75 72.63 17.39 73.41 17.04 74.20 16.70 74.98 16.36 75.76 16.03 76.54 15.71 77.32 15.40 78.10 15.10 78.88 14.80 79.66 14.50 80.44 14.22 81.22 13.94 82.01 13.67 82.79 13.40 83.57 13.14 84.35 12.88 85.13 12.63 85.91 12.39 86.69 12.15 87.47 11.92 88.25 11.69 89.03 11.46 89.82 11.25 90.60 11.03 91.38 10.82 92.16 10.62 92.94 10.42 93.72 10.23 94.50 10.03 95.28 9.85 96.06 9.67 96.84 9.49 97.63 9.31"/><path class="c-now" d="M0.00 14.29 0.78 32.42 1.56 46.33 2.34 57.00 3.12 65.19 3.91 71.48 4.69 76.32 5.47 80.04 6.25 82.91 7.03 85.12 7.81 86.84 8.59 88.17 9.37 89.21 10.15 90.02 10.93 90.66 11.72 91.17 12.50 90.78 13.28 89.17 14.06 87.59 14.84 86.04 15.62 84.51 16.40 83.00 17.18 81.53 17.96 80.07 18.74 78.64 19.53 77.23 20.31 75.85 21.09 74.49 21.87 73.15 22.65 71.84 23.43 70.54 24.21 69.27 24.99 68.02 25.77 66.79 26.55 65.58 27.34 64.39 28.12 63.22 28.90 62.06 29.68 60.93 30.46 59.82 31.24 58.72 32.02 57.65 32.80 56.59 33.58 55.54 34.36 54.52 35.15 53.51 35.93 52.52 36.71 51.55 37.49 50.59 38.27 49.64 39.05 48.72 39.83 47.80 40.61 46.91 41.39 46.03 42.17 45.16 42.96 44.31 43.74 43.47 44.52 42.64 45.30 41.83 46.08 41.03 46.86 40.25 47.64 39.48 48.42 38.72 49.20 37.97 49.98 37.23 50.77 36.51 51.55 35.80 52.33 35.10 53.11 34.42 53.89 33.74 54.67 33.08 55.45 32.42 56.23 31.78 57.01 31.15 57.79 30.53 58.58 29.92 59.36 29.32 60.14 28.72 60.92 28.14 61.70 27.57 62.48 27.01 63.26 26.46 64.04 25.91 64.82 25.38 65.60 24.85 66.39 24.33 67.17 23.82 67.95 23.32 68.73 22.83 69.51 22.35 70.29 21.87 71.07 21.40 71.85 20.94 72.63 20.49 73.41 20.04 74.20 19.61 74.98 19.18 75.76 18.75 76.54 18.34 77.32 17.93 78.10 17.52 78.88 17.13 79.66 16.74 80.44 16.35 81.22 15.98 82.01 15.61 82.79 15.24 83.57 14.88 84.35 14.53 85.13 14.18 85.91 13.84 86.69 13.51 87.47 13.18 88.25 12.85 89.03 12.53 89.82 12.22 90.60 11.91 91.38 11.61 92.16 11.31 92.94 11.01 93.72 10.73 94.50 10.44 95.28 10.16 96.06 9.89 96.84 9.62 97.63 9.35 98.41 9.09 99.19 8.83 99.97 8.58"/></svg>
+          </div>
+          <div class="feat__row">
+            <span class="feat__no">02</span>
+            <div><h4>Weight loss, measured not guessed</h4><p>Weigh in, weigh out. Loss is worked out per batch and tracked against the target for that profile.</p></div>
+            <p class="proof proof--num num">14<small>.2%</small><span>batch 0412, target 15%</span></p>
+          </div>
+          <div class="feat__row">
+            <span class="feat__no">03</span>
+            <div><h4>Notes from the cupping table</h4><p>Scores and tasting notes attach to the batch, dated by rest day, next to the curve that made them.</p></div>
+            <blockquote class="proof proof--quote">“A touch flat on day 3, sweet by day 7.”<cite>Cupping note, batch 0412</cite></blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="pricing" aria-labelledby="pricing-h">
+    <div class="spec__note">
+      <p class="spec__no">03</p>
+      <h2 id="pricing-h">Pricing and footer</h2>
+      <p>One surface with three columns. The plan most people need is raised, not badged.</p>
+      <ol class="notes">
+        <li>The currency sign and the period are small and quiet. The figure is tabular and set in the display face.</li>
+        <li>Switching the billing period swaps the price in place with a blur. Nothing changes width.</li>
+        <li>Later plans list only what they add.</li>
+        <li>The raised plan overlaps the well by 12&nbsp;px, top and bottom, and takes the one primary button.</li>
+        <li>The footer wordmark is cropped by the frame at under 8% contrast: identity as texture.</li>
+        <li>The status line is a real link with a state, not decoration.</li>
+      </ol>
+    </div>
+    <div class="spec__stage">
+      <div class="frame price">
+        <div class="price__head">
+          <div><h3>Priced by the drum, not the seat.</h3><p>Everyone at the roastery can log in on every plan.</p></div>
+          <div class="seg" role="radiogroup" aria-label="Billing period" style="--n: 2">
+            <span class="seg__thumb" aria-hidden="true"></span>
+            <label><input class="sr-only" type="radio" name="bill" id="bill-m" checked>Monthly</label>
+            <label><input class="sr-only" type="radio" name="bill" id="bill-y">Yearly<small>2 months free</small></label>
+          </div>
+        </div>
+        <div class="plans">
+          <article class="plan" aria-labelledby="plan-bench">
+            <h4 class="plan__name" id="plan-bench">Bench</h4>
+            <p class="plan__for">For a sample roaster or a first drum.</p>
+            <p class="plan__price num"><span class="m"><sup>$</sup>0<sub>per month</sub></span><span class="y" aria-hidden="true"><sup>$</sup>0<sub>per month</sub></span></p>
+            <p class="plan__bill"><span class="m">Free up to 30 batches a month</span><span class="y" aria-hidden="true">Free up to 30 batches a month</span></p>
+            <a class="btn " href="#pricing">Start free</a>
+            <ul class="plan__list"><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>1 roaster</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>30 batches a month</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Curves and weight loss</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>CSV export</span></li></ul>
+          </article>
+          <article class="plan plan--pick" aria-labelledby="plan-roastery">
+            <h4 class="plan__name" id="plan-roastery">Roastery<span>Most roasteries pick this</span></h4>
+            <p class="plan__for">For a working roastery.</p>
+            <p class="plan__price num"><span class="m"><sup>$</sup>29<sub>per month</sub></span><span class="y" aria-hidden="true"><sup>$</sup>24<sub>per month</sub></span></p>
+            <p class="plan__bill"><span class="m">Billed monthly</span><span class="y" aria-hidden="true">$288 billed yearly</span></p>
+            <a class="btn btn--primary" href="#pricing">Start a 30-day trial</a>
+            <ul class="plan__list"><li class="plus">Everything in Bench, and</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Up to 4 roasters</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Unlimited batches</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Cupping notes and scores</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Green stock and wholesale orders</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Alerts on stalled rise</span></li></ul>
+          </article>
+          <article class="plan" aria-labelledby="plan-group">
+            <h4 class="plan__name" id="plan-group">Group</h4>
+            <p class="plan__for">For more than one site.</p>
+            <p class="plan__price num"><span class="m"><sup>$</sup>79<sub>per month</sub></span><span class="y" aria-hidden="true"><sup>$</sup>66<sub>per month</sub></span></p>
+            <p class="plan__bill"><span class="m">Billed monthly</span><span class="y" aria-hidden="true">$792 billed yearly</span></p>
+            <a class="btn " href="#pricing">Talk to us</a>
+            <ul class="plan__list"><li class="plus">Everything in Roastery, and</li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Unlimited roasters and sites</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Profiles shared across sites</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Single sign-on</span></li><li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>API and webhooks</span></li></ul>
+          </article>
+        </div>
+      </div>
+
+      <footer class="frame foot2" aria-label="Batchbook footer">
+        <div class="foot2__grid">
+          <div class="foot2__about">
+            <a class="brand" href="#heroes"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M5.5 9.5c1 5.5 3.6 7 6 3.4S16 8 18.75 8.75"/></svg>Batchbook</a>
+            <p>The roast log for small roasteries. Built in Leith by four people and one Probat.</p>
+            <a class="foot2__status" href="#pricing"><i aria-hidden="true"></i>All systems normal</a>
+          </div>
+          <nav aria-label="Product"><h4>Product</h4><ul><li><a href="#features">Roast log</a></li><li><a href="#features">Compare</a></li><li><a href="#features">Cupping</a></li><li><a href="#pricing">Pricing</a></li></ul></nav>
+          <nav aria-label="Help"><h4>Help</h4><ul><li><a href="#heroes">Connect a roaster</a></li><li><a href="#heroes">Import from Artisan</a></li><li><a href="#heroes">Changelog</a></li></ul></nav>
+          <nav aria-label="Company"><h4>Company</h4><ul><li><a href="#heroes">About</a></li><li><a href="#heroes">Privacy</a></li><li><a href="#heroes">Terms</a></li></ul></nav>
+        </div>
+        <div class="foot2__base"><span>© 2026 Batchbook Ltd, Leith, Scotland</span><span>Set in the system sans and Iowan Old Style</span></div>
+        <span class="foot2__mark" aria-hidden="true">Batchbook</span>
+      </footer>
+    </div>
+  </section>
+
+  <footer class="foot">Exemplars set a level of finish. They are not a kit: do not copy a layout or a look from them.</footer>
+</main>
+
+<script>
+(function () {
+  /* shared:start */
+  var root = document.documentElement;
+
+  /* Switcher links keep the other parameter; file links keep both. */
+  document.querySelectorAll("[data-palette-link]").forEach(function (a) {
+    var p = a.dataset.paletteLink;
+    a.href = "?palette=" + p;
+    if (p === root.dataset.palette) a.setAttribute("aria-current", "true");
+  });
+  var other = root.dataset.theme === "dark" ? "light" : "dark";
+  var themeLink = document.querySelector("[data-theme-link]");
+  themeLink.href = "?palette=" + root.dataset.palette + "&theme=" + other;
+  themeLink.setAttribute("aria-label", "Switch to " + other + " theme");
+  document.querySelectorAll(".bar__nav a, .bar__brand").forEach(function (a) {
+    a.href = a.getAttribute("href") + "?palette=" + root.dataset.palette + "&theme=" + root.dataset.theme;
+  });
+
+  /* shared:end */
+
+  /* Billing period: CSS swaps the prices. This keeps the hidden price out of the accessibility tree. */
+  document.querySelectorAll('input[name="bill"]').forEach(function (r) {
+    r.addEventListener("change", function () {
+      var yearly = document.getElementById("bill-y").checked;
+      document.querySelectorAll(".plan .m").forEach(function (e) { e.setAttribute("aria-hidden", String(yearly)); });
+      document.querySelectorAll(".plan .y").forEach(function (e) { e.setAttribute("aria-hidden", String(!yearly)); });
+    });
+  });
+  if (root.dataset.state === "yearly") document.getElementById("bill-y").click();
+})();
+</script>
+</body>
+</html>
