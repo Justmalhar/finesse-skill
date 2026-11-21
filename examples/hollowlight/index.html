@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hollowlight, a lighthouse puzzle game for Steam and Switch</title>
+<meta name="description" content="Hollowlight is a puzzle-exploration game about the last keeper of a North Sea lighthouse. Spring 2027 on Steam and Nintendo Switch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script>
+  /* Before first paint: ?still renders the final, unpinned layout for full-page captures. */
+  (function () {
+    var q = new URLSearchParams(location.search);
+    if (q.has("still")) document.documentElement.classList.add("still");
+  })();
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script defer src="script.js"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2.5v8M4.5 7.5 8 11l3.5-3.5M3 13.5h10"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 2.5 14 13H2z"/><path d="M8 6.5v3M8 11.25v.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-mark" viewBox="0 0 16 16"><path d="M4 2.5h8v11l-4-2.75-4 2.75z"/><path d="M8 5.25v3.5M6.25 7h3.5"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="nav">
+    <div class="wrap nav__in">
+      <a class="brand" href="#top" aria-label="Hollowlight, back to top">
+        <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M11 25h6l-1-14h-4z"/><path d="M10.5 11h7M12 11V8h4v3M11.5 8 14 5.5 16.5 8"/><path d="M3 9.5 11 8.5M3 6.5l8 1.25M25 9.5l-8-1M25 6.5l-8 1.25"/></svg>
+        Hollowlight
+      </a>
+      <nav class="nav__links" aria-label="Sections">
+        <a href="#story">Story</a>
+        <a href="#pillars">How it plays</a>
+        <a href="#press">Press kit</a>
+        <a href="#requirements">Requirements</a>
+      </nav>
+      <a class="btn btn--primary" href="#wishlist"><svg class="icon" aria-hidden="true"><use href="#i-mark"/></svg><span>Wishlist<span class="long"> on Steam</span></span></a>
+    </div>
+  </div>
+  <div class="runhead" aria-hidden="true">
+    <div class="wrap runhead__in">
+      <span class="runhead__book">Hollowlight, the keeper’s log</span>
+      <span class="runhead__now" id="runhead"><b hidden></b><span>Saltmarrow Rock, spring 2027</span></span>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" data-section="|Saltmarrow Rock, spring 2027" aria-labelledby="hero-h">
+    <div class="scene" id="scene">
+      <svg class="scene__poster" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="pb" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#f1ca47" stop-opacity="0.55"/><stop offset="0.5" stop-color="#f1ca47" stop-opacity="0.12"/><stop offset="1" stop-color="#f1ca47" stop-opacity="0"/></linearGradient>
+          <radialGradient id="pg"><stop offset="0" stop-color="#f1ca47" stop-opacity="0.55"/><stop offset="0.25" stop-color="#f1ca47" stop-opacity="0.16"/><stop offset="1" stop-color="#f1ca47" stop-opacity="0"/></radialGradient>
+          <linearGradient id="psea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b0f0e"/><stop offset="1" stop-color="#0c0403"/></linearGradient>
+        </defs>
+        <g fill="#f9f1f1" opacity="0.7"><circle cx="120" cy="90" r="1.2"/><circle cx="260" cy="160" r="0.9"/><circle cx="410" cy="70" r="1.4"/><circle cx="530" cy="210" r="0.8"/><circle cx="640" cy="120" r="1.1"/><circle cx="760" cy="60" r="0.9"/><circle cx="880" cy="180" r="1.3"/><circle cx="980" cy="90" r="0.8"/><circle cx="1240" cy="140" r="1.2"/><circle cx="1330" cy="60" r="0.9"/><circle cx="1420" cy="200" r="1.1"/><circle cx="1520" cy="110" r="1.4"/><circle cx="1180" cy="40" r="0.8"/><circle cx="340" cy="260" r="0.8"/><circle cx="1480" cy="300" r="0.9"/><circle cx="70" cy="320" r="1"/></g>
+        <polygon points="1070,262 0,160 0,380 1070,272" fill="url(#pb)"/>
+        <circle cx="1070" cy="267" r="160" fill="url(#pg)"/>
+        <rect y="600" width="1600" height="300" fill="url(#psea)"/>
+        <g stroke="#f1ca47" stroke-linecap="round" opacity="0.35"><path d="M1040 622h60M1020 650h100M1050 680h50M1000 716h140M1035 760h70M990 812h160"/></g>
+        <g stroke="#f9f1f1" stroke-linecap="round" opacity="0.08"><path d="M120 640h180M420 700h240M200 780h300M1300 660h160M1250 760h260M700 640h140"/></g>
+        <path d="M930 612c30-30 70-46 120-52 40-8 90-4 130 10 40 14 70 30 90 42z" fill="#2f1c1a"/>
+        <path d="M1046 566 1058 300h24l12 266z" fill="#e9dfd7"/>
+        <path d="M1050 480h40l1.6 26h-43.2zM1054 380h32l1.2 22h-34.4z" fill="#3a1d1a"/>
+        <rect x="1048" y="292" width="44" height="8" rx="2" fill="#241715"/>
+        <rect x="1058" y="262" width="24" height="30" fill="#f1ca47"/>
+        <path d="M1054 262 1070 242 1086 262z" fill="#241715"/>
+        <rect x="1110" y="540" width="56" height="30" fill="#d8ccc3"/><path d="M1104 542 1138 520 1172 542z" fill="#3a1d1a"/><rect x="1126" y="550" width="10" height="10" fill="#f1ca47"/>
+      </svg>
+      <canvas class="scene__canvas" id="scene-canvas" aria-hidden="true"></canvas>
+    </div>
+    <svg class="hero__cut" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10 100 0"/></svg>
+
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <h1 id="hero-h">Someone keeps putting out the light at <em>Saltmarrow Rock</em>.</h1>
+        <p class="hero__sub">Hollowlight is a puzzle-exploration game about the last keeper of a North Sea lighthouse. Read the log, turn the lens, learn the tide, and find out who climbs the tower at 2:14 every night.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="#wishlist"><svg class="icon" aria-hidden="true"><use href="#i-mark"/></svg>Wishlist on Steam</a>
+          <a class="textlink" href="#story">Read the first page of the log<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <p class="hero__plat"><span><strong>Spring 2027</strong> on Steam and Nintendo Switch</span><span>Single player, 8 to 10 hours</span></p>
+      </div>
+
+      <aside class="lightlist" aria-label="Light list entry for Saltmarrow Rock">
+        <p class="lightlist__head"><span>List of Lights</span><span class="num">No. A 3714</span></p>
+        <p class="lightlist__name">Saltmarrow Rock</p>
+        <p class="lightlist__char">Character <b class="num">Fl W 10s</b>, one white flash every ten seconds</p>
+        <dl>
+          <div><dt>Height</dt><dd class="num">41<small>m</small></dd></div>
+          <div><dt>Range</dt><dd class="num">18<small>nmi</small></dd></div>
+          <div><dt>Offshore</dt><dd class="num">11<small>nmi</small></dd></div>
+        </dl>
+        <p class="lightlist__status"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Extinguished 02:14 <span class="num">40 nights</span>
+          <span class="ring" title="Next flash"><svg viewBox="0 0 28 28" aria-hidden="true"><circle class="t" cx="14" cy="14" r="11"/><circle class="p" cx="14" cy="14" r="11"/></svg></span>
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="story" data-section="I|The light at Saltmarrow Rock" aria-labelledby="story-h">
+    <div class="sec__head">
+      <span class="sec__no">I</span>
+      <h2 id="story-h">The last keeper left a logbook, a cat, and a lamp that will not stay lit</h2>
+    </div>
+    <div class="story">
+      <div class="story__prose">
+        <p class="lead">October 1911. The Northern Lighthouse Board sends you to Saltmarrow Rock, eleven miles off the Aberdeenshire coast, to replace a keeper named Elias Brand. Brand left no note.</p>
+        <p>Every night you light the lamp at dusk. Every night, at fourteen minutes past two, it goes out. The tower has seven rooms, one stair and no other way up. As far as the log can tell you, you are alone on the rock.</p>
+        <p>Hollowlight is about the forty nights that follow: what Brand wrote, what he crossed out, and what the light shows when you point it somewhere it was never meant to go.</p>
+        <p class="story__sig">No combat and no timers. You can stand in the lamp room and watch the sea for as long as you like.</p>
+      </div>
+      <div class="log">
+        <div class="log__head"><h3>Keeper’s journal, volume VII</h3><span>Kept by E. Brand</span></div>
+        <div class="log__scroll">
+          <table>
+            <thead><tr><th scope="col">Date, 1911</th><th scope="col">Wind</th><th scope="col" class="r">Vis.</th><th scope="col" class="r">Lit</th><th scope="col" class="r">Out</th><th scope="col">Remarks</th></tr></thead>
+            <tbody class="num">
+              <tr><td>Tue 3 Oct</td><td>SW 4</td><td class="r">6 nmi</td><td class="r">17:58</td><td class="r">06:41</td><td class="rem">Wick trimmed at midnight. All in order.</td></tr>
+              <tr><td>Wed 4 Oct</td><td>SW 5</td><td class="r">5 nmi</td><td class="r">17:55</td><td class="r out">02:14</td><td class="rem">Lamp out. Oil full, chimney clean. Relit 02:20.</td></tr>
+              <tr><td>Thu 5 Oct</td><td>W 6</td><td class="r">3 nmi</td><td class="r">17:53</td><td class="r out">02:14</td><td class="rem">Out again, same minute. <s>Heard the stair.</s></td></tr>
+              <tr class="is-flag"><td>Fri 6 Oct</td><td>calm</td><td class="r">12 nmi</td><td class="r">17:50</td><td class="r out">02:14</td><td class="rem">Oil store counted. Three casks short of the book.</td></tr>
+              <tr><td>Sat 7 Oct</td><td>NW 3</td><td class="r">9 nmi</td><td class="r">17:48</td><td class="r out">02:14</td><td class="rem">Sat up in the watch room. Saw nothing pass.</td></tr>
+              <tr><td>Sun 8 Oct</td><td>NW 7</td><td class="r">1 nmi</td><td class="r">17:45</td><td class="r">&nbsp;</td><td class="rem">Lamp lit. Tide 4.6 m. Going up to see.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="log__foot"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>The entries stop on 8 October. You arrive on the <b>9th</b>.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap pillars" id="pillars" data-section="II|How it plays" aria-labelledby="pillars-h">
+    <div class="sec__head">
+      <span class="sec__no">II</span>
+      <h2 id="pillars-h">Three things you learn on the rock, and nothing else to carry</h2>
+    </div>
+    <div class="pillars__grid">
+      <div class="pillars__list">
+        <span class="rail" aria-hidden="true"><i></i></span>
+        <article class="pillar is-on" data-step="0">
+          <span class="pillar__no">i</span>
+          <div>
+            <h3>Light is the only tool you have</h3>
+            <p>There is no inventory. You turn the lens, shutter the panes and trim the wick. A beam held on the right bearing lights a reef marker, a window on the mainland, or a figure on the gallery rail.</p>
+            <dl class="pillar__fact"><div><dt>Lens puzzles</dt><dd class="num">38</dd></div><div><dt>Bearings to learn</dt><dd class="num">12</dd></div></dl>
+          </div>
+        </article>
+        <article class="pillar" data-step="1">
+          <span class="pillar__no">ii</span>
+          <div>
+            <h3>The tower changes with the tide</h3>
+            <p>Saltmarrow’s lower rooms flood and drain twice a day. Read the tide table in the log and you know which door is open at 04:40, and which stair is under water.</p>
+            <dl class="pillar__fact"><div><dt>Rooms</dt><dd class="num">7</dd></div><div><dt>Tidal range</dt><dd class="num">0.4 to 4.8 m</dd></div></dl>
+          </div>
+        </article>
+        <article class="pillar" data-step="2">
+          <span class="pillar__no">iii</span>
+          <div>
+            <h3>Every log entry is evidence</h3>
+            <p>No quest markers and no glowing hints. Brand’s journal is the map. Check his dates against the weather, the oil stores and the tide, and the gaps start to say something.</p>
+            <dl class="pillar__fact"><div><dt>Entries</dt><dd class="num">212</dd></div><div><dt>Volumes</dt><dd class="num">7</dd></div></dl>
+          </div>
+        </article>
+      </div>
+
+      <div class="stage">
+        <figure class="plate is-on" data-step="0">
+          <svg viewBox="0 0 640 400" role="img" aria-label="Top-down plan of the lamp room. The beam is held on bearing 214 degrees and lights the reef buoy; two other bearings are dashed.">
+            <g class="d-line"><circle cx="360" cy="230" r="150"/><circle cx="360" cy="230" r="110"/></g>
+            <g class="d-line"><path d="M360 72v14M360 374v14M202 230h14M504 230h14M248 118l10 10M462 332l10 10M472 118l-10 10M248 342l10-10"/></g>
+            <path class="d-beam" d="M360 230 96 64 60 118z"/>
+            <path class="d-gold" d="M360 230 78 91"/>
+            <path class="d-dash" d="M360 230 600 112M360 230 560 380"/>
+            <g class="d-ink"><circle cx="360" cy="230" r="34"/><circle cx="360" cy="230" r="24"/><circle cx="360" cy="230" r="14"/></g>
+            <circle class="d-dot" cx="360" cy="230" r="6"/>
+            <circle class="d-dot" cx="78" cy="91" r="7"/><circle cx="78" cy="91" r="14" fill="none" stroke="var(--accent)" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="600" cy="112" r="6" fill="var(--text-muted)"/><circle cx="560" cy="380" r="6" fill="var(--text-muted)"/>
+            <text class="d-label d-label--gold" x="98" y="80">REEF BUOY, LIT</text>
+            <text class="d-label" x="476" y="98">MAINLAND WINDOW</text>
+            <text class="d-label" x="474" y="372">GALLERY RAIL</text>
+            <text class="d-serif" x="186" y="196">bearing 214°</text>
+            <text class="d-label" x="352" y="66">N</text>
+          </svg>
+          <figcaption><b>Lamp room plan</b><span class="num">Bearing 214°, held 6 s</span></figcaption>
+        </figure>
+        <figure class="plate" data-step="1">
+          <svg viewBox="0 0 640 400" role="img" aria-label="Cross-section of the tower's seven rooms. The tide at 3.1 metres floods the oil store and coal room.">
+            <path class="d-ink" d="M210 360 232 40h96l22 320"/>
+            <rect class="d-room d-room--lit" x="244" y="48" width="72" height="34" rx="4"/>
+            <rect class="d-room" x="240" y="90" width="80" height="34" rx="4"/>
+            <rect class="d-room" x="236" y="132" width="88" height="34" rx="4"/>
+            <rect class="d-room" x="232" y="174" width="96" height="34" rx="4"/>
+            <rect class="d-room" x="228" y="216" width="104" height="34" rx="4"/>
+            <rect class="d-room" x="224" y="258" width="112" height="34" rx="4"/>
+            <rect class="d-room" x="220" y="300" width="120" height="52" rx="4"/>
+            <path class="d-water" d="M60 268h520v92H60z" opacity="0.9"/>
+            <path class="d-line" d="M60 268c20-5 40 5 60 0s40-5 60 0 40 5 60 0M400 268c20-5 40 5 60 0s40-5 60 0 40 5 60 0"/>
+            <g class="d-label"><text x="364" y="70">7 Lamp</text><text x="364" y="112">6 Service</text><text x="364" y="154">5 Watch</text><text x="364" y="196">4 Bunks</text><text x="364" y="238">3 Kitchen</text><text x="364" y="284">2 Coal</text><text x="364" y="330">1 Oil store</text></g>
+            <g class="d-line"><path d="M560 40v320M552 72h16M552 136h16M552 200h16M552 264h16M552 328h16"/></g>
+            <g class="d-label"><text x="500" y="76">4.8 m</text><text x="500" y="204">2.6 m</text><text x="500" y="332">0.4 m</text></g>
+            <path d="M548 268h28" stroke="var(--accent)" stroke-width="3"/>
+            <text class="d-label d-label--gold" x="420" y="258">3.1 m at 04:40</text>
+            <text class="d-serif" x="72" y="300">two rooms under water</text>
+          </svg>
+          <figcaption><b>Tower section at 04:40</b><span class="num">Tide 3.1 m, falling</span></figcaption>
+        </figure>
+        <figure class="plate" data-step="2">
+          <svg viewBox="0 0 640 400" role="img" aria-label="A page of the keeper's journal with the 6 October entry circled and linked to the oil store count.">
+            <rect x="40" y="36" width="340" height="328" rx="6" fill="var(--surface-raised)" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <g class="d-line"><path d="M40 92h340M40 140h340M40 188h340M40 236h340M40 284h340M40 332h340M112 36v328"/></g>
+            <g class="d-label"><text x="56" y="72">3 Oct</text><text x="56" y="120">4 Oct</text><text x="56" y="168">5 Oct</text><text x="56" y="216">6 Oct</text><text x="56" y="264">7 Oct</text><text x="56" y="312">8 Oct</text></g>
+            <g class="d-serif"><text x="126" y="72">All in order.</text><text x="126" y="120">Out 02:14. Oil full.</text><text x="126" y="168">Out again, same minute.</text><text x="126" y="216">Three casks short.</text><text x="126" y="264">Saw nothing pass.</text><text x="126" y="312">Going up to see.</text></g>
+            <ellipse cx="200" cy="211" rx="104" ry="22" fill="none" stroke="var(--accent)" stroke-width="2"/>
+            <path class="d-gold" d="M304 211c50 0 70-60 120-60"/>
+            <rect x="424" y="112" width="180" height="96" rx="8" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+            <text class="d-label d-label--gold" x="440" y="140">OIL STORE, 6 OCT</text>
+            <text class="d-label d-label--ink" x="440" y="166">Book: 24 casks</text>
+            <text class="d-label d-label--ink" x="440" y="188">Counted: 21 casks</text>
+            <path class="d-dash" d="M304 120c60 0 100 140 140 160"/>
+            <rect x="444" y="252" width="160" height="60" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <text class="d-label" x="460" y="278">TIDE, 4 OCT 02:14</text>
+            <text class="d-label d-label--ink" x="460" y="298">4.6 m, high water</text>
+          </svg>
+          <figcaption><b>Journal, volume VII</b><span class="num">2 of 212 entries cross-checked</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="press" data-section="III|Press kit" aria-labelledby="press-h">
+    <div class="sec__head">
+      <span class="sec__no">III</span>
+      <h2 id="press-h">Press kit</h2>
+      <p>Everything you need to write about Hollowlight. Screenshots are from the current build and may change before launch. Keys for review go out in February 2027.</p>
+    </div>
+    <div class="press">
+      <div class="facts">
+        <h3>Fact sheet</h3>
+        <dl>
+          <div><dt>Developer</dt><dd>Lantern &amp; Ash, three people in Aberdeen</dd></div>
+          <div><dt>Release</dt><dd>Spring 2027</dd></div>
+          <div><dt>Platforms</dt><dd>Windows, macOS, Steam Deck, Nintendo Switch</dd></div>
+          <div><dt>Price</dt><dd>Announced with the release date</dd></div>
+          <div><dt>Playtime</dt><dd class="num">8 to 10 hours, 40 in-game nights</dd></div>
+          <div><dt>Languages</dt><dd>English, French, German, Spanish, Japanese, Brazilian Portuguese</dd></div>
+          <div><dt>Press</dt><dd><a href="mailto:press@lanternandash.co.uk">press@lanternandash.co.uk</a></dd></div>
+        </dl>
+      </div>
+      <div>
+        <div class="shots">
+          <figure class="shot shot--big">
+            <svg viewBox="0 0 640 520" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Screenshot: inside the lamp room at night, the glowing lens behind the window panes.">
+              <defs>
+                <radialGradient id="lr" cx="0.5" cy="0.48" r="0.6"><stop offset="0" stop-color="#f1ca47" stop-opacity="0.9"/><stop offset="0.3" stop-color="#c9902a" stop-opacity="0.45"/><stop offset="1" stop-color="#1b0f0e" stop-opacity="0"/></radialGradient>
+                <linearGradient id="lrsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c0403"/><stop offset="1" stop-color="#2f1c1a"/></linearGradient>
+              </defs>
+              <rect width="640" height="520" fill="url(#lrsky)"/>
+              <rect y="330" width="640" height="190" fill="#120807"/>
+              <g stroke="#f1ca47" stroke-opacity="0.25" stroke-linecap="round"><path d="M40 370h120M220 400h200M480 380h120M120 450h160M380 470h200"/></g>
+              <rect width="640" height="520" fill="url(#lr)"/>
+              <g fill="none" stroke="#f1ca47" stroke-width="3" opacity="0.85"><ellipse cx="320" cy="250" rx="120" ry="150"/><ellipse cx="320" cy="250" rx="94" ry="118"/><ellipse cx="320" cy="250" rx="68" ry="86"/><ellipse cx="320" cy="250" rx="42" ry="54"/></g>
+              <ellipse cx="320" cy="250" rx="22" ry="28" fill="#fff1c2"/>
+              <g fill="#241715"><rect x="0" y="0" width="18" height="520"/><rect x="150" y="0" width="12" height="520"/><rect x="478" y="0" width="12" height="520"/><rect x="622" y="0" width="18" height="520"/><rect y="0" width="640" height="16"/><rect y="440" width="640" height="80"/></g>
+              <rect y="436" width="640" height="6" fill="#5a3a2a"/>
+            </svg>
+            <figcaption>Lamp room, night 12</figcaption>
+            <div class="hud" aria-hidden="true"><span><i>Oil</i>34%</span><span class="bar"><b></b></span><span><i>Tide</i>2.4 m falling</span></div>
+          </figure>
+          <figure class="shot">
+            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Screenshot: the spiral stair seen from above, a single lantern on the steps.">
+              <rect width="400" height="250" fill="#130807"/>
+              <g fill="none" stroke="#3a2622" stroke-width="16"><circle cx="200" cy="125" r="150"/><circle cx="200" cy="125" r="118"/><circle cx="200" cy="125" r="86"/><circle cx="200" cy="125" r="54"/></g>
+              <g stroke="#6b4a3e" stroke-width="2"><path d="M200 125 350 125M200 125 306 231M200 125 200 275M200 125 94 231M200 125 50 125M200 125 94 19M200 125 200-25M200 125 306 19M200 125 339 68M200 125 339 182M200 125 61 182M200 125 61 68"/></g>
+              <circle cx="200" cy="125" r="24" fill="#0c0403"/>
+              <circle cx="284" cy="160" r="40" fill="#f1ca47" opacity="0.18"/><circle cx="284" cy="160" r="6" fill="#f1ca47"/>
+            </svg>
+            <figcaption>The stair at 02:13</figcaption>
+          </figure>
+          <figure class="shot">
+            <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Screenshot: Saltmarrow Rock seen from a mainland window, its beam crossing the sky.">
+              <defs><linearGradient id="mw" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#f1ca47" stop-opacity="0.5"/><stop offset="1" stop-color="#f1ca47" stop-opacity="0"/></linearGradient></defs>
+              <rect width="400" height="250" fill="#1b0f0e"/>
+              <rect y="0" width="400" height="140" fill="#130807"/>
+              <g fill="#f9f1f1" opacity="0.7"><circle cx="60" cy="40" r="1"/><circle cx="140" cy="70" r="0.8"/><circle cx="300" cy="30" r="1.1"/><circle cx="350" cy="90" r="0.8"/><circle cx="220" cy="50" r="0.9"/></g>
+              <rect y="140" width="400" height="110" fill="#0c0403"/>
+              <polygon points="262,122 30,84 30,150 262,125" fill="url(#mw)"/>
+              <g stroke="#f1ca47" stroke-opacity="0.35" stroke-linecap="round"><path d="M250 150h24M244 162h36M254 176h18"/></g>
+              <path d="M254 140 259 123h6l5 17z" fill="#e9dfd7"/><circle cx="262" cy="122" r="4" fill="#f1ca47"/><circle cx="262" cy="122" r="14" fill="#f1ca47" opacity="0.2"/>
+              <g fill="none" stroke="#3a1d1a" stroke-width="12"><rect x="6" y="6" width="388" height="238"/><path d="M200 0v250M0 125h400"/></g>
+              <rect x="0" y="214" width="400" height="36" fill="#2f1c1a"/><rect x="0" y="212" width="400" height="4" fill="#5a3a2a"/>
+              <rect x="300" y="190" width="10" height="24" rx="2" fill="#6b4a3e"/><path d="M305 190c-4-8 4-10 0-18" stroke="#f1ca47" stroke-width="2" fill="none" opacity="0.8"/>
+            </svg>
+            <figcaption>From the mainland, night 1</figcaption>
+          </figure>
+        </div>
+        <ul class="dl">
+          <li><a role="link" aria-disabled="true"><span class="dl__type">ZIP</span><span><b>Screenshots</b><small>16 images, 3840 by 2160, PNG</small></span><span class="dl__size num">61 MB</span><svg class="icon icon--20" aria-hidden="true"><use href="#i-down"/></svg></a></li>
+          <li><a role="link" aria-disabled="true"><span class="dl__type">ZIP</span><span><b>Logo, key art and capsule images</b><small>SVG and PNG, light and dark</small></span><span class="dl__size num">18 MB</span><svg class="icon icon--20" aria-hidden="true"><use href="#i-down"/></svg></a></li>
+          <li><a role="link" aria-disabled="true"><span class="dl__type">MP4</span><span><b>Announcement trailer</b><small>1 min 42 s, 4K and 1080p</small></span><span class="dl__size num">412 MB</span><svg class="icon icon--20" aria-hidden="true"><use href="#i-down"/></svg></a></li>
+          <li><a role="link" aria-disabled="true"><span class="dl__type">PDF</span><span><b>Fact sheet and studio bios</b><small>2 pages</small></span><span class="dl__size num">0.4 MB</span><svg class="icon icon--20" aria-hidden="true"><use href="#i-down"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="requirements" data-section="IV|System requirements" aria-labelledby="req-h">
+    <div class="sec__head">
+      <span class="sec__no">IV</span>
+      <h2 id="req-h">System requirements</h2>
+      <p>Targets for the launch build on PC and Mac. The rock runs at 60 frames per second on the recommended spec at 1440p.</p>
+    </div>
+    <div class="req">
+      <div class="log__scroll">
+        <table class="spec">
+          <thead><tr><th scope="col">Windows and macOS</th><th scope="col">Minimum</th><th scope="col" class="rec">Recommended</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">System</th><td>Windows 10 64-bit, macOS 12</td><td class="rec">Windows 11, macOS 14</td></tr>
+            <tr><th scope="row">Processor</th><td>Intel Core i5-6600 or Ryzen 3 3100, Apple M1</td><td class="rec">Intel Core i5-10400 or Ryzen 5 3600, Apple M2</td></tr>
+            <tr><th scope="row">Memory</th><td class="num">8 GB</td><td class="rec num">16 GB</td></tr>
+            <tr><th scope="row">Graphics</th><td>GTX 1050 Ti 4 GB or RX 570</td><td class="rec">RTX 2060 6 GB or RX 6600</td></tr>
+            <tr><th scope="row">Target</th><td class="num">1080p, 30 fps, low</td><td class="rec num">1440p, 60 fps, high</td></tr>
+            <tr><th scope="row">Storage</th><td class="num">6 GB, SSD preferred</td><td class="rec num">6 GB, SSD</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="plats">
+        <div class="platcard">
+          <h3>Steam Deck <span class="badge badge--wait"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Verified target</span></h3>
+          <p>Built and tested on Deck from the first prototype. Rating is pending Valve’s review before launch.</p>
+          <ul class="num"><li><span>Frame rate</span><span>40 fps locked</span></li><li><span>Battery</span><span>about 3 h 30 min</span></li></ul>
+        </div>
+        <div class="platcard">
+          <h3>Nintendo Switch <span class="badge badge--ok"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Confirmed</span></h3>
+          <p>Handheld, tabletop and docked. Plays on Switch and Switch 2.</p>
+          <ul class="num"><li><span>Download size</span><span>4.1 GB</span></li><li><span>Docked</span><span>1080p, 30 fps</span></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="wishlist" data-section="V|Wishlist" aria-labelledby="wish-h">
+    <div class="wrap band__grid">
+      <div>
+        <span class="band__no">V</span>
+        <h2 id="wish-h">Wishlist Hollowlight and Steam will tell you the night it launches</h2>
+        <p class="band__sub">Wishlists are how a three-person studio gets seen. It costs nothing and takes one click. Switch players can follow the game on the Nintendo eShop.</p>
+        <div class="band__cta">
+          <a class="btn btn--ink btn--lg" role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-mark"/></svg>Wishlist on Steam</a>
+          <a class="textlink" role="link" aria-disabled="true">Follow on the Nintendo eShop<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <form class="signup" id="signup" novalidate>
+        <h3>The keeper’s dispatch</h3>
+        <p>One letter a month from the studio: what we built, what we cut, and the release date the moment we have it.</p>
+        <label for="email">Email address</label>
+        <div class="signup__row">
+          <div class="field"><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="email-help"></div>
+          <button class="btn btn--ink" type="submit"><span class="faces"><span class="is-on" data-face="idle">Send me the dispatch</span><span data-face="busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Sending</span><span data-face="done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>You’re on the list</span></span></button>
+        </div>
+        <p class="signup__help" id="email-help">No spam, one letter a month. Unsubscribe from any of them.</p>
+        <p class="sr-only" aria-live="polite" id="signup-live"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__about">
+        <a class="brand" href="#top">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M11 25h6l-1-14h-4z"/><path d="M10.5 11h7M12 11V8h4v3M11.5 8 14 5.5 16.5 8"/><path d="M3 9.5 11 8.5M3 6.5l8 1.25M25 9.5l-8-1M25 6.5l-8 1.25"/></svg>
+          Hollowlight
+        </a>
+        <p>A game by Lantern &amp; Ash, made in Aberdeen with support from Creative Scotland’s games fund.</p>
+      </div>
+      <div><h4>The game</h4><ul><li><a href="#story">Story</a></li><li><a href="#pillars">How it plays</a></li><li><a href="#requirements">Requirements</a></li></ul></div>
+      <div><h4>Press</h4><ul><li><a href="#press">Press kit</a></li><li><a href="mailto:press@lanternandash.co.uk">Contact</a></li></ul></div>
+      <div><h4>Follow</h4><ul><li><a role="link" aria-disabled="true">Steam page</a></li><li><a role="link" aria-disabled="true">Nintendo eShop</a></li><li><a role="link" aria-disabled="true">Bluesky</a></li></ul></div>
+    </div>
+    <div class="foot__base"><span>© 2026 Lantern &amp; Ash Ltd. Hollowlight is a work of fiction; Saltmarrow Rock is not on any chart.</span><span>Nintendo Switch is a trademark of Nintendo.</span></div>
+    <span class="foot__mark" aria-hidden="true">Hollowlight</span>
+  </div>
+</footer>
+
+</body>
+</html>

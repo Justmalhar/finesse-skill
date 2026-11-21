@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>prod-eu-west-1 overview, KubeWatch</title>
+<script>
+  /* Before first paint: theme and state from the URL. Dark is the default. */
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    if (q.get("theme") === "light") root.dataset.theme = "light";
+    var s = q.get("state");
+    if (s === "loading" || s === "empty" || s === "error") root.dataset.state = s;
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-grid" viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="0.5"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="0.5"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="0.5"/><rect x="9" y="9" width="4.5" height="4.5" rx="0.5"/></symbol>
+  <symbol id="i-box" viewBox="0 0 16 16"><path d="M8 1.75l5.5 3v6.5L8 14.25l-5.5-3v-6.5z"/><path d="M2.5 4.75L8 7.75l5.5-3M8 7.75v6.5"/></symbol>
+  <symbol id="i-server" viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="11" height="4.5" rx="0.5"/><rect x="2.5" y="9" width="11" height="4.5" rx="0.5"/><path d="M5 4.75h.01M5 11.25h.01"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 16 16"><path d="M9.5 2.5c2-.5 3.5-.5 4 0s.5 2 0 4L8 12l-4-4z"/><path d="M6 10l-3.5 3.5M4 8L2.5 7.5 4.5 5.5 7 6M8 12l.5 1.5 2-2L10 9"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 16 16"><path d="M4 11V7a4 4 0 0 1 8 0v4l1.25 1.5H2.75z"/><path d="M6.5 14h3"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 16 16"><path d="M3.5 14V2.5M3.5 3h8.5l-2 3 2 3H3.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 16 16"><rect x="4.5" y="1.75" width="7" height="12.5" rx="1"/><path d="M7 12h2"/></symbol>
+  <symbol id="i-logs" viewBox="0 0 16 16"><path d="M3 3.5h10M3 6.5h7M3 9.5h10M3 12.5h5"/></symbol>
+  <symbol id="i-trace" viewBox="0 0 16 16"><path d="M2.5 4h6M5 8h7M3.5 12h9"/><circle cx="10.5" cy="4" r="1.25"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="M10.25 10.25l3.25 3.25"/></symbol>
+  <symbol id="i-req" viewBox="0 0 16 16"><path d="M2 8h3l2-4.5 2 9 2-4.5h3"/></symbol>
+  <symbol id="i-err" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5v3.5M8 10.75v.25"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 4.75V8l2.25 1.5"/></symbol>
+  <symbol id="i-up" viewBox="0 0 12 12"><path d="M6 9.5v-7M3 5.5l3-3 3 3"/></symbol>
+  <symbol id="i-down" viewBox="0 0 12 12"><path d="M6 2.5v7M3 6.5l3 3 3-3"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 16 16"><path d="M5.5 6.5L8 9l2.5-2.5"/></symbol>
+  <symbol id="i-sort" viewBox="0 0 12 12"><path d="M4 4.5L6 2.5l2 2M4 7.5l2 2 2-2"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 12 12"><path d="M6 1.5l4.75 8.5h-9.5z"/><path d="M6 5v2"/></symbol>
+  <symbol id="i-crit" viewBox="0 0 12 12"><path d="M4 1.5h4L10.5 4v4L8 10.5H4L1.5 8V4z"/><path d="M6 4v2.25M6 8.25v.25"/></symbol>
+  <symbol id="i-info" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.5"/><path d="M6 5.5v2.75M6 3.75V4"/></symbol>
+  <symbol id="i-retry" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.5-3.6M13 2.5v3h-3"/></symbol>
+</svg>
+
+<div class="app">
+  <!-- Sidebar: groups of links, counts at the row end, the on-call chip at the foot. -->
+  <aside class="side" aria-label="KubeWatch">
+    <div class="logo">
+      <svg class="logo__mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l8.25 4.75v9.5L12 21.5l-8.25-4.75v-9.5z"/><circle cx="12" cy="12" r="3"/><path d="M12 5.5V9M12 15v3.5M6.4 8.75l3 1.75M14.6 13.5l3 1.75M6.4 15.25l3-1.75M14.6 10.5l3-1.75"/></svg>
+      <span class="logo__name">kubewatch</span>
+    </div>
+    <button class="cluster" type="button" aria-haspopup="menu" aria-expanded="false" aria-disabled="true">
+      <span class="cluster__dot" aria-hidden="true"></span>
+      <span class="cluster__name"><b>prod-eu-west-1</b><span>EKS 1.31.4, 3 zones</span></span>
+      <svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg>
+    </button>
+
+    <nav class="nav" aria-label="Screens">
+      <p class="nav__label">Observe</p>
+      <a href="#top" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span>Overview</span></a>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-box"/></svg><span>Workloads</span><span class="count num">214</span></a>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-server"/></svg><span>Nodes</span><span class="count num">42</span></a>
+      <a href="#deploys"><svg class="icon" aria-hidden="true"><use href="#i-rocket"/></svg><span>Deploys</span><span class="count num">8</span></a>
+      <p class="nav__label">Respond</p>
+      <a href="#alerts"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg><span>Alerts</span><span class="count count--hot num">4</span></a>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg><span>Incidents</span><span class="count num">1</span></a>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span>On-call</span></a>
+      <p class="nav__label">Explore</p>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-logs"/></svg><span>Logs</span></a>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-trace"/></svg><span>Traces</span></a>
+    </nav>
+
+    <div class="budget">
+      <p class="budget__top"><span>Error budget, 30 days</span><b class="num" data-budget-left>58%<span> left</span></b></p>
+      <div class="budget__bar" role="meter" aria-label="Error budget left" aria-valuemin="0" aria-valuemax="100" aria-valuenow="58"><i style="--p: 58%"></i><i class="budget__today" data-budget-today style="--p: 0%"></i></div>
+      <p class="budget__note" data-budget-note>Today spent part of it. Resets 1 December.</p>
+    </div>
+    <div class="me">
+      <span class="avatar" aria-hidden="true">PR</span>
+      <span class="me__name"><b>Priya Raman</b><span>On call until Mon 09:00</span></span>
+    </div>
+  </aside>
+
+  <div class="col">
+    <header class="top">
+      <nav class="crumbs" aria-label="Breadcrumb"><span>Clusters</span><span aria-hidden="true">/</span><span>prod-eu-west-1</span><span aria-hidden="true">/</span><b aria-current="page">Overview</b></nav>
+      <label class="search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <span class="sr-only">Filter services</span>
+        <input type="search" placeholder="Filter services" aria-keyshortcuts="/" data-search>
+        <kbd>/</kbd>
+      </label>
+      <div class="seg" role="radiogroup" aria-label="Time range" style="--n: 3">
+        <label><input type="radio" name="range" value="12"><span>1h</span></label>
+        <label><input type="radio" name="range" value="72"><span>6h</span></label>
+        <label><input type="radio" name="range" value="288" checked><span>24h</span></label>
+        <span class="seg__thumb" aria-hidden="true"></span>
+      </div>
+      <p class="live"><span class="live__dot" aria-hidden="true"></span>Live<span class="live__age num" data-age>2s ago</span></p>
+      <a class="btn btn--primary" role="link" aria-disabled="true">Declare incident</a>
+    </header>
+
+    <main class="main" id="top">
+      <div class="head">
+        <div>
+          <h1>prod-eu-west-1</h1>
+          <ul class="chips">
+            <li class="chip"><svg class="icon" aria-hidden="true"><use href="#i-server"/></svg><span class="num">42</span> nodes in 3 zones</li>
+            <li class="chip"><svg class="icon" aria-hidden="true"><use href="#i-box"/></svg><span class="num" data-pods-total>1,284</span> pods</li>
+            <li><a class="chip chip--warn" href="#alerts"><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg><span class="num">4</span> alerts firing</a></li>
+          </ul>
+        </div>
+        <p class="head__side num">Sat 21 Nov, 16:00 UTC</p>
+      </div>
+
+      <div class="sheet">
+        <!-- Band: three signals and the deploy lanes share one 24 hour axis and one crosshair. -->
+        <section class="panel band c12" aria-labelledby="band-h">
+          <header class="panel__head">
+            <div><h2 id="band-h">Golden signals and deploys</h2><p data-band-sub>Last 24 hours at 5 minute resolution, all ingress traffic</p></div>
+            <ul class="legend">
+              <li><i class="sw sw--line"></i>Today</li>
+              <li><i class="sw sw--dash"></i>Same time yesterday</li>
+              <li><i class="sw sw--slo"></i>SLO limit</li>
+            </ul>
+          </header>
+
+          <div class="signals" data-signals>
+            <div class="sig sig--req">
+              <div class="sig__info">
+                <p class="sig__label"><svg class="icon" aria-hidden="true"><use href="#i-req"/></svg>Requests</p>
+                <p class="sig__fig"><span class="odo" data-odo aria-hidden="true"></span><span class="unit">req/s</span></p>
+                <span class="sr-only" aria-live="polite" data-odo-live></span>
+                <p class="sig__delta" data-delta="req"></p>
+                <p class="sig__cap num" data-cap="req"></p>
+              </div>
+              <div class="sig__y num" data-y="req"></div>
+              <div class="sig__plot"><svg viewBox="0 0 288 100" preserveAspectRatio="none" data-svg="req" aria-hidden="true"></svg></div>
+            </div>
+            <div class="sig sig--err">
+              <div class="sig__info">
+                <p class="sig__label"><svg class="icon" aria-hidden="true"><use href="#i-err"/></svg>5xx error rate</p>
+                <p class="sig__fig num"><span data-fig="err">0.00</span><span class="unit">%</span></p>
+                <p class="sig__delta" data-delta="err"></p>
+                <p class="sig__cap num" data-cap="err"></p>
+              </div>
+              <div class="sig__y num" data-y="err"></div>
+              <div class="sig__plot"><svg viewBox="0 0 288 100" preserveAspectRatio="none" data-svg="err" aria-hidden="true"></svg></div>
+            </div>
+            <div class="sig sig--lat">
+              <div class="sig__info">
+                <p class="sig__label"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>p95 latency</p>
+                <p class="sig__fig num"><span data-fig="lat">0</span><span class="unit">ms</span></p>
+                <p class="sig__delta" data-delta="lat"></p>
+                <p class="sig__cap num" data-cap="lat"></p>
+              </div>
+              <div class="sig__y num" data-y="lat"></div>
+              <div class="sig__plot"><svg viewBox="0 0 288 100" preserveAspectRatio="none" data-svg="lat" aria-hidden="true"></svg></div>
+            </div>
+
+            <div class="deploys" id="deploys" data-deploys aria-label="Deploys in the last 24 hours" role="list"></div>
+
+            <div class="xaxis num" data-xaxis aria-hidden="true"></div>
+
+            <div class="scrub" tabindex="0" role="slider" aria-label="Time in the last 24 hours" aria-valuemin="0" aria-valuemax="288" aria-valuenow="288" data-scrub>
+              <span class="scrub__line"></span>
+              <span class="scrub__pt scrub__pt--req"></span><span class="scrub__pt scrub__pt--err"></span><span class="scrub__pt scrub__pt--lat"></span>
+              <div class="tip" data-tip></div>
+            </div>
+          </div>
+          <table class="sr-only" data-sr-table><caption>Golden signals, 24 hour summary</caption><tbody></tbody></table>
+        </section>
+
+        <!-- Cluster health: a node strip by zone, then three meters against capacity. -->
+        <section class="panel health c4" aria-labelledby="health-h">
+          <header class="panel__head">
+            <div><h2 id="health-h">Cluster health</h2><p>42 nodes, m7i.4xlarge and m7i.8xlarge</p></div>
+            <span class="badge badge--warn"><svg aria-hidden="true"><use href="#i-warn"/></svg>Degraded</span>
+          </header>
+          <div class="health__body">
+            <div class="zones" data-zones></div>
+            <ul class="nodekey">
+              <li><i class="nk nk--ok"></i><span class="num">40</span> Ready</li>
+              <li><i class="nk nk--warn"></i><span class="num">1</span> Memory pressure</li>
+              <li><i class="nk nk--off"></i><span class="num">1</span> Cordoned</li>
+            </ul>
+            <dl class="cap">
+              <div><dt>CPU requested</dt><dd class="num"><b>68%</b> of 352 cores</dd><span class="segbar" style="--p: 68%; --c: var(--chart-1)"></span></div>
+              <div><dt>Memory requested</dt><dd class="num"><b>74%</b> of 1.38 TiB</dd><span class="segbar" style="--p: 74%; --c: var(--chart-3)"></span></div>
+              <div><dt>Pods scheduled</dt><dd class="num"><b>1,284</b> of 4,620</dd><span class="segbar" style="--p: 27.8%; --c: var(--chart-4)"></span></div>
+            </dl>
+            <p class="health__cp num"><span>API server p99 <b>82 ms</b></span><span>etcd <b>3 of 3</b> healthy</span></p>
+          </div>
+        </section>
+
+        <!-- Alerts: one tinted badge per alert, the action on the one that needs it. -->
+        <section class="panel alerts c4" id="alerts" aria-labelledby="alerts-h">
+          <header class="panel__head">
+            <div><h2 id="alerts-h">Active alerts</h2><p>Sorted by severity, then age</p></div>
+            <span class="count count--hot num" data-alert-count>4</span>
+          </header>
+          <ol class="alist only-live">
+            <li class="al al--crit">
+              <span class="badge badge--crit"><svg aria-hidden="true"><use href="#i-crit"/></svg>Critical</span>
+              <div class="al__body">
+                <p class="al__t">Error budget burn <span class="num">14.2×</span> on checkout-api</p>
+                <p class="al__m num">shop, 6 h window, since 13:11 <span class="al__age">2 h 49 m</span></p>
+              </div>
+              <button class="btn btn--sm al__ack" type="button" data-ack>
+                <span class="face face--idle">Ack</span>
+                <span class="face face--busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.75"/><path d="M8 2.25A5.75 5.75 0 0 1 13.75 8"/></svg></span>
+                <span class="face face--done">Acked</span>
+              </button>
+            </li>
+            <li class="al">
+              <span class="badge badge--warn"><svg aria-hidden="true"><use href="#i-warn"/></svg>Warning</span>
+              <div class="al__body">
+                <p class="al__t">Memory pressure on ip-10-4-23-118</p>
+                <p class="al__m num">eu-west-1b, 91% of 128 GiB <span class="al__age">58 m</span></p>
+              </div>
+            </li>
+            <li class="al">
+              <span class="badge badge--warn"><svg aria-hidden="true"><use href="#i-warn"/></svg>Warning</span>
+              <div class="al__body">
+                <p class="al__t">Consumer lag on orders-events</p>
+                <p class="al__m num">data, 48,210 messages behind <span class="al__age">1 h 20 m</span></p>
+              </div>
+            </li>
+            <li class="al">
+              <span class="badge badge--info"><svg aria-hidden="true"><use href="#i-info"/></svg>Info</span>
+              <div class="al__body">
+                <p class="al__t">PVC data-postgres-2 at 82%</p>
+                <p class="al__m num">data, 410 of 500 GiB <span class="al__age">9 h 48 m</span></p>
+              </div>
+            </li>
+          </ol>
+          <div class="empty only-empty">
+            <svg class="empty__ghost" viewBox="0 0 200 72" aria-hidden="true"><rect x="0" y="4" width="56" height="16" rx="2"/><rect x="68" y="6" width="132" height="12" rx="2"/><rect x="0" y="40" width="56" height="16" rx="2"/><rect x="68" y="42" width="104" height="12" rx="2"/></svg>
+            <p><b>Nothing firing.</b> The last alert, checkout-api error budget burn, resolved at 15:52. New alerts land here with their severity.</p>
+          </div>
+          <p class="sr-only" role="status" aria-live="polite" data-ack-live></p>
+        </section>
+
+        <!-- Pods by namespace: one composition bar, then each namespace split by phase. -->
+        <section class="panel pods c4" aria-labelledby="pods-h">
+          <header class="panel__head">
+            <div><h2 id="pods-h">Pods by namespace</h2><p>Running, pending and failing, right now</p></div>
+            <p class="pods__total num"><b data-pods-sum>1,284</b> pods</p>
+          </header>
+          <div class="pods__body only-ok">
+            <div class="mixbar" data-mixbar role="img" aria-label="Share of pods by namespace"></div>
+            <table class="ptable">
+              <caption class="sr-only">Pods by namespace and phase</caption>
+              <thead><tr><th scope="col">Namespace</th><th scope="col" class="r">Pods</th><th scope="col" class="phase">Phase</th><th scope="col" class="r">Failing</th></tr></thead>
+              <tbody data-pods></tbody>
+            </table>
+          </div>
+          <div class="fail only-error" role="alert">
+            <p><b>Could not load pod counts.</b> The metrics-server in kube-system timed out after 10 s.</p>
+            <p class="num">Last good reading: 1,284 pods at 15:58.</p>
+            <button class="btn btn--sm" type="button" data-retry><svg class="icon" aria-hidden="true"><use href="#i-retry"/></svg>Retry</button>
+          </div>
+        </section>
+
+        <!-- Noisiest services: a sortable table with a 24 hour error spark per row. -->
+        <section class="panel noisy c12" aria-labelledby="noisy-h">
+          <header class="panel__head">
+            <div><h2 id="noisy-h">Noisiest services</h2><p data-noisy-sub>By 5xx responses in the last 24 hours</p></div>
+          </header>
+          <div class="tablewrap">
+            <table class="stable">
+              <caption class="sr-only">Services ranked by 5xx responses</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Service</th>
+                  <th scope="col" class="r" aria-sort="descending"><button type="button" data-sort="e5">5xx, 24 h<svg aria-hidden="true"><use href="#i-sort"/></svg></button></th>
+                  <th scope="col" class="r"><button type="button" data-sort="rate">Error rate<svg aria-hidden="true"><use href="#i-sort"/></svg></button></th>
+                  <th scope="col" class="spark-col">Errors, 24 h</th>
+                  <th scope="col" class="r"><button type="button" data-sort="p95">p95, ms<svg aria-hidden="true"><use href="#i-sort"/></svg></button></th>
+                  <th scope="col" class="r"><button type="button" data-sort="restarts">Restarts<svg aria-hidden="true"><use href="#i-sort"/></svg></button></th>
+                  <th scope="col" class="r"><button type="button" data-sort="logs">Log lines/min<svg aria-hidden="true"><use href="#i-sort"/></svg></button></th>
+                </tr>
+              </thead>
+              <tbody data-services></tbody>
+            </table>
+            <p class="noresult" data-noresult hidden>No service matches “<span data-q></span>”. <button type="button" class="linkbtn" data-clear>Clear the filter</button></p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Screens">
+  <a href="#top" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Overview</a>
+  <a href="#deploys"><svg class="icon" aria-hidden="true"><use href="#i-rocket"/></svg>Deploys</a>
+  <a href="#alerts"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg>Alerts</a>
+  <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-logs"/></svg>Logs</a>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>

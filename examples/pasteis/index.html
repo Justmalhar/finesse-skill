@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nata &amp; Co. Pastéis de nata in Bairro Alto, Lisbon</title>
+<meta name="description" content="Nata &amp; Co. bakes pastéis de nata in the window on Rua da Rosa from 6am. Four pastries, preorder boxes of 6 and 12, open Tuesday to Sunday.">
+<script>
+  /* Before first paint: honour ?theme= and mark that scripts run, so reveals can hide content safely. */
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    var t = q.get("theme");
+    if (t === "light" || t === "dark") root.dataset.theme = t;
+    if (q.has("shot")) root.classList.add("is-shot");
+    root.classList.add("js");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.25"/><path d="M8 4.5V8l2.5 1.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14.5s4.75-4.2 4.75-8a4.75 4.75 0 0 0-9.5 0c0 3.8 4.75 8 4.75 8z"/><circle cx="8" cy="6.5" r="1.75"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 2.5l6 10.5H2z"/><path d="M8 6.5v3M8 11.25v.25"/></symbol>
+  <symbol id="i-tram" viewBox="0 0 16 16"><rect x="3.5" y="3" width="9" height="9" rx="2"/><path d="M3.5 8h9M6 12l-1.5 2M10 12l1.5 2M6.5 1.5h3"/></symbol>
+  <symbol id="i-walk" viewBox="0 0 16 16"><circle cx="9" cy="2.75" r="1.25"/><path d="M7.5 14l1.5-4.5L11 11v3M9 9.5L8.25 6 5.5 7.5V10M8.25 6l3 1.5"/></symbol>
+  <symbol id="i-lift" viewBox="0 0 16 16"><path d="M2 13.5L14 4.5"/><rect x="5.5" y="6" width="5" height="4" rx="1" transform="rotate(-37 8 8)"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to the pastries</a>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top" aria-label="Nata &amp; Co., home">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path class="brand__crust" d="M16 2.5l2.6 1.9 3.2-.2 1.6 2.8 2.9 1.4.1 3.2 2.1 2.4-1.2 3 1.2 3-2.1 2.4-.1 3.2-2.9 1.4-1.6 2.8-3.2-.2L16 29.5l-2.6-1.9-3.2.2-1.6-2.8-2.9-1.4-.1-3.2-2.1-2.4 1.2-3-1.2-3 2.1-2.4.1-3.2 2.9-1.4 1.6-2.8 3.2.2z"/>
+        <circle class="brand__custard" cx="16" cy="16" r="8.5"/>
+        <path class="brand__burn" d="M12.5 13.5c1.2-1.4 3-1.6 4.2-.8M17.5 19.5c1.4.2 2.6-.6 3-1.8"/>
+      </svg>
+      <span class="brand__name">Nata <i>&amp;</i> Co.</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#pastries">Pastries</a>
+      <a href="#window">The window</a>
+      <a href="#preorder">Boxes</a>
+      <a href="#visit">Hours and map</a>
+    </nav>
+    <p class="status" data-status>
+      <span class="status__dot" aria-hidden="true"></span>
+      <span class="status__text">Tuesday to Sunday from 06:00</span>
+    </p>
+    <a class="btn btn--primary btn--nav" href="#preorder">Preorder a box</a>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Hero: copy on five columns, the tray on seven, collaged with cut paper. -->
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <div class="wrap hero__in">
+      <div class="hero__copy">
+        <p class="hero__where"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Rua da Rosa 112, Bairro Alto, Lisboa</p>
+        <h1 id="hero-h">Pastéis de nata, baked in the window from 6am.</h1>
+        <p class="hero__sub">Every tray at Nata &amp; Co. comes out of the oven behind the glass on Rua da Rosa, forty tarts at a time, until about two in the afternoon. Stand outside and watch, then take one while the custard still trembles.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="#preorder">Preorder a box of 6 or 12<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="textlink" href="#visit">Today’s hours</a>
+        </div>
+        <ol class="morning" aria-label="This morning at the window">
+          <li><span class="num">06:00</span>Ovens up to 320 °C</li>
+          <li><span class="num">06:40</span>First tray out</li>
+          <li><span class="num">14:00</span>Last tray, give or take</li>
+        </ol>
+      </div>
+
+      <div class="hero__art">
+        <span class="cut cut--sun" aria-hidden="true"></span>
+        <span class="cut cut--wedge" aria-hidden="true"></span>
+        <span class="cut cut--custard" aria-hidden="true"></span>
+        <figure class="ht ht--hero" style="--src: url(tray.jpg)">
+          <img class="ht__photo" src="tray.jpg" width="1280" height="852" alt="A tray of freshly baked pastéis de nata seen from above, their custard tops blistered dark brown." fetchpriority="high">
+          <figcaption class="chip num">Tray 3, 07:30, 40 tarts</figcaption>
+        </figure>
+        <div class="tag">
+          <p class="tag__name">Pastel de nata</p>
+          <p class="tag__price num"><sup>€</sup>1<small>.40</small></p>
+          <p class="tag__note">Warm from the window until 11</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The four pastries: an unequal bento, not four identical cards. -->
+  <section class="pastries" id="pastries" aria-labelledby="pastries-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="pastries-h">Four pastries, and the nata is the reason we open.</h2>
+        <p>Everything is made in the shop, on the marble bench you can see from the street. Hover a photo to see it without the print.</p>
+      </div>
+      <div class="bento">
+        <article class="pastry pastry--lead reveal">
+          <figure class="ht ht--cocoa" style="--src: url(nata.jpg)">
+            <img class="ht__photo" src="nata.jpg" width="1280" height="853" alt="A single pastel de nata held up close, its flaky crust and scorched custard top in focus." loading="lazy">
+            <span class="ht__print" aria-hidden="true"><span class="ht__screen"><img src="nata.jpg" alt="" width="1280" height="853" loading="lazy"></span></span>
+          </figure>
+          <div class="pastry__body">
+            <div class="pastry__top">
+              <h3>Pastel de nata</h3>
+              <p class="price num">€1.40</p>
+            </div>
+            <p>Laminated dough rolled into a log, sliced, and pressed into each tin with a wet thumb. Custard of yolks, milk, lemon peel and a cinnamon stick, baked at 320 °C until the top blisters in about thirteen minutes.</p>
+            <dl class="facts">
+              <div><dt>Out of the oven</dt><dd>Every 25 minutes, 06:40 to 14:00</dd></div>
+              <div><dt>Best eaten</dt><dd>Within the hour, with cinnamon</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="pastry pastry--side reveal">
+          <figure class="ht ht--cocoa ht--bright" style="--src: url(bola.jpg)">
+            <img class="ht__photo" src="bola.jpg" width="1280" height="852" alt="A sugared bola de Berlim on a white plate, cut to show its yellow custard filling." loading="lazy">
+            <span class="ht__print" aria-hidden="true"><span class="ht__screen"><img src="bola.jpg" alt="" width="1280" height="852" loading="lazy"></span></span>
+          </figure>
+          <div class="pastry__body">
+            <div class="pastry__top"><h3>Bola de Berlim</h3><p class="price num">€1.90</p></div>
+            <p>Brioche fried to order in small batches, split and filled with the same egg custard as the nata.</p>
+            <p class="when"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>From 10:00</p>
+          </div>
+        </article>
+
+        <article class="pastry pastry--side reveal">
+          <figure class="ht ht--cocoa ht--low ht--bright" style="--src: url(queijada.jpg)">
+            <img class="ht__photo" src="queijada.jpg" width="1280" height="960" alt="A round queijada with a coconut-flecked top on a paper doily, beside a small espresso." loading="lazy">
+            <span class="ht__print" aria-hidden="true"><span class="ht__screen"><img src="queijada.jpg" alt="" width="1280" height="960" loading="lazy"></span></span>
+          </figure>
+          <div class="pastry__body">
+            <div class="pastry__top"><h3>Queijada</h3><p class="price num">€1.60</p></div>
+            <p>Fresh cheese, sugar and a little cinnamon in a crisp, thin case. Denser than the nata and good with a bica.</p>
+            <p class="when"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>All day</p>
+          </div>
+        </article>
+
+        <article class="pastry pastry--wide reveal">
+          <figure class="ht ht--cocoa ht--trav ht--bright" style="--src: url(travesseiro.jpg)">
+            <img class="ht__photo" src="travesseiro.jpg" width="1280" height="964" alt="A sugar-dusted travesseiro in a paper box, its puff pastry rolled around almond cream." loading="lazy">
+            <span class="ht__print" aria-hidden="true"><span class="ht__screen"><img src="travesseiro.jpg" alt="" width="1280" height="964" loading="lazy"></span></span>
+          </figure>
+          <div class="pastry__body">
+            <div class="pastry__top"><h3>Travesseiro</h3><p class="price num">€2.20</p></div>
+            <p>The Sintra pillow: puff pastry folded around almond and egg cream, rolled in sugar while it is still hot. We bake twenty-four, and only at weekends.</p>
+            <p class="when"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Saturday and Sunday, from 09:00 until gone</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- The one dark band: 6am is still dark in Lisbon for half the year. -->
+  <section class="window" id="window" data-theme="dark" aria-labelledby="window-h">
+    <div class="wrap window__in">
+      <div class="window__art">
+        <span class="cut cut--strip" aria-hidden="true"></span>
+        <figure class="ht ht--ink" style="--src: url(dough.jpg)">
+          <img class="ht__photo" src="dough.jpg" width="1280" height="852" alt="Puff pastry dough being folded and rolled with a wooden rolling pin on a floured bench." loading="lazy">
+          <span class="ht__print" aria-hidden="true"><span class="ht__screen"><img src="dough.jpg" alt="" width="1280" height="852" loading="lazy"></span></span>
+          <figcaption class="chip">The dough is folded the afternoon before</figcaption>
+        </figure>
+      </div>
+      <div class="window__copy">
+        <h2 id="window-h">At six the street is still dark, and the oven is already on.</h2>
+        <p class="window__lede">Marta and Ivo start at half past five. The bench sits right against the glass, so the first people up Rua da Rosa see the tins filled before they see a sign.</p>
+        <ol class="steps">
+          <li><span class="steps__t num">05:30</span><div><b>Dough out of the cold room</b><span>Laminated yesterday, rolled into logs as thick as a wrist.</span></div></li>
+          <li><span class="steps__t num">06:00</span><div><b>Ovens up to 320 °C</b><span>Two deck ovens, one tray of 40 each.</span></div></li>
+          <li><span class="steps__t num">06:15</span><div><b>Discs pressed into tins</b><span>A wet thumb from the centre outward, so the edge stands tall.</span></div></li>
+          <li><span class="steps__t num">06:25</span><div><b>Custard poured</b><span>Sugar syrup cooked to 106 °C, folded into milk and yolks.</span></div></li>
+          <li><span class="steps__t num">06:40</span><div><b>First tray out</b><span>Thirteen minutes. The tops blister black in spots, on purpose.</span></div></li>
+        </ol>
+        <div class="trays" role="img" aria-label="Trays out of the oven on a weekday: one every 25 minutes from 06:40 to 14:00, eighteen trays in all.">
+          <p class="trays__label"><span>Trays out on a weekday</span><span class="num">18 trays, 720 tarts</span></p>
+          <div class="trays__axis">
+            <div class="trays__row" data-trays></div>
+            <div class="trays__ticks num" aria-hidden="true"><span>06</span><span>08</span><span>10</span><span>12</span><span>14</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preorder: a working form beside a box that redraws for 6 or 12. -->
+  <section class="preorder" id="preorder" aria-labelledby="preorder-h">
+    <div class="wrap preorder__in">
+      <div class="preorder__intro">
+        <h2 id="preorder-h">Preorder a box, skip the line on a Saturday.</h2>
+        <p>Order by 18:00 and we hold your box from the morning trays the next day. You pay at the counter when you collect.</p>
+        <div class="box-art">
+          <span class="cut cut--box" aria-hidden="true"></span>
+          <svg class="box" viewBox="0 0 400 300" role="img" aria-labelledby="box-title" data-box="12">
+            <title id="box-title">A white bakery box seen from above, holding the selected number of tarts.</title>
+            <defs>
+              <g id="tart">
+                <path class="tart__crust" d="M0-27l4.5 3.3 5.5-.4 2.8 4.8 5 2.4.2 5.5 3.6 4.1L19.5-2 21.6 3l-3.6 4.1-.2 5.5-5 2.4-2.8 4.8-5.5-.4L0 27l-4.5-3.6-5.5.4-2.8-4.8-5-2.4-.2-5.5L-21.6 3-19.5-2l-2.1-5.1 3.6-4.1.2-5.5 5-2.4 2.8-4.8 5.5.4z"/>
+                <circle class="tart__custard" r="16"/>
+                <ellipse class="tart__burn" cx="-5" cy="-6" rx="5" ry="3.5" transform="rotate(-20 -5 -6)"/><ellipse class="tart__burn" cx="6" cy="4" rx="4" ry="2.5"/><circle class="tart__burn" cx="-6" cy="8" r="2"/><circle class="tart__burn" cx="7" cy="-7" r="1.5"/>
+              </g>
+            </defs>
+            <rect class="box__base" x="20" y="20" width="360" height="260" rx="12"/>
+            <rect class="box__inner" x="36" y="36" width="328" height="228" rx="6"/>
+            <g class="box__tarts" data-tarts></g>
+          </svg>
+          <p class="box-art__cap chip num" data-box-cap>12 tarts, €15.00</p>
+        </div>
+      </div>
+
+      <form class="order" novalidate data-order>
+        <fieldset class="order__group">
+          <legend>Box</legend>
+          <div class="seg" role="radiogroup" aria-label="Box size" style="--n: 2">
+            <label><input type="radio" name="size" value="6"><span>Box of 6</span><small class="num">€7.80</small></label>
+            <label><input type="radio" name="size" value="12" checked><span>Box of 12</span><small class="num">€15.00</small></label>
+            <span class="seg__thumb" aria-hidden="true"></span>
+          </div>
+          <p class="order__save" data-save>Twelve singles would be €16.80. The box saves €1.80.</p>
+        </fieldset>
+
+        <fieldset class="order__group order__grid">
+          <legend>Collection</legend>
+          <div class="field">
+            <label for="day">Day</label>
+            <div class="input select">
+              <select id="day" name="day" data-days>
+                <option>Tomorrow</option>
+              </select>
+              <svg class="icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M4.5 6.5L8 10l3.5-3.5"/></svg>
+            </div>
+          </div>
+          <div class="field">
+            <label for="time">Time</label>
+            <div class="input select">
+              <select id="time" name="time">
+                <option>07:00</option><option>07:30</option><option selected>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option><option>11:00</option>
+              </select>
+              <svg class="icon" aria-hidden="true" viewBox="0 0 16 16"><path d="M4.5 6.5L8 10l3.5-3.5"/></svg>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="order__group order__grid">
+          <legend>Your details</legend>
+          <div class="field">
+            <label for="name">Name on the box</label>
+            <div class="input"><input id="name" name="name" autocomplete="given-name" placeholder="Inês" aria-describedby="name-help" required></div>
+            <p class="field__help" id="name-help">We write it on the lid.</p>
+          </div>
+          <div class="field">
+            <label for="phone">Mobile</label>
+            <div class="input"><span class="input__prefix">+351</span><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="912 345 678" aria-describedby="phone-help" required></div>
+            <p class="field__help" id="phone-help">A text when the box is ready. Nothing else.</p>
+          </div>
+        </fieldset>
+
+        <label class="opt opt--switch">
+          <span>Cinnamon and icing sugar sachets</span>
+          <span class="opt__desc">One of each per tart, in a paper twist.</span>
+          <input class="switch" type="checkbox" role="switch" name="sachets" checked>
+        </label>
+
+        <div class="order__foot">
+          <button class="btn btn--primary btn--lg order__submit" type="submit" data-submit>
+            <span class="face face--idle">Hold my box</span>
+            <span class="face face--busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25"/><path d="M8 1.75a6.25 6.25 0 0 1 6.25 6.25"/></svg>Holding</span>
+            <span class="face face--done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Box held</span>
+          </button>
+          <p class="order__total"><span>Pay at the counter</span><b class="num" data-total>€15.00</b></p>
+        </div>
+        <p class="order__msg" role="status" aria-live="polite" data-msg></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Hours and map: a table and a drawn street plan, side by side. -->
+  <section class="visit" id="visit" aria-labelledby="visit-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="visit-h">Hours, and how to find a shop on a street of shops.</h2>
+        <p>Look for the bench in the window and the line on the pavement. On Mondays the shutter is down while we clean the ovens and laminate dough for the week.</p>
+      </div>
+      <div class="visit__grid">
+        <div class="hours">
+          <table>
+            <caption class="sr-only">Opening hours and tray times</caption>
+            <thead><tr><th scope="col">Day</th><th scope="col">Open</th><th scope="col" class="r">Trays until</th></tr></thead>
+            <tbody data-hours>
+              <tr data-day="1"><th scope="row">Monday</th><td colspan="2" class="closed">Closed for the ovens</td></tr>
+              <tr data-day="2"><th scope="row">Tuesday</th><td class="num">06:00 to 19:00</td><td class="num r">14:00</td></tr>
+              <tr data-day="3"><th scope="row">Wednesday</th><td class="num">06:00 to 19:00</td><td class="num r">14:00</td></tr>
+              <tr data-day="4"><th scope="row">Thursday</th><td class="num">06:00 to 19:00</td><td class="num r">14:00</td></tr>
+              <tr data-day="5"><th scope="row">Friday</th><td class="num">06:00 to 20:00</td><td class="num r">15:00</td></tr>
+              <tr data-day="6"><th scope="row">Saturday</th><td class="num">06:00 to 20:00</td><td class="num r">16:00</td></tr>
+              <tr data-day="0"><th scope="row">Sunday</th><td class="num">07:00 to 15:00</td><td class="num r">13:00</td></tr>
+            </tbody>
+          </table>
+          <ul class="ways">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-walk"/></svg><div><b>Baixa-Chiado metro</b><span>7 minutes uphill by Rua da Misericórdia</span></div></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-lift"/></svg><div><b>Elevador da Glória</b><span>4 minutes from the top stop at São Pedro de Alcântara</span></div></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-tram"/></svg><div><b>Tram 28, Calhariz Bica</b><span>6 minutes north along Rua da Rosa</span></div></li>
+          </ul>
+        </div>
+
+        <figure class="map">
+          <svg viewBox="0 0 640 520" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="map-title">
+            <title id="map-title">Street plan of Bairro Alto. Nata and Co. is on Rua da Rosa, between Travessa da Queimada and Travessa da Água da Flor.</title>
+            <rect class="map__ground" width="640" height="520"/>
+            <g class="map__blocks">
+              <path d="M40 40h92v86H40zM152 40h92v86h-92zM264 40h82v86h-82zM366 40h86v86h-86z"/>
+              <path d="M40 146h92v96H40zM152 146h92v96h-92zM264 146h82v96h-82zM366 146h86v96h-86z"/>
+              <path d="M40 262h92v84H40zM152 262h92v84h-92zM264 262h82v84h-82zM366 262h86v84h-86z"/>
+              <path d="M40 366h92v76H40zM152 366h92v76h-92zM264 366h82v76h-82zM366 366h86v76h-86z"/>
+            </g>
+            <path class="map__park" d="M486 120h120v150H486z"/>
+            <path class="map__big" d="M472 0v520M0 462h640"/>
+            <path class="map__route" d="M560 489V462H254V200"/>
+            <circle class="map__metro" cx="560" cy="489" r="10"/>
+          </svg>
+          <span class="map__label map__label--v" style="--x: 22.2%; --y: 6%">Rua do Século</span>
+          <span class="map__label map__label--v map__label--key" style="--x: 39.7%; --y: 52%">Rua da Rosa</span>
+          <span class="map__label map__label--v" style="--x: 55.6%; --y: 6%">Rua da Atalaia</span>
+          <span class="map__label map__label--v" style="--x: 73.75%; --y: 6%">Rua da Misericórdia</span>
+          <span class="map__label map__label--h" style="--x: 7%; --y: 26.2%">Travessa da Queimada</span>
+          <span class="map__label map__label--h" style="--x: 7%; --y: 48.5%">Tv. da Água da Flor</span>
+          <span class="map__label map__label--h" style="--x: 42%; --y: 68.5%">Travessa da Espera</span>
+          <span class="map__label map__label--h map__label--road" style="--x: 7%; --y: 88.8%">Largo de Camões</span>
+          <span class="map__label map__label--park" style="--x: 77%; --y: 30%">Miradouro de São Pedro de Alcântara</span>
+          <span class="map__label map__label--metro map__label--key" style="--x: 85%; --y: 94%">Baixa-Chiado</span>
+          <span class="map__shop" style="--x: 39.7%; --y: 38.5%"><span class="map__pin" aria-hidden="true"></span><span class="map__card"><b>Nata &amp; Co.</b><span class="num">Rua da Rosa 112</span></span></span>
+          <figcaption class="sr-only">Walking route from Baixa-Chiado metro: up Rua da Misericórdia, left at Largo de Camões, then up Rua da Rosa.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__about">
+        <a class="brand" href="#top" aria-label="Nata &amp; Co., back to top">
+          <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><path class="brand__crust" d="M16 2.5l2.6 1.9 3.2-.2 1.6 2.8 2.9 1.4.1 3.2 2.1 2.4-1.2 3 1.2 3-2.1 2.4-.1 3.2-2.9 1.4-1.6 2.8-3.2-.2L16 29.5l-2.6-1.9-3.2.2-1.6-2.8-2.9-1.4-.1-3.2-2.1-2.4 1.2-3-1.2-3 2.1-2.4.1-3.2 2.9-1.4 1.6-2.8 3.2.2z"/><circle class="brand__custard" cx="16" cy="16" r="8.5"/><path class="brand__burn" d="M12.5 13.5c1.2-1.4 3-1.6 4.2-.8M17.5 19.5c1.4.2 2.6-.6 3-1.8"/></svg>
+          <span class="brand__name">Nata <i>&amp;</i> Co.</span>
+        </a>
+        <p>A bakery of one room and two ovens in Bairro Alto, baking pastéis de nata in the window since 2019.</p>
+      </div>
+      <div>
+        <h2 class="foot__h">Shop</h2>
+        <address>Rua da Rosa 112<br>1200-389 Lisboa</address>
+      </div>
+      <div>
+        <h2 class="foot__h">Ask us</h2>
+        <ul>
+          <li><a href="tel:+351213420612" class="num">+351 21 342 0612</a></li>
+          <li><a href="mailto:ola@nataeco.pt">ola@nataeco.pt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot__h">Elsewhere</h2>
+        <ul>
+          <li><a role="link" aria-disabled="true">Instagram</a></li>
+          <li><a href="#preorder">Preorder a box</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot__base"><span>Photographs from Wikimedia Commons, credited in CREDITS.md</span><span>Prices include VAT</span></p>
+  </div>
+  <p class="foot__mark" aria-hidden="true">Nata &amp; Co.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

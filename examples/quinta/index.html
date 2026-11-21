@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quinta do Vale Alto, Douro wines from the estate</title>
+<meta name="description" content="Quinta do Vale Alto is a family wine estate on the schist terraces above the Douro at Covas do Douro. Four wines, tastings at the quinta, and bottles sold direct.">
+<script>
+  /* Before first paint. The programme is printed dark: plum-black is the default; ?theme=light gives the daylight edition. */
+  (function () {
+    var t = new URLSearchParams(location.search).get("theme");
+    if (t === "light") document.documentElement.dataset.theme = "light";
+    document.documentElement.classList.add("js");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h9.5M9 4.5 12.5 8 9 11.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14Z"/><circle cx="8" cy="6.5" r="1.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5v3.2l2 1.3"/></symbol>
+  <symbol id="i-train" viewBox="0 0 16 16"><rect x="4" y="2.5" width="8" height="8.5" rx="2"/><path d="M4 7.5h8M6 13.5l-1 1M10 13.5l1 1M6.2 9.3h.1M9.7 9.3h.1"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5v3.5M8 10.9v.1"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 16 16"><path d="M4 8h8"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M4 8h8M8 4v8"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2.5 5h11M2.5 11h11"/></symbol>
+  <symbol id="i-x" viewBox="0 0 16 16"><path d="m4 4 8 8M12 4l-8 8"/></symbol>
+  <!-- A Douro still-wine bottle (sloped shoulders) and a port bottle (high shoulders, bulb in the neck). -->
+  <symbol id="b-still" viewBox="0 0 80 280"><path d="M33 6h14v4h-1v58c0 14 4 22 13 34 7 9 11 17 11 30v136c0 4-3 6-7 6H17c-4 0-7-2-7-6V132c0-13 4-21 11-30 9-12 13-20 13-34V10h-1Z"/></symbol>
+  <symbol id="b-port" viewBox="0 0 80 280"><path d="M32 6h16v5h-1v22c3 2 5 5 5 9s-2 7-5 9v19c0 9 6 13 14 18 6 4 10 9 10 18v148c0 4-3 6-7 6H15c-4 0-7-2-7-6V106c0-9 4-14 10-18 8-5 14-9 14-18V51c-3-2-5-5-5-9s2-7 5-9V11h-1Z"/></symbol>
+</svg>
+
+<a class="skip" href="#wines">Skip to the wines</a>
+
+<header class="nav" id="top">
+  <div class="nav__in wrap">
+    <a class="mark" href="#top" aria-label="Quinta do Vale Alto, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path class="mark__ring" d="M16 2.5a13.5 13.5 0 1 1 0 27 13.5 13.5 0 0 1 0-27Z"/><path class="mark__terr" d="M6 21.5h5.5v-3H17v-3h5v-3h4.5M7.5 25h7v-3h6v-3h5.5"/></svg>
+      <span>Quinta do Vale Alto</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections" id="nav-links">
+      <a href="#wines">The wines</a>
+      <a href="#terroir">Terroir</a>
+      <a href="#harvest">Harvest</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="btn btn--primary nav__cta" href="#buy">Buy from the estate</a>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open the menu"><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main>
+  <!-- Hero: copy on the plum ground, the valley bleeding off the right edge, the bill of four wines along the foot. -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero__grid wrap">
+      <div class="hero__copy">
+        <p class="hero__place"><span>Covas do Douro, Cima Corgo</span><span>Est. <span class="num">1911</span></span></p>
+        <h1 id="hero-h">Four wines from one steep bend of the Douro.</h1>
+        <p class="hero__sub">Fourteen hectares of hand-built schist terraces, from the river at 75&nbsp;m up to 410&nbsp;m. The Lobo family has farmed them for four generations and still picks every row by hand.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="#buy">Buy from the estate<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="link" href="#visit">Book a tasting at the quinta</a>
+        </div>
+      </div>
+      <figure class="hero__art">
+        <img src="hero.jpg" width="1600" height="900" alt="Terraced vineyards falling to the Douro under a clear sky, a white farmhouse on the lower slope." fetchpriority="high">
+        <figcaption class="chip">Schist terraces above the Douro in the Cima Corgo</figcaption>
+        <aside class="vindima" aria-label="Harvest 2026 in figures">
+          <p class="vindima__top"><span>Vindima 2026</span><span class="num">4 Sep to 3 Oct</span></p>
+          <p class="vindima__fig num">48.2<span class="unit">t</span></p>
+          <p class="vindima__cap">grapes picked by hand, 6% under 2025</p>
+          <div class="vindima__bars" aria-hidden="true">
+            <i style="--v: .34"></i><i style="--v: .52"></i><i style="--v: .88"></i><i style="--v: 1"></i><i style="--v: .61"></i>
+          </div>
+          <p class="vindima__axis num" aria-hidden="true"><span>wk 36</span><span>wk 40</span></p>
+        </aside>
+      </figure>
+    </div>
+    <ol class="bill wrap" aria-label="The four wines">
+      <li style="--wine: var(--w-branco)"><span class="bill__no num">I</span><a class="link" href="#w-branco">Vale Alto Branco</a><span class="bill__meta"><span class="num">2024</span> white, Rabigato and Códega</span><span class="bill__price num"><small>€</small>16</span></li>
+      <li style="--wine: var(--w-tinto)"><span class="bill__no num">II</span><a class="link" href="#w-tinto">Vale Alto Tinto</a><span class="bill__meta"><span class="num">2022</span> red, Touriga Franca</span><span class="bill__price num"><small>€</small>19</span></li>
+      <li style="--wine: var(--w-reserva)"><span class="bill__no num">III</span><a class="link" href="#w-reserva">Vale Alto Reserva</a><span class="bill__meta"><span class="num">2021</span> red, Touriga Nacional</span><span class="bill__price num"><small>€</small>34</span></li>
+      <li style="--wine: var(--w-porto)"><span class="bill__no num">IV</span><a class="link" href="#w-porto">Vintage Port</a><span class="bill__meta"><span class="num">2020</span> 1,200 bottles made</span><span class="bill__price num"><small>€</small>58</span></li>
+    </ol>
+  </section>
+
+  <!-- I. The wines: four bottles on one shelf, then a vintage sheet that compares them line by line. -->
+  <section class="sec" id="wines" aria-labelledby="wines-h">
+    <div class="wrap">
+      <header class="sec__head">
+        <span class="sec__no num" aria-hidden="true">I</span>
+        <div>
+          <h2 id="wines-h">The wines, and the years that made them</h2>
+          <p>Each wine comes from its own band of terraces. Higher means cooler nights, more acid and a later pick.</p>
+        </div>
+      </header>
+
+      <div class="shelf">
+        <article class="wine" id="w-branco" style="--wine: var(--w-branco); --glass: oklch(0.72 0.07 105 / 0.85); --label: oklch(0.94 0.02 95)">
+          <svg class="bottle" viewBox="0 0 80 280" aria-hidden="true"><use href="#b-still" class="bottle__glass"/><rect class="bottle__label" x="14" y="168" width="52" height="66" rx="2"/><path class="bottle__crest" d="M26 190h8v-4h6v-4h6v-4h8"/><text class="bottle__year" x="40" y="222">2024</text><rect class="bottle__shine" x="18" y="120" width="5" height="140" rx="2.5"/><rect class="bottle__cap" x="32" y="6" width="16" height="26" rx="1"/></svg>
+          <div class="wine__txt">
+            <h3>Vale Alto Branco <span class="num">2024</span></h3>
+            <p class="wine__style">DOC Douro, white</p>
+            <p class="wine__note">Lemon peel, wet schist and white peach. Tight and salty at the finish; better still after a year in bottle.</p>
+          </div>
+        </article>
+        <article class="wine" id="w-tinto" style="--wine: var(--w-tinto); --glass: oklch(0.24 0.04 150); --label: oklch(0.42 0.12 350)">
+          <svg class="bottle" viewBox="0 0 80 280" aria-hidden="true"><use href="#b-still" class="bottle__glass"/><rect class="bottle__label" x="14" y="168" width="52" height="66" rx="2"/><path class="bottle__crest" d="M26 190h8v-4h6v-4h6v-4h8"/><text class="bottle__year" x="40" y="222">2022</text><rect class="bottle__shine" x="18" y="120" width="5" height="140" rx="2.5"/><rect class="bottle__cap" x="32" y="6" width="16" height="26" rx="1"/></svg>
+          <div class="wine__txt">
+            <h3>Vale Alto Tinto <span class="num">2022</span></h3>
+            <p class="wine__style">DOC Douro, red</p>
+            <p class="wine__note">Black cherry, rockrose and a pinch of pepper. Soft tannins, made to open on a weeknight with grilled sardines.</p>
+          </div>
+        </article>
+        <article class="wine wine--lead" id="w-reserva" style="--wine: var(--w-reserva); --glass: oklch(0.2 0.02 150); --label: oklch(0.17 0.02 340)">
+          <svg class="bottle" viewBox="0 0 80 280" aria-hidden="true"><use href="#b-still" class="bottle__glass"/><rect class="bottle__label bottle__label--gilt" x="14" y="168" width="52" height="66" rx="2"/><path class="bottle__crest" d="M26 190h8v-4h6v-4h6v-4h8"/><text class="bottle__year" x="40" y="222">2021</text><rect class="bottle__shine" x="18" y="120" width="5" height="140" rx="2.5"/><rect class="bottle__cap" x="32" y="6" width="16" height="26" rx="1"/></svg>
+          <div class="wine__txt">
+            <h3>Vale Alto Reserva <span class="num">2021</span></h3>
+            <p class="wine__style">DOC Douro, red, from vines planted in 1938</p>
+            <p class="wine__note">Violet, blackberry and cocoa, then graphite. Firm, fine-grained tannins; decant it an hour before dinner.</p>
+          </div>
+        </article>
+        <article class="wine" id="w-porto" style="--wine: var(--w-porto); --glass: oklch(0.16 0.01 150); --label: oklch(0.8 0.11 85)">
+          <svg class="bottle" viewBox="0 0 80 280" aria-hidden="true"><use href="#b-port" class="bottle__glass"/><rect class="bottle__label" x="12" y="168" width="56" height="66" rx="2"/><path class="bottle__crest bottle__crest--ink" d="M25 190h8v-4h6v-4h6v-4h10"/><text class="bottle__year bottle__year--ink" x="40" y="222">2020</text><rect class="bottle__shine" x="16" y="112" width="5" height="148" rx="2.5"/><rect class="bottle__cap bottle__cap--wax" x="31" y="6" width="18" height="30" rx="2"/></svg>
+          <div class="wine__txt">
+            <h3>Vintage Port <span class="num">2020</span></h3>
+            <p class="wine__style">Porto, trodden by foot in granite lagares</p>
+            <p class="wine__note">Cassis, liquorice and dried fig over a spine of acid. It will throw a crust: stand the bottle upright a day before opening.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="sheet" role="region" aria-labelledby="sheet-cap" tabindex="0">
+        <table>
+          <caption id="sheet-cap">Vintage sheet: the four wines side by side</caption>
+          <thead>
+            <tr><th scope="col"><span class="sr-only">Measure</span></th><th scope="col"><i class="sw" style="--wine: var(--w-branco)"></i>Branco 2024</th><th scope="col"><i class="sw" style="--wine: var(--w-tinto)"></i>Tinto 2022</th><th scope="col"><i class="sw" style="--wine: var(--w-reserva)"></i>Reserva 2021</th><th scope="col"><i class="sw" style="--wine: var(--w-porto)"></i>Port 2020</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Grapes</th><td>Rabigato 45%, Códega do Larinho 35%, Viosinho 20%</td><td>Touriga Franca 50%, Tinta Roriz 30%, Tinta Barroca 20%</td><td>Touriga Nacional 60%, Touriga Franca 25%, old field blend 15%</td><td>Touriga Nacional, Touriga Franca, Sousão</td></tr>
+            <tr><th scope="row">Terraces</th><td>Socalco Norte, <span class="num">380 to 410&nbsp;m</span></td><td>Patamares do Meio, <span class="num">220 to 300&nbsp;m</span></td><td>Vinha Velha, <span class="num">300 to 360&nbsp;m</span></td><td>Vinha Velha and the river terraces, <span class="num">90 to 360&nbsp;m</span></td></tr>
+            <tr><th scope="row">Growing season rain</th><td class="bar"><span class="num">642<span class="unit">mm</span></span><i style="--p: 1"></i></td><td class="bar"><span class="num">318<span class="unit">mm</span></span><i style="--p: .5"></i></td><td class="bar"><span class="num">587<span class="unit">mm</span></span><i style="--p: .91"></i></td><td class="bar"><span class="num">411<span class="unit">mm</span></span><i style="--p: .64"></i></td></tr>
+            <tr><th scope="row">Picked</th><td class="num">6 to 11 Sep</td><td class="num">14 to 27 Sep</td><td class="num">20 Sep to 2 Oct</td><td class="num">17 to 24 Sep</td></tr>
+            <tr><th scope="row">Alcohol</th><td class="num">12.5%</td><td class="num">13.5%</td><td class="num">14.0%</td><td class="num">19.5%</td></tr>
+            <tr><th scope="row">Total acidity</th><td class="num">6.4<span class="unit">g/l</span></td><td class="num">5.6<span class="unit">g/l</span></td><td class="num">5.9<span class="unit">g/l</span></td><td class="num">4.8<span class="unit">g/l</span></td></tr>
+            <tr><th scope="row">Residual sugar</th><td class="num">1.2<span class="unit">g/l</span></td><td class="num">0.8<span class="unit">g/l</span></td><td class="num">0.6<span class="unit">g/l</span></td><td class="num">98<span class="unit">g/l</span></td></tr>
+            <tr><th scope="row">Ageing</th><td>6 months on lees, a fifth in used 500&nbsp;l barrels</td><td>12 months, 30% in used French oak</td><td>18 months in 225&nbsp;l French oak, 30% new</td><td>20 months in old wooden vats, bottled unfiltered</td></tr>
+            <tr><th scope="row">Bottles made</th><td class="num">6,400</td><td class="num">14,200</td><td class="num">3,900</td><td class="num">1,200</td></tr>
+            <tr><th scope="row">Drink</th><td class="num">2025 to 2029</td><td class="num">now to 2030</td><td class="num">2026 to 2038</td><td class="num">2030 to 2060</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full-width plate between sections. -->
+  <figure class="plate">
+    <img src="panorama.jpg" width="1600" height="546" loading="lazy" alt="A wide view of terraced vineyards in late light, rows curving around the contours of the valley.">
+    <figcaption class="chip">The terraces follow the contour of the hill, each wall dry-stacked from the schist dug out to make it</figcaption>
+  </figure>
+
+  <!-- II. Terroir: the slope drawn to scale, beside the photograph and the facts. -->
+  <section class="sec" id="terroir" aria-labelledby="terroir-h">
+    <div class="wrap">
+      <header class="sec__head">
+        <span class="sec__no num" aria-hidden="true">II</span>
+        <div>
+          <h2 id="terroir-h">Schist, a south face and 335 metres of slope</h2>
+          <p>The quinta climbs from the river to the ridge in 31 terraces. Every wine on this page is a slice of that climb.</p>
+        </div>
+      </header>
+
+      <div class="terroir">
+        <figure class="section-fig">
+          <div class="slope" role="img" aria-label="Cross-section of the estate: the slope rises from the Douro at 75 metres to the ridge at 410 metres. Patamares do Meio between 220 and 300 metres give the Tinto, Vinha Velha between 300 and 360 metres the Reserva and the Port, and Socalco Norte from 380 to 410 metres the Branco.">
+            <div class="slope__axis num" aria-hidden="true"><span style="--y: 0">400&nbsp;m</span><span style="--y: 1">300</span><span style="--y: 2">200</span><span style="--y: 3">100</span></div>
+            <svg viewBox="0 0 600 340" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="soil-a"/><stop offset="1" class="soil-b"/></linearGradient>
+                <pattern id="schist" width="14" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><path d="M0 5h9" class="schist-line"/></pattern>
+              </defs>
+              <path class="grid" d="M0 40h600M0 120h600M0 200h600M0 280h600"/>
+              <path class="ground" d="M0 340V300H40V288.6H56.8V278.5H73.5V268.7H90.3V259.3H107.1V250H123.9V240.8H140.6V231.8H157.4V222.9H174.2V214.1H191V205.4H207.7V196.7H224.5V188.1H241.3V179.5H258.1V171H274.8V162.6H291.6V154.2H308.4V145.8H325.2V137.5H341.9V129.2H358.7V120.9H375.5V112.7H392.3V104.5H409V96.4H425.8V88.2H442.6V80.1H459.4V72H476.1V64H492.9V56H509.7V47.9H526.5V40H543.2V32H600V340Z"/>
+              <path class="schist" d="M0 340V300H40V288.6H56.8V278.5H73.5V268.7H90.3V259.3H107.1V250H123.9V240.8H140.6V231.8H157.4V222.9H174.2V214.1H191V205.4H207.7V196.7H224.5V188.1H241.3V179.5H258.1V171H274.8V162.6H291.6V154.2H308.4V145.8H325.2V137.5H341.9V129.2H358.7V120.9H375.5V112.7H392.3V104.5H409V96.4H425.8V88.2H442.6V80.1H459.4V72H476.1V64H492.9V56H509.7V47.9H526.5V40H543.2V32H600V340Z"/>
+              <path class="band band--4" d="M241.3 188.1V179.5H258.1V171H274.8V162.6H291.6V154.2H308.4V145.8H325.2V137.5H341.9V129.2H358.7V120.9H375.5"/>
+              <path class="band band--1" d="M375.5 120.9V112.7H392.3V104.5H409V96.4H425.8V88.2H442.6V80.1H459.4V72H476.1"/>
+              <path class="band band--5" d="M492.9 64V56H509.7V47.9H526.5V40H543.2V32H600"/>
+              <path class="river" d="M0 300H40"/>
+            </svg>
+            <span class="tag" style="--x: 2%; --y: 88%; --c: var(--chart-2)"><b>Rio Douro</b><span class="num">75&nbsp;m</span></span>
+            <span class="tag" style="--x: 44%; --y: 50%; --c: var(--w-tinto)"><b>Patamares do Meio</b><span>Tinto</span></span>
+            <span class="tag" style="--x: 64%; --y: 30%; --c: var(--w-reserva)"><b>Vinha Velha</b><span>Reserva, Port</span></span>
+            <span class="tag tag--end" style="--x: 100%; --y: 8%; --c: var(--w-branco)"><b>Socalco Norte</b><span>Branco</span></span>
+          </div>
+          <figcaption>Section through the estate, drawn to scale vertically. Coloured runs mark the terraces each wine comes from.</figcaption>
+        </figure>
+
+        <div class="terroir__side">
+          <div class="photo photo--terraces">
+            <img src="terraces.jpg" width="1400" height="933" loading="lazy" alt="Close view of narrow vineyard terraces cut into a red-brown hillside, young vines along each step.">
+          </div>
+          <dl class="facts">
+            <div><dt>Soil</dt><dd>Grey and blue schist, split by roots to 6&nbsp;m</dd></div>
+            <div><dt>Aspect</dt><dd>South and south-west</dd></div>
+            <div><dt>Rain</dt><dd class="num">620&nbsp;mm a year, ten-year mean</dd></div>
+            <div><dt>Vines</dt><dd class="num">48 years old on average; oldest 1938</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <blockquote class="pull">
+        <p>“We pick the high terraces last. Up there the schist holds the night cold, and the Touriga Franca keeps its acid well into October.”</p>
+        <footer><b>Inês Lobo</b>, winemaker and the fourth generation at Vale Alto</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- III. Harvest: the 2026 pick as a calendar, coloured by the wine each parcel goes to. -->
+  <section class="sec sec--band" id="harvest" aria-labelledby="harvest-h">
+    <div class="wrap">
+      <header class="sec__head">
+        <span class="sec__no num" aria-hidden="true">III</span>
+        <div>
+          <h2 id="harvest-h">Harvest 2026 went from 4 September to 3 October</h2>
+          <p>Twenty-six pickers, 29 picking days and three treading nights in the lagares. Whites go first, from the top; the old vines wait for the cool at the end.</p>
+        </div>
+      </header>
+
+      <div class="cal">
+        <div class="cal__head">
+          <ul class="legend" aria-label="Destination wine">
+            <li style="--wine: var(--w-branco)">Branco</li>
+            <li style="--wine: var(--w-tinto)">Tinto</li>
+            <li style="--wine: var(--w-reserva)">Reserva</li>
+            <li style="--wine: var(--w-porto)">Vintage Port</li>
+          </ul>
+          <p class="cal__total"><span class="num">48.2</span> tonnes in all</p>
+        </div>
+        <div class="cal__plot" role="table" aria-label="Picking dates by grape variety, September to October 2026">
+          <div class="cal__scale num" aria-hidden="true">
+            <span style="--d: 0">1 Sep</span><span style="--d: 7">8</span><span style="--d: 14">15</span><span style="--d: 21">22</span><span style="--d: 28">29</span><span style="--d: 34">5 Oct</span>
+          </div>
+          <div class="cal__rows">
+            <div class="cal__row" role="row" style="--wine: var(--w-branco); --a: 3; --b: 9"><span role="rowheader">Rabigato</span><span role="cell" class="cal__bar"><i></i><b class="num">4 to 9 Sep</b></span><span role="cell" class="cal__t num">3.1<span class="unit">t</span></span></div>
+            <div class="cal__row" role="row" style="--wine: var(--w-branco); --a: 5; --b: 11"><span role="rowheader">Códega and Viosinho</span><span role="cell" class="cal__bar"><i></i><b class="num">6 to 11 Sep</b></span><span role="cell" class="cal__t num">3.4<span class="unit">t</span></span></div>
+            <div class="cal__row" role="row" style="--wine: var(--w-tinto); --a: 13; --b: 18"><span role="rowheader">Tinta Roriz</span><span role="cell" class="cal__bar"><i></i><b class="num">14 to 18 Sep</b></span><span role="cell" class="cal__t num">7.9<span class="unit">t</span></span></div>
+            <div class="cal__row" role="row" style="--wine: var(--w-porto); --a: 16; --b: 20"><span role="rowheader">Sousão</span><span role="cell" class="cal__bar"><i></i><b class="num">17 to 20 Sep</b></span><span role="cell" class="cal__t num">2.6<span class="unit">t</span></span></div>
+            <div class="cal__row" role="row" style="--wine: var(--w-reserva); --a: 18; --b: 25"><span role="rowheader">Touriga Nacional</span><span role="cell" class="cal__bar"><i></i><b class="num">19 to 25 Sep</b></span><span role="cell" class="cal__t num">9.8<span class="unit">t</span></span></div>
+            <div class="cal__row" role="row" style="--wine: var(--w-tinto); --a: 21; --b: 30"><span role="rowheader">Touriga Franca</span><span role="cell" class="cal__bar"><i></i><b class="num">22 Sep to 1 Oct</b></span><span role="cell" class="cal__t num">15.6<span class="unit">t</span></span></div>
+            <div class="cal__row cal__row--late" role="row" style="--wine: var(--w-reserva); --a: 29; --b: 33"><span role="rowheader">Old field blend, 1938</span><span role="cell" class="cal__bar"><i></i><b class="num">30 Sep to 3 Oct</b></span><span role="cell" class="cal__t num">5.8<span class="unit">t</span></span></div>
+          </div>
+          <span class="cal__rain" style="--d: 23" aria-hidden="true"><span>Rain, 24 Sep, picking stopped</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV. Visiting: three tastings as a printed price list, and a booking form with every state. -->
+  <section class="sec" id="visit" aria-labelledby="visit-h">
+    <div class="wrap visit">
+      <div class="visit__info">
+        <header class="sec__head sec__head--stack">
+          <span class="sec__no num" aria-hidden="true">IV</span>
+          <div>
+            <h2 id="visit-h">Taste the wines where they grow</h2>
+            <p>Tastings run Tuesday to Saturday at 10:30 and 15:00, for up to ten people, led by Inês or her brother Duarte.</p>
+          </div>
+        </header>
+
+        <ul class="menu">
+          <li><div><h3>Cellar tasting</h3><p>The four wines in the 1911 adega, with bread, olive oil and cheese from Sabrosa.</p></div><p class="menu__price num"><small>€</small>25<span>75 min</span></p></li>
+          <li><div><h3>Terrace walk and tasting</h3><p>Climb the old mule track to the 410&nbsp;m terrace, then taste the Branco where it grows.</p></div><p class="menu__price num"><small>€</small>45<span>2 h 30</span></p></li>
+          <li><div><h3>Harvest day</h3><p>September only. Pick a morning with the crew, lunch on the terrace, tread at night.</p></div><p class="menu__price num"><small>€</small>95<span>9 h, lunch</span></p></li>
+        </ul>
+
+        <div class="photo photo--rows">
+          <img src="rows.jpg" width="1600" height="437" loading="lazy" alt="Vine rows planted straight up a steep slope, green against bare earth.">
+        </div>
+
+        <ul class="getting">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span>Estrada Municipal 323, Covas do Douro, 5085-201 Sabrosa</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-train"/></svg><span>Train from Porto São Bento to Pinhão, 2 h 25; we collect from the station for booked tastings</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>Closed Sunday, Monday and from 20 December to 6 January</span></li>
+        </ul>
+      </div>
+
+      <form class="book" id="book" novalidate aria-labelledby="book-h">
+        <h3 id="book-h">Book a tasting</h3>
+        <p class="book__lede">We confirm by email within a day. Pay at the quinta.</p>
+
+        <fieldset class="book__choice">
+          <legend class="label">Tasting</legend>
+          <label class="radio"><input type="radio" name="tasting" value="cellar" checked><span><b>Cellar tasting</b><span class="num">€25 a person</span></span></label>
+          <label class="radio"><input type="radio" name="tasting" value="walk"><span><b>Terrace walk</b><span class="num">€45 a person</span></span></label>
+          <label class="radio"><input type="radio" name="tasting" value="harvest" disabled><span><b>Harvest day</b><span>Back in September 2027</span></span></label>
+        </fieldset>
+
+        <div class="book__row">
+          <div class="field">
+            <label class="label" for="b-date">Date</label>
+            <div class="input"><input id="b-date" name="date" type="date" min="2026-11-24" max="2027-06-30" aria-describedby="b-date-help" required></div>
+            <p class="help" id="b-date-help">Tuesday to Saturday, from 24 November</p>
+          </div>
+          <div class="field">
+            <label class="label" for="b-time">Time</label>
+            <div class="input select"><select id="b-time" name="time"><option>10:30</option><option>15:00</option></select><svg class="icon" aria-hidden="true" viewBox="0 0 16 16"><path d="m4.5 6.5 3.5 3.5 3.5-3.5"/></svg></div>
+            <p class="help">Starts at the adega door</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="label" id="b-guests-l">Guests</span>
+          <div class="stepper" role="group" aria-labelledby="b-guests-l">
+            <button type="button" class="stepper__btn" data-step="-1" aria-label="One fewer guest"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg></button>
+            <output class="num" id="b-guests" aria-live="polite">2</output>
+            <button type="button" class="stepper__btn" data-step="1" aria-label="One more guest"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+            <span class="stepper__sum num" id="b-sum">€50 in all</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="b-email">Email</label>
+          <div class="input"><input id="b-email" name="email" type="email" autocomplete="email" placeholder="ana.sousa@example.pt" aria-describedby="b-email-help" required></div>
+          <p class="help" id="b-email-help">For the confirmation and directions</p>
+        </div>
+
+        <button class="btn btn--primary btn--lg btn--block" type="submit" id="b-submit">
+          <span class="btn__face" data-face="idle">Request this tasting</span>
+          <span class="btn__face" data-face="busy" aria-hidden="true"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Sending</span>
+          <span class="btn__face" data-face="done" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Request sent</span>
+        </button>
+        <p class="book__status" id="b-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- V. Buying direct: a case builder with live totals. -->
+  <section class="sec sec--buy" id="buy" aria-labelledby="buy-h">
+    <div class="wrap">
+      <header class="sec__head">
+        <span class="sec__no num" aria-hidden="true">V</span>
+        <div>
+          <h2 id="buy-h">Buy direct, by the bottle or the case</h2>
+          <p>Shipped from the quinta in pulp cases. Free across mainland Portugal from six bottles; €18 a case to the rest of the EU.</p>
+        </div>
+      </header>
+
+      <div class="order">
+        <ul class="order__list" aria-label="Wines to order">
+          <li style="--wine: var(--w-branco)" data-price="16" data-max="24"><i class="sw" aria-hidden="true"></i><div><b>Vale Alto Branco 2024</b><span class="num">€16 a bottle</span></div><div class="stepper stepper--sm" role="group" aria-label="Branco bottles"><button type="button" class="stepper__btn" data-step="-1" aria-label="One fewer Branco"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg></button><output class="num">0</output><button type="button" class="stepper__btn" data-step="1" aria-label="One more Branco"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button></div><span class="order__line num">€0</span></li>
+          <li style="--wine: var(--w-tinto)" data-price="19" data-max="24"><i class="sw" aria-hidden="true"></i><div><b>Vale Alto Tinto 2022</b><span class="num">€19 a bottle</span></div><div class="stepper stepper--sm" role="group" aria-label="Tinto bottles"><button type="button" class="stepper__btn" data-step="-1" aria-label="One fewer Tinto"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg></button><output class="num">3</output><button type="button" class="stepper__btn" data-step="1" aria-label="One more Tinto"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button></div><span class="order__line num">€57</span></li>
+          <li style="--wine: var(--w-reserva)" data-price="34" data-max="12"><i class="sw" aria-hidden="true"></i><div><b>Vale Alto Reserva 2021</b><span class="num">€34 a bottle</span></div><div class="stepper stepper--sm" role="group" aria-label="Reserva bottles"><button type="button" class="stepper__btn" data-step="-1" aria-label="One fewer Reserva"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg></button><output class="num">2</output><button type="button" class="stepper__btn" data-step="1" aria-label="One more Reserva"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button></div><span class="order__line num">€68</span></li>
+          <li style="--wine: var(--w-porto)" data-price="58" data-max="6"><i class="sw" aria-hidden="true"></i><div><b>Vintage Port 2020</b><span class="num">€58 a bottle, six per order</span></div><div class="stepper stepper--sm" role="group" aria-label="Port bottles"><button type="button" class="stepper__btn" data-step="-1" aria-label="One fewer Port"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg></button><output class="num">1</output><button type="button" class="stepper__btn" data-step="1" aria-label="One more Port"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button></div><span class="order__line num">€58</span></li>
+        </ul>
+
+        <aside class="order__sum" aria-labelledby="sum-h">
+          <h3 id="sum-h">Your case</h3>
+          <div class="case" aria-hidden="true" id="case"></div>
+          <p class="case__note num" id="case-note">6 of 6 places filled</p>
+          <dl class="sum">
+            <div><dt>Bottles</dt><dd class="num" id="o-bottles">6</dd></div>
+            <div><dt>Wine</dt><dd class="num" id="o-wine">€183</dd></div>
+            <div><dt>Shipping, mainland Portugal</dt><dd class="num" id="o-ship">Free</dd></div>
+            <div class="sum__total"><dt>Total, VAT included</dt><dd class="num" id="o-total">€183</dd></div>
+          </dl>
+          <a class="btn btn--primary btn--lg btn--block" role="link" aria-disabled="true">Go to payment<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <p class="sum__fine">Orders leave on Tuesdays. You must be 18 or over to buy wine.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__about">
+      <a class="mark" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path class="mark__ring" d="M16 2.5a13.5 13.5 0 1 1 0 27 13.5 13.5 0 0 1 0-27Z"/><path class="mark__terr" d="M6 21.5h5.5v-3H17v-3h5v-3h4.5M7.5 25h7v-3h6v-3h5.5"/></svg><span>Quinta do Vale Alto</span></a>
+      <p>Lobo family wines from Covas do Douro since 1911. Seven people work here all year and twenty-six more at harvest.</p>
+    </div>
+    <div>
+      <h3>The estate</h3>
+      <ul><li><a class="link" href="#wines">The wines</a></li><li><a class="link" href="#terroir">Terroir</a></li><li><a class="link" href="#harvest">Harvest 2026</a></li></ul>
+    </div>
+    <div>
+      <h3>Come and buy</h3>
+      <ul><li><a class="link" href="#visit">Book a tasting</a></li><li><a class="link" href="#buy">Order wine</a></li><li><a class="link" href="mailto:adega@valealto.example">adega@valealto.example</a></li></ul>
+    </div>
+    <div>
+      <h3>Find us</h3>
+      <p class="foot__addr">Estrada Municipal 323<br>Covas do Douro<br>5085-201 Sabrosa, Portugal</p>
+    </div>
+  </div>
+  <div class="wrap foot__base"><span>© 2026 Quinta do Vale Alto, Lda.</span><span>Seja responsável. Beba com moderação.</span><span>Photographs: Rosino, Tupungato and François Philipp, credited in CREDITS.md</span></div>
+  <span class="foot__word" aria-hidden="true">Vale Alto</span>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>

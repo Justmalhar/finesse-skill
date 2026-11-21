@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paper Harbour, audience overview, Soundcheck for Artists</title>
+<script>
+  /* Before first paint: the desk is dark after the close; ?theme=light gives the daylight version. ?state=loading shows skeletons. */
+  (function () {
+    var q = new URLSearchParams(location.search), r = document.documentElement;
+    if (q.get("theme") === "light") r.dataset.theme = "light";
+    if (q.get("state")) r.dataset.state = q.get("state");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-grid" viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1"/><rect x="9" y="9" width="4.5" height="4.5" rx="1"/></symbol>
+  <symbol id="i-users" viewBox="0 0 16 16"><circle cx="6" cy="5.5" r="2.25"/><path d="M2 13c.6-2.2 2.1-3.3 4-3.3s3.4 1.1 4 3.3M10.5 3.6a2.2 2.2 0 0 1 0 4.2M12 9.9c1 .5 1.7 1.5 2 3.1"/></symbol>
+  <symbol id="i-note" viewBox="0 0 16 16"><path d="M6 12V3.5l7-1.5V10.5"/><circle cx="4.25" cy="12" r="1.75"/><circle cx="11.25" cy="10.5" r="1.75"/></symbol>
+  <symbol id="i-disc" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><circle cx="8" cy="8" r="1.5"/></symbol>
+  <symbol id="i-list" viewBox="0 0 16 16"><path d="M2.5 4h8M2.5 8h8M2.5 12h5M12.5 9v4.5M10.25 11.25h4.5"/></symbol>
+  <symbol id="i-mega" viewBox="0 0 16 16"><path d="M2.5 6.5v3h2l5 3v-9l-5 3h-2ZM12 6a2.5 2.5 0 0 1 0 4M5 9.5l1 4"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M9.8 6.2c-.4-.6-1-.9-1.8-.9-1 0-1.8.6-1.8 1.4 0 1.9 3.6 1 3.6 2.8 0 .8-.8 1.4-1.8 1.4-.8 0-1.5-.3-1.9-1M8 4.2v1.1M8 10.9V12"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="m10.25 10.25 3.25 3.25"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2.5v8M4.75 7.5 8 10.75l3.25-3.25M3 13.5h10"/></symbol>
+  <symbol id="i-chevrons" viewBox="0 0 16 16"><path d="m5.5 6 2.5-2.5L10.5 6M5.5 10l2.5 2.5 2.5-2.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1 1M11.4 11.4l1 1M3.6 12.4l1-1M11.4 4.6l1-1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13 9.6A5.5 5.5 0 0 1 6.4 3 5.5 5.5 0 1 0 13 9.6Z"/></symbol>
+  <symbol id="i-headphones" viewBox="0 0 16 16"><path d="M2.75 11V8.5a5.25 5.25 0 0 1 10.5 0V11"/><rect x="2.5" y="9.5" width="3" height="4" rx="1"/><rect x="10.5" y="9.5" width="3" height="4" rx="1"/></symbol>
+  <symbol id="i-play" viewBox="0 0 16 16"><path d="M5.5 3.5v9l7-4.5-7-4.5Z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 16 16"><path d="M8 13s-5-2.9-5-6.6A2.7 2.7 0 0 1 8 5a2.7 2.7 0 0 1 5 1.4C13 10.1 8 13 8 13Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14Z"/><circle cx="8" cy="6.5" r="1.5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></symbol>
+  <symbol id="i-up" viewBox="0 0 12 12"><path d="M6 9.5v-7M3 5.5l3-3 3 3"/></symbol>
+  <symbol id="i-dn" viewBox="0 0 12 12"><path d="M6 2.5v7M3 6.5l3 3 3-3"/></symbol>
+  <symbol id="s-check" viewBox="0 0 12 12"><path d="m3 6.3 2 2 4-4.6"/></symbol>
+  <symbol id="s-warn" viewBox="0 0 12 12"><path d="M6 2 10.5 10h-9L6 2ZM6 5.2v2M6 8.6v.1"/></symbol>
+  <symbol id="s-ring" viewBox="0 0 12 12"><circle cx="6" cy="6" r="3.5"/></symbol>
+</svg>
+
+<div class="app">
+
+<aside class="side" aria-label="Sidebar">
+  <a class="brand" href="#main" aria-label="Soundcheck for Artists, overview">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" class="brand__tile"/><path class="brand__wave" d="M5 12h2l1.5-4 2 9 2-12 2 10 1.5-3H19"/></svg>
+    <span>Soundcheck</span>
+  </a>
+  <button class="artist" type="button" aria-label="Paper Harbour, verified artist. Switch artist">
+    <span class="artist__art" aria-hidden="true"></span>
+    <span class="artist__name"><b>Paper Harbour</b><span>Verified, 4 members</span></span>
+    <svg class="icon" aria-hidden="true"><use href="#i-chevrons"/></svg>
+  </button>
+  <nav class="nav" aria-label="Artist">
+    <a href="#main" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span class="t">Overview</span></a>
+    <a href="#geo-h"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg><span class="t">Audience</span></a>
+    <a href="#tracks-h"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg><span class="t">Music</span><span class="count">47</span></a>
+    <a href="#release-h"><svg class="icon" aria-hidden="true"><use href="#i-disc"/></svg><span class="t">Releases</span><span class="count count--live">1</span></a>
+    <a href="#adds-h"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg><span class="t">Playlists</span></a>
+  </nav>
+  <nav class="nav nav--sub" aria-label="Business">
+    <p class="nav__label" aria-hidden="true">Business</p>
+    <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-mega"/></svg><span class="t">Campaigns</span></a>
+    <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-coin"/></svg><span class="t">Payouts</span></a>
+  </nav>
+  <section class="team" aria-labelledby="team-h">
+    <p id="team-h" class="team__h">Team on this artist</p>
+    <div class="stack-av" role="img" aria-label="Mara Quint, manager; Joel Abara, label; Sun Hee Park, publicist; and 3 more">
+      <span class="av" style="--c: var(--chart-4)">MQ</span><span class="av" style="--c: var(--chart-3)">JA</span><span class="av" style="--c: var(--chart-6)">SP</span><span class="av av--more">+3</span>
+    </div>
+    <p class="team__p">Mara edited the release plan 2 h ago</p>
+  </section>
+</aside>
+
+<div class="col">
+<header class="top">
+  <p class="crumbs">Paper Harbour <span aria-hidden="true">/</span> <b>Overview</b></p>
+  <label class="search"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Filter tracks" aria-label="Filter top tracks" aria-keyshortcuts="/"><kbd aria-hidden="true">/</kbd></label>
+  <div class="seg" role="radiogroup" aria-label="Range" style="--n: 3">
+    <span class="seg__thumb" aria-hidden="true"></span>
+    <label><input class="sr-only" type="radio" name="range" value="7">7<span class="l">&nbsp;days</span><span class="s">d</span></label>
+    <label><input class="sr-only" type="radio" name="range" value="28" checked>28<span class="l">&nbsp;days</span><span class="s">d</span></label>
+    <label><input class="sr-only" type="radio" name="range" value="365">12<span class="l">&nbsp;months</span><span class="s">m</span></label>
+  </div>
+  <a class="iconbtn" id="theme" href="?theme=light" aria-label="Switch to light theme"><svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg><svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg></a>
+  <button class="btn btn--primary" type="button" id="export"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg><span class="t">Export report</span></button>
+</header>
+
+<main class="main" id="main">
+  <p class="sr-only" role="status" id="live"></p>
+
+  <header class="head">
+    <div>
+      <h1>Audience, last 28 days</h1>
+      <p class="head__sub">24 Oct to 20 Nov 2026, compared with the 28 days before. Updated 06:00 CET from yesterday’s plays.</p>
+    </div>
+    <ul class="chips">
+      <li class="chip chip--live"><span class="pulse" aria-hidden="true"></span>412 listening now</li>
+      <li><a class="chip" href="#release-h"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Low Tide Radio out Fri 11 Dec</a></li>
+    </ul>
+  </header>
+
+  <!-- Band archetype: the trend is the story, so the chart runs the full width and the four measures overlap its foot. -->
+  <section class="band" aria-labelledby="band-h" data-skel>
+    <header class="band__head">
+      <div>
+        <h2 id="band-h">Monthly listeners and weekly streams</h2>
+        <p>12 months to 20 Nov. Listeners are unique people in a rolling 28 days.</p>
+      </div>
+      <ul class="legend">
+        <li><i class="sw" style="--c: var(--chart-1)"></i>Monthly listeners <b class="num">312.4k</b></li>
+        <li><i class="sw sw--dash"></i>Same week last year <b class="num">118.0k</b></li>
+        <li><i class="sw sw--bar" style="--c: var(--chart-2)"></i>Streams per week <b class="num">463k</b></li>
+      </ul>
+    </header>
+    <div class="band__chart">
+      <div class="band__y num" aria-hidden="true"><span style="--t: 0">400k</span><span style="--t: 1">300k</span><span style="--t: 2">200k</span><span style="--t: 3">100k</span></div>
+      <div class="plot" id="plot" tabindex="0" role="slider" aria-label="Monthly listeners by week. Arrow keys move one week." aria-valuemin="0" aria-valuemax="51" aria-valuenow="51" aria-valuetext="">
+        <svg class="plot__svg" viewBox="0 0 51 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="fill-l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-opacity=".42"/><stop offset=".75" stop-opacity=".06"/><stop offset="1" stop-opacity="0"/></linearGradient></defs>
+          <path class="p-area" id="p-area"/><path class="p-cmp" id="p-cmp"/><path class="p-line" id="p-line"/>
+        </svg>
+        <div class="bars" id="bars" aria-hidden="true"></div>
+        <span class="mark" style="--x: 27.45%" aria-hidden="true"><b>Glass Lungs</b> single, 13 Mar</span>
+        <span class="mark" style="--x: 50.98%" aria-hidden="true"><b>Fresh Finds: Indie</b> add, 3 Jun</span>
+        <span class="mark" style="--x: 76.47%" aria-hidden="true"><b>EU tour</b> 4 to 26 Sep</span>
+        <span class="mark" style="--x: 96.08%" aria-hidden="true"><b>Low Tide Radio</b> single, 13 Nov</span>
+        <span class="cross" aria-hidden="true"></span>
+        <span class="pt" id="pt" aria-hidden="true"></span>
+        <div class="tip" id="tip" aria-hidden="true">
+          <span class="tip__t" id="tip-t"></span>
+          <span class="tip__r"><i class="sw" style="--c: var(--chart-1)"></i>Monthly listeners<b id="tip-l"></b></span>
+          <span class="tip__r"><i class="sw sw--dash"></i>Last year<b id="tip-c"></b></span>
+          <span class="tip__r"><i class="sw sw--bar" style="--c: var(--chart-2)"></i>Streams that week<b id="tip-s"></b></span>
+        </div>
+      </div>
+      <div class="band__x num" aria-hidden="true"><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span></div>
+    </div>
+    <table class="sr-only"><caption>Monthly listeners at each quarter</caption><thead><tr><th scope="col">Week of</th><th scope="col">Monthly listeners</th></tr></thead><tbody><tr><td>1 Dec 2025</td><td>118,000</td></tr><tr><td>2 Mar 2026</td><td>131,000</td></tr><tr><td>1 Jun 2026</td><td>176,000</td></tr><tr><td>31 Aug 2026</td><td>262,000</td></tr><tr><td>16 Nov 2026</td><td>312,400</td></tr></tbody></table>
+  </section>
+
+  <div class="grid">
+    <!-- Four measures, four visual types: a goal meter, the heat strip, spark bars, a composition bar. -->
+    <article class="tile kpi c3 kpi--over" data-skel>
+      <h2 class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Monthly listeners<span class="delta delta--good"><svg aria-hidden="true"><use href="#i-up"/></svg>18.6%<span class="sr-only"> up on the previous 28 days, good</span></span></h2>
+      <p class="kpi__fig num">312.4<span class="unit">k</span></p>
+      <p class="kpi__ctx num">263.4k previous 28 days</p>
+      <div class="kpi__viz">
+        <span class="goal" style="--at: 89.3%" aria-hidden="true">Goal 350k</span>
+        <div class="segbar" role="meter" aria-label="Monthly listeners against the 350,000 release goal" aria-valuemin="0" aria-valuemax="350000" aria-valuenow="312400" style="--p: 89.3%; --n: 28"></div>
+      </div>
+      <p class="kpi__cap"><span><b class="num">37.6k</b> to the release goal</span><span class="num">by 11 Dec</span></p>
+    </article>
+
+    <article class="tile kpi c3 kpi--over" data-skel>
+      <h2 class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Streams<span class="delta delta--good"><svg aria-hidden="true"><use href="#i-up"/></svg>22.1%<span class="sr-only"> up, good</span></span></h2>
+      <p class="kpi__fig num">1.84<span class="unit">M</span></p>
+      <p class="kpi__ctx num">5.9 per listener</p>
+      <div class="kpi__viz">
+        <div class="heat heat--lg" id="heat-total" data-seed="7" data-trend="0.9" data-base="0.55" role="img" aria-label="Streams per day for the last 30 days, rising from about 52,000 to 71,000, peak 81,400 on Fri 13 Nov"></div>
+      </div>
+      <p class="kpi__cap"><span class="num">22 Oct</span><span>Peak <b class="num">81.4k</b> Fri 13 Nov</span><span class="num">20 Nov</span></p>
+    </article>
+
+    <article class="tile kpi c3 kpi--over" data-skel style="--c: var(--chart-4)">
+      <h2 class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Saves<span class="delta delta--bad"><svg aria-hidden="true"><use href="#i-dn"/></svg>0.4 pts<span class="sr-only"> save rate down, bad</span></span></h2>
+      <p class="kpi__fig num">41.2<span class="unit">k</span></p>
+      <p class="kpi__ctx num">13.2% of listeners</p>
+      <div class="kpi__viz spark" data-values="0.42,0.48,0.45,0.51,0.6,0.58,0.66,0.62,0.7,0.74,0.69,0.81,0.95,1,0.88,0.84,0.9,0.86,0.92,0.8,0.78,0.85,0.83,0.88,0.79,0.82,0.86,0.9" role="img" aria-label="Saves per day for 28 days, highest on 13 November, the day the single came out"></div>
+      <p class="kpi__cap"><span>Save rate <b class="num">13.2%</b>, was 13.6%</span><span>28 d</span></p>
+    </article>
+
+    <article class="tile kpi c3 kpi--over" data-skel style="--c: var(--chart-3)">
+      <h2 class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>Playlist adds<span class="delta delta--good"><svg aria-hidden="true"><use href="#i-up"/></svg>31%<span class="sr-only"> up, good</span></span></h2>
+      <p class="kpi__fig num">1,284</p>
+      <p class="kpi__ctx num">980 previous 28 days</p>
+      <div class="kpi__viz">
+        <div class="comp" role="img" aria-label="Playlist adds by type: listener playlists 1,091, algorithmic 176, editorial 17">
+          <i style="--w: 85%; --c: var(--chart-5)"></i><i style="--w: 13.7%; --c: var(--chart-3)"></i><i style="--w: 1.3%; --c: var(--chart-6)"></i>
+        </div>
+      </div>
+      <p class="kpi__cap kpi__cap--keys"><span class="key" style="--k: var(--chart-5)">Listener <b class="num">1,091</b></span><span class="key" style="--k: var(--chart-3)">Algo <b class="num">176</b></span><span class="key" style="--k: var(--chart-6)">Editorial <b class="num">17</b></span></p>
+    </article>
+
+    <!-- Top tracks: the heat strip beside each name, credits as an avatar stack. -->
+    <section class="tile c8 tracks" id="tracks" aria-labelledby="tracks-h" data-skel>
+      <header class="tile__head">
+        <div><h2 id="tracks-h">Top tracks</h2><p>By streams in the last 28 days. Daily listeners, 22 Oct to 20 Nov, in the strip.</p></div>
+        <a class="link" role="link" aria-disabled="true">All 47 tracks</a>
+      </header>
+      <div class="tablewrap">
+        <table class="tt">
+          <thead><tr><th scope="col" class="tt__n">#</th><th scope="col">Track</th><th scope="col" class="r" aria-sort="descending">Streams</th><th scope="col" class="r">Change</th><th scope="col" class="tt__heat">Daily listeners, 30 d</th><th scope="col">Credits</th></tr></thead>
+          <tbody id="tt-body">
+            <tr data-name="glass lungs" data-seed="3" data-trend="0.15" data-base="0.75"><td class="tt__n num">1</td><td><span class="trk"><span class="art" style="--a: var(--chart-1); --b: var(--chart-6)" aria-hidden="true"></span><span><b>Glass Lungs</b><span>Glass Lungs, single, 2026</span></span></span></td><td class="r num">612,400</td><td class="r"><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>12%</span></td><td><span class="heat"></span></td><td><span class="stack-av" role="img" aria-label="Credits: Paper Harbour, Ines Varga, Tomas Reyes"><span class="av" style="--c: var(--chart-1)">PH</span><span class="av" style="--c: var(--chart-2)">IV</span><span class="av" style="--c: var(--chart-3)">TR</span></span></td></tr>
+            <tr data-name="saltmarsh" data-seed="11" data-trend="0.9" data-base="0.3"><td class="tt__n num">2</td><td><span class="trk"><span class="art" style="--a: var(--chart-3); --b: var(--chart-1)" aria-hidden="true"></span><span><b>Saltmarsh</b><span>Northbound, Slowly, 2025</span></span></span></td><td class="r num">398,100</td><td class="r"><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>41%</span></td><td><span class="heat"></span></td><td><span class="stack-av" role="img" aria-label="Credits: Paper Harbour, Ines Varga"><span class="av" style="--c: var(--chart-1)">PH</span><span class="av" style="--c: var(--chart-2)">IV</span></span></td></tr>
+            <tr data-name="low tide radio" data-seed="5" data-trend="1.6" data-base="0" data-start="22"><td class="tt__n num">3</td><td><span class="trk"><span class="art art--new" style="--a: var(--chart-2); --b: var(--chart-4)" aria-hidden="true"></span><span><b>Low Tide Radio</b><span>Single, out 13 Nov</span></span></span></td><td class="r num">243,900</td><td class="r"><span class="chg chg--new">New</span></td><td><span class="heat"></span></td><td><span class="stack-av" role="img" aria-label="Credits: Paper Harbour, Ines Varga, Tomas Reyes, Wren Achebe, Kai Lindqvist and 2 more"><span class="av" style="--c: var(--chart-1)">PH</span><span class="av" style="--c: var(--chart-2)">IV</span><span class="av" style="--c: var(--chart-3)">TR</span><span class="av av--more num">+4</span></span></td></tr>
+            <tr data-name="northbound, slowly" data-seed="17" data-trend="-0.3" data-base="0.5"><td class="tt__n num">4</td><td><span class="trk"><span class="art" style="--a: var(--chart-6); --b: var(--chart-5)" aria-hidden="true"></span><span><b>Northbound, Slowly</b><span>Northbound, Slowly, 2025</span></span></span></td><td class="r num">221,800</td><td class="r"><span class="chg chg--dn num"><svg aria-hidden="true"><use href="#i-dn"/></svg>6%</span></td><td><span class="heat"></span></td><td><span class="stack-av" role="img" aria-label="Credits: Paper Harbour"><span class="av" style="--c: var(--chart-1)">PH</span></span></td></tr>
+            <tr data-name="weather for two ana lume" data-seed="23" data-trend="0.05" data-base="0.38"><td class="tt__n num">5</td><td><span class="trk"><span class="art" style="--a: var(--chart-4); --b: var(--chart-3)" aria-hidden="true"></span><span><b>Weather for Two</b><span>feat. Ana Lume, 2025</span></span></span></td><td class="r num">142,900</td><td class="r"><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>3%</span></td><td><span class="heat"></span></td><td><span class="stack-av" role="img" aria-label="Credits: Paper Harbour, Ana Lume, Ines Varga"><span class="av" style="--c: var(--chart-1)">PH</span><span class="av" style="--c: var(--chart-4)">AL</span><span class="av" style="--c: var(--chart-2)">IV</span></span></td></tr>
+            <tr data-name="lamplight static" data-seed="29" data-trend="-0.5" data-base="0.32"><td class="tt__n num">6</td><td><span class="trk"><span class="art" style="--a: var(--chart-5); --b: var(--chart-2)" aria-hidden="true"></span><span><b>Lamplight Static</b><span>First Light EP, 2023</span></span></span></td><td class="r num">96,200</td><td class="r"><span class="chg chg--dn num"><svg aria-hidden="true"><use href="#i-dn"/></svg>11%</span></td><td><span class="heat"></span></td><td><span class="stack-av" role="img" aria-label="Credits: Paper Harbour, Tomas Reyes"><span class="av" style="--c: var(--chart-1)">PH</span><span class="av" style="--c: var(--chart-3)">TR</span></span></td></tr>
+            <tr class="tt__empty" id="tt-empty" hidden><td colspan="6"><p><b>No track matches “<span id="tt-q"></span>”.</b> Check the spelling, or <button type="button" class="linkbtn" id="tt-clear">clear the filter</button> to see all six.</p></td></tr>
+          </tbody>
+          <tfoot><tr><td></td><td>Other 41 tracks</td><td class="r num">124,700</td><td class="r muted num">−2%</td><td colspan="2" class="muted">Total <b class="num">1,840,000</b> streams</td></tr></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- Release countdown -->
+    <section class="tile c4 release" aria-labelledby="release-h" data-skel>
+      <div class="cover" aria-hidden="true"><span>Paper Harbour</span><b>Low Tide Radio</b></div>
+      <div class="release__body">
+        <p class="release__over">Album, 11 tracks</p>
+        <h2 id="release-h">Low Tide Radio</h2>
+        <p class="release__date">Out Fri 11 Dec 2026, 00:00 local time</p>
+        <div class="count-down num" id="countdown" role="timer" aria-live="off" aria-label="Time until release">
+          <div><b data-u="d">19</b><span>days</span></div><div><b data-u="h">06</b><span>hrs</span></div><div><b data-u="m">00</b><span>min</span></div><div><b data-u="s">00</b><span>sec</span></div>
+        </div>
+        <div class="presave">
+          <p class="presave__top"><span>Pre-saves</span><b class="num">8,412 <span class="muted">of 12,000</span></b></p>
+          <div class="meter" role="meter" aria-label="Pre-saves against goal" aria-valuemin="0" aria-valuemax="12000" aria-valuenow="8412"><i style="--p: 70.1%"></i></div>
+          <p class="presave__cap num">+486 a day this week; on pace for 18,100 by release</p>
+        </div>
+        <ul class="checks">
+          <li><span class="status status--ok"><svg aria-hidden="true"><use href="#s-check"/></svg>Done</span>Artwork and lyrics delivered</li>
+          <li><span class="status status--ok"><svg aria-hidden="true"><use href="#s-check"/></svg>Done</span>Editorial pitch sent 13 Nov</li>
+          <li><span class="status status--warn"><svg aria-hidden="true"><use href="#s-warn"/></svg>3 of 11</span>Canvas loops uploaded</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Geography -->
+    <section class="tile c6 geo" aria-labelledby="geo-h" data-skel>
+      <header class="tile__head">
+        <div><h2 id="geo-h">Listeners by city</h2><p>Top 8 of 2,914 cities, last 28 days</p></div>
+        <p class="tile__aside num"><b>61</b> countries</p>
+      </header>
+      <ol class="cities" id="cities">
+        <li style="--p: 100%"><span class="cities__n num">1</span><span class="cities__name">Berlin <span>DE</span></span><span class="cities__bar"><i></i></span><b class="num">21.4k</b><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>9%</span></li>
+        <li style="--p: 88.3%"><span class="cities__n num">2</span><span class="cities__name">London <span>GB</span></span><span class="cities__bar"><i></i></span><b class="num">18.9k</b><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>14%</span></li>
+        <li style="--p: 75.7%"><span class="cities__n num">3</span><span class="cities__name">Mexico City <span>MX</span></span><span class="cities__bar"><i></i></span><b class="num">16.2k</b><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>62%</span></li>
+        <li style="--p: 59.3%"><span class="cities__n num">4</span><span class="cities__name">São Paulo <span>BR</span></span><span class="cities__bar"><i></i></span><b class="num">12.7k</b><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>38%</span></li>
+        <li style="--p: 52.8%"><span class="cities__n num">5</span><span class="cities__name">Melbourne <span>AU</span></span><span class="cities__bar"><i></i></span><b class="num">11.3k</b><span class="chg chg--dn num"><svg aria-hidden="true"><use href="#i-dn"/></svg>4%</span></li>
+        <li style="--p: 45.8%"><span class="cities__n num">6</span><span class="cities__name">Chicago <span>US</span></span><span class="cities__bar"><i></i></span><b class="num">9.8k</b><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>7%</span></li>
+        <li style="--p: 40.2%"><span class="cities__n num">7</span><span class="cities__name">Stockholm <span>SE</span></span><span class="cities__bar"><i></i></span><b class="num">8.6k</b><span class="chg chg--dn num"><svg aria-hidden="true"><use href="#i-dn"/></svg>12%</span></li>
+        <li style="--p: 36.9%"><span class="cities__n num">8</span><span class="cities__name">Jakarta <span>ID</span></span><span class="cities__bar"><i></i></span><b class="num">7.9k</b><span class="chg chg--up num"><svg aria-hidden="true"><use href="#i-up"/></svg>119%</span></li>
+      </ol>
+      <p class="tile__foot">Mexico City and Jakarta grew fastest after the <b>Fresh Finds: Indie</b> add in their regions.</p>
+    </section>
+
+    <!-- Age -->
+    <section class="tile c3 age" aria-labelledby="age-h" data-skel>
+      <header class="tile__head"><div><h2 id="age-h">Audience age</h2><p>Share of listeners who gave an age</p></div></header>
+      <div class="cols" role="img" aria-label="Listeners by age: 18 to 22, 24 percent; 23 to 27, 31 percent; 28 to 34, 22 percent; 35 to 44, 14 percent; 45 to 59, 7 percent; 60 and over, 2 percent">
+        <div style="--v: .774"><b class="num">24%</b><i></i><span class="num">18–22</span></div>
+        <div style="--v: 1" class="is-top"><b class="num">31%</b><i></i><span class="num">23–27</span></div>
+        <div style="--v: .71"><b class="num">22%</b><i></i><span class="num">28–34</span></div>
+        <div style="--v: .452"><b class="num">14%</b><i></i><span class="num">35–44</span></div>
+        <div style="--v: .226"><b class="num">7%</b><i></i><span class="num">45–59</span></div>
+        <div style="--v: .065"><b class="num">2%</b><i></i><span class="num">60+</span></div>
+      </div>
+      <p class="tile__foot">Median age <b class="num">26</b>, one year younger than in May.</p>
+    </section>
+
+    <!-- Source -->
+    <section class="tile c3 source" aria-labelledby="src-h" data-skel>
+      <header class="tile__head"><div><h2 id="src-h">Where streams start</h2><p>Share of 1.84M streams</p></div></header>
+      <div class="donut" id="donut" aria-hidden="true"><div class="donut__c"><b class="num">66%</b><span>from playlists</span></div></div>
+      <table class="mixtable" id="mix">
+        <caption class="sr-only">Streams by source, last 28 days</caption>
+        <tbody>
+          <tr data-share="34" style="--c: var(--chart-3)"><th scope="row"><i class="sw"></i>Algorithmic playlists</th><td class="num">34%</td></tr>
+          <tr data-share="21" style="--c: var(--chart-4)"><th scope="row"><i class="sw"></i>Listener’s own library</th><td class="num">21%</td></tr>
+          <tr data-share="18" style="--c: var(--chart-6)"><th scope="row"><i class="sw"></i>Editorial playlists</th><td class="num">18%</td></tr>
+          <tr data-share="14" style="--c: var(--chart-5)"><th scope="row"><i class="sw"></i>Listener playlists</th><td class="num">14%</td></tr>
+          <tr data-share="8" style="--c: var(--chart-2)"><th scope="row"><i class="sw"></i>Artist profile</th><td class="num">8%</td></tr>
+          <tr data-share="5" style="--c: var(--border-strong)"><th scope="row"><i class="sw"></i>Other</th><td class="num">5%</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Playlist adds feed -->
+    <section class="tile c12 adds" aria-labelledby="adds-h" data-skel>
+      <header class="tile__head">
+        <div><h2 id="adds-h">Playlist adds that moved streams</h2><p>Adds in the last 28 days, by streams they sent</p></div>
+      </header>
+      <ol class="adds__list">
+        <li style="--c: var(--chart-3)"><span class="adds__kind">Algorithmic</span><b>Discover Weekly</b><span class="adds__meta">Personal to each listener, 28,410 adds</span><span class="adds__fig num">228.6k<span class="unit">streams</span></span><span class="adds__bar" style="--p: 100%"><i></i></span></li>
+        <li style="--c: var(--chart-6)"><span class="adds__kind">Editorial</span><b>Fresh Finds: Indie</b><span class="adds__meta">812k followers, added 3 Jun, position 14</span><span class="adds__fig num">61.2k<span class="unit">streams</span></span><span class="adds__bar" style="--p: 26.8%"><i></i></span></li>
+        <li style="--c: var(--chart-3)"><span class="adds__kind">Algorithmic</span><b>Release Radar</b><span class="adds__meta">Followers of the artist, from 13 Nov</span><span class="adds__fig num">54.9k<span class="unit">streams</span></span><span class="adds__bar" style="--p: 24%"><i></i></span></li>
+        <li style="--c: var(--chart-5)"><span class="adds__kind">Listener</span><b>late trains home</b><span class="adds__meta">94k followers, added 9 Nov</span><span class="adds__fig num">18.3k<span class="unit">streams</span></span><span class="adds__bar" style="--p: 8%"><i></i></span></li>
+      </ol>
+    </section>
+  </div>
+</main>
+</div>
+
+<nav class="tabbar" aria-label="Artist">
+  <a href="#main" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Overview</a>
+  <a href="#geo-h"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Audience</a>
+  <a href="#tracks-h"><svg class="icon" aria-hidden="true"><use href="#i-note"/></svg>Music</a>
+  <a href="#release-h"><svg class="icon" aria-hidden="true"><use href="#i-disc"/></svg>Release</a>
+</nav>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

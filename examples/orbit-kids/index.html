@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orbit, the hands-on science museum in Bristol</title>
+<meta name="description" content="Five hands-on science galleries for children aged 4 to 12 on Bristol harbourside. Opening hours, tickets, family memberships, school visits and birthday parties.">
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    var t = q.get("theme");
+    if (t === "light" || t === "dark") root.dataset.theme = t;
+    if (q.has("reveal")) root.dataset.reveal = "all";
+    root.classList.add("js");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14z"/><circle cx="8" cy="6.5" r="1.6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5v3.25l2 1.25"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11"/></symbol>
+  <symbol id="i-bus" viewBox="0 0 16 16"><rect x="3" y="2.5" width="10" height="9.5" rx="2"/><path d="M3 8h10M5.5 12v1.5M10.5 12v1.5"/><circle cx="5.5" cy="10" r=".4"/><circle cx="10.5" cy="10" r=".4"/></symbol>
+  <symbol id="i-access" viewBox="0 0 16 16"><circle cx="8" cy="3" r="1.25"/><path d="M3.5 5.75L8 6.5l4.5-.75M8 6.5v3.5l-2.5 4M8 10l2.5 4"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 16 16"><path d="M3 6h8v3.5a3.5 3.5 0 0 1-3.5 3.5h-1A3.5 3.5 0 0 1 3 9.5V6zM11 7h1a1.5 1.5 0 0 1 0 3h-1M5.5 2.5v1.5M8 2.5v1.5"/></symbol>
+  <!-- Gallery glyphs -->
+  <symbol id="g-moon" viewBox="0 0 24 24"><path d="M15.5 4.5a8 8 0 1 0 4 12.5 7 7 0 0 1-4-12.5z"/></symbol>
+  <symbol id="g-drop" viewBox="0 0 24 24"><path d="M12 3.5s6 6.6 6 10.8a6 6 0 0 1-12 0C6 10.1 12 3.5 12 3.5z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></symbol>
+  <symbol id="g-bolt" viewBox="0 0 24 24"><path d="M13.5 3L6 13.5h5.5L10.5 21 18 10.5h-5.5z"/></symbol>
+  <symbol id="g-lens" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5M8 10.5a2.5 2.5 0 0 1 2.5-2.5"/></symbol>
+  <symbol id="g-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></symbol>
+</svg>
+
+<header class="band">
+  <div class="wrap band__in">
+    <a class="brand" href="#main" aria-label="Orbit, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="6.5" fill="currentColor"/>
+        <ellipse cx="16" cy="16" rx="14" ry="6" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(-28 16 16)"/>
+        <circle cx="27.4" cy="9.6" r="2.6" fill="currentColor"/>
+      </svg>
+      <b>Orbit</b><small>Science museum, Bristol</small>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#galleries">Galleries</a></li>
+        <li><a href="#tickets">Tickets</a></li>
+        <li><a href="#schools">Schools</a></li>
+        <li><a href="#parties">Parties</a></li>
+        <li><a href="#visit">Plan a visit</a></li>
+      </ul>
+    </nav>
+    <div class="band__right">
+      <p class="openchip" data-open="true"><i aria-hidden="true"></i><span class="long" data-today-chip>Open every day but Monday</span></p>
+      <details class="menu">
+        <summary><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg><span class="menu__t">Menu</span></summary>
+        <ul>
+          <li><a href="#galleries">Galleries</a></li>
+          <li><a href="#tickets">Tickets</a></li>
+          <li><a href="#schools">Schools</a></li>
+          <li><a href="#parties">Parties</a></li>
+          <li><a href="#visit">Plan a visit</a></li>
+        </ul>
+      </details>
+      <a class="btn" href="#tickets">Book tickets</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap hero__in">
+      <div class="hero__copy">
+        <p class="hero__where"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Wapping Wharf, Bristol harbourside</p>
+        <h1 id="hero-h">The science museum where touching is the point</h1>
+        <p class="hero__sub">Five hands-on galleries for children aged 4 to 12, a planetarium under the dome and live shows every open day.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="#tickets">Book tickets<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="textlink" href="#schools">Plan a school visit</a>
+        </div>
+        <ul class="facts">
+          <li><b>Free</b>for under 4s, always</li>
+          <li><b class="num">£9.50</b>for a child day ticket</li>
+          <li><b>3 hours</b>to see all five galleries</li>
+        </ul>
+      </div>
+
+      <div class="map">
+        <div class="map__frame">
+          <p class="map__cap"><b>The building is round</b>The galleries ring the Sun Hall, so every loop brings you back to the café and the toilets.</p>
+          <div class="orbits">
+            <svg viewBox="0 0 660 660" aria-hidden="true">
+              <circle class="o" cx="330" cy="330" r="140"/>
+              <circle class="o" cx="330" cy="330" r="220"/>
+              <circle class="o" cx="330" cy="330" r="292"/>
+              <text x="330" y="181" text-anchor="middle">GROUND</text>
+              <text x="330" y="101" text-anchor="middle">FLOOR 1</text>
+              <text x="440" y="70" text-anchor="middle">FLOOR 2</text>
+            </svg>
+            <div class="hub"><b>Sun Hall</b><span>Café, lockers</span></div>
+            <a class="planet planet--sky" href="#galleries" data-goto="sky" style="--i: 0">
+              <span class="planet__body"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-moon"/></svg></span>
+              <span class="planet__label"><b>Sky Lab</b><span>Ages 5 to 12</span></span>
+            </a>
+            <a class="planet planet--spark" href="#galleries" data-goto="spark" style="--i: 1">
+              <span class="planet__body"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-bolt"/></svg></span>
+              <span class="planet__label"><b>Spark Shed</b><span>Ages 6 to 12</span></span>
+            </a>
+            <a class="planet planet--water" href="#galleries" data-goto="water" style="--i: 2">
+              <span class="planet__body"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-drop"/></svg></span>
+              <span class="planet__label"><b>Water Works</b><span>Ages 4 to 10</span></span>
+            </a>
+            <a class="planet planet--tiny" href="#galleries" data-goto="tiny" style="--i: 3">
+              <span class="planet__body"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-lens"/></svg></span>
+              <span class="planet__label"><b>Tiny Worlds</b><span>Ages 4 to 9</span></span>
+            </a>
+            <a class="planet planet--build" href="#galleries" data-goto="build" style="--i: 4">
+              <span class="planet__body"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#g-cog"/></svg></span>
+              <span class="planet__label"><b>Build Yard</b><span>Ages 5 to 12</span></span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="today" aria-labelledby="today-h">
+          <div class="today__top"><h2 id="today-h" class="sr-only">Today at Orbit</h2><span data-today-date>Opening hours</span><span class="status" data-today-status data-open="true"><i aria-hidden="true"></i><span>Open</span></span></div>
+          <p class="today__hours num" data-today-hours>9:30<small>to</small>18:00</p>
+          <div class="dayline" style="--from: 5%; --to: 95%; --now: 50%" data-dayline aria-hidden="true">
+            <span class="dayline__open"></span><span class="dayline__now" hidden></span>
+          </div>
+          <div class="dayaxis num" aria-hidden="true"><span>9:00</span><span>12:00</span><span>15:00</span><span>18:30</span></div>
+          <div class="busy">
+            <p class="busy__head">How busy it gets<span>Quieter after 15:00</span></p>
+            <div class="busy__bars" data-busy aria-hidden="true">
+              <i style="--v: 30"></i><i style="--v: 72"></i><i style="--v: 96"></i><i style="--v: 88"></i><i style="--v: 70"></i><i style="--v: 64"></i><i class="q" style="--v: 38"></i><i class="q" style="--v: 26"></i><i class="q" style="--v: 14"></i>
+            </div>
+            <div class="busy__axis num" aria-hidden="true"><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span></div>
+            <p class="sr-only">Usually busiest between 11:00 and 12:00, and quietest after 15:00.</p>
+          </div>
+          <div class="nextshow" data-nextshow>
+            <i class="dot" aria-hidden="true"></i>
+            <p><span>Planetarium show</span>Is the Moon following us?</p>
+            <time class="num">11:00</time>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="galleries" aria-labelledby="gal-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="gal-h">Five galleries, one loop around the Sun Hall</h2>
+        <p>Start anywhere. Every exhibit works with small hands, and staff in blue aprons run a demo in each gallery every hour.</p>
+      </div>
+
+      <div class="folder">
+        <div class="tabs" role="tablist" aria-label="Galleries">
+          <button class="tab" role="tab" id="t-sky" aria-controls="p-sky" aria-selected="true" style="--c: var(--g-sky)"><i class="tab__dot" aria-hidden="true"></i><b>Sky Lab</b><span>Floor 2, ages 5 to 12</span></button>
+          <button class="tab" role="tab" id="t-water" aria-controls="p-water" aria-selected="false" tabindex="-1" style="--c: var(--g-water)"><i class="tab__dot" aria-hidden="true"></i><b>Water Works</b><span>Ground, ages 4 to 10</span></button>
+          <button class="tab" role="tab" id="t-spark" aria-controls="p-spark" aria-selected="false" tabindex="-1" style="--c: var(--g-spark)"><i class="tab__dot" aria-hidden="true"></i><b>Spark Shed</b><span>Floor 1, ages 6 to 12</span></button>
+          <button class="tab" role="tab" id="t-tiny" aria-controls="p-tiny" aria-selected="false" tabindex="-1" style="--c: var(--g-tiny)"><i class="tab__dot" aria-hidden="true"></i><b>Tiny Worlds</b><span>Ground, ages 4 to 9</span></button>
+          <button class="tab" role="tab" id="t-build" aria-controls="p-build" aria-selected="false" tabindex="-1" style="--c: var(--g-build)"><i class="tab__dot" aria-hidden="true"></i><b>Build Yard</b><span>Floor 1, ages 5 to 12</span></button>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-sky" aria-labelledby="t-sky" style="--c: var(--g-sky)">
+          <figure class="panel__fig">
+            <div class="panel__img"><img src="img/moon.jpg" width="1200" height="1190" alt="The full Moon in sharp detail, its dark seas and bright craters against a black sky." style="object-position: 50% 40%"></div>
+            <span class="panel__tag"><i aria-hidden="true"></i>Planetarium, 40 seats</span>
+            <figcaption>The full Moon, photographed by Gregory H. Revera. The Moon wheel in Sky Lab is printed from this picture.</figcaption>
+          </figure>
+          <div class="panel__text">
+            <h3>Sky Lab</h3>
+            <dl class="meta"><div><dt>Where</dt><dd>Floor 2, under the dome</dd></div><div><dt>Ages</dt><dd>5 to 12</dd></div><div><dt>Allow</dt><dd class="num">60 min</dd></div></dl>
+            <p>A planetarium under the dome, a Moon you can turn to see why it changes shape, and a launch pad where air rockets fly up into the ceiling nets.</p>
+            <div class="dont"><h4>Three things not to miss</h4>
+              <ol>
+                <li><span><b>The Moon wheel.</b> Turn the handle and watch the phases change on a lamp-lit globe.</span></li>
+                <li><span><b>Rocket pad.</b> Pump, count down, launch, then read the height off the wall.</span></li>
+                <li><span><b>Mars scales.</b> Step on and see your weight on Mars: about 38% of what you weigh at home.</span></li>
+              </ol>
+            </div>
+            <p class="onnow"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Planetarium shows at 11:00, 13:30 and 15:30. Free with your ticket, collect a seat token at the door.</p>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-water" aria-labelledby="t-water" hidden style="--c: var(--g-water)">
+          <figure class="panel__fig">
+            <div class="panel__img"><img src="img/water-drop.jpg" width="1600" height="1066" alt="A drop of water bouncing up from a blue water surface, caught mid-air above the ripple it made." loading="lazy"></div>
+            <span class="panel__tag"><i aria-hidden="true"></i>Smocks and a drying room</span>
+            <figcaption>A drop rebounding off water, by José Manuel Suárez. Our drop camera shows the same thing at 1,000 frames a second.</figcaption>
+          </figure>
+          <div class="panel__text">
+            <h3>Water Works</h3>
+            <dl class="meta"><div><dt>Where</dt><dd>Ground floor</dd></div><div><dt>Ages</dt><dd>4 to 10</dd></div><div><dt>Allow</dt><dd class="num">45 min</dd></div></dl>
+            <p>Eighteen metres of channels, locks and dams at toddler height. Waterproof smocks hang by the door and there is a warm drying room for wet sleeves.</p>
+            <div class="dont"><h4>Three things not to miss</h4>
+              <ol>
+                <li><span><b>The lock gates.</b> Fill and empty three locks to float a boat uphill.</span></li>
+                <li><span><b>Archimedes screw.</b> Wind water up a slope by hand and fill the top pool.</span></li>
+                <li><span><b>Drop camera.</b> Make a splash and watch it again, slowed down forty times.</span></li>
+              </ol>
+            </div>
+            <p class="onnow"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Dam building with a member of staff at 10:30 and 14:00.</p>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-spark" aria-labelledby="t-spark" hidden style="--c: var(--g-spark)">
+          <figure class="panel__fig">
+            <div class="panel__img"><img src="img/plasma.jpg" width="1200" height="1200" alt="A plasma globe seen from above, pink and violet filaments reaching from the centre to the glass." loading="lazy"></div>
+            <span class="panel__tag"><i aria-hidden="true"></i>Live show twice a day</span>
+            <figcaption>A plasma globe photographed from above by Colin. Ours is 40 cm across and sits at child height.</figcaption>
+          </figure>
+          <div class="panel__text">
+            <h3>Spark Shed</h3>
+            <dl class="meta"><div><dt>Where</dt><dd>Floor 1</dd></div><div><dt>Ages</dt><dd>6 to 12</dd></div><div><dt>Allow</dt><dd class="num">45 min</dd></div></dl>
+            <p>Magnets, circuits and the plasma globe everyone remembers. A hand-crank generator lights a whole street of model houses if three people turn it together.</p>
+            <div class="dont"><h4>Three things not to miss</h4>
+              <ol>
+                <li><span><b>Plasma globe.</b> Put a hand on the glass and the lightning follows it.</span></li>
+                <li><span><b>Human battery.</b> Two hands, two metal plates and a meter that shows your own current.</span></li>
+                <li><span><b>Big Static.</b> The live show where hair stands up on purpose, at 12:15 and 14:45.</span></li>
+              </ol>
+            </div>
+            <p class="onnow"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Big Static runs 20 minutes. Ear defenders are on the hooks by the door.</p>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-tiny" aria-labelledby="t-tiny" hidden style="--c: var(--g-tiny)">
+          <figure class="panel__fig">
+            <div class="panel__img"><img src="img/ladybird.jpg" width="1600" height="1066" alt="A seven-spot ladybird climbing a single green grass stem against a soft green background." loading="lazy" style="object-position: 54% 50%"></div>
+            <span class="panel__tag"><i aria-hidden="true"></i>Microscopes at child height</span>
+            <figcaption>A seven-spot ladybird, by Humoyun Mehridinov. Count its spots under the bug cam, then count the ones in our garden.</figcaption>
+          </figure>
+          <div class="panel__text">
+            <h3>Tiny Worlds</h3>
+            <dl class="meta"><div><dt>Where</dt><dd>Ground floor</dd></div><div><dt>Ages</dt><dd>4 to 9</dd></div><div><dt>Allow</dt><dd class="num">40 min</dd></div></dl>
+            <p>Microscopes you do not have to lean over, a living ant colony behind glass, and an indoor garden where you can count the legs on everything.</p>
+            <div class="dont"><h4>Three things not to miss</h4>
+              <ol>
+                <li><span><b>Bug cam.</b> Put a leaf under the big-screen microscope and find what lives on it.</span></li>
+                <li><span><b>Ant city.</b> 3,000 leafcutter ants carrying leaves along a rope over your head.</span></li>
+                <li><span><b>Story time.</b> For 4 to 6 year olds on the reading rug, at 10:30.</span></li>
+              </ol>
+            </div>
+            <p class="onnow"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>The ants are fed at 14:30. It is the best time to see the whole colony move.</p>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-build" aria-labelledby="t-build" hidden style="--c: var(--g-build)">
+          <figure class="panel__fig">
+            <div class="panel__img"><img src="img/cogs.jpg" width="1600" height="1200" alt="Close view of large brass clockwork gears meshing, lit warm gold against a dark background." loading="lazy"></div>
+            <span class="panel__tag"><i aria-hidden="true"></i>Nothing glued down</span>
+            <figcaption>Clockwork gears, photographed by SomeDriftwood. The gear wall in Build Yard has 60 of them on one handle.</figcaption>
+          </figure>
+          <div class="panel__text">
+            <h3>Build Yard</h3>
+            <dl class="meta"><div><dt>Where</dt><dd>Floor 1</dd></div><div><dt>Ages</dt><dd>5 to 12</dd></div><div><dt>Allow</dt><dd class="num">60 min</dd></div></dl>
+            <p>Ramps, pulleys and a two-storey ball run made from parts children can move. Every piece is meant to come apart and go back together a different way.</p>
+            <div class="dont"><h4>Three things not to miss</h4>
+              <ol>
+                <li><span><b>The big ball run.</b> Change the track, drop a ball and race the clock on the wall.</span></li>
+                <li><span><b>Lift your grown-up.</b> A pulley rig that lets an eight year old raise an adult off the floor.</span></li>
+                <li><span><b>Gear wall.</b> Sixty cogs, one handle. Guess which one turns fastest.</span></li>
+              </ol>
+            </div>
+            <p class="onnow"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>The ball run is reset to a new course every Saturday morning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tickets" aria-labelledby="tix-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="tix-h">Tickets and family memberships</h2>
+        <p>Booking online holds your entry time. Walk up if you like: we only turn people away on the busiest school holiday mornings.</p>
+      </div>
+      <div class="tix">
+        <div class="tix__day">
+          <h3>Day tickets</h3>
+          <p>Valid all day. Leave for lunch and come back.</p>
+          <table class="ledger">
+            <caption class="sr-only">Day ticket prices</caption>
+            <tbody>
+              <tr><th scope="row">Child<small>Ages 4 to 12</small></th><td class="num"><sup>£</sup>9.50</td></tr>
+              <tr><th scope="row">Adult<small>13 and over</small></th><td class="num"><sup>£</sup>12.00</td></tr>
+              <tr><th scope="row">Concession<small>Students, over 65s, carers go free</small></th><td class="num"><sup>£</sup>10.00</td></tr>
+              <tr><th scope="row">Under 4<small>With a paying adult</small></th><td>Free</td></tr>
+              <tr><th scope="row">Family of four<small>Two adults, two children</small></th><td class="num"><sup>£</sup>38.00</td></tr>
+            </tbody>
+          </table>
+          <a class="btn btn--primary btn--lg" href="#visit">Choose a date<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <p class="tix__note">Planetarium seats are included. Tokens are given out at the dome.</p>
+        </div>
+        <div class="tix__mem">
+          <h3>Memberships, for a year of visits</h3>
+          <div class="plans">
+            <article class="plan plan--pick" aria-labelledby="m-family">
+              <p class="plan__name" id="m-family">Family<span>Most families pick this</span></p>
+              <p class="plan__price num"><sup>£</sup>85<sub>a year</sub></p>
+              <p class="plan__for">Two named adults and up to three children.</p>
+              <ul>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Unlimited visits, no booking needed</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>In at 9:00 on weekends, before the doors open</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>10% off birthday parties and the café</span></li>
+              </ul>
+            </article>
+            <article class="plan" aria-labelledby="m-grand">
+              <p class="plan__name" id="m-grand">Grandparents</p>
+              <p class="plan__price num"><sup>£</sup>70<sub>a year</sub></p>
+              <p class="plan__for">Two named adults and up to four grandchildren.</p>
+              <ul>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Unlimited visits on weekdays</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Two guest passes a year</span></li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Relaxed openings, first Sunday of the month</span></li>
+              </ul>
+            </article>
+          </div>
+          <div class="payback">
+            <p><b>Paid for by your third visit</b>A family of four spends £38 a visit on day tickets. A Family membership costs £85 for the year.</p>
+            <figure aria-label="Day ticket cost for a family of four after one, two and three visits, against the £85 membership.">
+              <div class="pb">
+                <span class="pb__grid" style="bottom: 0"></span>
+                <span class="pb__y num" style="bottom: 0">£0</span>
+                <span class="pb__grid" style="bottom: calc(50 / 120 * 100%)"></span>
+                <span class="pb__y num" style="bottom: calc(50 / 120 * 100%)">£50</span>
+                <span class="pb__grid" style="bottom: calc(100 / 120 * 100%)"></span>
+                <span class="pb__y num" style="bottom: calc(100 / 120 * 100%)">£100</span>
+                <div class="pb__bars"><i style="--v: 38"><b class="num">£38</b></i><i style="--v: 76"><b class="num">£76</b></i><i class="over" style="--v: 114"><b class="num">£114</b></i></div>
+                <div class="pb__line"><span class="num">Membership £85</span></div>
+              </div>
+              <div class="pb__x"><span>1 visit</span><span>2 visits</span><span>3 visits</span></div>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="schools" aria-labelledby="sch-h">
+    <div class="wrap schools">
+      <div>
+        <ol class="tt" aria-label="A typical school day at Orbit">
+          <li><time class="num">9:45</time><i class="pip" aria-hidden="true"></i><div><b>Arrive at the schools entrance</b><p>On Gas Ferry Road, with coat racks and a lunch-box trolley per class.</p></div></li>
+          <li style="--c: var(--g-spark)"><time class="num">10:00</time><i class="pip" aria-hidden="true"></i><div><b>Workshop, 50 minutes</b><p>One class at a time in a lab room, led by a science educator.</p></div></li>
+          <li style="--c: var(--g-water)"><time class="num">11:00</time><i class="pip" aria-hidden="true"></i><div><b>Gallery time</b><p>Galleries open to schools only until 11:30 on weekdays.</p></div></li>
+          <li><time class="num">12:15</time><i class="pip" aria-hidden="true"></i><div><b>Lunch room</b><p>Booked for your group, 45 minutes, next to the toilets.</p></div></li>
+          <li style="--c: var(--g-sky)"><time class="num">13:15</time><i class="pip" aria-hidden="true"></i><div><b>Planetarium</b><p>A 25-minute show matched to your workshop topic.</p></div></li>
+          <li><time class="num">14:00</time><i class="pip" aria-hidden="true"></i><div><b>Coach pick-up</b><p>Drop-off and pick-up bay right outside the schools entrance.</p></div></li>
+        </ol>
+      </div>
+      <div class="schools__copy">
+        <h2 id="sch-h">School visits, planned around your timetable</h2>
+        <p>Every workshop is written against the national curriculum for science and taught by people who used to teach it. Mondays in term time are for schools only.</p>
+        <p class="price-line"><b class="num"><sup>£</sup>6.50</b><span>per pupil, workshop and planetarium included.<br>One adult free for every 6 pupils in KS1, every 10 in KS2.</span></p>
+        <ul class="workshops">
+          <li>Light and shadows<span>KS1, Year 3</span></li>
+          <li>Forces and magnets<span>KS2, Year 3</span></li>
+          <li>Living things and their habitats<span>KS1, KS2</span></li>
+          <li>Earth and space<span>KS2, Year 5</span></li>
+          <li>Electricity: build a circuit<span>KS2, Year 4</span></li>
+        </ul>
+        <div class="contact">
+          <a class="btn btn--primary" href="mailto:schools@orbitmuseum.org.uk">Email the schools team</a>
+          <a class="tel num" href="tel:+441174960321">0117 496 0321</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="parties" aria-labelledby="party-h">
+    <div class="wrap">
+      <div class="party__head">
+        <div>
+          <h2 id="party-h">Birthday parties with a lab coat for everyone</h2>
+        </div>
+        <div>
+          <p>Two hours, a party host who does this every weekend, and something to take home that the birthday child made.</p>
+          <p class="party__price"><b class="num">£16.50 a child</b>10 to 20 children, Saturdays and Sundays at 13:00 or 15:30.</p>
+        </div>
+      </div>
+      <div class="twohours" data-reveal>
+        <div class="twohours__bar">
+          <div class="seg seg--a"><time class="num">0:00 to 0:15</time><div><b>Welcome</b><p>Lab coats, name badges, safety goggles.</p></div></div>
+          <div class="seg seg--b"><time class="num">0:15 to 1:00</time><div><b>The experiment</b><p>Your chosen theme in a private lab room with the host.</p></div></div>
+          <div class="seg seg--c"><time class="num">1:00 to 1:35</time><div><b>Party room</b><p>Food you bring or ours from £5 a head. Candles allowed.</p></div></div>
+          <div class="seg seg--d"><time class="num">1:35 to 2:00</time><div><b>Galleries</b><p>Free play before home time.</p></div></div>
+        </div>
+        <div class="twohours__axis num" aria-hidden="true"><span style="left: 0">Start</span><span style="left: 12.5%">15 min</span><span style="left: 50%">1 hour</span><span style="left: 79.2%">1 h 35</span><span style="left: 100%">2 hours</span></div>
+      </div>
+      <ul class="themes">
+        <li><h3>Rocket party</h3><span>Ages 6 to 10</span><p>Build an air rocket from card and tape, test it on the launch pad, take it home in a tube.</p></li>
+        <li><h3>Slime lab</h3><span>Ages 5 to 9</span><p>Mix three kinds of slime, find out which one bounces, take a pot of the best one home.</p></li>
+        <li><h3>Bug detectives</h3><span>Ages 4 to 7</span><p>A hunt round Tiny Worlds with magnifiers and a clipboard, then a visit to the ants.</p></li>
+      </ul>
+      <p style="margin-top: 40px"><a class="textlink" href="mailto:parties@orbitmuseum.org.uk">Ask about a date<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+    </div>
+  </section>
+
+  <section class="section" id="visit" aria-labelledby="visit-h">
+    <div class="wrap visit">
+      <div class="week">
+        <table>
+          <caption>Opening hours</caption>
+          <tbody data-week>
+            <tr data-day="1"><th scope="row">Monday</th><td class="closed">Schools only in term time</td></tr>
+            <tr data-day="2"><th scope="row">Tuesday</th><td class="num">10:00 to 17:00</td></tr>
+            <tr data-day="3"><th scope="row">Wednesday</th><td class="num">10:00 to 17:00</td></tr>
+            <tr data-day="4"><th scope="row">Thursday</th><td class="num">10:00 to 17:00</td></tr>
+            <tr data-day="5"><th scope="row">Friday</th><td class="num">10:00 to 17:00</td></tr>
+            <tr data-day="6"><th scope="row">Saturday</th><td class="num">9:30 to 18:00</td></tr>
+            <tr data-day="0"><th scope="row">Sunday</th><td class="num">9:30 to 18:00</td></tr>
+          </tbody>
+        </table>
+        <p class="week__note">School holidays: open every day, Monday included, 9:30 to 18:00. Last entry an hour before closing.</p>
+      </div>
+      <div class="howto">
+        <h2 id="visit-h">Getting here and getting around</h2>
+        <div>
+          <h3><svg class="icon icon--20" aria-hidden="true"><use href="#i-bus"/></svg>By bus, train or boat</h3>
+          <ul>
+            <li><b>Bus 8 and 9</b> stop at Wapping Wharf, two minutes away.</li>
+            <li><b>Temple Meads</b> is a 15-minute walk along the water.</li>
+            <li><b>Ferry</b> to Mardyke from the city centre every 40 minutes.</li>
+          </ul>
+        </div>
+        <div>
+          <h3><svg class="icon icon--20" aria-hidden="true"><use href="#i-pin"/></svg>By car</h3>
+          <p>No parking on site. <b>Cumberland Road car park</b> is 400 m away and costs £7 for four hours. Blue badge bays are by the schools entrance.</p>
+        </div>
+        <div>
+          <h3><svg class="icon icon--20" aria-hidden="true"><use href="#i-access"/></svg>Access</h3>
+          <p>Step-free everywhere, with lifts to every floor and a buggy park in the Sun Hall. A quiet room sits next to Tiny Worlds, and ear defenders and ear-level maps are free to borrow.</p>
+        </div>
+        <div>
+          <h3><svg class="icon icon--20" aria-hidden="true"><use href="#i-cup"/></svg>Food</h3>
+          <p>The Sun Hall café does hot lunches from £4.50. Bring your own: the picnic room by the lockers is free and has a microwave for baby food.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__in">
+      <div class="foot__about">
+        <a class="brand" href="#main" aria-label="Orbit, back to top">
+          <svg viewBox="0 0 32 32" aria-hidden="true" style="color: var(--accent)">
+            <circle cx="16" cy="16" r="6.5" fill="currentColor"/>
+            <ellipse cx="16" cy="16" rx="14" ry="6" fill="none" stroke="currentColor" stroke-width="2" transform="rotate(-28 16 16)"/>
+            <circle cx="27.4" cy="9.6" r="2.6" fill="currentColor"/>
+          </svg>
+          <b>Orbit</b>
+        </a>
+        <p>A hands-on science museum for children, run as a charity since 2009. 1 Gas Ferry Road, Wapping Wharf, Bristol BS1 6UN.</p>
+      </div>
+      <nav aria-label="Visit"><h4>Visit</h4><ul><li><a href="#visit">Opening hours</a></li><li><a href="#tickets">Tickets</a></li><li><a href="#visit">Access</a></li></ul></nav>
+      <nav aria-label="Groups"><h4>Groups</h4><ul><li><a href="#schools">School visits</a></li><li><a href="#parties">Birthday parties</a></li><li><a href="#tickets">Memberships</a></li></ul></nav>
+      <nav aria-label="Contact"><h4>Contact</h4><ul><li><a href="tel:+441174960300">0117 496 0300</a></li><li><a href="mailto:hello@orbitmuseum.org.uk">hello@orbitmuseum.org.uk</a></li></ul></nav>
+    </div>
+    <div class="foot__base"><span>Orbit Science Museum is a registered charity, number 1129084.</span><span>Photographs credited in each gallery panel.</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

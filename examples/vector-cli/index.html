@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vector: schema diffs and migrations for Postgres and MySQL</title>
+<meta name="description" content="Vector is an open-source command-line tool that diffs database schemas and writes the migration, for Postgres and MySQL.">
+<script>
+  /* Before first paint: ?theme=light|dark picks the theme. Dark is the page's home. */
+  (function () {
+    var q = new URLSearchParams(location.search), t = q.get("theme");
+    document.documentElement.dataset.theme = t === "light" ? "light" : "dark";
+    if (q.get("reveal") === "all") document.documentElement.classList.add("reveal-all");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 3.5v-.25A.75.75 0 0 0 9.75 2.5h-6.5a.75.75 0 0 0-.75.75v6.5c0 .41.34.75.75.75h.25"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 16 16"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+  <symbol id="i-repo" viewBox="0 0 16 16"><path d="M4.5 13.5h-.75A1.25 1.25 0 0 1 2.5 12.25V3.75A1.25 1.25 0 0 1 3.75 2.5h9.75v8.5H4.25a1.25 1.25 0 0 0 0 2.5h.25"/><path d="M6.5 11v3.5l1.25-1 1.25 1V11"/></symbol>
+  <filter id="duo-dark" color-interpolation-filters="sRGB">
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.014 0.03 0.929"/><feFuncG type="table" tableValues="0.195 0.21 0.734"/><feFuncB type="table" tableValues="0.119 0.13 0.391"/></feComponentTransfer>
+  </filter>
+  <filter id="duo-light" color-interpolation-filters="sRGB">
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncR type="table" tableValues="0.026 0.04 0.866"/><feFuncG type="table" tableValues="0.126 0.14 0.929"/><feFuncB type="table" tableValues="0.079 0.09 0.875"/></feComponentTransfer>
+  </filter>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" data-nav>
+  <div class="wrap nav__in">
+    <a class="brand" href="#top" aria-label="Vector home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="brand__rows" d="M3 6.5h7M3 12h5M3 17.5h7"/><path class="brand__v" d="M13 6.5l4 11 4-11"/></svg>
+      <span>vector</span>
+      <small class="num">v0.14.2</small>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#install">Install</a>
+      <a href="#how">How it works</a>
+      <a href="#ci">CI</a>
+      <a href="#bench">Benchmarks</a>
+      <a href="#docs">Docs</a>
+    </nav>
+    <div class="nav__tools">
+      <a class="btn btn--sm btn--quiet" role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-repo"/></svg>Source</a>
+      <button class="btn btn--sm btn--icon btn--quiet" type="button" data-theme-toggle aria-label="Switch to light theme">
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <h1 id="hero-h">Schema diffs and safe migrations for Postgres and MySQL</h1>
+        <p class="hero__sub">Vector compares two databases, or a database and the schema files in your repo, and writes the SQL that takes one to the other. It orders the statements, plans the locks and refuses to drop data unless you ask.</p>
+
+        <div class="install" id="install">
+          <div class="tabs" role="tablist" aria-label="Install with">
+            <button class="tab" role="tab" type="button" id="t-brew" aria-selected="true" aria-controls="install-cmd" data-cmd="brew install vectorsql/tap/vector">Homebrew</button>
+            <button class="tab" role="tab" type="button" id="t-sh" aria-selected="false" aria-controls="install-cmd" tabindex="-1" data-cmd="curl -fsSL https://get.vectorsql.dev | sh">Shell</button>
+            <button class="tab" role="tab" type="button" id="t-cargo" aria-selected="false" aria-controls="install-cmd" tabindex="-1" data-cmd="cargo install vector-schema --locked">Cargo</button>
+            <button class="tab" role="tab" type="button" id="t-docker" aria-selected="false" aria-controls="install-cmd" tabindex="-1" data-cmd="docker run --rm ghcr.io/vectorsql/vector:0.14">Docker</button>
+          </div>
+          <div class="cmd well" role="tabpanel" id="install-cmd" aria-labelledby="t-brew">
+            <code><span class="cmd__prompt" aria-hidden="true">$</span><span data-cmd-text>brew install vectorsql/tap/vector</span></code>
+            <button class="copy" type="button" data-copy aria-label="Copy install command">
+              <span class="copy__face" data-face="idle"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy__label">Copy</span></span>
+              <span class="copy__face" data-face="copied"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="copy__label">Copied</span></span>
+              <span class="copy__face" data-face="failed"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span class="copy__label">Select it</span></span>
+            </button>
+          </div>
+          <p class="sr-only" aria-live="polite" data-copy-status></p>
+        </div>
+
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="#docs">Read the quick start<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="textlink" href="#ci">See it in CI</a>
+        </div>
+        <p class="hero__fine">One static binary for macOS, Linux and Windows. Postgres 12 to 17, MySQL 8.0 and 8.4. MIT licence.</p>
+      </div>
+
+      <figure class="hero__art" aria-labelledby="term-cap">
+        <div class="term" data-theme="dark" role="img" aria-label="Terminal output of vector diff: five changes across three tables, one blocked drop, and a migration file written.">
+          <div class="term__bar" aria-hidden="true"><i></i><i></i><i></i><span>acme-billing: zsh</span></div>
+          <div class="term__body" aria-hidden="true">
+            <div class="ln ln--cmd"><span class="t-path">~/acme-billing</span> <span class="t-mut">$</span> vector diff --from $STAGING_URL --to ./schema</div>
+            <div class="ln t-mut">Introspecting  postgres 16.4 at staging   142 tables  0.41 s<span class="pin" style="left: 86%">1</span></div>
+            <div class="ln t-mut">Reading        ./schema, 14 files          142 tables  0.08 s</div>
+            <div class="ln ln--gap"></div>
+            <div class="ln t-obj">public.invoices</div>
+            <div class="ln"><span class="t-add">  + column      due_on</span>        date not null default current_date + 30</div>
+            <div class="ln"><span class="t-chg">  ~ column      amount_cents</span>  integer <span class="t-mut">→</span> bigint<span class="pin" style="left: 86%">2</span></div>
+            <div class="ln"><span class="t-add">  + index       invoices_customer_due_idx</span> (customer_id, due_on)</div>
+            <div class="ln t-obj">public.refunds</div>
+            <div class="ln"><span class="t-del">  - column      legacy_ref</span>    text    <span class="t-block">blocked: drops data</span><span class="pin" style="left: 86%">3</span></div>
+            <div class="ln t-obj">public.customers</div>
+            <div class="ln"><span class="t-chg">  ~ constraint  customers_email_key</span>  unique (email) <span class="t-mut">→</span> unique (lower(email))</div>
+            <div class="ln ln--gap"></div>
+            <div class="ln">5 changes in 3 tables, <span class="t-block">1 blocked</span> <span class="t-mut">(pass --allow-drop to include it)</span></div>
+            <div class="ln"><span class="t-acc">Plan</span>  6 statements, longest lock 0.2 s, index built concurrently<span class="pin" style="left: 86%">4</span></div>
+            <div class="ln"><span class="t-acc">Wrote</span> migrations/20261121_0932_invoices_due_on.sql</div>
+            <div class="ln"><span class="t-path">~/acme-billing</span> <span class="t-mut">$</span> <span class="caret"></span></div>
+          </div>
+        </div>
+        <figcaption id="term-cap">
+          <ol class="pins">
+            <li><span class="pin pin--static">1</span><p><b>Reads the live catalogue.</b> A plain connection string, no migration history or ORM models needed.</p></li>
+            <li><span class="pin pin--static">2</span><p><b>Casts are planned.</b> The type change ships with <code>USING amount_cents::bigint</code>.</p></li>
+            <li><span class="pin pin--static">3</span><p><b>Data loss is held back.</b> Drops stay out of the plan until you pass <code>--allow-drop</code>.</p></li>
+            <li><span class="pin pin--static">4</span><p><b>Locks are budgeted.</b> Indexes build concurrently, so writes keep flowing during the deploy.</p></li>
+          </ol>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="how" id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="how-h">Three passes, one SQL file</h2>
+        <p>Vector never guesses from your migration folder. It reads what is really in the database, compares it with what you want, and writes the steps in between.</p>
+      </div>
+      <ol class="passes">
+        <li class="pass">
+          <p class="pass__no num">01</p>
+          <h3>Introspect</h3>
+          <p>Both sides are read into the same model: from <code>pg_catalog</code> and <code>information_schema</code>, or from the <code>.sql</code> files in your repo.</p>
+          <dl class="readout well">
+            <div><dt>Tables</dt><dd class="num">142</dd></div>
+            <div><dt>Columns</dt><dd class="num">1,318</dd></div>
+            <div><dt>Indexes</dt><dd class="num">287</dd></div>
+            <div><dt>Constraints</dt><dd class="num">403</dd></div>
+            <div><dt>Views and functions</dt><dd class="num">36</dd></div>
+            <div class="readout__total"><dt>Read in</dt><dd class="num">0.41<span class="unit">s</span></dd></div>
+          </dl>
+        </li>
+        <li class="pass">
+          <p class="pass__no num">02</p>
+          <h3>Diff</h3>
+          <p>Objects are matched by name, then by shape, so a renamed column is offered as a rename instead of a drop and an add.</p>
+          <svg class="graph" viewBox="0 0 280 184" role="img" aria-label="Dependency graph: the view invoice_totals depends on invoices.amount_cents, so the view is dropped before the type change and recreated after it.">
+            <defs><marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1l6 3-6 3" class="graph__head"/></marker></defs>
+            <path class="graph__edge" d="M128 44C156 44 156 88 184 88" marker-end="url(#arr)"/>
+            <path class="graph__edge" d="M128 140C156 140 156 96 184 96" marker-end="url(#arr)"/>
+            <rect class="graph__node" x="4" y="24" width="124" height="40" rx="4"/>
+            <rect class="graph__node graph__node--hot" x="4" y="120" width="124" height="40" rx="4"/>
+            <rect class="graph__node" x="184" y="72" width="92" height="40" rx="4"/>
+            <text x="66" y="49" text-anchor="middle">invoice_totals</text>
+            <text x="66" y="145" text-anchor="middle">amount_cents</text>
+            <text x="230" y="97" text-anchor="middle">invoices</text>
+            <text class="graph__note" x="66" y="16" text-anchor="middle">view</text>
+            <text class="graph__note" x="66" y="180" text-anchor="middle">type change</text>
+            <text class="graph__note" x="230" y="132" text-anchor="middle">table</text>
+          </svg>
+          <p class="pass__foot">Drop <code>invoice_totals</code>, alter, recreate. The order comes from the graph, never from file names.</p>
+        </li>
+        <li class="pass">
+          <p class="pass__no num">03</p>
+          <h3>Plan</h3>
+          <p>Each statement gets the lock it takes and an estimate from table size. Anything over your budget is split or flagged.</p>
+          <pre class="sql well" aria-label="Generated migration file"><code><span class="c">-- 20261121_0932_invoices_due_on.sql</span>
+<span class="k">alter table</span> invoices
+  <span class="k">add column</span> due_on date <span class="k">not null</span>
+  <span class="k">default</span> current_date + 30;
+<span class="c">-- lock: access exclusive, est. 0.2 s</span>
+<span class="k">alter table</span> invoices
+  <span class="k">alter column</span> amount_cents <span class="k">type</span> bigint
+  <span class="k">using</span> amount_cents::bigint;
+<span class="c">-- lock: none</span>
+<span class="k">create index concurrently</span>
+  invoices_customer_due_idx
+  <span class="k">on</span> invoices (customer_id, due_on);</code></pre>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="ci" id="ci" aria-labelledby="ci-h">
+    <div class="wrap ci__grid">
+      <div class="ci__art">
+        <figure class="duo duo--pr" role="img" aria-label="A pull request comment from vector-bot listing the schema plan: five changes, their locks, and one blocked drop.">
+          <div class="duo__src" aria-hidden="true">
+            <div class="pr__head"><span class="pr__avatar"></span><span class="pr__who"><b>vector-bot</b> commented on <b>#482 Add due dates to invoices</b></span><span class="pr__time">2 min ago</span></div>
+            <div class="pr__body">
+              <p class="pr__title">Schema plan for acme-billing: 5 changes, 1 blocked</p>
+              <table class="pr__table">
+                <thead><tr><th>Change</th><th>Object</th><th>Lock</th></tr></thead>
+                <tbody>
+                  <tr><td>+ add column</td><td>invoices.due_on</td><td>exclusive, 0.2 s</td></tr>
+                  <tr><td>~ alter type</td><td>invoices.amount_cents</td><td>exclusive, 0.2 s</td></tr>
+                  <tr><td>+ create index</td><td>invoices_customer_due_idx</td><td>none</td></tr>
+                  <tr><td>~ replace unique</td><td>customers_email_key</td><td>share, 0.1 s</td></tr>
+                  <tr class="pr__blocked"><td>- drop column</td><td>refunds.legacy_ref</td><td>blocked</td></tr>
+                </tbody>
+              </table>
+              <p class="pr__hint">Add the <b>allow-drop</b> label to include the blocked change.</p>
+            </div>
+          </div>
+        </figure>
+        <figure class="duo duo--checks" role="img" aria-label="Checks on the pull request: tests passed, vector check failed with one blocked change, lint passed.">
+          <div class="duo__src" aria-hidden="true">
+            <p class="checks__head">3 checks, 1 failing</p>
+            <ul class="checks">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><b>test</b> ubuntu, postgres 16<span class="num">2m 14s</span></li>
+              <li class="is-fail"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg><b>vector check</b> 1 blocked change<span class="num">18s</span></li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><b>lint</b> sqlfluff<span class="num">41s</span></li>
+            </ul>
+          </div>
+        </figure>
+      </div>
+
+      <div class="ci__copy">
+        <h2 id="ci-h">A review step for every schema change</h2>
+        <p><code>vector check</code> runs the same diff against staging on each pull request, posts the plan as a comment and fails the build when the change would drop data or hold a lock past your budget.</p>
+        <pre class="yaml well" aria-label="GitHub Actions workflow"><code><span class="c"># .github/workflows/schema.yml</span>
+<span class="k">on:</span> pull_request
+<span class="k">jobs:</span>
+  <span class="k">schema:</span>
+    <span class="k">runs-on:</span> ubuntu-latest
+    <span class="k">steps:</span>
+      - <span class="k">uses:</span> actions/checkout@v4
+      - <span class="k">run:</span> curl -fsSL https://get.vectorsql.dev | sh
+      - <span class="k">run:</span> vector check --comment
+        <span class="k">env:</span>
+          <span class="k">VECTOR_TARGET:</span> ${{ secrets.STAGING_URL }}</code></pre>
+        <dl class="exits">
+          <div><dt><code>0</code></dt><dd>No drift. The schema in the repo matches staging.</dd></div>
+          <div><dt><code>1</code></dt><dd>Drift with a safe plan. Comment posted, build passes.</dd></div>
+          <div><dt><code>2</code></dt><dd>Blocked change or lock over budget. Build fails.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="bench" id="bench" aria-labelledby="bench-h">
+    <div class="wrap bench__grid">
+      <div class="bench__copy">
+        <h2 id="bench-h">Measured on a <span class="nowrap">1,200-table</span> schema</h2>
+        <p>Times are relative to Vector on the same machine, so a bar at 4× took four times as long. Lower is faster.</p>
+        <dl class="method">
+          <div><dt>Schema</dt><dd>1,200 tables, 9,840 columns, 2,310 indexes</dd></div>
+          <div><dt>Host</dt><dd>EPYC 7443P, 64 GB, Postgres 16.4 and MySQL 8.4 local</dd></div>
+          <div><dt>Versions</dt><dd>Vector 0.14.2, Tablewright 2.9.0, sqldrift 1.6.3</dd></div>
+          <div><dt>Runs</dt><dd>Median of 20, after 3 warm-ups</dd></div>
+        </dl>
+        <p class="bench__repro">Reproduce it: <code>vector bench --suite schema-1200</code></p>
+      </div>
+
+      <figure class="chart" aria-labelledby="chart-cap">
+        <figcaption id="chart-cap" class="chart__head">
+          <span>Time relative to Vector</span>
+          <span class="legend">
+            <span class="key key--1"><i></i>Vector</span>
+            <span class="key key--2"><i></i>Tablewright</span>
+            <span class="key key--3"><i></i>sqldrift</span>
+          </span>
+        </figcaption>
+        <div class="chart__plot" data-reveal>
+          <div class="chart__grid" aria-hidden="true"><i style="--x: 0"></i><i style="--x: 0.25"></i><i style="--x: 0.5"></i><i style="--x: 0.75"></i><i style="--x: 1"></i></div>
+          <table class="bars">
+            <caption class="sr-only">Time relative to Vector, lower is faster</caption>
+            <thead class="sr-only"><tr><th scope="col">Workload</th><th scope="col">Tool</th><th scope="col">Relative time</th></tr></thead>
+            <tbody>
+              <tr class="bars__group"><th scope="rowgroup" colspan="3">Introspect a live database</th></tr>
+              <tr class="s1"><td class="sr-only">Introspect</td><th scope="row">Vector</th><td><span class="bar" style="--v: 1"></span><span class="num">1.0×</span></td></tr>
+              <tr class="s2"><td class="sr-only">Introspect</td><th scope="row">Tablewright</th><td><span class="bar" style="--v: 3.4"></span><span class="num">3.4×</span></td></tr>
+              <tr class="s3"><td class="sr-only">Introspect</td><th scope="row">sqldrift</th><td><span class="bar" style="--v: 9.1"></span><span class="num">9.1×</span></td></tr>
+              <tr class="bars__group"><th scope="rowgroup" colspan="3">Diff against schema files</th></tr>
+              <tr class="s1"><td class="sr-only">Diff</td><th scope="row">Vector</th><td><span class="bar" style="--v: 1"></span><span class="num">1.0×</span></td></tr>
+              <tr class="s2"><td class="sr-only">Diff</td><th scope="row">Tablewright</th><td><span class="bar" style="--v: 2.6"></span><span class="num">2.6×</span></td></tr>
+              <tr class="s3"><td class="sr-only">Diff</td><th scope="row">sqldrift</th><td><span class="bar" style="--v: 5.8"></span><span class="num">5.8×</span></td></tr>
+              <tr class="bars__group"><th scope="rowgroup" colspan="3">Plan 40 changes with lock estimates</th></tr>
+              <tr class="s1"><td class="sr-only">Plan</td><th scope="row">Vector</th><td><span class="bar" style="--v: 1"></span><span class="num">1.0×</span></td></tr>
+              <tr class="s2"><td class="sr-only">Plan</td><th scope="row">Tablewright</th><td><span class="bar" style="--v: 4.2"></span><span class="num">4.2×</span></td></tr>
+              <tr class="s3"><td class="sr-only">Plan</td><th scope="row">sqldrift</th><td><span class="bar" style="--v: 14.5"></span><span class="num">14.5×</span></td></tr>
+            </tbody>
+          </table>
+          <div class="chart__axis num" aria-hidden="true"><span style="--x: 0">0×</span><span style="--x: 0.25">4×</span><span style="--x: 0.5">8×</span><span style="--x: 0.75">12×</span><span style="--x: 1">16×</span></div>
+        </div>
+        <p class="chart__note">sqldrift has no lock estimates; its plan time is for statement order only.</p>
+      </figure>
+    </div>
+  </section>
+
+  <section class="docs" id="docs" aria-labelledby="docs-h">
+    <div class="wrap">
+      <div class="sec-head sec-head--row">
+        <h2 id="docs-h">Docs</h2>
+        <p>Everything lives in the repo under <code>docs/</code> and ships with each release. <code>vector help &lt;command&gt;</code> prints the same pages offline.</p>
+      </div>
+      <div class="docs__grid">
+        <nav class="docs__col" aria-labelledby="d-start">
+          <h3 id="d-start">Start</h3>
+          <ul>
+            <li><a href="#install"><span>Install</span><small>Homebrew, shell, Cargo, Docker</small></a></li>
+            <li><a role="link" aria-disabled="true"><span>Quick start</span><small>Your first diff in five minutes</small></a></li>
+            <li><a role="link" aria-disabled="true"><span>Connection strings</span><small>TLS, IAM auth, SSH tunnels</small></a></li>
+            <li><a role="link" aria-disabled="true"><span>Schema files</span><small>One file per table, or one per schema</small></a></li>
+          </ul>
+        </nav>
+        <nav class="docs__col" aria-labelledby="d-guides">
+          <h3 id="d-guides">Guides</h3>
+          <ul>
+            <li><a href="#ci"><span>GitHub Actions</span><small>The workflow above, explained</small></a></li>
+            <li><a role="link" aria-disabled="true"><span>GitLab CI and CircleCI</span><small>Same check, other runners</small></a></li>
+            <li><a role="link" aria-disabled="true"><span>Renames</span><small>Hints when the shape match is unsure</small></a></li>
+            <li><a role="link" aria-disabled="true"><span>Zero-downtime changes</span><small>Expand, backfill, contract</small></a></li>
+          </ul>
+        </nav>
+        <nav class="docs__col" aria-labelledby="d-ref">
+          <h3 id="d-ref">Reference</h3>
+          <ul>
+            <li><a role="link" aria-disabled="true"><span><code>vector diff</code></span><small>Compare and print</small></a></li>
+            <li><a role="link" aria-disabled="true"><span><code>vector plan</code></span><small>Write the migration file</small></a></li>
+            <li><a role="link" aria-disabled="true"><span><code>vector check</code></span><small>Exit codes for CI</small></a></li>
+            <li><a role="link" aria-disabled="true"><span><code>vector.toml</code></span><small>Lock budget, ignore rules, dialect</small></a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="last">
+        <p class="last__line">Point it at staging and see what drifted.</p>
+        <div class="cmd well cmd--last">
+          <code><span class="cmd__prompt" aria-hidden="true">$</span><span>vector diff --from $STAGING_URL --to ./schema</span></code>
+          <button class="copy" type="button" data-copy aria-label="Copy diff command">
+            <span class="copy__face" data-face="idle"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span class="copy__label">Copy</span></span>
+            <span class="copy__face" data-face="copied"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span class="copy__label">Copied</span></span>
+            <span class="copy__face" data-face="failed"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span class="copy__label">Select it</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="brand" href="#top" aria-label="Vector, back to top">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="brand__rows" d="M3 6.5h7M3 12h5M3 17.5h7"/><path class="brand__v" d="M13 6.5l4 11 4-11"/></svg>
+      <span>vector</span>
+    </a>
+    <p>MIT licence. Built by eleven maintainers and everyone who has sent a pull request since 2023.</p>
+    <ul class="foot__links">
+      <li><a role="link" aria-disabled="true">Releases</a></li>
+      <li><a role="link" aria-disabled="true">Changelog</a></li>
+      <li><a role="link" aria-disabled="true">Security policy</a></li>
+      <li><a role="link" aria-disabled="true">Code of conduct</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

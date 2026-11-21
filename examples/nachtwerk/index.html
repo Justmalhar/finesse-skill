@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nachtwerk, techno in the Kraftwerk Lindenau, Leipzig</title>
+<meta name="description" content="Nachtwerk is a monthly techno night in the turbine hall of a former power station in Leipzig-Plagwitz. Next dates, line-ups, door policy, tickets and the way there at night.">
+<script>
+  /* Before first paint: dark is the house theme; ?theme=light is honoured. */
+  (function () {
+    var t = new URLSearchParams(location.search).get("theme");
+    var root = document.documentElement;
+    if (t === "light" || t === "dark") root.dataset.theme = t;
+    root.classList.add("js");
+    if (new URLSearchParams(location.search).has("shot")) root.classList.add("shot");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 16 16"><path d="M3.5 8h9"/></symbol>
+  <symbol id="i-close" viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="10"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap top__in">
+    <a class="mark" href="#top" aria-label="Nachtwerk, back to top"><b>NACHTWERK</b><span>Leipzig-Plagwitz</span></a>
+    <nav aria-label="Sections">
+      <a href="#dates">Dates</a>
+      <a href="#hall">The hall</a>
+      <a href="#door">Door and rules</a>
+      <a href="#tickets">Tickets</a>
+      <a href="#route">Getting here</a>
+    </nav>
+    <p class="top__next">Next <b class="num">Sat 5 Dec</b></p>
+    <a class="btn btn--primary btn--sm" href="#tickets">Tickets</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap">
+      <div class="hero__grid">
+        <div class="hero__copy">
+          <dl class="facts">
+            <div><dt class="sr-only">Night</dt><dd><b>No. 41</b></dd></div>
+            <div><dt class="sr-only">Date</dt><dd class="num">Sat 5 Dec 2026</dd></div>
+            <div><dt class="sr-only">Hours</dt><dd class="num">Doors 23:00, lights up 10:00</dd></div>
+          </dl>
+          <h1 id="hero-h" class="display">Eleven hours of techno in a <span class="red">1912</span> turbine hall.</h1>
+          <p class="hero__sub">Once a month the old Kraftwerk Lindenau in Leipzig runs again: one sound system under a 22-metre glass roof, 900 people, no phones on the floor.</p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#tickets">Tickets for 5 Dec, from €18<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="textlink" href="#dates">All three dates</a>
+          </div>
+        </div>
+
+        <figure class="sheet" aria-labelledby="sheet-cap">
+          <div class="strip">
+            <p class="strip__edge" aria-hidden="true"><span>NW 400 TX</span><span class="num">41</span></p>
+            <ol class="strip__frames">
+              <li class="cell"><button class="frame" type="button" data-src="img/turbine-hall-nw.jpg" data-no="11" data-cap="Turbine hall, north-west wall, before the night" aria-label="Open frame 11: turbine hall, north-west wall"><img src="img/turbine-hall-nw.jpg" alt="" width="958" height="1200" style="--i:0; object-position: 50% 30%"></button><p class="cell__no num"><span>11</span><span>11A</span></p></li>
+              <li class="cell"><button class="frame" type="button" data-src="img/turbine-hall-nw.jpg" data-no="12" data-cap="Turbine hall, the gallery stairs" aria-label="Open frame 12: turbine hall, gallery stairs"><img src="img/turbine-hall-nw.jpg" alt="" width="958" height="1200" style="--i:1; object-position: 50% 88%"></button><p class="cell__no num"><span>12</span><span>12A</span></p></li>
+              <li class="cell"><button class="frame" type="button" data-src="img/turbine-two.jpg" data-no="13" data-cap="Unit 2, kept where it stood since 1925" aria-label="Open frame 13: turbine unit 2"><img src="img/turbine-two.jpg" alt="" width="1101" height="800" style="--i:2"></button><p class="cell__no num"><span>13</span><span>13A</span></p></li>
+              <li class="cell"><button class="frame" type="button" data-src="img/south-gallery.jpg" data-no="14" data-cap="South gallery between units 5 and 2" aria-label="Open frame 14: south gallery"><img src="img/south-gallery.jpg" alt="" width="872" height="1200" style="--i:3; object-position: 50% 60%"></button><p class="cell__no num"><span>14</span><span>14A</span></p></li>
+            </ol>
+          </div>
+          <div class="strip">
+            <p class="strip__edge" aria-hidden="true"><span>NW 400 TX</span><span class="num">41</span></p>
+            <ol class="strip__frames">
+              <li class="cell"><button class="frame" type="button" data-src="img/light-beams.jpg" data-no="15" data-cap="Beams in the haze, 03:40" aria-label="Open frame 15: light beams in the haze"><img src="img/light-beams.jpg" alt="" width="1200" height="799" style="--i:4"></button><p class="cell__no num"><span>15</span><span>15A</span></p></li>
+              <li class="cell cell--picked">
+                <button class="frame" type="button" data-src="img/roof-truss.jpg" data-no="16" data-cap="The glass roof, 22 metres up. This frame is the No. 41 poster." aria-label="Open frame 16: the glass roof, chosen for the No. 41 poster"><img src="img/roof-truss.jpg" alt="" width="1101" height="894" style="--i:5; object-position: 50% 35%"></button>
+                <svg class="grease" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M58 6 C 84 4, 98 22, 97 50 C 96 80, 76 96, 48 95 C 20 94, 3 78, 4 50 C 5 24, 22 7, 50 5 C 62 4.5, 72 6, 80 11"/></svg>
+                <p class="cell__no num"><span>16</span><span>16A</span></p>
+              </li>
+              <li class="cell"><button class="frame" type="button" data-src="img/mixer.jpg" data-no="17" data-cap="Booth, Schaltwarte, 05:15" aria-label="Open frame 17: the mixer in the booth"><img src="img/mixer.jpg" alt="" width="1200" height="799" style="--i:6"></button><p class="cell__no num"><span>17</span><span>17A</span></p></li>
+              <li class="cell"><button class="frame" type="button" data-src="img/station-l.jpg" data-no="18" data-cap="The long hall before the floor went in" aria-label="Open frame 18: the long hall"><img src="img/station-l.jpg" alt="" width="1127" height="865" style="--i:7"></button><p class="cell__no num"><span>18</span><span>18A</span></p></li>
+            </ol>
+          </div>
+          <div class="strip">
+            <p class="strip__edge" aria-hidden="true"><span>NW 400 TX</span><span class="num">41</span></p>
+            <ol class="strip__frames">
+              <li class="cell"><button class="frame" type="button" data-src="img/roof-truss.jpg" data-no="19" data-cap="Roof truss, second exposure" aria-label="Open frame 19: roof truss"><img src="img/roof-truss.jpg" alt="" width="1101" height="894" style="--i:8; object-position: 50% 80%"></button><p class="cell__no num"><span>19</span><span>19A</span></p></li>
+              <li class="cell"><button class="frame" type="button" data-src="img/chimney-sued.jpg" data-no="20" data-cap="Leipzig-Süd chimney, from the tram, 07:30" aria-label="Open frame 20: chimney seen from the tram"><img src="img/chimney-sued.jpg" alt="" width="1200" height="1200" style="--i:9; object-position: 50% 70%"></button><p class="cell__no num"><span>20</span><span>20A</span></p></li>
+              <li class="cell"><button class="frame" type="button" data-src="img/turbine-two.jpg" data-no="21" data-cap="Valve gear on unit 2" aria-label="Open frame 21: valve gear on unit 2"><img src="img/turbine-two.jpg" alt="" width="1101" height="800" style="--i:10; object-position: 70% 50%"></button><p class="cell__no num"><span>21</span><span>21A</span></p></li>
+              <li class="cell"><button class="frame" type="button" data-src="img/augustusplatz.jpg" data-no="22" data-cap="Augustusplatz, waiting for the N2" aria-label="Open frame 22: Augustusplatz at night"><img src="img/augustusplatz.jpg" alt="" width="1200" height="900" style="--i:11"></button><p class="cell__no num"><span>22</span><span>22A</span></p></li>
+            </ol>
+          </div>
+          <figcaption class="sheet__cap" id="sheet-cap"><span>Roll 41, daylight and 03:40. Frame 16 is the poster.</span><span class="num">12 of 36</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="run" aria-labelledby="run-h">
+        <div class="run__head">
+          <h2 id="run-h">Running order, No. 41</h2>
+          <p>Doors at 23:00, lights up at 10:00. One tick is five minutes.</p>
+          <div class="run__keys" aria-hidden="true"><span style="--k: var(--accent)"><i></i>Turbinenhalle</span><span style="--k: var(--text-muted)"><i></i>Schaltwarte</span></div>
+        </div>
+        <div class="run__scroll" tabindex="0" role="region" aria-label="Running order timeline, scrolls sideways on small screens">
+          <div class="ruler">
+            <ol class="track track--main" aria-label="Turbinenhalle">
+              <li class="slot" style="grid-column: 1 / 25"><b>Juno Reiter</b><span class="mono num">23:00</span></li>
+              <li class="slot" style="grid-column: 25 / 55"><b>Kessel b2b Ostrowski</b><span class="mono num">01:00</span></li>
+              <li class="slot" style="grid-column: 55 / 85"><b>Vera Lindqvist, live</b><span class="mono num">03:30</span></li>
+              <li class="slot slot--head" style="grid-column: 85 / 133"><b>Ilse Krampe, closing</b><span class="mono num">06:00 to 10:00</span></li>
+            </ol>
+            <ol class="track track--two" aria-label="Schaltwarte">
+              <li class="slot" style="grid-column: 13 / 49"><b>Fabrik Null</b><span class="mono num">00:00</span></li>
+              <li class="slot" style="grid-column: 49 / 85"><b>Odile Marchetti</b><span class="mono num">03:00</span></li>
+              <li class="slot" style="grid-column: 85 / 109"><b>Mattis Born</b><span class="mono num">06:00</span></li>
+            </ol>
+            <div class="ticks" aria-hidden="true"></div>
+            <div class="hours num" aria-hidden="true">
+              <span style="--h:0"><b>23:00</b></span><span style="--h:1">00:00</span><span style="--h:2">01:00</span><span style="--h:3">02:00</span><span style="--h:4">03:00</span><span style="--h:5">04:00</span><span style="--h:6">05:00</span><span style="--h:7">06:00</span><span style="--h:8">07:00</span><span style="--h:9">08:00</span><span style="--h:10">09:00</span><span style="--h:11"><b>10:00</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="dates" aria-labelledby="dates-h">
+    <div class="shead">
+      <h2 id="dates-h" class="display">The next three nights</h2>
+      <p><span class="shead__no">01 of 05</span>First Saturday of the month. January moves to the 9th, because nobody needs a turbine hall on the 2nd.</p>
+    </div>
+    <div class="dates">
+      <article class="date date--next reveal" style="--i:0" aria-labelledby="d41">
+        <div class="date__when">
+          <span class="date__day num" aria-hidden="true">05</span>
+          <span class="date__month" aria-hidden="true">December</span>
+          <h3 id="d41" class="date__meta num">No. 41, Sat 5 Dec 2026<br>23:00 to 10:00</h3>
+        </div>
+        <div class="rooms">
+          <div class="room">
+            <h3>Turbinenhalle <span>700 people</span></h3>
+            <ul class="acts">
+              <li><span>Ilse Krampe<em>closing</em></span><span class="mono num">06:00</span></li>
+              <li><span>Vera Lindqvist<em>live</em></span><span class="mono num">03:30</span></li>
+              <li><span>Kessel b2b Ostrowski</span><span class="mono num">01:00</span></li>
+              <li><span>Juno Reiter</span><span class="mono num">23:00</span></li>
+            </ul>
+          </div>
+          <div class="room">
+            <h3>Schaltwarte <span>200 people</span></h3>
+            <ul class="acts">
+              <li><span>Mattis Born</span><span class="mono num">06:00</span></li>
+              <li><span>Odile Marchetti</span><span class="mono num">03:00</span></li>
+              <li><span>Fabrik Null</span><span class="mono num">00:00</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="date__tix">
+          <p class="tier-now"><b class="num">€18</b><span>Second tier on sale</span></p>
+          <div class="meter meter--hot" role="meter" aria-valuemin="0" aria-valuemax="900" aria-valuenow="688" aria-label="Tickets sold for No. 41"><i style="--v: 0.764"></i></div>
+          <p class="meter__label num"><span>688 of 900 sold</span><span>212 left</span></p>
+          <div class="date__actions">
+            <a class="btn btn--primary btn--sm" href="#tickets">Buy tickets<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="textlink" data-ics="41" download="nachtwerk-41.ics" href="#dates"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Add to calendar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="date reveal" style="--i:1" aria-labelledby="d42">
+        <div class="date__when">
+          <span class="date__day num" aria-hidden="true">09</span>
+          <span class="date__month" aria-hidden="true">January</span>
+          <h3 id="d42" class="date__meta num">No. 42, Sat 9 Jan 2027<br>23:00 to 10:00</h3>
+        </div>
+        <div class="rooms">
+          <div class="room">
+            <h3>Turbinenhalle <span>700 people</span></h3>
+            <ul class="acts">
+              <li><span>Ostrowski<em>all night</em></span><span class="mono num">23:00</span></li>
+            </ul>
+          </div>
+          <div class="room">
+            <h3>Schaltwarte <span>200 people</span></h3>
+            <ul class="acts">
+              <li><span>Lea Sommerfeld</span><span class="mono num">04:00</span></li>
+              <li><span>Halbe and Reiter</span><span class="mono num">00:00</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="date__tix">
+          <p class="tier-now"><b class="num">€14</b><span>Early tier on sale</span></p>
+          <div class="meter" role="meter" aria-valuemin="0" aria-valuemax="300" aria-valuenow="159" aria-label="Early tickets sold for No. 42"><i style="--v: 0.53"></i></div>
+          <p class="meter__label num"><span>159 of 300 early sold</span><span>141 left</span></p>
+          <div class="date__actions">
+            <a class="btn btn--sm" href="#tickets">Buy tickets</a>
+            <a class="textlink" data-ics="42" download="nachtwerk-42.ics" href="#dates"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Add to calendar</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="date reveal" style="--i:2" aria-labelledby="d43">
+        <div class="date__when">
+          <span class="date__day num" aria-hidden="true">06</span>
+          <span class="date__month" aria-hidden="true">February</span>
+          <h3 id="d43" class="date__meta num">No. 43, Sat 6 Feb 2027<br>23:00 to 10:00</h3>
+        </div>
+        <div class="rooms">
+          <div class="room">
+            <h3>Turbinenhalle <span>700 people</span></h3>
+            <ul class="acts acts--tba">
+              <li><span>Two more names on 9 Jan</span><span class="mono num">tba</span></li>
+            </ul>
+            <ul class="acts">
+              <li><span>Vera Lindqvist<em>live</em></span><span class="mono num">tba</span></li>
+            </ul>
+          </div>
+          <div class="room">
+            <h3>Schaltwarte <span>200 people</span></h3>
+            <ul class="acts">
+              <li><span>Mattis Born<em>all night</em></span><span class="mono num">00:00</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="date__tix">
+          <p class="tier-now"><b class="num">Fri 8 Jan</b><span>Sale opens 12:00</span></p>
+          <div class="meter" role="meter" aria-valuemin="0" aria-valuemax="900" aria-valuenow="0" aria-label="Tickets sold for No. 43"><i style="--v: 0"></i></div>
+          <p class="meter__label num"><span>0 of 900 sold</span><span>not on sale yet</span></p>
+          <div class="date__actions">
+            <a class="textlink" data-ics="43" download="nachtwerk-43.ics" href="#dates"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Add to calendar</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section wrap" id="hall" aria-labelledby="hall-h">
+    <div class="shead">
+      <h2 id="hall-h" class="display">A power station with the power off</h2>
+      <p><span class="shead__no">02 of 05</span>Built in 1912 for the Lindenau tram depot, shut down in 1991, rented by the night since 2023.</p>
+    </div>
+    <div class="hall">
+      <figure class="print">
+        <img src="img/roof-truss.jpg" alt="Looking up into the turbine hall: steel roof trusses and a long glass roof light." width="1101" height="894" loading="lazy">
+        <figcaption>Frame 16, printed under the safelight</figcaption>
+      </figure>
+      <div class="hall__notes">
+        <p>The Turbinenhalle keeps its crane rail, its tiles and one of its three turbines. The sound system stands where unit 3 was. Upstairs, the Schaltwarte still has the 1950s switch desks; the booth is built over them.</p>
+        <dl class="spec num">
+          <div><dt>Height to the glass roof</dt><dd>22<small>m</small></dd></div>
+          <div><dt>Turbinenhalle floor</dt><dd>1,140<small>m²</small></dd></div>
+          <div><dt>Bass bins in the main stack</dt><dd>24</dd></div>
+          <div><dt>Limit at the barrier</dt><dd>99<small>dB</small></dd></div>
+          <div><dt>Toilets, all gender, cleaned hourly</dt><dd>18</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="door" aria-labelledby="door-h">
+    <div class="shead">
+      <h2 id="door-h" class="display">Door policy and house rules</h2>
+      <p><span class="shead__no">03 of 05</span>Read them before you queue. The people on the door have.</p>
+    </div>
+    <div class="door">
+      <div class="door__lead">
+        <p>The door is not about clothes. It is about whether you came for the night and for the people in it.</p>
+        <p>You need to be 18 and to carry photo ID. We check every ID, every time, including regulars.</p>
+        <p>We say no sometimes, and we don’t explain it in the queue. Re-entry with a stamp until 04:00; after that, out is out.</p>
+        <p class="contact">Turned away and think we got it wrong? Write to <a href="mailto:door@nachtwerk-leipzig.de">door@nachtwerk-leipzig.de</a>. A person answers within a week.</p>
+      </div>
+      <ol class="rules">
+        <li><div><h3>Phones stay in pockets on the floor</h3><p>We put a sticker over your camera at the door. It stays on until you leave. The Kesselhaus bar is the place for messages.</p></div></li>
+        <li><div><h3>Ask first, every time</h3><p>Touch, a photo, a drink, a dance. A no is a full answer.</p></div></li>
+        <li><div><h3>The awareness team wears red armbands</h3><p>They sit at the Kesselhaus bar all night. Or ask any bar “Is Luisa here?” and someone takes you somewhere quiet.</p></div></li>
+        <li><div><h3>No racism, sexism, homophobia or transphobia</h3><p>Not on the floor, not in the queue, not in the yard. You leave, and the ticket is not refunded.</p></div></li>
+        <li><div><h3>Water is free at every bar</h3><p>Bring the cup back and fill it again. Earplugs are free at the cloakroom.</p></div></li>
+        <li><div><h3>Leave the yard quietly</h3><p>Forty families live on Karl-Heine-Straße. They are the reason we can stay open until ten.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section wrap" id="tickets" aria-labelledby="tix-h">
+    <div class="shead">
+      <h2 id="tix-h" class="display">Tickets</h2>
+      <p><span class="shead__no">04 of 05</span>No booking fee. Up to four per order, names not needed.</p>
+    </div>
+    <div class="tix">
+      <form class="tix__pick" id="tix-form" aria-label="Choose tickets">
+        <fieldset>
+          <legend class="sr-only">Night</legend>
+          <div class="seg">
+            <label><input class="sr-only" type="radio" name="night" value="41" checked>No. 41, Sat 5 Dec</label>
+            <label><input class="sr-only" type="radio" name="night" value="42">No. 42, Sat 9 Jan</label>
+          </div>
+        </fieldset>
+        <fieldset class="tiers" id="tiers" aria-live="polite">
+          <legend class="sr-only">Ticket tier</legend>
+        </fieldset>
+        <p class="tix__note">Soli tickets are for anyone for whom €18 is a lot. We don’t ask for proof. Supporter tickets pay for them.</p>
+      </form>
+
+      <aside class="order" aria-labelledby="order-h">
+        <h3 id="order-h">Your order</h3>
+        <p class="order__night num" id="order-night">No. 41, Sat 5 Dec</p>
+        <dl class="num">
+          <div><dt>Tier</dt><dd id="order-tier">Second tier</dd></div>
+          <div><dt>Price each</dt><dd id="order-each">€18.00</dd></div>
+          <div><dt>Booking fee</dt><dd>€0.00</dd></div>
+        </dl>
+        <div class="order__row">
+          <span id="qty-label">Tickets</span>
+          <div class="stepper" role="group" aria-labelledby="qty-label">
+            <button type="button" id="qty-down" aria-label="One ticket fewer"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg></button>
+            <output id="qty" class="num" aria-live="polite">2</output>
+            <button type="button" id="qty-up" aria-label="One ticket more"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+          </div>
+        </div>
+        <div class="order__total">
+          <div><span>Total</span><b class="num" id="order-total"><small>€</small>36</b></div>
+        </div>
+        <a class="btn btn--primary" role="link" aria-disabled="true">Continue to payment<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <p class="order__fine">Card, PayPal or Apple Pay. Tickets arrive as a PDF with one QR code each. Returns through our resale page until Friday 18:00.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section wrap" id="route" aria-labelledby="route-h">
+    <div class="shead">
+      <h2 id="route-h" class="display">Getting here at night, and home in the morning</h2>
+      <p><span class="shead__no">05 of 05</span>There is no parking. The tram is quicker anyway.</p>
+    </div>
+    <div class="route">
+      <div>
+        <p class="address"><b>Kraftwerk Lindenau, Karl-Heine-Straße 105, 04229 Leipzig</b><span>Gate on the canal side</span></p>
+        <div class="line">
+          <h3>From Hauptbahnhof, about 18 minutes</h3>
+          <svg viewBox="0 0 720 96" role="img" aria-label="Route: tram 14 from Hauptbahnhof via Goerdelerring and Westplatz to Karl-Heine-/Merseburger Straße, 13 minutes, then 4 minutes on foot to the gate.">
+            <path class="l-track" d="M16 40H560"/>
+            <path class="l-walk" d="M560 40H700"/>
+            <circle class="l-stop" cx="16" cy="40" r="7"/>
+            <circle class="l-stop" cx="160" cy="40" r="5"/>
+            <circle class="l-stop" cx="320" cy="40" r="5"/>
+            <circle class="l-stop" cx="560" cy="40" r="7"/>
+            <rect class="l-end" x="694" y="34" width="12" height="12"/>
+            <text class="l-name" x="16" y="18">Hauptbahnhof</text>
+            <text x="16" y="72">0 min</text>
+            <text class="l-name" x="160" y="18" text-anchor="middle">Goerdelerring</text>
+            <text x="160" y="72" text-anchor="middle">3 min</text>
+            <text class="l-name" x="320" y="18" text-anchor="middle">Westplatz</text>
+            <text x="320" y="72" text-anchor="middle">7 min</text>
+            <text class="l-name" x="560" y="18" text-anchor="middle">Karl-Heine-/Merseburger Str.</text>
+            <text x="560" y="72" text-anchor="middle">tram 14, 13 min</text>
+            <text class="l-name" x="706" y="18" text-anchor="end">Gate</text>
+            <text x="706" y="72" text-anchor="end">walk 4 min</text>
+          </svg>
+        </div>
+        <table class="board num">
+          <caption>From the gate, Sunday morning<span>The first trams after the night. Times from the stop, 4 minutes from the gate.</span></caption>
+          <thead><tr><th scope="col">Leaves</th><th scope="col">Line</th><th scope="col">To</th><th scope="col" class="r hide-sm">From</th></tr></thead>
+          <tbody>
+            <tr><td>04:52</td><td><span class="line-no">14</span></td><td>Hauptbahnhof</td><td class="r hide-sm">Karl-Heine-/Merseburger Str.</td></tr>
+            <tr><td>05:14</td><td><span class="line-no">S1</span></td><td>Hauptbahnhof, Stötteritz</td><td class="r hide-sm">Leipzig-Plagwitz, 10 min walk</td></tr>
+            <tr><td>05:22</td><td><span class="line-no">14</span></td><td>Hauptbahnhof</td><td class="r hide-sm">Karl-Heine-/Merseburger Str.</td></tr>
+            <tr><td>05:30</td><td><span class="line-no">N2</span></td><td>Augustusplatz</td><td class="r hide-sm">Lindenauer Markt, 8 min walk</td></tr>
+            <tr><td>05:52</td><td><span class="line-no">14</span></td><td>Hauptbahnhof</td><td class="r hide-sm">Karl-Heine-/Merseburger Str.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="route__side">
+        <figure class="night">
+          <img src="img/augustusplatz.jpg" alt="Augustusplatz in Leipzig at night, street lights and an empty tram stop." width="1200" height="900" loading="lazy">
+          <figcaption>Augustusplatz, where the night buses meet</figcaption>
+        </figure>
+        <ul class="ways">
+          <li><b>Night bus</b><span>N2 from Augustusplatz every 30 minutes, 01:00 to 04:30. Get off at Lindenauer Markt.</span></li>
+          <li><b>Bike</b><span>160 racks in the yard, lit and watched until 10:00. Bring a lock anyway.</span></li>
+          <li><b>Taxi</b><span>A rank at the gate from 03:00. Share one: the bar staff will find you someone heading east.</span></li>
+          <li><b>On foot</b><span>The canal path is unlit after midnight. Walk Karl-Heine-Straße instead.</span></li>
+          <li><b>Step-free</b><span>Ramp at the gate and a lift to the Schaltwarte. Tell the door and we’ll walk you up.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__about">
+        <a class="mark" href="#top" aria-label="Nachtwerk, back to top"><b>NACHTWERK</b></a>
+        <p>A monthly night run by Nachtwerk e.V., a non-profit of eleven people who wanted somewhere to dance that stays open until ten.</p>
+      </div>
+      <nav aria-label="This page"><h3>On this page</h3><ul><li><a href="#dates">Dates</a></li><li><a href="#hall">The hall</a></li><li><a href="#door">Door and rules</a></li><li><a href="#tickets">Tickets</a></li><li><a href="#route">Getting here</a></li></ul></nav>
+      <div><h3>Write to us</h3><ul><li><a href="mailto:door@nachtwerk-leipzig.de">door@nachtwerk-leipzig.de</a></li><li><a href="mailto:booking@nachtwerk-leipzig.de">booking@nachtwerk-leipzig.de</a></li><li><a href="mailto:awareness@nachtwerk-leipzig.de">awareness@nachtwerk-leipzig.de</a></li></ul></div>
+      <div><h3>The house</h3><ul><li>Kraftwerk Lindenau</li><li>Karl-Heine-Straße 105</li><li>04229 Leipzig</li></ul></div>
+    </div>
+    <div class="foot__base"><span>© 2026 Nachtwerk e.V., Leipzig</span><span>Photographs: Library of Congress HAER and Wikimedia Commons contributors, see CREDITS.md</span></div>
+  </div>
+</footer>
+
+<dialog class="lightbox" id="lightbox" aria-labelledby="lb-cap">
+  <img id="lb-img" src="img/roof-truss.jpg" alt="">
+  <div class="lightbox__bar">
+    <p id="lb-cap"><span class="num" id="lb-no">16</span><span id="lb-text">The glass roof</span></p>
+    <form method="dialog"><button class="btn btn--sm" type="submit" autofocus>Close<svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></form>
+  </div>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>

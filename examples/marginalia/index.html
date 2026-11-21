@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en-GB" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marginalia, an independent bookshop on Colegate, Norwich</title>
+<meta name="description" content="Staff picks, author readings, the Long Book Club and a letter every Friday from Marginalia, an independent bookshop in Norwich.">
+<script>
+  /* Before first paint: theme from ?theme=, a class for JS-only motion, ?static for full-page captures. */
+  (function () {
+    var q = new URLSearchParams(location.search), root = document.documentElement;
+    var t = q.get("theme");
+    if (t === "light" || t === "dark") root.dataset.theme = t;
+    root.classList.add("js");
+    if (q.has("static")) root.classList.add("static");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <defs><style>.mk { fill: var(--c-mark); } .mks { fill: none; stroke: var(--c-mark); stroke-width: 1.5; }</style></defs>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-full" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M4 12L12 4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1 1M11.4 11.4l1 1M3.6 12.4l1-1M11.4 4.6l1-1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13 9.5A5.5 5.5 0 0 1 6.5 3a5.5 5.5 0 1 0 6.5 6.5z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2.5 5h11M2.5 11h11"/></symbol>
+  <symbol id="m-salt" viewBox="0 0 200 300"><circle class="mk" cx="150" cy="118" r="14" opacity="0.5"/><path class="mks" d="M0 150H200"/><rect class="mk" x="12" y="168" width="40" height="20" rx="1"/><rect class="mks" x="58" y="168" width="40" height="20" rx="1"/><rect class="mks" x="104" y="168" width="40" height="20" rx="1"/><rect class="mk" x="150" y="168" width="40" height="20" rx="1"/><rect class="mks" x="12" y="194" width="40" height="20" rx="1"/><rect class="mks" x="58" y="194" width="40" height="20" rx="1"/><rect class="mk" x="104" y="194" width="40" height="20" rx="1"/><rect class="mks" x="150" y="194" width="40" height="20" rx="1"/><rect class="mks" x="12" y="220" width="40" height="20" rx="1"/><rect class="mk" x="58" y="220" width="40" height="20" rx="1"/><rect class="mks" x="104" y="220" width="40" height="20" rx="1"/><rect class="mks" x="150" y="220" width="40" height="20" rx="1"/><rect class="mk" x="12" y="246" width="40" height="20" rx="1"/><rect class="mks" x="58" y="246" width="40" height="20" rx="1"/><rect class="mks" x="104" y="246" width="40" height="20" rx="1"/><rect class="mk" x="150" y="246" width="40" height="20" rx="1"/><rect class="mks" x="12" y="272" width="40" height="20" rx="1"/><rect class="mks" x="58" y="272" width="40" height="20" rx="1"/><rect class="mk" x="104" y="272" width="40" height="20" rx="1"/><rect class="mks" x="150" y="272" width="40" height="20" rx="1"/></symbol>
+  <symbol id="m-rooms" viewBox="0 0 200 300"><rect class="mks" x="25" y="120" width="150" height="170"/><rect class="mks" x="37" y="134" width="126" height="142"/><rect class="mks" x="49" y="148" width="102" height="114"/><rect class="mks" x="61" y="162" width="78" height="86"/><rect class="mks" x="73" y="176" width="54" height="58"/><rect class="mks" x="85" y="190" width="30" height="30"/><rect class="mk" x="94" y="196" width="12" height="18"/></symbol>
+  <symbol id="m-water" viewBox="0 0 200 300"><path class="mks" d="M-10 150 Q 2 153 14 150 Q 26 147 38 150 Q 50 153 62 150 Q 74 147 86 150 Q 98 153 110 150 Q 122 147 134 150 Q 146 153 158 150 Q 170 147 182 150 Q 194 153 206 150"/><path class="mks" d="M-10 166 Q 2 169.6 14 166 Q 26 162.4 38 166 Q 50 169.6 62 166 Q 74 162.4 86 166 Q 98 169.6 110 166 Q 122 162.4 134 166 Q 146 169.6 158 166 Q 170 162.4 182 166 Q 194 169.6 206 166"/><path class="mks" d="M-10 182 Q 2 186.2 14 182 Q 26 177.8 38 182 Q 50 186.2 62 182 Q 74 177.8 86 182 Q 98 186.2 110 182 Q 122 177.8 134 182 Q 146 186.2 158 182 Q 170 177.8 182 182 Q 194 186.2 206 182"/><path class="mks" d="M-10 198 Q 2 202.8 14 198 Q 26 193.2 38 198 Q 50 202.8 62 198 Q 74 193.2 86 198 Q 98 202.8 110 198 Q 122 193.2 134 198 Q 146 202.8 158 198 Q 170 193.2 182 198 Q 194 202.8 206 198"/><path class="mks" d="M-10 214 Q 2 219.4 14 214 Q 26 208.6 38 214 Q 50 219.4 62 214 Q 74 208.6 86 214 Q 98 219.4 110 214 Q 122 208.6 134 214 Q 146 219.4 158 214 Q 170 208.6 182 214 Q 194 219.4 206 214"/><path class="mks" d="M-10 230 Q 2 236 14 230 Q 26 224 38 230 Q 50 236 62 230 Q 74 224 86 230 Q 98 236 110 230 Q 122 224 134 230 Q 146 236 158 230 Q 170 224 182 230 Q 194 236 206 230"/><path class="mks" d="M-10 246 Q 2 252.6 14 246 Q 26 239.4 38 246 Q 50 252.6 62 246 Q 74 239.4 86 246 Q 98 252.6 110 246 Q 122 239.4 134 246 Q 146 252.6 158 246 Q 170 239.4 182 246 Q 194 252.6 206 246"/><path class="mks" d="M-10 262 Q 2 269.2 14 262 Q 26 254.8 38 262 Q 50 269.2 62 262 Q 74 254.8 86 262 Q 98 269.2 110 262 Q 122 254.8 134 262 Q 146 269.2 158 262 Q 170 254.8 182 262 Q 194 269.2 206 262"/><path class="mks" d="M-10 278 Q 2 285.8 14 278 Q 26 270.2 38 278 Q 50 285.8 62 278 Q 74 270.2 86 278 Q 98 285.8 110 278 Q 122 270.2 134 278 Q 146 285.8 158 278 Q 170 270.2 182 278 Q 194 285.8 206 278"/></symbol>
+  <symbol id="m-lantern" viewBox="0 0 200 300"><circle class="mks" cx="100" cy="190" r="70" opacity="0.35"/><circle class="mks" cx="100" cy="190" r="52" opacity="0.6"/><circle class="mk" cx="100" cy="190" r="34"/><path class="mks" d="M100 120V100M86 100H114"/></symbol>
+  <symbol id="m-map" viewBox="0 0 200 300"><path class="mks" stroke-linejoin="round" d="M124.3 200 L124.2 204.2 L120.9 207.5 L116.9 209.7 L112.1 209.6 L108.2 208.3 L103.7 209 L97.6 208.5 L95.5 204.3 L97.9 200 L99.4 196.8 L100.7 193.6 L103.7 191 L107.5 188.4 L112.8 187.1 L116.9 190.3 L117.8 194.7 L120.3 196.9Z"/><path class="mks" stroke-linejoin="round" d="M140.8 200 L138.9 208.6 L130.6 214.1 L122.6 217.8 L114 218.7 L106.1 218 L96.2 219.6 L84.6 217.4 L82.5 208.2 L88 200 L89.3 193.8 L90.2 186.4 L96.2 180.4 L104.9 176.2 L115.3 175.4 L122.6 182.2 L125.1 189.7 L132.1 193.4Z"/><path class="mks" stroke-linejoin="round" d="M158.8 200 L152.6 212.7 L138.3 219.4 L127.6 224.9 L116.2 228.8 L103.6 229.7 L88 231.2 L72.5 225.7 L72 211.3 L79.6 200 L78.2 190.5 L77.6 177.8 L88 168.8 L102.4 164.9 L117.4 165.9 L127.6 175.1 L133.2 184.1 L146.4 189.2Z"/><path class="mks" stroke-linejoin="round" d="M176.5 200 L163.9 216.1 L144.2 223.5 L132.7 232.2 L118.8 240.9 L100.7 243.3 L79.9 242.6 L62.4 232.7 L63.6 213.8 L70.9 200 L64.7 186.5 L63.3 168 L79.9 157.4 L100.5 155.8 L119 158.2 L132.7 167.8 L143.3 177.1 L162.8 184.3Z"/><path class="mks" stroke-linejoin="round" d="M192.1 200 L172.2 218.5 L149.3 227 L138.9 241 L122 255.5 L97.6 257.7 L72.9 252.5 L54.8 237.9 L56.2 216 L60.1 200 L48.2 181.6 L48.2 157.6 L72.9 147.5 L99 149.2 L120.5 151.4 L138.9 159 L155.9 168.5 L180.3 179.1Z"/><path class="mks" stroke-linejoin="round" d="M204.1 200 L178.1 220.3 L155.3 231.1 L146.9 252.3 L125.6 272.3 L94.6 271.3 L67.7 259.9 L49.1 241.8 L47.8 218.5 L45.7 200 L29.3 176 L33.9 147.8 L67.7 140.1 L98.1 144.6 L122.1 143.7 L146.9 147.7 L170.4 158.5 L196.7 174.2Z"/><path class="mks" d="M20 290L60 250L58 220L90 200" stroke-dasharray="3 4"/><circle class="mk" cx="110" cy="200" r="4"/></symbol>
+  <symbol id="m-orchard" viewBox="0 0 200 300"><circle class="mk" cx="28" cy="165" r="8"/><circle class="mks" cx="57" cy="165" r="8"/><circle class="mks" cx="86" cy="165" r="8"/><circle class="mks" cx="115" cy="165" r="8"/><circle class="mks" cx="144" cy="165" r="8"/><circle class="mks" cx="173" cy="165" r="8"/><circle class="mks" cx="40" cy="189" r="8"/><circle class="mks" cx="69" cy="189" r="8"/><circle class="mks" cx="98" cy="189" r="8"/><circle class="mk" cx="127" cy="189" r="8"/><circle class="mks" cx="156" cy="189" r="8"/><circle class="mks" cx="185" cy="189" r="8"/><circle class="mks" cx="28" cy="213" r="8"/><circle class="mks" cx="57" cy="213" r="8"/><circle class="mks" cx="86" cy="213" r="8"/><circle class="mks" cx="115" cy="213" r="8"/><circle class="mks" cx="144" cy="213" r="8"/><circle class="mks" cx="173" cy="213" r="8"/><circle class="mks" cx="40" cy="237" r="8"/><circle class="mks" cx="69" cy="237" r="8"/><circle class="mk" cx="98" cy="237" r="8"/><circle class="mks" cx="127" cy="237" r="8"/><circle class="mks" cx="156" cy="237" r="8"/><circle class="mks" cx="185" cy="237" r="8"/><circle class="mks" cx="28" cy="261" r="8"/><circle class="mks" cx="57" cy="261" r="8"/><circle class="mks" cx="86" cy="261" r="8"/><circle class="mks" cx="115" cy="261" r="8"/><circle class="mks" cx="144" cy="261" r="8"/><circle class="mk" cx="173" cy="261" r="8"/></symbol>
+  <symbol id="m-march" viewBox="0 0 200 300"><path class="mks" d="M0 250H200"/><path class="mk" opacity="0.9" d="M10 250V214L26 200L42 214V250ZM50 250V190H66V176H74V190H90V250ZM98 250V206L118 186L138 206V250ZM146 250V160L152 148L158 160V250ZM164 250V218L178 204L192 218V250Z"/><circle class="mks" cx="150" cy="120" r="12"/></symbol>
+</svg>
+
+<header class="strip">
+  <div class="wrap strip__in">
+    <p class="status" data-open="true"><i aria-hidden="true"></i><span data-status>Open today, 9:30 to 18:00</span></p>
+    <p class="strip__addr">23 Colegate, Norwich</p>
+    <button class="iconbtn menubtn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Sections"><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#picks">Staff picks</a>
+      <a href="#readings">Readings</a>
+      <a href="#club">Book club</a>
+      <a href="#visit">Hours</a>
+      <a href="#letter">The Friday letter</a>
+    </nav>
+    <button class="iconbtn" type="button" data-theme-toggle aria-label="Switch to light theme">
+      <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="wrap mast">
+  <div class="mast__row">
+    <p class="mast__meta"><b class="num">No. 312</b>Every Friday since Dec 2020</p>
+    <p class="mast__name">Marginalia</p>
+    <p class="mast__meta mast__meta--end"><b>Friday 20 November 2026</b>Norwich, free to read</p>
+  </div>
+  <p class="mast__strap"><span>Booksellers, readings upstairs, and a letter every Friday</span><span>23 Colegate since 2014</span></p>
+</div>
+
+<main>
+  <section class="wrap front" aria-labelledby="lead-h">
+    <div class="lead">
+      <h1 id="lead-h">Books chosen by five booksellers on Colegate, and a letter about them every Friday.</h1>
+      <p class="lead__dek">Marginalia is an independent bookshop in Norwich. We read what we stock, host authors upstairs most Thursdays, and write it all down for you on Friday morning.</p>
+
+      <form class="signup" data-signup novalidate>
+        <label class="signup__label" for="email-1">Your email</label>
+        <div class="signup__row">
+          <input id="email-1" name="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="help-1" required>
+          <button class="pill pill--primary" type="submit">
+            <span class="pill__face is-on" data-face="idle">Send me Fridays</span>
+            <span class="pill__face" data-face="busy" aria-hidden="true"><svg class="spinner" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 6 6"/></svg>Adding you</span>
+            <span class="pill__face" data-face="done" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg>You’re on the list</span>
+          </button>
+        </div>
+        <p class="signup__help" id="help-1" aria-live="polite">One letter on Friday at 8am. Picks, readings, nothing else.</p>
+      </form>
+
+      <nav class="inside" aria-labelledby="inside-h">
+        <h2 id="inside-h">In this issue</h2>
+        <ol>
+          <li><a href="#picks"><span>Six staff picks for the front table</span><span class="num">6 books</span></a></li>
+          <li><a href="#readings"><span>Hannah Okafor reads on Thursday</span><span class="num">26 Nov</span></a></li>
+          <li><a href="#club"><span>Middlemarch, books one to three</span><span class="num">2 Dec</span></a></li>
+          <li><a href="#visit"><span>Hours, and the Calvert Street door</span><span class="num">7 days</span></a></li>
+        </ol>
+      </nav>
+    </div>
+
+    <article class="pick" aria-labelledby="pick-h">
+      <p class="label">Pick of the week</p>
+      <span class="cover cover--salt pick__cover" role="img" aria-label="Cover of The Salt Year: salt pans in rows under a pale sun.">
+        <svg aria-hidden="true"><use href="#m-salt"/></svg>
+        <span class="cover__t" aria-hidden="true">The Salt Year</span><span class="cover__a" aria-hidden="true">Ines Varga</span>
+      </span>
+      <h2 id="pick-h">The Salt Year</h2>
+      <p class="pick__by">Ines Varga. Novel, hardback, 352 pages</p>
+      <blockquote>“A woman inherits a failing salt works on the Essex marshes, and its one stubborn foreman. Quiet, very funny, and the best weather in a novel for years.”<cite>Ruth Adair, fiction table</cite></blockquote>
+      <div class="pick__buy">
+        <span class="price">£18.99</span>
+        <a class="pill pill--sm" href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20The%20Salt%20Year">Reserve a copy</a>
+      </div>
+    </article>
+
+    <aside class="side" aria-label="Today at the shop">
+      <p class="label">At the shop</p>
+      <figure>
+        <div class="plate"><img src="lamp-stack.jpg" alt="A stack of hardbacks on a wooden table between two brass reading lamps, by a tall window." width="1600" height="1068" fetchpriority="high"></div>
+        <figcaption class="figcap"><b>Fig. 1</b> The reading table by the front window. Thursday readings move upstairs.</figcaption>
+      </figure>
+      <dl class="today">
+        <div><dt data-today-label>Today</dt><dd data-today-hours>9:30 to 18:00</dd></div>
+        <div><dt>Next reading</dt><dd class="num">Thu 26 Nov, 19:00</dd></div>
+        <div><dt>Book club</dt><dd class="num">Wed 2 Dec, 19:30</dd></div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="wrap sec" id="picks" aria-labelledby="picks-h">
+    <header class="sec__head">
+      <h2 id="picks-h">This week’s staff picks</h2>
+      <p>Six books from the front table, chosen and written up by the people who sell them. They stay on the table until Thursday, then go back to the shelves with a note tucked inside.</p>
+    </header>
+    <ol class="plist" data-peek-list>
+      <li class="prow reveal" style="--i: 0">
+        <span class="prow__no">01</span>
+        <span class="prow__thumb"><span class="cover cover--salt"><svg aria-hidden="true"><use href="#m-salt"/></svg><span class="cover__t">The Salt Year</span><span class="cover__a">Ines Varga</span></span></span>
+        <div class="prow__main">
+          <h3><a href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20The%20Salt%20Year">The Salt Year</a></h3>
+          <p class="prow__by">Ines Varga. Novel, hardback</p>
+          <p class="prow__rev">A woman inherits a failing salt works on the Essex marshes, and its one stubborn foreman. Quiet, very funny, and the best weather in a novel for years.</p>
+        </div>
+        <p class="prow__note"><b>Ruth, page 112</b>The storm chapter. Read it with a window open.</p>
+        <div class="prow__buy"><span class="price">£18.99</span><a class="pill pill--sm" href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20The%20Salt%20Year">Reserve</a></div>
+      </li>
+      <li class="prow reveal" style="--i: 1">
+        <span class="prow__no">02</span>
+        <span class="prow__thumb"><span class="cover cover--rooms"><svg aria-hidden="true"><use href="#m-rooms"/></svg><span class="cover__t">A Field Guide to Small Rooms</span><span class="cover__a">Tomás Ferreira</span></span></span>
+        <div class="prow__main">
+          <h3><a href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20A%20Field%20Guide%20to%20Small%20Rooms">A Field Guide to Small Rooms</a></h3>
+          <p class="prow__by">Tomás Ferreira. Essays, paperback</p>
+          <p class="prow__rev">Twelve essays on box rooms, lifts, a phone box and a lighthouse kitchen. Read one a night and your own flat starts to look different.</p>
+        </div>
+        <p class="prow__note"><b>Dev</b>Start with “The Lift”, then go in order.</p>
+        <div class="prow__buy"><span class="price">£12.99</span><a class="pill pill--sm" href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20A%20Field%20Guide%20to%20Small%20Rooms">Reserve</a></div>
+      </li>
+      <li class="prow reveal" style="--i: 2">
+        <span class="prow__no">03</span>
+        <span class="prow__thumb"><span class="cover cover--water"><svg aria-hidden="true"><use href="#m-water"/></svg><span class="cover__t">Low Water</span><span class="cover__a">Hannah Okafor</span></span></span>
+        <div class="prow__main">
+          <h3><a href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20Low%20Water">Low Water</a></h3>
+          <p class="prow__by">Hannah Okafor. Crime, paperback</p>
+          <p class="prow__rev">A body in the Broads in the driest August on record. Okafor plots like a clockmaker, and I guessed wrong twice.</p>
+        </div>
+        <p class="prow__note"><b>Odile</b>She reads here on Thursday. Signed copies after.</p>
+        <div class="prow__buy"><span class="price">£9.99</span><a class="pill pill--sm" href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20Low%20Water">Reserve</a></div>
+      </li>
+      <li class="prow reveal" style="--i: 3">
+        <span class="prow__no">04</span>
+        <span class="prow__thumb"><span class="cover cover--lantern"><svg aria-hidden="true"><use href="#m-lantern"/></svg><span class="cover__t">Lantern Hours</span><span class="cover__a">Maeve Doyle</span></span></span>
+        <div class="prow__main">
+          <h3><a href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20Lantern%20Hours">Lantern Hours</a></h3>
+          <p class="prow__by">Maeve Doyle. Poems, paperback</p>
+          <p class="prow__rev">Short poems written on night shifts at a Cork hospital. I keep reading “Ward 4, 3am” aloud to whoever is at the till.</p>
+        </div>
+        <p class="prow__note"><b>Sam, page 9</b>You will want to read it aloud too.</p>
+        <div class="prow__buy"><span class="price">£10.99</span><a class="pill pill--sm" href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20Lantern%20Hours">Reserve</a></div>
+      </li>
+      <li class="prow reveal" style="--i: 4">
+        <span class="prow__no">05</span>
+        <span class="prow__thumb"><span class="cover cover--map"><svg aria-hidden="true"><use href="#m-map"/></svg><span class="cover__t">Every Map Is Wrong</span><span class="cover__a">Priya Raman</span></span></span>
+        <div class="prow__main">
+          <h3><a href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20Every%20Map%20Is%20Wrong">Every Map Is Wrong</a></h3>
+          <p class="prow__by">Priya Raman. Non-fiction, hardback</p>
+          <p class="prow__rev">A cartographer on what maps leave out, and why. Comes with a fold-out of the Norfolk coast as it stood in 1797.</p>
+        </div>
+        <p class="prow__note"><b>Kit</b>The fold-out alone is worth it. Ask to see it.</p>
+        <div class="prow__buy"><span class="price">£22.00</span><a class="pill pill--sm" href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20Every%20Map%20Is%20Wrong">Reserve</a></div>
+      </li>
+      <li class="prow reveal" style="--i: 5">
+        <span class="prow__no">06</span>
+        <span class="prow__thumb"><span class="cover cover--orchard"><svg aria-hidden="true"><use href="#m-orchard"/></svg><span class="cover__t">The Orchard Ledger</span><span class="cover__a">Jonah Pell</span></span></span>
+        <div class="prow__main">
+          <h3><a href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20The%20Orchard%20Ledger">The Orchard Ledger</a></h3>
+          <p class="prow__by">Jonah Pell. Ages 8 to 12, paperback</p>
+          <p class="prow__rev">Two siblings keep the accounts for their gran’s apple orchard and uncover a very small fraud. The most tense long division I have ever read.</p>
+        </div>
+        <p class="prow__note"><b>Odile</b>Jonah reads for children here on 12 December.</p>
+        <div class="prow__buy"><span class="price">£7.99</span><a class="pill pill--sm" href="mailto:hello@marginaliabooks.co.uk?subject=Reserve%20The%20Orchard%20Ledger">Reserve</a></div>
+      </li>
+    </ol>
+    <div class="peek" aria-hidden="true" data-peek></div>
+  </section>
+
+  <section class="wrap sec" id="readings" aria-labelledby="readings-h">
+    <header class="sec__head">
+      <h2 id="readings-h">Author readings</h2>
+      <p>Upstairs in the long room, forty seats, most Thursdays at seven. A ticket is £5 and comes off the book if you buy one on the night.</p>
+    </header>
+    <div class="readings">
+      <article class="next" aria-labelledby="next-h">
+        <div class="date">
+          <span class="date__dow">Thursday</span>
+          <span class="date__day">26</span>
+          <span class="date__mon">November</span>
+          <span class="date__time num">19:00</span>
+        </div>
+        <div>
+          <h3 id="next-h">Hannah Okafor on Low Water</h3>
+          <p class="next__book">In conversation with Odile Fournier</p>
+          <p class="next__body">Okafor grew up on a boat at Ranworth and wrote Low Water during last summer’s drought. She will read the first chapter and talk about plotting a crime novel around a tide table.</p>
+          <dl class="facts">
+            <div><dt>Doors</dt><dd class="num">18:30, ends about 20:30</dd></div>
+            <div><dt>Ticket</dt><dd>£5, taken off the book</dd></div>
+            <div class="seats"><dt>Seats</dt><dd><span class="num">14 of 40 left</span></dd><dd><span class="meter" role="img" aria-label="26 of 40 seats booked"><i style="--v: 0.65"></i></span></dd></div>
+            <div><dt>Access</dt><dd>Lift from the Calvert Street door</dd></div>
+          </dl>
+          <div class="next__cta">
+            <a class="pill pill--primary" href="mailto:hello@marginaliabooks.co.uk?subject=Seat%20for%20Hannah%20Okafor%2C%2026%20November">Book a seat</a>
+            <p>Or ask at the till. We hold booked seats until 18:50.</p>
+          </div>
+        </div>
+      </article>
+
+      <div>
+        <ol class="rlist">
+          <li class="rrow">
+            <span class="rrow__d"><b>3</b><span>Dec</span></span>
+            <div><h3>Tomás Ferreira</h3><p>A Field Guide to Small Rooms. Thursday, 19:00</p></div>
+            <div class="rrow__state"><span class="num">26 left</span><span class="meter" role="img" aria-label="14 of 40 seats booked"><i style="--v: 0.35"></i></span></div>
+          </li>
+          <li class="rrow">
+            <span class="rrow__d"><b>12</b><span>Dec</span></span>
+            <div><h3>Jonah Pell, for ages 8 to 12</h3><p>The Orchard Ledger. Saturday, 11:00. Free with an adult</p></div>
+            <div class="rrow__state"><span class="num">31 left</span><span class="meter" role="img" aria-label="9 of 40 seats booked"><i style="--v: 0.225"></i></span></div>
+          </li>
+          <li class="rrow rrow--full">
+            <span class="rrow__d"><b>17</b><span>Dec</span></span>
+            <div><h3>Winter poems with Maeve Doyle</h3><p>And three Norwich poets. Thursday, 19:00</p></div>
+            <div class="rrow__state"><span class="full"><svg class="icon" aria-hidden="true"><use href="#i-full"/></svg>Full</span><a class="tlink" href="mailto:hello@marginaliabooks.co.uk?subject=Waiting%20list%2C%2017%20December">Waiting list</a></div>
+          </li>
+        </ol>
+        <p class="rnote">The long room is up one flight. For step-free access use the Calvert Street door and ring the bell; we will bring the lift down for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="club" aria-labelledby="club-h">
+    <div class="club">
+      <div class="club__copy">
+        <h2 id="club-h">The Long Book Club</h2>
+        <p>One long book, read slowly over three months and talked about on three Wednesday evenings in the long room. This winter it is Middlemarch.</p>
+        <p class="small num">£12 for all three evenings, with 10% off any edition from the shop. 18 places, 7 left.</p>
+        <a class="pill pill--primary" href="mailto:hello@marginaliabooks.co.uk?subject=The%20Long%20Book%20Club">Join the club</a>
+      </div>
+
+      <figure class="plan" aria-labelledby="plan-h">
+        <div class="plan__head">
+          <span class="cover cover--march" role="img" aria-label="Cover of Middlemarch: a row of town roofs.">
+            <svg aria-hidden="true"><use href="#m-march"/></svg>
+            <span class="cover__t" aria-hidden="true">Middle&shy;march</span><span class="cover__a" aria-hidden="true">George Eliot</span>
+          </span>
+          <div>
+            <h3 id="plan-h">Middlemarch</h3>
+            <p>George Eliot, 1871 to 1872. Eight books, 86 chapters, about 880 pages.</p>
+          </div>
+          <p class="pace"><b class="num">3</b><span>chapters a day to reach chapter 33 by 2 December</span></p>
+        </div>
+        <div class="chapters">
+          <div class="chapters__bar" data-chapters role="img" aria-label="86 chapters in three reading blocks: chapters 1 to 33 for 2 December, 34 to 62 for 6 January, 63 to 86 for 3 February."></div>
+          <div class="books num" aria-hidden="true">
+            <span><b>I</b>1 to 12</span><span><b>II</b>13 to 22</span><span><b>III</b>23 to 33</span><span><b>IV</b>34 to 42</span><span><b>V</b>43 to 53</span><span><b>VI</b>54 to 62</span><span><b>VII</b>63 to 71</span><span><b>VIII</b>72 to 86</span>
+          </div>
+        </div>
+        <figcaption class="meets">
+          <p class="meet m1"><i aria-hidden="true"></i><b class="num">Wed 2 Dec, 19:30</b><span>Books I to III, chapters 1 to 33</span></p>
+          <p class="meet m2"><i aria-hidden="true"></i><b class="num">Wed 6 Jan, 19:30</b><span>Books IV to VI, chapters 34 to 62</span></p>
+          <p class="meet m3"><i aria-hidden="true"></i><b class="num">Wed 3 Feb, 19:30</b><span>Books VII and VIII, chapters 63 to 86</span></p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="visit" aria-labelledby="visit-h">
+    <div class="visit">
+      <figure class="map" aria-label="Map: the shop on Colegate, between St George’s Street and Magdalen Street, south of the River Wensum. Not to scale.">
+        <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g class="blocks">
+            <rect x="20" y="16" width="190" height="78" rx="6"/><rect x="250" y="16" width="240" height="96" rx="6"/><rect x="545" y="10" width="150" height="56" rx="6"/>
+            <rect x="20" y="206" width="190" height="72" rx="6"/><rect x="250" y="206" width="110" height="72" rx="6"/><rect x="400" y="196" width="100" height="82" rx="6"/><rect x="545" y="176" width="150" height="102" rx="6"/>
+            <rect x="20" y="322" width="190" height="170" rx="6"/><rect x="250" y="322" width="110" height="170" rx="6"/><rect x="400" y="322" width="100" height="170" rx="6"/><rect x="545" y="322" width="150" height="170" rx="6"/>
+          </g>
+          <path class="river" d="M-20 150C150 90 300 205 450 158S650 70 720 112"/>
+          <path class="road" d="M-10 300H710M230 520V-10M522 520V-10"/>
+          <path class="lane" d="M380 300V520M380 300V180"/>
+          <path class="walk" d="M522 120V300H460"/>
+        </svg>
+        <span class="map__lbl map__lbl--river" style="left: 15%; top: 21%">River Wensum</span>
+        <span class="map__lbl" style="left: 22%; top: 56%">Colegate</span>
+        <span class="map__lbl" style="left: 33%; top: 84%">St George’s Street</span>
+        <span class="map__lbl" style="left: 74.6%; top: 84%">Magdalen Street</span>
+        <span class="map__lbl" style="left: 85%; top: 22%">Fye Bridge</span>
+        <span class="map__lbl" style="left: 54.3%; top: 74%">Calvert Street door</span>
+        <span class="pin" style="left: 64.4%; top: 59%"><span>Marginalia</span><i></i></span>
+        <span class="map__scale">Not to scale. Dotted line: from Fye Bridge, 2 minutes</span>
+      </figure>
+
+      <div>
+        <h2 id="visit-h">Find us on Colegate</h2>
+        <address>23 Colegate<br>Norwich NR3 1BN</address>
+        <p class="visit__how">Two minutes from Fye Bridge. Walk down Magdalen Street, turn right onto Colegate, and look for the oxblood door with a bench outside.</p>
+        <dl class="hours" data-hours>
+          <div data-day="Monday"><dt>Monday</dt><dd>10:00 to 18:00</dd></div>
+          <div data-day="Tuesday"><dt>Tuesday</dt><dd>10:00 to 18:00</dd></div>
+          <div data-day="Wednesday"><dt>Wednesday</dt><dd>10:00 to 18:00<br><small>Book club evenings to 21:30</small></dd></div>
+          <div data-day="Thursday"><dt>Thursday</dt><dd>10:00 to 20:30<br><small>Readings upstairs from 19:00</small></dd></div>
+          <div data-day="Friday"><dt>Friday</dt><dd>10:00 to 18:00</dd></div>
+          <div data-day="Saturday" class="is-today"><dt>Saturday</dt><dd>9:30 to 18:00</dd></div>
+          <div data-day="Sunday"><dt>Sunday</dt><dd>11:00 to 16:00</dd></div>
+        </dl>
+        <p class="rnote">Closed 25 and 26 December. Open until 20:00 every day from 14 to 23 December.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap sec" id="letter" aria-labelledby="letter-h">
+    <div class="letter">
+      <div>
+        <h2 id="letter-h">The Friday letter</h2>
+        <p class="letter__dek">Every Friday at 8am: the week’s picks, who is reading upstairs, and one short paragraph from whoever closed the shop on Thursday night.</p>
+        <ul class="gets">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Six staff picks, with prices and the page to start on</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Readings two weeks ahead, before seats go on the board in the window</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>First word on signed copies and the next book club book</span></li>
+        </ul>
+        <form class="signup" data-signup novalidate>
+          <label class="signup__label" for="email-2">Your email</label>
+          <div class="signup__row">
+            <input id="email-2" name="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="help-2" required>
+            <button class="pill pill--primary" type="submit">
+              <span class="pill__face is-on" data-face="idle">Send me Fridays</span>
+              <span class="pill__face" data-face="busy" aria-hidden="true"><svg class="spinner" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 6 6"/></svg>Adding you</span>
+              <span class="pill__face" data-face="done" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg>You’re on the list</span>
+            </button>
+          </div>
+          <p class="signup__help" id="help-2" aria-live="polite">312 letters so far, one every Friday. Leave with one click.</p>
+        </form>
+      </div>
+
+      <article class="sample" aria-label="An excerpt from letter No. 312">
+        <div class="sample__mast"><span class="num">No. 312</span><b>Marginalia</b><span>20 Nov 2026</span></div>
+        <h3>The awning, the storm, and a very good novel about salt</h3>
+        <p>Dear reader, Tuesday’s wind took the awning clean off its brackets, and for an hour the front table was the wettest place in Norwich. We lost nothing but our dignity and one road atlas.</p>
+        <p>Which is a fair way into this week’s pick. The Salt Year is about weather, mostly, and about what people do when it ruins their plans. Ruth finished it on the bus and missed her stop by four villages.</p>
+        <p class="sample__sig">Ruth, Dev, Odile, Sam and Kit</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <p class="foot__name">Marginalia</p>
+        <p style="margin-top: 12px; max-width: 36ch">An independent bookshop at 23 Colegate, Norwich, since 2014. Five booksellers, about eleven thousand books, one bench outside.</p>
+      </div>
+      <nav aria-label="The shop"><h3>The shop</h3><ul><li><a href="#picks">Staff picks</a></li><li><a href="#readings">Readings</a></li><li><a href="#club">Book club</a></li></ul></nav>
+      <nav aria-label="Visit"><h3>Visit</h3><ul><li><a href="#visit">Hours</a></li><li><a href="#visit">How to find us</a></li><li><a href="#readings">Step-free access</a></li></ul></nav>
+      <div><h3>Write to us</h3><ul><li><a href="mailto:hello@marginaliabooks.co.uk">hello@marginaliabooks.co.uk</a></li><li><a href="#letter">The Friday letter</a></li></ul></div>
+    </div>
+    <div class="foot__base"><span>© 2026 Marginalia Books Ltd, Norwich</span><span>Set in Besley and Rethink Sans. Photograph by chuttersnap, CC0. Covers drawn for this page.</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

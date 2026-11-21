@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kaedama: ramen for fourteen at a time, Melbourne</title>
+<meta name="description" content="Kaedama is a 14-seat ramen counter in Cohen Place, Melbourne. Three bowls, a pork broth that goes on at 4 am, and no bookings.">
+<script>
+  /* Before first paint: dark unless ?theme=light. */
+  (function () {
+    var t = new URLSearchParams(location.search).get("theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    document.documentElement.classList.add("js");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 3v10M4 9l4 4 4-4"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14.25s4.75-4.1 4.75-7.75a4.75 4.75 0 0 0-9.5 0c0 3.65 4.75 7.75 4.75 7.75Z"/><circle cx="8" cy="6.5" r="1.75"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 4.75V8l2.25 1.5"/></symbol>
+  <symbol id="i-tram" viewBox="0 0 16 16"><rect x="4" y="3.25" width="8" height="8.5" rx="1.5"/><path d="M4 8h8M6 13.75l-1 1M10 13.75l1 1M6.5 1.75h3"/></symbol>
+  <symbol id="i-card" viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="8.5" rx="1.5"/><path d="M2 7h12"/></symbol>
+  <symbol id="i-step" viewBox="0 0 16 16"><path d="M2.5 12.5h4v-3h3v-3h4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2.75 5h10.5M2.75 11h10.5"/></symbol>
+  <symbol id="i-mark" viewBox="0 0 24 24"><path d="M3.5 10.5h17a8.5 8.5 0 0 1-17 0Z"/><path d="M7 4.5l3 4M12.5 3l.5 5.5M17.5 4.5l-2.5 4"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <div class="wrap top__in">
+    <a class="brand" href="#main"><svg class="brand__mark" aria-hidden="true"><use href="#i-mark"/></svg><span>Kaedama</span><span class="brand__jp" lang="ja">替玉</span></a>
+    <nav class="top__nav" id="nav" aria-label="Sections">
+      <a href="#bowls">Bowls</a>
+      <a href="#broth">Broth</a>
+      <a href="#queue">Queue</a>
+      <a href="#visit">Hours and map</a>
+    </nav>
+    <div class="top__end">
+      <p class="status" id="status"><i aria-hidden="true"></i><span>Open today 11:30</span></p>
+      <button class="iconbtn" type="button" id="theme-btn" aria-label="Switch to light theme">
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <button class="iconbtn top__menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero cut" aria-labelledby="hero-h">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="hero__where"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>9 Cohen Place, Melbourne</p>
+        <h1 id="hero-h">Ramen for fourteen at a time.</h1>
+        <p class="hero__sub">A counter in a laneway off Little Bourke Street. Three bowls, a pork broth that goes on at 4 am, and no bookings: join the queue and we’ll call your number.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="#bowls">See the three bowls<svg class="icon" aria-hidden="true"><use href="#i-down"/></svg></a>
+          <a class="textlink" href="#queue">How the queue works</a>
+        </div>
+        <dl class="hero__facts">
+          <div><dt>Seats</dt><dd class="num">14</dd><span>at one counter</span></div>
+          <div><dt>Broth</dt><dd class="num">18 h</dd><span>on the stove</span></div>
+          <div><dt>Bowls</dt><dd class="num">$21 to $23</dd><span>noodles $4 more</span></div>
+        </dl>
+      </div>
+    </div>
+    <figure class="hero__photo">
+      <img src="img/miso.jpg" width="1400" height="1050" alt="A bowl of miso ramen on a wooden counter: orange broth, two halved soft eggs, corn, spring onion, pork and nori.">
+      <span class="tag tag--a" aria-hidden="true"><b class="num">No. 3</b>Aka miso<em class="num">$23</em></span>
+      <span class="tag tag--b" aria-hidden="true"><b>Pot 2</b><span>Lit <span class="num">04:00</span>, ready <span class="num">11:30</span></span></span>
+    </figure>
+  </section>
+
+  <section class="bowls" id="bowls" aria-labelledby="bowls-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="bowls-h">The whole menu is three bowls.</h2>
+        <p>Each one is made the same way every day, from the same pots. Tell us how firm you want the noodles when you order: hard, regular or soft.</p>
+      </div>
+      <div class="bowls__grid">
+        <article class="bowl bowl--lead" aria-labelledby="b1">
+          <figure class="ht bowl__img bowl__img--tk"><img src="img/tonkotsu.jpg" width="960" height="1117" loading="lazy" alt="Tonkotsu ramen seen from above: milky pork broth, chashu, nori, a soft egg, spring onion and wood ear mushroom."></figure>
+          <div class="bowl__body">
+            <p class="bowl__no num">No. 1</p>
+            <h3 id="b1">Shiro tonkotsu <span lang="ja">白</span></h3>
+            <p class="bowl__desc">Pork bone broth boiled hard for eighteen hours until it turns white and coats the spoon. Thin straight Hakata noodles, so they cook in ninety seconds.</p>
+            <dl class="spec">
+              <div><dt>Broth</dt><dd>Pork bone, emulsified</dd></div>
+              <div><dt>Noodle</dt><dd>Thin, straight</dd></div>
+              <div><dt>On top</dt><dd>Chashu belly, ajitama, wood ear, nori</dd></div>
+            </dl>
+            <div class="bowl__foot">
+              <div class="meter" role="img" aria-label="Richness 5 of 5"><span>Richness</span><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+              <p class="price num"><sup>$</sup>22</p>
+            </div>
+          </div>
+        </article>
+        <article class="bowl" aria-labelledby="b2">
+          <figure class="ht bowl__img"><img src="img/shio.jpg" width="1265" height="1400" loading="lazy" alt="Shio ramen in a patterned bowl: clear golden broth, sliced chicken, mizuna and thin noodles."></figure>
+          <div class="bowl__body">
+            <p class="bowl__no num">No. 2</p>
+            <h3 id="b2">Shio <span lang="ja">塩</span></h3>
+            <p class="bowl__desc">Clear chicken and kombu broth seasoned with Murray River salt and a little yuzu. The light one.</p>
+            <dl class="spec">
+              <div><dt>Broth</dt><dd>Chicken and kombu, clear</dd></div>
+              <div><dt>Noodle</dt><dd>Medium, wavy</dd></div>
+              <div><dt>On top</dt><dd>Chicken chashu, mizuna</dd></div>
+            </dl>
+            <div class="bowl__foot">
+              <div class="meter" role="img" aria-label="Richness 2 of 5"><span>Richness</span><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+              <p class="price num"><sup>$</sup>21</p>
+            </div>
+          </div>
+        </article>
+        <article class="bowl" aria-labelledby="b3">
+          <figure class="ht bowl__img"><img src="img/aka.jpg" width="1400" height="1051" loading="lazy" alt="A bowl of miso ramen from above: sliced pork, a halved soft-boiled egg, spring onion and bean sprouts."></figure>
+          <div class="bowl__body">
+            <p class="bowl__no num">No. 3</p>
+            <h3 id="b3">Aka miso <span lang="ja">赤</span></h3>
+            <p class="bowl__desc">The tonkotsu broth again, with red miso and our chilli oil stirred through. Thick noodles that hold up to it.</p>
+            <dl class="spec">
+              <div><dt>Broth</dt><dd>Pork bone, red miso, chilli oil</dd></div>
+              <div><dt>Noodle</dt><dd>Thick, wavy</dd></div>
+              <div><dt>On top</dt><dd>Pork, corn, two egg halves</dd></div>
+            </dl>
+            <div class="bowl__foot">
+              <div class="meter" role="img" aria-label="Richness 4 of 5"><span>Richness</span><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+              <p class="price num"><sup>$</sup>23</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="kae">
+        <figure class="ht kae__img"><img src="img/empty.jpg" width="1600" height="1066" loading="lazy" alt="An empty ramen bowl with a spoon, on an orange table."></figure>
+        <div class="kae__copy">
+          <h3>Say “kaedama” before the broth goes cold.</h3>
+          <p>It means a second portion of noodles. We boil it to order and drop it into the broth you have left, about a minute after you ask. That is where the name comes from.</p>
+          <dl class="kae__list">
+            <div><dt>Kaedama, extra noodles</dt><dd class="num">$4</dd></div>
+            <div><dt>Ajitama, soy-marinated egg</dt><dd class="num">$3</dd></div>
+            <div><dt>Extra chashu, two slices</dt><dd class="num">$5</dd></div>
+            <div><dt>Chilli oil, garlic, sesame</dt><dd>On the counter</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="broth" id="broth" aria-labelledby="broth-h">
+    <div class="wrap broth__grid">
+      <div class="broth__copy">
+        <h2 id="broth-h">One pot, eighteen hours, a hundred and sixty bowls.</h2>
+        <p>The pork broth starts at 4 am with forty kilos of trotters and back bones. It boils hard, never simmers, and is topped up with water as it reduces. When it is gone, the tonkotsu and the miso are gone too.</p>
+        <p class="broth__note">The shio has its own small pot of chicken and kombu, started at 7 am.</p>
+      </div>
+      <figure class="chart" aria-labelledby="chart-cap">
+        <figcaption id="chart-cap" class="chart__cap"><b>Pot 2, Thursday</b><span><i class="key key--level"></i>Level in the pot</span><span><i class="key key--top"></i>Water added</span></figcaption>
+        <div class="chart__plot">
+          <svg viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
+            <path class="grid" d="M0 0H600M0 60H600M0 120H600M0 180H600"/>
+            <path class="fill" d="M0 12 L50 26 L100 44 L133 58 L133 30 L200 52 L267 74 L300 84 L300 50 L367 76 L433 100 L467 112 L467 80 L533 104 L600 128 V240 H0Z"/>
+            <path class="line" d="M0 12 L50 26 L100 44 L133 58 L133 30 L200 52 L267 74 L300 84 L300 50 L367 76 L433 100 L467 112 L467 80 L533 104 L600 128"/>
+            <path class="top" d="M133 58V30M300 84V50M467 112V80"/>
+          </svg>
+          <span class="ylab num" style="top: 0">100%</span>
+          <span class="ylab num" style="top: 25%">75%</span>
+          <span class="ylab num" style="top: 50%">50%</span>
+          <span class="ylab num" style="top: 75%">25%</span>
+          <span class="ev num" style="left: 22.2%; top: 34%">Water in</span>
+          <span class="ev ev--end num" style="left: 100%; top: 53.3%">47% left at 22:00, strained</span>
+        </div>
+        <div class="chart__x num" aria-hidden="true"><span>04:00</span><span>07:00</span><span>10:00</span><span>13:00</span><span>16:00</span><span>19:00</span><span>22:00</span></div>
+        <ol class="chart__steps">
+          <li><b class="num">04:00</b>Bones in, blanched, scrubbed, back in</li>
+          <li><b class="num">10:00</b>Fat back added for body</li>
+          <li><b class="num">22:00</b>Strained, cooled, into tomorrow’s pot</li>
+        </ol>
+      </figure>
+    </div>
+  </section>
+
+  <section class="queue cut" id="queue" aria-labelledby="queue-h">
+    <div class="wrap">
+      <div class="head head--queue">
+        <h2 id="queue-h">No bookings. Here is how the queue works.</h2>
+        <p>Most people wait between ten and thirty minutes and stay about twenty-five. Come at 3 pm or after 9 pm and you will usually walk straight in.</p>
+      </div>
+      <ol class="steps">
+        <li><b class="num">1</b><h3>Line up in Cohen Place</h3><p>Along the wall to the left of the door, not across the laneway. Groups of up to four.</p></li>
+        <li><b class="num">2</b><h3>Order at the door</h3><p>We take your order and card while you wait, and hand you a numbered tag.</p></li>
+        <li><b class="num">3</b><h3>We call your number</h3><p>When stools come free together, your group goes in. The bowl is on the counter about four minutes later.</p></li>
+        <li><b class="num">4</b><h3>Eat, then give the stool back</h3><p>No lingering is the rule that keeps the queue short. Stay for one more kaedama, not one more drink.</p></li>
+      </ol>
+      <figure class="waits" aria-labelledby="waits-cap">
+        <figcaption id="waits-cap" class="waits__cap"><b>Typical wait, in minutes</b><span><i class="key key--fri"></i>Friday and Saturday</span><span><i class="key key--wk"></i>Tuesday to Thursday</span></figcaption>
+        <div class="waits__plot">
+          <span class="waits__y num" style="bottom: 0%">0</span>
+          <span class="waits__y num" style="bottom: 33.3%">15</span>
+          <span class="waits__y num" style="bottom: 66.6%">30</span>
+          <span class="waits__y num" style="bottom: 100%">45</span>
+          <div class="waits__slot" data-t="11:30"><i class="b b--fri" style="--h: 0.222"></i><i class="b b--wk" style="--h: 0.111"></i></div>
+          <div class="waits__slot" data-t="12:00"><i class="b b--fri" style="--h: 0.556"></i><i class="b b--wk" style="--h: 0.333"></i></div>
+          <div class="waits__slot" data-t="12:30"><i class="b b--fri" style="--h: 0.889"></i><i class="b b--wk" style="--h: 0.556"></i></div>
+          <div class="waits__slot" data-t="13:00"><i class="b b--fri" style="--h: 0.778"></i><i class="b b--wk" style="--h: 0.444"></i></div>
+          <div class="waits__slot" data-t="13:30"><i class="b b--fri" style="--h: 0.444"></i><i class="b b--wk" style="--h: 0.222"></i></div>
+          <div class="waits__slot" data-t="14:00"><i class="b b--fri" style="--h: 0.222"></i><i class="b b--wk" style="--h: 0.111"></i></div>
+          <div class="waits__slot" data-t="14:30"><i class="b b--fri" style="--h: 0.111"></i><i class="b b--wk" style="--h: 0.000"></i></div>
+          <div class="waits__gap"><span>Closed 15:00 to 17:30</span></div>
+          <div class="waits__slot" data-t="17:30"><i class="b b--fri" style="--h: 0.333"></i><i class="b b--wk" style="--h: 0.111"></i></div>
+          <div class="waits__slot" data-t="18:00"><i class="b b--fri" style="--h: 0.667"></i><i class="b b--wk" style="--h: 0.333"></i></div>
+          <div class="waits__slot" data-t="18:30"><i class="b b--fri" style="--h: 1.000"></i><i class="b b--wk" style="--h: 0.556"></i></div>
+          <div class="waits__slot" data-t="19:00"><i class="b b--fri" style="--h: 1.000"></i><i class="b b--wk" style="--h: 0.556"></i></div>
+          <div class="waits__slot" data-t="19:30"><i class="b b--fri" style="--h: 0.778"></i><i class="b b--wk" style="--h: 0.333"></i></div>
+          <div class="waits__slot" data-t="20:00"><i class="b b--fri" style="--h: 0.556"></i><i class="b b--wk" style="--h: 0.222"></i></div>
+          <div class="waits__slot" data-t="20:30"><i class="b b--fri" style="--h: 0.333"></i><i class="b b--wk" style="--h: 0.111"></i></div>
+          <div class="waits__slot" data-t="21:00"><i class="b b--fri" style="--h: 0.222"></i><i class="b b--wk" style="--h: 0.000"></i></div>
+          <div class="waits__slot" data-t="21:30"><i class="b b--fri" style="--h: 0.111"></i><i class="b b--wk" style="--h: 0.000"></i></div>
+        </div>
+        <div class="waits__x num" aria-hidden="true"><span>11:30</span><span></span><span></span><span></span><span>13:30</span><span></span><span></span><span class="waits__gapx"></span><span>17:30</span><span></span><span></span><span></span><span>19:30</span><span></span><span></span><span></span><span>21:30</span></div>
+        <div class="sr-only"><table>
+          <caption>Typical wait in minutes by time of day</caption>
+          <thead><tr><th scope="col">Time</th><th scope="col">Friday and Saturday</th><th scope="col">Tuesday to Thursday</th></tr></thead>
+          <tbody><tr><th scope="row">11:30</th><td>10</td><td>5</td></tr><tr><th scope="row">12:00</th><td>25</td><td>15</td></tr><tr><th scope="row">12:30</th><td>40</td><td>25</td></tr><tr><th scope="row">13:00</th><td>35</td><td>20</td></tr><tr><th scope="row">13:30</th><td>20</td><td>10</td></tr><tr><th scope="row">14:00</th><td>10</td><td>5</td></tr><tr><th scope="row">14:30</th><td>5</td><td>0</td></tr><tr><th scope="row">17:30</th><td>15</td><td>5</td></tr><tr><th scope="row">18:00</th><td>30</td><td>15</td></tr><tr><th scope="row">18:30</th><td>45</td><td>25</td></tr><tr><th scope="row">19:00</th><td>45</td><td>25</td></tr><tr><th scope="row">19:30</th><td>35</td><td>15</td></tr><tr><th scope="row">20:00</th><td>25</td><td>10</td></tr><tr><th scope="row">20:30</th><td>15</td><td>5</td></tr><tr><th scope="row">21:00</th><td>10</td><td>0</td></tr><tr><th scope="row">21:30</th><td>5</td><td>0</td></tr></tbody>
+        </table></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="visit" id="visit" aria-labelledby="visit-h">
+    <div class="wrap visit__grid">
+      <div class="hours">
+        <h2 id="visit-h">Hours and how to find us.</h2>
+        <table class="hours__t">
+          <caption class="sr-only">Opening hours</caption>
+          <thead><tr><th scope="col">Day</th><th scope="col">Lunch</th><th scope="col">Dinner</th></tr></thead>
+          <tbody>
+            <tr data-day="1"><th scope="row">Monday</th><td colspan="2" class="closed">Closed, broth day</td></tr>
+            <tr data-day="2"><th scope="row">Tuesday</th><td class="num">11:30 to 15:00</td><td class="num">17:30 to 21:30</td></tr>
+            <tr data-day="3"><th scope="row">Wednesday</th><td class="num">11:30 to 15:00</td><td class="num">17:30 to 21:30</td></tr>
+            <tr data-day="4"><th scope="row">Thursday</th><td class="num">11:30 to 15:00</td><td class="num">17:30 to 21:30</td></tr>
+            <tr data-day="5"><th scope="row">Friday</th><td class="num">11:30 to 15:00</td><td class="num">17:30 to 22:30</td></tr>
+            <tr data-day="6"><th scope="row">Saturday</th><td class="num">11:30 to 15:00</td><td class="num">17:30 to 22:30</td></tr>
+            <tr data-day="0"><th scope="row">Sunday</th><td class="num">11:30 to 16:00</td><td class="closed">Closed</td></tr>
+          </tbody>
+        </table>
+        <p class="hours__note">We close early when the broth runs out, usually only on Saturdays. The sign on the door goes up about an hour before.</p>
+        <ul class="facts">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-tram"/></svg><span>Tram 86 or 96 to Bourke St and Exhibition St, then two minutes on foot</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-step"/></svg><span>One step at the door. We have a ramp, just ask.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg><span>Card only. No cash, no phone orders.</span></li>
+        </ul>
+      </div>
+      <figure class="map" aria-labelledby="map-cap">
+        <svg class="map__svg" viewBox="0 0 640 520" role="img" aria-labelledby="map-title">
+          <title id="map-title">Street map: Kaedama is in Cohen Place, a laneway running south from Little Bourke Street between Russell Street and Exhibition Street.</title>
+          <rect class="m-block" x="0" y="0" width="640" height="520"/>
+          <path class="m-street" d="M0 120H640M0 380H640M150 0V520M520 0V520"/>
+          <path class="m-lane" d="M340 120V250H420M250 120V60M420 250V380"/>
+          <path class="m-queue" d="M346 214V246"/>
+          <circle class="m-pin-ring" cx="340" cy="250" r="22"/>
+          <circle class="m-pin" cx="340" cy="250" r="9"/>
+          <text class="m-label" x="24" y="110">LITTLE BOURKE ST</text>
+          <text class="m-label" x="24" y="370">BOURKE ST</text>
+          <text class="m-label m-label--v" transform="translate(140 504) rotate(-90)">RUSSELL ST</text>
+          <text class="m-label m-label--v" transform="translate(510 504) rotate(-90)">EXHIBITION ST</text>
+          <text class="m-lane-label" x="352" y="168">COHEN PL</text>
+          <text class="m-you" x="370" y="236">Kaedama</text>
+          <text class="m-q" x="356" y="206">queue here</text>
+          <path class="m-tram" d="M560 380h48"/>
+          <text class="m-label" x="536" y="410">TRAM 86, 96</text>
+        </svg>
+        <figcaption id="map-cap"><b>Rear of 9 Cohen Place, Melbourne VIC 3000</b><span>The door with the orange tag, forty metres down from Little Bourke Street.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__row">
+      <p>No phone and no bookings. For anything else: <a href="mailto:counter@kaedama.com.au">counter@kaedama.com.au</a></p>
+      <p><a role="link" aria-disabled="true">Instagram</a></p>
+    </div>
+    <p class="foot__mark" aria-hidden="true">KAEDAMA</p>
+    <div class="foot__base"><span>© 2026 Kaedama, Melbourne. Photographs from Wikimedia Commons, credited in CREDITS.md.</span><span>Set in Mona Sans</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

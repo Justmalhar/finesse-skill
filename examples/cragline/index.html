@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Logbook, Cragline</title>
+<meta name="description" content="Cragline logbook: sends by grade, grade pyramid, current projects, the wall map with this week's new routes, and session history.">
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search), r = document.documentElement;
+    var t = q.get("theme");
+    if (t === "light" || t === "dark") r.dataset.theme = t;
+    if (q.get("state")) r.dataset.state = q.get("state");
+  })();
+</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-log" viewBox="0 0 16 16"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v10H4.5A1.5 1.5 0 0 0 3 13.5zM3 13.5A1.5 1.5 0 0 0 4.5 15H13v-3M6 5h4"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 16 16"><path d="M3.5 14.5V2.5M3.5 3h8.5l-2 3 2 3H3.5"/></symbol>
+  <symbol id="i-map" viewBox="0 0 16 16"><path d="M1.5 3.5 5.5 2l5 2 4-1.5v10l-4 1.5-5-2-4 1.5zM5.5 2v10M10.5 4v10"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></symbol>
+  <symbol id="i-board" viewBox="0 0 16 16"><path d="M3 14V8.5M8 14V2.5M13 14V6M1.5 14h13"/></symbol>
+  <symbol id="i-comp" viewBox="0 0 16 16"><circle cx="6" cy="5.5" r="2.5"/><path d="M1.5 13.5c.5-2.5 2.3-4 4.5-4s4 1.5 4.5 4M11 3.2a2.3 2.3 0 0 1 0 4.6M12.5 9.7c1.2.6 1.8 1.9 2 3.8"/></symbol>
+  <symbol id="i-set" viewBox="0 0 16 16"><path d="M2 4.5h3m3.5 0H14M2 11.5h7.5m3.5 0h1"/><circle cx="6.75" cy="4.5" r="1.75"/><circle cx="11.25" cy="11.5" r="1.75"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 16 16"><path d="m6 4 4 4-4 4"/></symbol>
+  <symbol id="i-down" viewBox="0 0 16 16"><path d="m4 6 4 4 4-4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.5 9.5A5.5 5.5 0 1 1 6.5 2.5a4.5 4.5 0 0 0 7 7z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.2l2 1.3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 2.5 14.5 13.5h-13zM8 6.5v3M8 11.5v.01"/></symbol>
+  <symbol id="i-x" viewBox="0 0 16 16"><path d="m4 4 8 8M12 4l-8 8"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 16 16"><path d="M9 1.5 3.5 9H8l-1 5.5L12.5 7H8z"/></symbol>
+  <symbol id="i-peak" viewBox="0 0 16 16"><path d="M1.5 13.5 6 5l2.5 4L11 6l3.5 7.5z"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.5-3.5M13 2.5v3h-3"/></symbol>
+  <symbol id="g-sent" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor" stroke="none"/><path d="m3.5 6.2 1.7 1.6 3.3-3.6" stroke="var(--surface)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="g-tried" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 1.4a4.6 4.6 0 0 1 0 9.2z" fill="currentColor"/></symbol>
+  <symbol id="g-new" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2 2"/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="side" aria-label="Cragline">
+    <a class="brand" href="#logbook">
+      <span class="brand__mark"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 15.5 7 7l3 4.5 3-6.5 5 10.5"/><path d="M12.2 6.6 13 5"/></svg></span>
+      <span class="brand__name"><b>Cragline</b><span>Basalt Lane, Bristol</span></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <p class="nav__label">You</p>
+      <a href="#logbook" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-log"/></svg><span>Logbook</span></a>
+      <a href="#projects"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg><span>Projects</span><b class="count">3</b></a>
+      <a href="#sessions"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg><span>Sessions</span></a>
+      <p class="nav__label">The gym</p>
+      <a href="#wallmap"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg><span>Wall map</span><b class="count count--new">7 new</b></a>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-board"/></svg><span>Leaderboard</span></a>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-comp"/></svg><span>Bouldering league</span></a>
+      <a role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-set"/></svg><span>Settings</span></a>
+    </nav>
+    <div class="pass">
+      <div class="pass__top">Off-peak plus membership<b class="num">6 of 8 <span class="unit">peak visits</span></b></div>
+      <div class="segbar" style="--p: 75%; --n: 8; --c: var(--chart-1)" role="meter" aria-valuemin="0" aria-valuemax="8" aria-valuenow="6" aria-label="Peak visits used this month"></div>
+      <p>Resets 1 Dec. Off-peak entry stays unlimited.</p>
+      <a role="link" aria-disabled="true">Switch to Unlimited</a>
+    </div>
+    <div class="me">
+      <span class="avatar" aria-hidden="true">IO</span>
+      <span class="me__name"><b>Ines Okafor</b><span>Member since 2021</span></span>
+    </div>
+  </aside>
+
+  <div class="col">
+    <header class="top">
+      <a class="top__brand" href="#logbook"><span class="brand__mark"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 15.5 7 7l3 4.5 3-6.5 5 10.5"/></svg></span>Cragline</a>
+      <div class="crumbs"><span>Ines Okafor</span><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg><b>Logbook</b></div>
+      <label class="search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <span class="sr-only">Search new routes</span>
+        <input id="q" type="search" placeholder="Search routes, walls, setters" autocomplete="off" aria-keyshortcuts="/">
+        <kbd>/</kbd>
+      </label>
+      <button class="btn btn--icon btn--quiet theme-btn" type="button" id="theme" aria-label="Switch colour theme"><svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg><svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg></button>
+      <button class="btn btn--primary" type="button" id="open-log"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span>Log a send</span></button>
+    </header>
+
+    <main class="main" id="logbook">
+      <div class="head">
+        <div>
+          <h1>Logbook</h1>
+          <p>Autumn block, <b>31 Aug to 22 Nov</b>. Last session Thursday, 2 h 05 m on the wall.</p>
+        </div>
+        <div class="chips">
+          <span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Week 12 of 12</span>
+          <a class="chip chip--warn" href="#projects"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Low Tide comes down 2 Dec</a>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Lead tile: the answer to "am I climbing harder than last block?" -->
+        <section class="tile lead c6 r2" aria-labelledby="lead-h" data-skel>
+          <div class="tile__head">
+            <div><h2 id="lead-h">Sends by grade</h2><p>Weekly sends, stacked by grade band</p></div>
+            <div class="seg" style="--n: 3" role="radiogroup" aria-label="Range">
+              <span class="seg__thumb" aria-hidden="true"></span>
+              <label><input type="radio" name="range" value="4">4 wk</label>
+              <label><input type="radio" name="range" value="12" checked>12 wk</label>
+              <label><input type="radio" name="range" value="24">24 wk</label>
+            </div>
+          </div>
+          <div class="lead__fig">
+            <p class="fig" id="lead-total">144<span class="unit">sends</span></p>
+            <span class="delta delta--good" id="lead-delta"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 9.5v-7M3 5.5l3-3 3 3"/></svg><span>18% vs summer block</span></span>
+            <ul class="legend" id="lead-legend">
+              <li><i class="sw b-hard"></i>V5 and up <b>22</b></li>
+              <li><i class="sw sw--dia b-mid"></i>V3 to V4 <b>76</b></li>
+              <li><i class="sw sw--ring b-easy"></i>V0 to V2 <b>46</b></li>
+              <li><i class="sw sw--dash"></i>Prior average</li>
+            </ul>
+          </div>
+          <div class="chart" id="chart">
+            <div class="chart__y axis" aria-hidden="true"><span style="top:0%">16</span><span style="top:25%">12</span><span style="top:50%">8</span><span style="top:75%">4</span><span style="top:100%">0</span></div>
+            <div class="plot" id="plot" tabindex="0" role="slider" aria-label="Sends per week. Use the arrow keys to read each week." aria-valuemin="1" aria-valuemax="12" aria-valuenow="12">
+              <div class="bars" id="bars"></div>
+              <div class="ref" id="ref"><span></span></div>
+              <div class="tip" id="tip" aria-hidden="true"></div>
+            </div>
+            <div class="chart__x axis" id="xaxis" aria-hidden="true"></div>
+          </div>
+          <dl class="stats">
+            <div><dt>V5 or harder</dt><dd id="st-hard">22 sends</dd><dd id="st-hard-c">summer block 9</dd></div>
+            <div><dt>Above prior average</dt><dd id="st-avg">10 of 12 wk</dd><dd id="st-avg-c">average 10.2 a week</dd></div>
+            <div><dt>Best week</dt><dd id="st-best">14 sends</dd><dd id="st-best-c">week of 28 Sep</dd></div>
+            <div><dt>Per session</dt><dd id="st-ps">4.8 sends</dd><dd id="st-ps-c">over 30 sessions</dd></div>
+          </dl>
+          <div class="skel" aria-hidden="true"><i style="--w:34%"></i><i style="--w:22%;--h:36px"></i><i class="grow"></i><i style="--w:100%;--h:40px"></i></div>
+        </section>
+
+        <section class="tile kpi c3" aria-labelledby="k1" data-skel>
+          <div class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-peak"/></svg><h2 id="k1" style="font:inherit">Hardest send</h2><span class="delta delta--good"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 9.5v-7M3 5.5l3-3 3 3"/></svg>1 grade</span></div>
+          <div class="kpi__mid"><p class="fig">V6</p><p class="kpi__ctx">Crimson Arête, 19 Nov</p></div>
+          <div class="kpi__viz">
+            <div class="ladder b-hard" aria-hidden="true">
+              <i class="on" style="--g:0"></i><i class="on" style="--g:1"></i><i class="on" style="--g:2"></i><i class="on" style="--g:3"></i><i class="on" style="--g:4"></i><i class="on" style="--g:5"></i><i class="on" style="--g:6"></i><i class="goal" style="--g:7"></i><i style="--g:8"></i><i style="--g:9"></i><i style="--g:10"></i>
+            </div>
+            <div class="ladder__x" aria-hidden="true"><span>V0</span><span></span><span>V2</span><span></span><span>V4</span><span></span><span>V6</span><span></span><span>V8</span><span></span><span>V10</span></div>
+          </div>
+          <p class="kpi__cap"><span><b>5</b> sends at V6</span><span>Goal V7 by March</span></p>
+          <div class="skel" aria-hidden="true"><i style="--w:50%"></i><i style="--w:30%;--h:28px"></i><i class="grow"></i></div>
+        </section>
+
+        <section class="tile kpi c3" aria-labelledby="k2" data-skel>
+          <div class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-bolt"/></svg><h2 id="k2" style="font:inherit">Flash rate</h2><span class="delta delta--good"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 9.5v-7M3 5.5l3-3 3 3"/></svg>5 pts</span></div>
+          <div class="kpi__mid"><p class="fig">31<span class="unit">%</span></p><p class="kpi__ctx">45 of 144 first go</p></div>
+          <div class="kpi__viz">
+            <div class="compo" role="img" aria-label="Flash 45, redpoint 81, repeat 18">
+              <span class="c-flash" style="--v:45; --c: var(--style-flash)">Flash <b>45</b></span>
+              <span class="c-red" style="--v:81; --c: var(--style-red)">Redpoint <b>81</b></span>
+              <span class="c-rep" style="--v:18; --c: var(--style-rep)">Rpt <b>18</b></span>
+            </div>
+          </div>
+          <p class="kpi__cap"><span>12 weeks, by style</span><span>Summer block <b>26%</b></span></p>
+          <div class="skel" aria-hidden="true"><i style="--w:50%"></i><i style="--w:30%;--h:28px"></i><i class="grow"></i></div>
+        </section>
+
+        <section class="tile kpi c3" aria-labelledby="k3" data-skel>
+          <div class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><h2 id="k3" style="font:inherit">Sessions</h2><span class="delta delta--good"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 9.5v-7M3 5.5l3-3 3 3"/></svg>6</span></div>
+          <div class="kpi__mid"><p class="fig">30</p><p class="kpi__ctx">2.5 a week, 1 h 48 m each</p></div>
+          <div class="kpi__viz">
+            <div class="wk" role="img" aria-label="Sessions by weekday: Monday 3, Tuesday 10, Wednesday 2, Thursday 9, Friday 1, Saturday 2, Sunday 3" style="--c: var(--chart-1)">
+              <span class="lo" data-d="M" style="--v:.3"><i></i></span><span data-d="T" style="--v:1"><i></i></span><span class="lo" data-d="W" style="--v:.2"><i></i></span><span data-d="T" style="--v:.9"><i></i></span><span class="lo" data-d="F" style="--v:.1"><i></i></span><span class="lo" data-d="S" style="--v:.2"><i></i></span><span class="lo" data-d="S" style="--v:.3"><i></i></span>
+            </div>
+          </div>
+          <p class="kpi__cap"><span><b>Tue</b> and <b>Thu</b> are your nights</span><span>Summer <b>24</b></span></p>
+          <div class="skel" aria-hidden="true"><i style="--w:50%"></i><i style="--w:30%;--h:28px"></i><i class="grow"></i></div>
+        </section>
+
+        <section class="tile kpi c3" aria-labelledby="k4" data-skel>
+          <div class="kpi__top"><svg class="icon" aria-hidden="true"><use href="#i-redo"/></svg><h2 id="k4" style="font:inherit">Attempts per send</h2><span class="delta delta--good"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2.5v7M3 6.5l3 3 3-3"/></svg>0.8</span></div>
+          <div class="kpi__mid"><p class="fig">2.6</p><p class="kpi__ctx">4-week average</p></div>
+          <div class="kpi__viz">
+            <div class="trend" id="trend" style="--c: var(--chart-1)" role="img" aria-label="Attempts per send fell from 3.5 to 2.4 over 12 weeks"></div>
+          </div>
+          <p class="kpi__cap"><span>Weekly, 12 weeks</span><span>Fewer is better</span></p>
+          <div class="skel" aria-hidden="true"><i style="--w:50%"></i><i style="--w:30%;--h:28px"></i><i class="grow"></i></div>
+        </section>
+
+        <!-- Projects -->
+        <section class="projects c9" id="projects" aria-labelledby="proj-h">
+          <div class="sect"><h2 id="proj-h">Current projects</h2><p>3 open, 1 sent this week</p><a class="btn btn--sm" role="link" aria-disabled="true">All projects</a></div>
+          <ul class="tickets">
+            <li class="ticket is-sent b-hard" id="t-crimson">
+              <div class="ticket__body">
+                <div class="stub"><span class="stub__grade">V6</span><span class="stub__code">ARÊTE 03</span></div>
+                <div class="ticket__main">
+                  <div><h3>Crimson Arête</h3><p class="ticket__meta">The Arête, set by Dee, 28 Oct</p></div>
+                  <div class="att">
+                    <p class="att__row"><span>Attempts</span><b>9</b></p>
+                    <div class="ticks" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="s"></i><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="att">
+                    <p class="att__row"><span>High point, moves</span><b>Top</b></p>
+                    <div class="hp" style="--p:100%" role="meter" aria-valuemin="0" aria-valuemax="14" aria-valuenow="14" aria-label="High point, moves"><i></i></div>
+                  </div>
+                  <div class="ticket__end"><p class="stamp" aria-hidden="true">Sent<small>19 Nov, go 9</small></p><span class="sr-only">Status: sent on 19 November, on attempt 9, over 3 sessions.</span></div>
+                </div>
+              </div>
+            </li>
+            <li class="ticket b-hard">
+              <div class="ticket__body">
+                <div class="stub"><span class="stub__grade">V6</span><span class="stub__code">CAVE 07</span></div>
+                <div class="ticket__main">
+                  <div><h3>Low Tide</h3><p class="ticket__meta">Cave, set by Marco, 21 Oct</p></div>
+                  <div class="att">
+                    <p class="att__row"><span>Attempts</span><b>7</b></p>
+                    <div class="ticks" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="att">
+                    <p class="att__row"><span>High point, moves</span><b>11 of 14</b></p>
+                    <div class="hp" style="--p:78.6%" role="meter" aria-valuemin="0" aria-valuemax="14" aria-valuenow="11" aria-label="High point, moves"><i></i></div>
+                  </div>
+                  <p class="ticket__end"><span>Last tried <b>17 Nov</b></span><span class="warn"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>Down in 11 days</span></p>
+                </div>
+              </div>
+            </li>
+            <li class="ticket b-hard">
+              <div class="ticket__body">
+                <div class="stub"><span class="stub__grade">V7</span><span class="stub__code">SLAB 22</span></div>
+                <div class="ticket__main">
+                  <div><h3>Glass Ceiling</h3><p class="ticket__meta">Slab, set by Priya, 3 Nov</p></div>
+                  <div class="att">
+                    <p class="att__row"><span>Attempts</span><b>4</b></p>
+                    <div class="ticks" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="att">
+                    <p class="att__row"><span>High point, moves</span><b>6 of 12</b></p>
+                    <div class="hp" style="--p:50%" role="meter" aria-valuemin="0" aria-valuemax="12" aria-valuenow="6" aria-label="High point, moves"><i></i></div>
+                  </div>
+                  <p class="ticket__end"><span>Last tried <b>15 Nov</b></span><span>Your first <b>V7</b></span></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="tile c3" aria-labelledby="pyr-h" data-skel>
+          <div class="tile__head"><div><h2 id="pyr-h">Grade pyramid</h2><p>Sends per grade, autumn block</p></div></div>
+          <div class="pyr" role="list">
+            <div class="pyr__row is-proj b-hard" role="listitem"><span>V7</span><span class="pyr__bar"><i class="proj"></i></span><b>0</b></div>
+            <div class="pyr__row b-hard" role="listitem"><span>V6</span><span class="pyr__bar"><i style="--v:5"></i></span><b>5</b></div>
+            <div class="pyr__row b-hard" role="listitem"><span>V5</span><span class="pyr__bar"><i style="--v:17"></i></span><b>17</b></div>
+            <div class="pyr__row b-mid" role="listitem"><span>V4</span><span class="pyr__bar"><i class="mid" style="--v:35"></i></span><b>35</b></div>
+            <div class="pyr__row b-mid" role="listitem"><span>V3</span><span class="pyr__bar"><i class="mid" style="--v:41"></i></span><b>41</b></div>
+            <div class="pyr__row b-easy" role="listitem"><span>V2</span><span class="pyr__bar"><i style="--v:24"></i></span><b>24</b></div>
+            <div class="pyr__row b-easy" role="listitem"><span>V1</span><span class="pyr__bar"><i style="--v:14"></i></span><b>14</b></div>
+            <div class="pyr__row b-easy" role="listitem"><span>V0</span><span class="pyr__bar"><i style="--v:8"></i></span><b>8</b></div>
+          </div>
+          <p class="pyr__note"><b>17 V5s under 5 V6s</b> is a solid base. The hatched V7 is Glass Ceiling, your one project there.</p>
+          <div class="skel" aria-hidden="true"><i style="--w:50%"></i><i class="grow"></i></div>
+        </section>
+
+        <!-- Wall map -->
+        <section class="tile c8" id="wallmap" aria-labelledby="map-h" data-skel>
+          <div class="tile__head">
+            <div><h2 id="map-h">Wall map</h2><p>7 new routes since Monday. The Prow was reset on 17 Nov.</p></div>
+            <span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b class="num">3</b> of 7 sent</span></span>
+          </div>
+          <div class="mapwrap">
+            <div class="mapcol">
+            <figure class="map" aria-label="Floor plan of Basalt Lane with new routes pinned to their walls">
+              <svg viewBox="0 0 400 300" aria-hidden="true">
+                <rect class="mat" x="20" y="20" width="360" height="260" rx="4"/>
+                <rect class="cave" x="284" y="17" width="99" height="99"/>
+                <rect class="board" x="17" y="222" width="72" height="61"/>
+                <path class="wall" d="M14 214 V14 H154"/>
+                <path class="wall" d="M226 14 H386 V140"/>
+                <path class="wall" d="M386 140 V286 H244"/>
+                <path class="wall" d="M156 286 H14 V214"/>
+                <path class="wall wall--thin" d="M14 219 H92 V286"/>
+                <polygon class="prow" points="150,12 190,68 230,12"/>
+                <rect class="block" x="148" y="128" width="104" height="48" rx="6" transform="rotate(-8 200 152)"/>
+                <rect class="desk" x="168" y="250" width="64" height="20" rx="3"/>
+              </svg>
+              <span class="wlab wlab--reset" style="--x:47.5%; --y:29.5%">The Prow, reset 17 Nov</span>
+              <span class="wlab" style="--x:83.5%; --y:26%">Cave</span>
+              <span class="wlab" style="--x:12%; --y:42%">Slab</span>
+              <span class="wlab" style="--x:50%; --y:50.5%">The Arête</span>
+              <span class="wlab" style="--x:86%; --y:74%">Comp wall</span>
+              <span class="wlab wlab--muted" style="--x:12.5%; --y:84%">Board</span>
+              <span class="wlab wlab--muted" style="--x:50%; --y:86.6%">Desk</span>
+              <span class="pin b-mid" data-r="1" style="--x:39.5%; --y:8.6%">1</span>
+              <span class="pin b-hard" data-r="2" style="--x:47.5%; --y:17%">2</span>
+              <span class="pin b-mid" data-r="3" style="--x:55.5%; --y:8.6%">3</span>
+              <span class="pin b-easy" data-r="4" style="--x:3.5%; --y:28%">4</span>
+              <span class="pin b-hard" data-r="5" style="--x:74%; --y:13.5%">5</span>
+              <span class="pin b-easy" data-r="6" style="--x:63%; --y:45%">6</span>
+              <span class="pin b-mid" data-r="7" style="--x:96.5%; --y:62%">7</span>
+            </figure>
+            <div class="map__key" aria-hidden="true"><span><i class="sw sw--ring b-easy"></i>V0 to V2</span><span><i class="sw sw--dia b-mid"></i>V3 to V4</span><span><i class="sw b-hard"></i>V5 and up</span><span class="map__hint">Hover a route to find it</span></div>
+            </div>
+            <div class="routes">
+              <p class="routes__head"><span>New this week</span><span>Your status</span></p>
+              <ul id="routes">
+                <li class="route b-mid" data-r="1" data-k="tannery v4 the prow dee"><span class="route__no">1</span><span class="route__name"><b>Tannery, V4</b><span>The Prow, Dee, 17 Nov</span></span><span class="route__st sent"><svg class="g" aria-hidden="true"><use href="#g-sent"/></svg>Sent</span></li>
+                <li class="route b-hard" data-r="2" data-k="half nelson v5 the prow dee"><span class="route__no">2</span><span class="route__name"><b>Half Nelson, V5</b><span>The Prow, Dee, 17 Nov</span></span><span class="route__st tried"><svg class="g" aria-hidden="true"><use href="#g-tried"/></svg>3 goes</span></li>
+                <li class="route b-mid" data-r="3" data-k="pocket watch v3 the prow sam"><span class="route__no">3</span><span class="route__name"><b>Pocket Watch, V3</b><span>The Prow, Sam, 17 Nov</span></span><span class="route__st sent"><svg class="g" aria-hidden="true"><use href="#g-sent"/></svg>Flash</span></li>
+                <li class="route b-easy" data-r="4" data-k="sea glass v2 slab priya"><span class="route__no">4</span><span class="route__name"><b>Sea Glass, V2</b><span>Slab, Priya, 18 Nov</span></span><span class="route__st sent"><svg class="g" aria-hidden="true"><use href="#g-sent"/></svg>Flash</span></li>
+                <li class="route b-hard" data-r="5" data-k="undertow v6 cave marco"><span class="route__no">5</span><span class="route__name"><b>Undertow, V6</b><span>Cave, Marco, 19 Nov</span></span><span class="route__st"><svg class="g" aria-hidden="true"><use href="#g-new"/></svg>Not tried</span></li>
+                <li class="route b-easy" data-r="6" data-k="paper moon v1 the arete priya"><span class="route__no">6</span><span class="route__name"><b>Paper Moon, V1</b><span>The Arête, Priya, 19 Nov</span></span><span class="route__st"><svg class="g" aria-hidden="true"><use href="#g-new"/></svg>Not tried</span></li>
+                <li class="route b-mid" data-r="7" data-k="dog leg v4 comp wall sam"><span class="route__no">7</span><span class="route__name"><b>Dog Leg, V4</b><span>Comp wall, Sam, 20 Nov</span></span><span class="route__st"><svg class="g" aria-hidden="true"><use href="#g-new"/></svg>Not tried</span></li>
+              </ul>
+              <div class="routes__none" id="routes-none" hidden>
+                <p>No new routes match <b id="routes-q"></b>. Search covers this week's routes by name, grade, wall and setter.</p>
+                <button class="btn btn--sm" type="button" id="clear-q"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Clear search</button>
+              </div>
+            </div>
+          </div>
+          <div class="skel" aria-hidden="true"><i style="--w:30%"></i><i class="grow"></i></div>
+        </section>
+
+        <!-- Sessions -->
+        <section class="tile c4" id="sessions" aria-labelledby="ses-h" data-skel>
+          <div class="tile__head"><div><h2 id="ses-h">Session history</h2><p>Each square is one send, coloured by grade band</p></div></div>
+          <ol class="sess" id="sess">
+            <li class="ses"><span class="ses__d"><b>19</b><span>Thu</span></span><div class="ses__mid"><div class="dots"><i class="b-hard">V6</i><i class="b-hard">V5</i><i class="b-mid">V4</i><i class="b-mid">V4</i><i class="b-mid">V3</i><i class="b-easy">V2</i></div><p><b>Crimson Arête</b> sent on go 9</p></div><span class="ses__r"><b>6</b>2 h 05 m</span></li>
+            <li class="ses"><span class="ses__d"><b>17</b><span>Tue</span></span><div class="ses__mid"><div class="dots"><i class="b-hard">V5</i><i class="b-hard">V5</i><i class="b-mid">V4</i><i class="b-mid">V3</i><i class="b-mid">V3</i><i class="b-mid">V3</i><i class="b-easy">V1</i></div><p>First night on the reset Prow</p></div><span class="ses__r"><b>7</b>1 h 40 m</span></li>
+            <li class="ses"><span class="ses__d"><b>15</b><span>Sun</span></span><div class="ses__mid"><div class="dots"><i class="b-hard">V5</i><i class="b-mid">V4</i><i class="b-mid">V4</i><i class="b-mid">V3</i></div><p>Glass Ceiling, 2 goes, high point 6</p></div><span class="ses__r"><b>4</b>1 h 20 m</span></li>
+            <li class="ses"><span class="ses__d"><b>12</b><span>Thu</span></span><div class="ses__mid"><div class="dots"><i class="b-hard">V5</i><i class="b-hard">V5</i><i class="b-mid">V4</i><i class="b-mid">V4</i><i class="b-mid">V3</i></div><p>Low Tide, 3 goes, high point 11</p></div><span class="ses__r"><b>5</b>2 h 10 m</span></li>
+            <li class="ses"><span class="ses__d"><b>10</b><span>Tue</span></span><div class="ses__mid"><div class="dots"><i class="b-mid">V4</i><i class="b-mid">V3</i><i class="b-easy">V2</i><i class="b-easy">V1</i></div><p>Short one, finger tape session</p></div><span class="ses__r"><b>4</b>1 h 30 m</span></li>
+            <li class="ses"><span class="ses__d"><b>7</b><span>Sat</span></span><div class="ses__mid"><div class="dots"><i class="b-hard">V5</i><i class="b-mid">V4</i><i class="b-mid">V3</i><i class="b-mid">V3</i><i class="b-easy">V2</i></div><p>Paired with Tom, Cave circuit</p></div><span class="ses__r"><b>5</b>1 h 50 m</span></li>
+          </ol>
+          <div class="skel" aria-hidden="true"><i style="--w:40%"></i><i style="--w:100%;--h:44px"></i><i style="--w:100%;--h:44px"></i><i style="--w:100%;--h:44px"></i></div>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="#logbook" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-log"/></svg>Logbook</a>
+  <a href="#projects"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg>Projects</a>
+  <a href="#wallmap"><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>Wall map</a>
+  <a href="#sessions"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Sessions</a>
+</nav>
+
+<dialog id="log" aria-labelledby="log-h">
+  <form id="log-form" novalidate>
+    <div class="dlg__head">
+      <div><h2 id="log-h">Log a send</h2><p>Saturday 21 November, Basalt Lane</p></div>
+      <button class="btn btn--icon btn--quiet" type="button" id="close-log" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="dlg__body">
+      <div class="field">
+        <label for="f-route">Route</label>
+        <div class="input">
+          <select id="f-route" aria-describedby="f-route-h">
+            <option value="">Choose a route</option>
+            <optgroup label="Projects">
+              <option value="Low Tide|6">Low Tide, V6, Cave</option>
+              <option value="Glass Ceiling|7">Glass Ceiling, V7, Slab</option>
+            </optgroup>
+            <optgroup label="New this week">
+              <option value="Half Nelson|5">Half Nelson, V5, The Prow</option>
+              <option value="Undertow|6">Undertow, V6, Cave</option>
+              <option value="Dog Leg|4">Dog Leg, V4, Comp wall</option>
+              <option value="Paper Moon|1">Paper Moon, V1, The Arête</option>
+            </optgroup>
+          </select>
+          <svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>
+        </div>
+        <p class="field__help" id="f-route-h">Projects and this week's new routes.</p>
+      </div>
+      <div class="row2">
+        <fieldset class="field">
+          <legend>Style</legend>
+          <div class="seg seg--wide" style="--n: 3">
+            <span class="seg__thumb" aria-hidden="true"></span>
+            <label><input type="radio" name="style" value="Flash">Flash</label>
+            <label><input type="radio" name="style" value="Redpoint" checked>Redpoint</label>
+            <label><input type="radio" name="style" value="Repeat">Repeat</label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="f-att">Attempts</label>
+          <div class="input"><input id="f-att" type="number" inputmode="numeric" min="1" max="99" value="4" aria-describedby="f-att-h"></div>
+        </div>
+      </div>
+      <p class="field__help" id="f-att-h">Count every go, including the one you sent.</p>
+    </div>
+    <div class="dlg__foot">
+      <button class="btn" type="button" id="cancel-log">Cancel</button>
+      <button class="btn btn--primary" type="submit" id="save-log"><span class="btn__faces"><span class="is-on">Save send</span><span><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 1 6 6"/></svg>Saving</span><span><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Saved</span></span></button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span id="toast-t"></span></div>
+
+<script src="script.js"></script>
+</body>
+</html>

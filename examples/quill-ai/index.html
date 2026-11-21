@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quill: support reply drafts in your team’s own voice</title>
+<meta name="description" content="Quill drafts replies to support tickets from your help centre, in the voice your agents already write in. Works inside Zendesk and Intercom. $24 per agent a month.">
+<script>
+  /* Before first paint: ?theme=dark or ?theme=light, otherwise light. */
+  (function () {
+    var t = new URLSearchParams(location.search).get("theme");
+    if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+    document.documentElement.classList.add("js");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-nib" viewBox="0 0 24 24"><path d="M12 2.75c3.6 3.1 5.5 6.6 5.5 10.2L12 21.25 6.5 12.95C6.5 9.35 8.4 5.85 12 2.75Z"/><path d="M12 21.25V12.5"/><circle cx="12" cy="11" r="1.6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 16 16"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2.75 5h10.5M2.75 11h10.5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="9" rx="1.5"/><path d="M2.5 4.5 8 8.75l5.5-4.25"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 16 16"><path d="M2.75 4.25a1.5 1.5 0 0 1 1.5-1.5h7.5a1.5 1.5 0 0 1 1.5 1.5v5a1.5 1.5 0 0 1-1.5 1.5H7l-3 2.5v-2.5h0.25a1.5 1.5 0 0 1-1.5-1.5Z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 16 16"><rect x="3.25" y="7" width="9.5" height="6.75" rx="1.5"/><path d="M5.25 7V5a2.75 2.75 0 0 1 5.5 0v2"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 16 16"><path d="M3.5 8h9"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top"><svg class="brand__mark" aria-hidden="true"><use href="#i-nib"/></svg>Quill</a>
+    <nav class="nav__links" id="nav-links" aria-label="Page sections">
+      <a href="#how">How it works</a>
+      <a href="#example">Example</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#security">Security</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <div class="nav__end">
+      <button class="iconbtn" type="button" id="theme-btn" aria-label="Switch to dark theme">
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <a class="nav__signin" role="link" aria-disabled="true">Sign in</a>
+      <a class="btn btn--primary nav__cta" href="#trial">Start a 14-day trial</a>
+      <button class="iconbtn nav__menu" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <h1 id="hero-h">First drafts of support replies, in your team’s own voice.</h1>
+        <p class="hero__sub">Quill reads your help centre and the replies your agents have already sent. When a ticket lands in Zendesk or Intercom, a draft is waiting beside it with its sources listed. Your agent reads it, edits it and presses send.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="#trial">Start a 14-day trial</a>
+          <a class="textlink" href="#example">Take apart an example reply<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <dl class="leaders hero__facts">
+          <div><dt>Replies Quill sends by itself</dt><dd>None, ever</dd></div>
+          <div><dt>Setup in Zendesk or Intercom</dt><dd class="num">About 20 min</dd></div>
+          <div><dt>Price per agent</dt><dd class="num">$24 a month</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero__art" aria-hidden="true" inert>
+        <div class="desk">
+          <div class="desk__bar">
+            <span class="desk__lights"><i></i><i></i><i></i></span>
+            <span class="desk__org">Fernhill Outdoor</span>
+            <span class="desk__crumb">Support <b>/</b> Open tickets <b>/</b> <span class="num">#48213</span></span>
+          </div>
+          <div class="desk__body">
+            <ul class="queue">
+              <li class="queue__item is-on">
+                <span class="queue__top"><b>Ines Duarte</b><span class="num">09:12</span></span>
+                <span class="queue__subj">Front pole snapped on night two</span>
+                <span class="state state--ready"><svg class="icon" aria-hidden="true"><use href="#i-nib"/></svg>Draft ready</span>
+              </li>
+              <li class="queue__item">
+                <span class="queue__top"><b>Tom Achebe</b><span class="num">09:04</span></span>
+                <span class="queue__subj">Footprint missing from order</span>
+                <span class="state state--ready"><svg class="icon" aria-hidden="true"><use href="#i-nib"/></svg>Draft ready</span>
+              </li>
+              <li class="queue__item">
+                <span class="queue__top"><b>Maja Lind</b><span class="num">08:51</span></span>
+                <span class="queue__subj">Can I machine wash the Corrie down jacket?</span>
+                <span class="state state--sent"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sent by Priya</span>
+              </li>
+              <li class="queue__item">
+                <span class="queue__top"><b>Owen Price</b><span class="num">08:37</span></span>
+                <span class="queue__subj">Stove will not light below zero</span>
+                <span class="state state--ask"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>No article covers this</span>
+              </li>
+              <li class="queue__item">
+                <span class="queue__top"><b>Ruth Okafor</b><span class="num">08:20</span></span>
+                <span class="queue__subj">Change delivery to my work address</span>
+                <span class="state state--sent"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sent by Sam</span>
+              </li>
+            </ul>
+            <div class="ticket">
+              <p class="ticket__subj">Front pole snapped on night two</p>
+              <p class="ticket__meta"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><span>Ines Duarte, by email, order <span class="num">FH-20931</span></span></p>
+              <div class="ticket__msg">
+                <p>Hi, the front pole on my Ridgeback 2 snapped on the second night out. Do I need to send the whole tent back, or can you post just the pole? I’m out again on the 14th.</p>
+                <p>Thanks, Ines</p>
+              </div>
+              <div class="ticket__fields">
+                <span><i>Product</i>Ridgeback 2 tent</span>
+                <span><i>Bought</i><span class="num">3 Aug 2026</span></span>
+                <span><i>Warranty</i>Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <article class="draft">
+          <header class="draft__head">
+            <span class="draft__name"><svg class="icon" aria-hidden="true"><use href="#i-nib"/></svg><span>Draft for <span class="num">#48213</span></span></span>
+            <span class="draft__voice">Fernhill house voice</span>
+          </header>
+          <div class="draft__text">
+            <p>Hi Ines,</p>
+            <p>Sorry the pole gave out on night two. You don’t need to send the tent back: I’ve ordered a replacement front pole (part <span class="num">RB2-FP</span>) at no charge, and it should reach you by Thursday the 12th, ahead of your trip.</p>
+            <p>If the shock cord inside is frayed too, reply with a photo and I’ll add a new one to the parcel.</p>
+            <p>Happy camping,<br>Sam</p>
+          </div>
+          <dl class="leaders leaders--sm draft__src">
+            <div><dt>Spare parts and repairs</dt><dd class="num">HC-117</dd></div>
+            <div><dt>Warranty, two years</dt><dd class="num">HC-042</dd></div>
+            <div><dt>Tracked 48, order by 14:00</dt><dd class="num">HC-210</dd></div>
+          </dl>
+          <footer class="draft__foot">
+            <span class="btn btn--primary btn--sm">Insert into reply</span>
+            <span class="btn btn--sm">Make it shorter</span>
+            <span class="draft__time num">Drafted in 4.2 s</span>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how" aria-labelledby="how-h">
+    <div class="wrap how__grid">
+      <div class="how__lead">
+        <h2 id="how-h">What Quill does before an agent opens the ticket.</h2>
+        <p>It drafts from two things you already have: the articles your customers can read, and the replies your team has already written.</p>
+        <a class="textlink" href="#integrations">Where the draft appears<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <div class="step__copy">
+            <h3>It reads your help centre</h3>
+            <p>Quill indexes every published article in Zendesk Guide or Intercom Articles and rereads them when they change. It drafts only from what is published, so a draft is never more generous than your policy.</p>
+          </div>
+          <figure class="ev ev--index reveal">
+            <figcaption><b>Fernhill help centre</b><span class="num">212 articles, synced 08:40</span></figcaption>
+            <ul class="bars">
+              <li style="--v: 0.88"><span>Product care</span><i></i><b class="num">88</b></li>
+              <li style="--v: 0.64"><span>Orders and delivery</span><i></i><b class="num">64</b></li>
+              <li style="--v: 0.41"><span>Returns and repairs</span><i></i><b class="num">41</b></li>
+              <li style="--v: 0.19"><span>Warranty</span><i></i><b class="num">19</b></li>
+            </ul>
+          </figure>
+        </li>
+        <li class="step">
+          <div class="step__copy">
+            <h3>It learns how your team writes</h3>
+            <p>From the last 5,000 replies your agents sent, Quill picks up the greeting, the sign-off, how long a reply runs and the phrases your team never uses.</p>
+          </div>
+          <figure class="ev ev--voice reveal">
+            <div>
+              <p class="ev__label">Your team writes</p>
+              <ul class="phr phr--yes">
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>“Sorry the pole gave out”</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>“I’ve ordered a replacement”</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>“Happy camping”</li>
+              </ul>
+            </div>
+            <div>
+              <p class="ev__label">Your team never writes</p>
+              <ul class="phr phr--no">
+                <li><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg>“We apologise for any inconvenience”</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg>“Please do not hesitate to contact us”</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-cross"/></svg>“Dear valued customer”</li>
+              </ul>
+            </div>
+          </figure>
+        </li>
+        <li class="step">
+          <div class="step__copy">
+            <h3>An agent edits it and sends it</h3>
+            <p>The draft waits in the ticket sidebar. Agents change it as they would their own writing, and Quill keeps their edits, so next week’s drafts need fewer of them.</p>
+          </div>
+          <figure class="ev ev--diff reveal">
+            <p class="diff">…sorry it wasn’t in the box. I’ve <del>refunded you for</del> <ins>posted you</ins> the missing footprint, and it should arrive on Thursday.</p>
+            <figcaption><span>Edited by Priya on <span class="num">#48210</span></span><span class="num">3 words changed</span></figcaption>
+          </figure>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="example" id="example" aria-labelledby="example-h">
+    <div class="wrap">
+      <div class="example__head">
+        <h2 id="example-h">Where each sentence of that draft came from.</h2>
+        <p>The reply at the top of this page, taken apart. Every claim in a Quill draft points at an article, a field on the ticket or your tone guide. Select a number to see its source.</p>
+      </div>
+      <div class="example__grid">
+        <div class="letter">
+          <blockquote class="letter__in">
+            <p class="letter__from"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Ines Duarte wrote, 09:12</p>
+            <p>“Hi, the front pole on my Ridgeback 2 snapped on the second night out. Do I need to send the whole tent back, or can you post just the pole? I’m out again on the 14th.”</p>
+          </blockquote>
+          <div class="letter__sheet">
+            <p class="letter__to">Draft reply, ready for Sam</p>
+            <p><span class="s" id="s1">Hi Ines,</span><a class="mk" href="#n1" aria-describedby="n1">1</a></p>
+            <p><span class="s" id="s2">Sorry the pole gave out on night two.</span><a class="mk" href="#n2" aria-describedby="n2">2</a> <span class="s" id="s3">You don’t need to send the tent back: I’ve ordered a replacement front pole (part RB2-FP) at no charge,</span><a class="mk" href="#n3" aria-describedby="n3">3</a> <span class="s" id="s4">and it should reach you by Thursday the 12th, ahead of your trip.</span><a class="mk" href="#n4" aria-describedby="n4">4</a></p>
+            <p><span class="s" id="s5">If the shock cord inside is frayed too, reply with a photo and I’ll add a new one to the parcel.</span><a class="mk" href="#n5" aria-describedby="n5">5</a></p>
+            <p><span class="s" id="s6">Happy camping,<br>Sam</span><a class="mk" href="#n6" aria-describedby="n6">6</a></p>
+          </div>
+        </div>
+        <ol class="notes">
+          <li id="n1" data-s="s1"><b class="notes__no">1</b><div><p class="notes__src">Tone guide, greetings</p><p>Open with the customer’s first name. No “Dear”, no surname.</p></div></li>
+          <li id="n2" data-s="s2"><b class="notes__no">2</b><div><p class="notes__src">Learned from 312 sent replies</p><p>Your agents name the problem in the apology instead of using a formula.</p></div></li>
+          <li id="n3" data-s="s3"><b class="notes__no">3</b><div><p class="notes__src">HC-117 Spare parts and repairs, and the parts list</p><p>A broken part under warranty is posted free and the tent stays with the customer. The part number comes from your catalogue, never from the model.</p></div></li>
+          <li id="n4" data-s="s4"><b class="notes__no">4</b><div><p class="notes__src">HC-210 Delivery, and the ticket text</p><p>Tracked 48 ordered before 14:00 on Tuesday arrives Thursday. The trip on the 14th is in Ines’s message, so the draft says it will arrive first.</p></div></li>
+          <li id="n5" data-s="s5"><b class="notes__no">5</b><div><p class="notes__src">HC-118 Shock cord repairs</p><p>A snapped pole often frays the cord. The article says to ask for a photo before sending one.</p></div></li>
+          <li id="n6" data-s="s6"><b class="notes__no">6</b><div><p class="notes__src">Sam’s own sign-off</p><p>Each agent’s draft closes the way that agent usually does.</p></div></li>
+        </ol>
+      </div>
+      <dl class="leaders example__not">
+        <div><dt>Refund offered</dt><dd>No, HC-117 repairs first</dd></div>
+        <div><dt>Dates the carrier cannot meet</dt><dd>None promised</dd></div>
+        <div><dt>Words Sam changed before sending</dt><dd class="num">2 of 66</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="integ" id="integrations" aria-labelledby="integ-h">
+    <div class="wrap">
+      <div class="integ__head">
+        <h2 id="integ-h">It lives inside the helpdesk your team already has open.</h2>
+        <p>No new tab and no second inbox. Quill is installed from each marketplace by an admin and appears where agents already reply.</p>
+      </div>
+      <div class="integ__grid">
+        <article class="desk-card" aria-labelledby="zd-h">
+          <div class="mini mini--zd" aria-hidden="true">
+            <div class="mini__main"><i class="mini__line w80"></i><i class="mini__line w60"></i><i class="mini__msg"></i><i class="mini__compose"></i></div>
+            <div class="mini__side"><span class="mini__tag"><svg class="icon" aria-hidden="true"><use href="#i-nib"/></svg>Quill</span><i class="mini__line w90"></i><i class="mini__line w70"></i><i class="mini__line w80"></i><i class="mini__btn"></i></div>
+          </div>
+          <h3 id="zd-h"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Zendesk Support</h3>
+          <dl class="leaders leaders--sm">
+            <div><dt>Where it appears</dt><dd>Ticket sidebar app</dd></div>
+            <div><dt>Reads</dt><dd>Ticket, requester, Guide</dd></div>
+            <div><dt>Writes</dt><dd>Only when an agent inserts</dd></div>
+            <div><dt>Install</dt><dd>Zendesk Marketplace</dd></div>
+            <div><dt>Channels</dt><dd>Email, web form, chat</dd></div>
+          </dl>
+        </article>
+        <article class="desk-card" aria-labelledby="ic-h">
+          <div class="mini mini--ic" aria-hidden="true">
+            <div class="mini__main"><i class="mini__bubble l"></i><i class="mini__bubble r"></i><i class="mini__bubble l s"></i><i class="mini__compose"></i></div>
+            <div class="mini__side"><span class="mini__tag"><svg class="icon" aria-hidden="true"><use href="#i-nib"/></svg>Quill</span><i class="mini__line w80"></i><i class="mini__line w90"></i><i class="mini__line w60"></i><i class="mini__btn"></i></div>
+          </div>
+          <h3 id="ic-h"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Intercom</h3>
+          <dl class="leaders leaders--sm">
+            <div><dt>Where it appears</dt><dd>Inbox app, right panel</dd></div>
+            <div><dt>Reads</dt><dd>Conversation, user, Articles</dd></div>
+            <div><dt>Writes</dt><dd>Only when an agent inserts</dd></div>
+            <div><dt>Install</dt><dd>Intercom App Store</dd></div>
+            <div><dt>Channels</dt><dd>Messenger, email</dd></div>
+          </dl>
+        </article>
+        <aside class="integ__note">
+          <p>Using Front, Help Scout or Freshdesk?</p>
+          <p>Not yet. Front is next, planned for spring 2027.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="security" aria-labelledby="sec-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2 id="sec-h">What happens to a ticket after Quill reads it.</h2>
+        <p>Your customers wrote to you, not to us. Ticket text is masked before drafting, never used to train a model, and deleted after thirty days.</p>
+      </div>
+      <ol class="flow">
+        <li><span class="flow__t num">0 s</span><b>Ticket arrives</b><span>Over the helpdesk API, encrypted in transit</span></li>
+        <li><span class="flow__t num">0.3 s</span><b>Details masked</b><span>Card numbers, phone numbers and street addresses replaced with tokens</span></li>
+        <li><span class="flow__t num">4 s</span><b>Draft written</b><span>In the region you chose, EU or US</span></li>
+        <li><span class="flow__t num">30 days</span><b>Kept for audit</b><span>Ticket text, draft and the agent’s edits</span></li>
+        <li><span class="flow__t num">Day 31</span><b>Deleted</b><span>Backups follow within seven days</span></li>
+      </ol>
+      <div class="sec__sheet">
+        <dl class="leaders">
+          <div><dt>Trains models on your tickets</dt><dd>Never</dd></div>
+          <div><dt>Model provider retention</dt><dd>Zero, by contract</dd></div>
+          <div><dt>Hosting</dt><dd>Frankfurt or Oregon</dd></div>
+          <div><dt>Encryption</dt><dd>TLS 1.3, AES-256 at rest</dd></div>
+        </dl>
+        <dl class="leaders">
+          <div><dt>Single sign-on</dt><dd>SAML and SCIM on Business</dd></div>
+          <div><dt>Penetration test</dt><dd>Yearly, outside firm</dd></div>
+          <div><dt>Data processing agreement</dt><dd>Signed before you pay</dd></div>
+          <div><dt>Subprocessors</dt><dd class="num">4, listed by name</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="price" id="pricing" aria-labelledby="price-h">
+    <div class="wrap">
+      <div class="price__head">
+        <h2 id="price-h">Priced per agent. Drafts are not counted.</h2>
+        <p>Pay for the people who send replies. Admins and read-only seats are free, and you can cancel in any month.</p>
+      </div>
+      <div class="price__grid">
+        <div class="plans">
+          <article class="plan" aria-labelledby="pl-team">
+            <h3 class="plan__name" id="pl-team">Team</h3>
+            <p class="plan__for">For one help centre and one helpdesk.</p>
+            <p class="plan__price num"><sup>$</sup>24<sub>per agent a month</sub></p>
+            <dl class="leaders leaders--sm">
+              <div><dt>Drafts</dt><dd>Unlimited</dd></div>
+              <div><dt>Help centres</dt><dd class="num">1</dd></div>
+              <div><dt>Languages</dt><dd class="num">14</dd></div>
+              <div><dt>Tone guides</dt><dd>Team and per agent</dd></div>
+              <div><dt>Audit log</dt><dd class="num">30 days</dd></div>
+              <div><dt>Single sign-on</dt><dd>Not included</dd></div>
+            </dl>
+          </article>
+          <article class="plan plan--pick" aria-labelledby="pl-biz">
+            <h3 class="plan__name" id="pl-biz">Business<span>Most teams over 25 agents</span></h3>
+            <p class="plan__for">For several brands, regions or helpdesks.</p>
+            <p class="plan__price num"><sup>$</sup>39<sub>per agent a month</sub></p>
+            <dl class="leaders leaders--sm">
+              <div><dt>Drafts</dt><dd>Unlimited</dd></div>
+              <div><dt>Help centres</dt><dd>Unlimited</dd></div>
+              <div><dt>Languages</dt><dd class="num">31</dd></div>
+              <div><dt>Tone guides</dt><dd>Per brand and per agent</dd></div>
+              <div><dt>Audit log</dt><dd>Up to 1 year</dd></div>
+              <div><dt>Single sign-on</dt><dd>SAML and SCIM</dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <form class="calc" id="calc" aria-labelledby="calc-h">
+          <h3 id="calc-h">Work out your bill</h3>
+          <div class="seg" role="radiogroup" aria-label="Plan">
+            <span class="seg__thumb" aria-hidden="true"></span>
+            <label><input class="sr-only" type="radio" name="plan" value="24" checked>Team</label>
+            <label><input class="sr-only" type="radio" name="plan" value="39">Business</label>
+          </div>
+          <div class="calc__seats">
+            <label for="seats">Agents who send replies</label>
+            <div class="stepper">
+              <button class="iconbtn" type="button" data-step="-1" aria-label="One agent fewer"><svg class="icon" aria-hidden="true"><use href="#i-minus"/></svg></button>
+              <output class="num" id="seats-out" for="seats">18</output>
+              <button class="iconbtn" type="button" data-step="1" aria-label="One agent more"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></button>
+            </div>
+            <input class="range" type="range" id="seats" min="1" max="120" value="18" style="--p: 14.3%">
+            <div class="range__ticks num" aria-hidden="true"><span>1</span><span>30</span><span>60</span><span>90</span><span>120</span></div>
+          </div>
+          <div class="calc__total">
+            <p class="total" aria-hidden="true"><sup>$</sup><span class="roll num" id="roll">432</span><sub>a month</sub></p>
+            <p class="sr-only" aria-live="polite" id="total-live">$432 a month</p>
+          </div>
+          <dl class="leaders leaders--sm calc__lines">
+            <div><dt id="line-seats">18 agents at $24</dt><dd class="num" id="line-sum">$432</dd></div>
+            <div><dt>Admins and read-only seats</dt><dd>Free</dd></div>
+            <div><dt>Billed</dt><dd>Monthly, by card or invoice</dd></div>
+          </dl>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="trial" id="trial" aria-labelledby="trial-h">
+    <div class="wrap trial__grid">
+      <div>
+        <h2 id="trial-h">Try it on last week’s tickets.</h2>
+        <p>Connect your help centre and Quill drafts replies to fifty tickets your team closed last week. Read its drafts next to what your agents actually sent, then decide.</p>
+      </div>
+      <form class="signup" id="signup" novalidate>
+        <div class="field">
+          <label for="email">Work email</label>
+          <div class="input"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><input id="email" name="email" type="email" autocomplete="email" placeholder="sam@fernhill.co.uk" aria-describedby="email-help"></div>
+          <p class="field__help" id="email-help">We send a setup link. No card needed for the trial.</p>
+        </div>
+        <button class="btn btn--primary btn--lg signup__btn" type="submit">
+          <span class="face face--idle">Start a 14-day trial</span>
+          <span class="face face--busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Sending link</span>
+          <span class="face face--done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Link sent</span>
+        </button>
+        <p class="sr-only" aria-live="polite" id="signup-live"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__about">
+        <a class="brand" href="#top"><svg class="brand__mark" aria-hidden="true"><use href="#i-nib"/></svg>Quill</a>
+        <p>Reply drafts for support teams. Made in Bristol by Quill Labs Ltd, a team of eleven.</p>
+      </div>
+      <nav aria-label="Product"><h2>Product</h2><ul><li><a href="#how">How it works</a></li><li><a href="#integrations">Integrations</a></li><li><a href="#pricing">Pricing</a></li></ul></nav>
+      <nav aria-label="Trust"><h2>Trust</h2><ul><li><a href="#security">Data handling</a></li><li><a role="link" aria-disabled="true">Subprocessors</a></li><li><a role="link" aria-disabled="true">Status</a></li></ul></nav>
+      <nav aria-label="Company"><h2>Company</h2><ul><li><a role="link" aria-disabled="true">About</a></li><li><a role="link" aria-disabled="true">Privacy</a></li><li><a role="link" aria-disabled="true">Terms</a></li></ul></nav>
+    </div>
+    <div class="foot__base"><span>© 2026 Quill Labs Ltd, Bristol, England</span><span>Set in Fraunces and Commissioner</span></div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

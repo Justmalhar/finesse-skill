@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Petal &amp; Stem, seasonal flowers delivered in Edinburgh</title>
+<meta name="description" content="Seasonal bouquets from a florist's studio in Leith, delivered across Edinburgh the same day. Weekly flower subscriptions from £32.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script>
+  /* Before first paint: light is the designed default; ?theme=dark switches. Reveal styles only arm when script runs. */
+  (function () {
+    var q = new URLSearchParams(location.search), r = document.documentElement;
+    var t = q.get("theme");
+    if (t === "light" || t === "dark") r.dataset.theme = t;
+    if (!q.has("still") && !matchMedia("(prefers-reduced-motion: reduce)").matches) r.classList.add("js-reveal");
+  })();
+</script>
+<script defer src="script.js"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 16 16"><path d="M3 5.5h10l-.75 8H3.75z"/><path d="M5.75 5.5V4.5a2.25 2.25 0 0 1 4.5 0v1"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14z"/><circle cx="8" cy="6.5" r="1.5"/></symbol>
+  <symbol id="i-bike" viewBox="0 0 16 16"><circle cx="4" cy="11" r="2.5"/><circle cx="12" cy="11" r="2.5"/><path d="M4 11l2.5-5h3.5l2 5M6.5 6 8 11h1.5M9.5 4.5h1.5"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 25V13"/><path class="c" d="M14 13c-3.5 0-6-2.6-6-6.5 2.4 0 4.4 1 5.2 2.6C14 6 15.8 4 18.5 4c.6 4.2-1.4 9-4.5 9z"/><path d="M14 20c-2.6 0-4.6-1.4-5.5-3.6 2.4-.4 4.6.6 5.5 3.6zM14 18c1.4-2.4 3.4-3.2 5.5-2.8-.8 2-2.8 3-5.5 2.8z"/></svg>
+      <span>Petal <em>&amp;</em> Stem</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#bouquets">This week</a>
+      <a href="#subscription">Subscription</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#studio">The studio</a>
+    </nav>
+    <span class="nav__note">Shop open Mon to Sat from 9:00</span>
+    <a class="btn btn--sm basket" id="basket" role="link" aria-disabled="true"><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg><span class="lbl">Basket</span><span class="basket__count" id="basket-count" aria-label="0 items">0</span></a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap" aria-labelledby="hero-h">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <p class="dateline"><b>Week 48</b><span>Mon 23 to Sat 28 November</span></p>
+        <h1 id="hero-h">Seasonal flowers from a Leith studio, at Edinburgh doors by <em>four</em>.</h1>
+        <p class="hero__sub">Order by 11 am and we deliver across central Edinburgh the same afternoon, by bike. This week: the last dahlias from East Lothian, Cornish ranunculus and an armful of tulips.</p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#bouquets">Shop this week’s bouquets</a>
+          <a class="textlink" href="#subscription">Or have them every Friday<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="cutoff" id="cutoff" aria-live="polite">
+          <div class="cutoff__top"><p class="cutoff__msg" id="cutoff-msg">Order by <b>11:00</b> for delivery today</p><span class="cutoff__zone">Zone 1</span></div>
+          <div class="daybar" aria-hidden="true"><i id="daybar"></i></div>
+          <div class="daybar__ticks" aria-hidden="true"><span>07:00</span><span>09:00</span><span>11:00 cut-off</span></div>
+        </div>
+      </div>
+
+      <figure class="hero__photo" id="hero-photo">
+        <img src="img/wrapped.jpg" width="1066" height="1600" alt="A hand-tied bouquet of coral and white carnations with leatherleaf fern, wrapped in kraft paper and held in two hands." fetchpriority="high">
+        <span class="pin" style="left: 52%; top: 44%" data-pin="1" aria-hidden="true"></span>
+        <span class="pin" style="left: 78%; top: 15%" data-pin="2" aria-hidden="true"></span>
+        <span class="pin" style="left: 56%; top: 70%" data-pin="3" aria-hidden="true"></span>
+        <figcaption class="tag"><b>The coral hand-tie</b><span>£36, 14 stems</span></figcaption>
+      </figure>
+
+      <div class="notes" aria-label="What is in the coral hand-tie">
+        <p class="note" data-note="2" style="position: absolute; top: 15%; left: 0; right: 0"><span class="note__n">02</span><b>Leatherleaf fern ×5</b>Lasts two weeks, longer than the flowers</p>
+        <p class="note" data-note="1" style="position: absolute; top: 44%; left: 0; right: 0"><span class="note__n">01</span><b>Carnation ‘Dona’ ×9</b>Coral and white, grown in Kent</p>
+        <p class="note" data-note="3" style="position: absolute; top: 70%; left: 0; right: 0"><span class="note__n">03</span><b>Kraft and tissue</b>No plastic sleeve, no floral foam</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="bouquets" aria-labelledby="b-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <span class="gnum" aria-hidden="true">01</span>
+        <h2 id="b-h">This week’s bouquets</h2>
+        <p>Four bouquets, made each morning from what came in on Monday. When a flower runs out, its bouquet comes off the list.</p>
+        <p class="sec__aside">Prices include a card<br>and care notes</p>
+      </div>
+
+      <div class="sec__body shop">
+        <article class="prod prod--feature reveal" style="--i: 0">
+          <div class="prod__img"><img src="img/dahlias.jpg" width="1200" height="1133" loading="lazy" alt="Orange ball dahlias with pink and white dahlias and spray chrysanthemums, packed tight."></div>
+          <div class="prod__body">
+            <div class="prod__main">
+              <div class="prod__top"><h3>The last dahlias</h3><span class="left left--low"><i></i>4 left today</span></div>
+              <p class="prod__desc">Ball dahlias, café au lait and spray chrysanthemums, cut under glass at Kilduff Farm on Monday. Their season ends with this bouquet.</p>
+              <ul class="stems">
+                <li><span>Dahlia ‘Sylvia’</span><span>×7</span></li>
+                <li><span>Dahlia ‘Café au Lait’</span><span>×3</span></li>
+                <li><span>Spray chrysanthemum</span><span>×5</span></li>
+                <li><span>Astrantia</span><span>×4</span></li>
+              </ul>
+              <div class="prod__buy">
+                <div class="sz" role="radiogroup" aria-label="Size">
+                  <label><input type="radio" name="sz-dahlia" value="regular" checked>Regular</label>
+                  <label><input type="radio" name="sz-dahlia" value="grand">Grand</label>
+                </div>
+                <p class="price"><span class="r"><small>£</small>42</span><span class="g"><small>£</small>58</span></p>
+                <button class="btn btn--primary add" type="button" data-name="The last dahlias"><span class="faces"><span class="is-on" data-face="idle">Add to basket</span><span data-face="busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Adding</span><span data-face="done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Added</span></span></button>
+              </div>
+            </div>
+            <div class="prod__aside">
+              <p class="note"><b>Vase life 5 to 6 days</b>Dahlias drink hard. Top up the water every morning.</p>
+              <p class="note"><b>18 miles</b>From Kilduff Farm to the studio door</p>
+            </div>
+          </div>
+        </article>
+
+        <div class="rows">
+          <article class="prod prod--row reveal" style="--i: 1">
+            <div class="prod__img"><img src="img/ranunculus.jpg" width="500" height="889" loading="lazy" alt="Orange and peach ranunculus with eucalyptus in a glass vase on a wooden stool."></div>
+            <div class="prod__main">
+              <div class="prod__top"><h3>Leith Shore</h3><span class="left"><i></i>In stock</span></div>
+              <p class="prod__desc">Ranunculus, eucalyptus and waxflower in a loose hand-tie. Cornish ranunculus until the Scottish ones arrive in March.</p>
+              <p class="stems">21 stems, vase life 7 to 9 days</p>
+              <div class="prod__buy">
+                <div class="sz" role="radiogroup" aria-label="Size">
+                  <label><input type="radio" name="sz-leith" value="regular" checked>Regular</label>
+                  <label><input type="radio" name="sz-leith" value="grand">Grand</label>
+                </div>
+                <p class="price"><span class="r"><small>£</small>38</span><span class="g"><small>£</small>52</span></p>
+                <button class="btn add" type="button" data-name="Leith Shore"><span class="faces"><span class="is-on" data-face="idle">Add to basket</span><span data-face="busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Adding</span><span data-face="done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Added</span></span></button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod prod--row reveal" style="--i: 2">
+            <div class="prod__img"><img src="img/lisianthus.jpg" width="1600" height="1066" loading="lazy" alt="White lisianthus with pink spray roses, seen from above on a pine floor."></div>
+            <div class="prod__main">
+              <div class="prod__top"><h3>Bruntsfield</h3><span class="left"><i></i>In stock</span></div>
+              <p class="prod__desc">White lisianthus, pink spray roses and stock. The one people send to say thank you.</p>
+              <p class="stems">18 stems, vase life 7 days</p>
+              <div class="prod__buy">
+                <div class="sz" role="radiogroup" aria-label="Size">
+                  <label><input type="radio" name="sz-brunts" value="regular" checked>Regular</label>
+                  <label><input type="radio" name="sz-brunts" value="grand">Grand</label>
+                </div>
+                <p class="price"><span class="r"><small>£</small>34</span><span class="g"><small>£</small>48</span></p>
+                <button class="btn add" type="button" data-name="Bruntsfield"><span class="faces"><span class="is-on" data-face="idle">Add to basket</span><span data-face="busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Adding</span><span data-face="done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Added</span></span></button>
+              </div>
+            </div>
+          </article>
+
+          <article class="prod prod--row is-sold reveal" style="--i: 3">
+            <div class="prod__img"><img src="img/tulips.jpg" width="1600" height="1066" loading="lazy" alt="Open orange and red tulips leaning out of a glass vase on a table by a window."></div>
+            <div class="prod__main">
+              <div class="prod__top"><h3>Tulip armful</h3><span class="left left--out"><i></i>Back Thursday</span></div>
+              <p class="prod__desc">Twenty orange tulips from Lincolnshire, wrapped in kraft. They keep growing in the vase, so give them room.</p>
+              <p class="stems">20 stems, vase life 6 to 8 days</p>
+              <div class="prod__buy">
+                <div class="sz" role="radiogroup" aria-label="Size">
+                  <label><input type="radio" name="sz-tulip" value="regular" checked>20 stems</label>
+                  <label><input type="radio" name="sz-tulip" value="grand">40 stems</label>
+                </div>
+                <p class="price"><span class="r"><small>£</small>28</span><span class="g"><small>£</small>50</span></p>
+                <button class="btn" type="button" disabled aria-describedby="tulip-why">Sold out today</button>
+                <span class="sr-only" id="tulip-why">The next box from the grower arrives on Thursday.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tint" id="subscription" aria-labelledby="s-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <span class="gnum" aria-hidden="true">02</span>
+        <h2 id="s-h">Flowers every Friday, chosen by us</h2>
+        <p>A subscription bouquet is whatever is best that week, made the same morning. You choose how often and how big; we choose the flowers.</p>
+      </div>
+      <div class="sec__body">
+        <div class="sub">
+          <figure class="sub__photo reveal" style="--i: 0">
+            <img src="img/carnations.jpg" width="1066" height="1600" loading="lazy" alt="Two paper-wrapped bouquets of coral and cream carnations with eucalyptus, lying on white linen.">
+            <figcaption>Last Friday’s subscription bouquets</figcaption>
+          </figure>
+          <form class="plan" id="plan" novalidate>
+            <fieldset>
+              <legend>How often</legend>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="freq" value="weekly" checked><b>Weekly</b><span>Every Friday</span></label>
+                <label class="opt"><input type="radio" name="freq" value="fortnightly"><b>Fortnightly</b><span>Every other Friday</span></label>
+                <label class="opt"><input type="radio" name="freq" value="monthly"><b>Monthly</b><span>First Friday</span></label>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Size</legend>
+              <div class="opts opts--2">
+                <label class="opt"><input type="radio" name="size" value="regular" checked><b>Regular</b><span>About 18 stems, for a table</span></label>
+                <label class="opt"><input type="radio" name="size" value="grand"><b>Grand</b><span>About 30 stems, for a mantel</span></label>
+              </div>
+            </fieldset>
+            <div class="summary">
+              <div>
+                <p class="summary__fig" aria-live="polite"><span id="per">£32</span> <small>per delivery</small></p>
+                <dl>
+                  <div><dt>One-off price</dt><dd class="num"><s id="oneoff">£38</s> <span class="save" id="save">you save 16%</span></dd></div>
+                  <div><dt>In December</dt><dd id="month">3 deliveries, £96</dd></div>
+                  <div><dt>First delivery</dt><dd>Friday 27 November</dd></div>
+                </dl>
+              </div>
+              <button class="btn btn--primary" type="submit" id="start"><span class="faces"><span class="is-on" data-face="idle">Start my subscription</span><span data-face="busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Saving</span><span data-face="done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>See you Friday</span></span></button>
+            </div>
+          </form>
+        </div>
+        <div class="sub__notes">
+          <p class="note"><b>Skip or pause</b>Any week, up to Wednesday noon. No fee, no phone call.</p>
+          <p class="note"><b>A vase comes first</b>Your first delivery includes a glass vase sized to the bouquet.</p>
+          <p class="note"><b>No delivery 25 December</b>December has three Fridays of flowers. We are closed from 24 December to 3 January.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="delivery" aria-labelledby="d-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <span class="gnum" aria-hidden="true">03</span>
+        <h2 id="d-h">Where we deliver, and by when</h2>
+        <p>Central Edinburgh goes out by cargo bike from the studio. Further out, a van leaves at noon. Monday to Saturday; no deliveries on Sunday.</p>
+      </div>
+      <div class="sec__body deliv">
+        <figure class="map reveal" style="--i: 0">
+          <svg viewBox="0 0 600 440" role="img" aria-label="Map of Edinburgh delivery zones. Zone 1 covers Leith, the New Town, the Old Town and Stockbridge around the studio. Zone 2 reaches Portobello, Morningside and Corstorphine. Zone 3 runs out to the city bypass, Musselburgh and South Queensferry.">
+            <path class="m-sea" d="M0 0h600v118c-40 6-70-4-110 6s-60 22-100 18-70-14-110-8-66 20-104 14S24 120 0 128z"/>
+            <path class="m-z3" d="M18 150c40-6 90 4 150 2s120-14 190-10 150-12 230-6c6 60-4 150-24 210-60 40-180 64-300 60S60 380 30 330C8 280 4 200 18 150z"/>
+            <path class="m-z2" d="M110 176c50-10 110-8 170-12s130-12 210-4c20 40 10 110-30 150-50 30-140 44-220 36s-130-30-150-70c-10-40-4-80 20-100z"/>
+            <path class="m-z1" d="M196 168c40-8 90-10 150-10s70 6 70 30-10 70-50 88-110 18-150 0-50-60-40-82 6-22 20-26z"/>
+            <path class="m-road" d="M44 352c80 36 200 52 320 40s150-40 196-90"/>
+            <text class="m-label--sea" x="28" y="60">Firth of Forth</text>
+            <text class="m-label m-label--muted" x="16" y="176">Queensferry</text>
+            <text class="m-label" x="214" y="196">Stockbridge</text>
+            <text class="m-label" x="288" y="232">New Town</text>
+            <text class="m-label" x="312" y="266">Old Town</text>
+            <text class="m-label" x="356" y="176">Leith</text>
+            <text class="m-label" x="452" y="210">Portobello</text>
+            <text class="m-label" x="60" y="272">Corstorphine</text>
+            <text class="m-label" x="214" y="326">Morningside</text>
+            <text class="m-label m-label--muted" x="588" y="300" text-anchor="end">Musselburgh</text>
+            <text class="m-label m-label--muted" x="250" y="416">A720 city bypass</text>
+            <circle class="m-studio" cx="340" cy="168" r="9"/>
+            <circle class="m-hit" id="m-hit" cx="0" cy="0" r="6" hidden/>
+          </svg>
+          <figcaption><span class="key"><i class="k1"></i>Zone 1, bike</span><span class="key"><i class="k2"></i>Zone 2, van</span><span class="key"><i class="k3"></i>Zone 3, next day</span><span class="key"><svg class="icon" aria-hidden="true" style="color: var(--accent)"><use href="#i-pin"/></svg>Studio, Constitution Street</span></figcaption>
+        </figure>
+
+        <div>
+          <form class="check" id="check" novalidate>
+            <label for="pc">Check your postcode</label>
+            <div class="check__row">
+              <div class="input"><input id="pc" name="pc" autocomplete="postal-code" placeholder="EH6 7BT" aria-describedby="pc-result" maxlength="8"></div>
+              <button class="btn" type="submit">Check</button>
+            </div>
+            <p class="result" id="pc-result"><svg class="icon" aria-hidden="true"><use href="#i-bike"/></svg><span>Enter the first half of your postcode, like EH6 or EH10, to see your cut-off.</span></p>
+          </form>
+
+          <table class="zones">
+            <thead><tr><th scope="col">Zone</th><th scope="col">Postcodes</th><th scope="col" class="r">Order by</th><th scope="col" class="r">Fee</th></tr></thead>
+            <tbody>
+              <tr data-zone="1"><th scope="row"><i style="background: var(--accent)"></i>Zone 1</th><td>EH1 to EH3, EH6, EH7<small>by bike, 12:00 to 16:00</small></td><td class="mono r">11:00 same day</td><td class="mono r">£5</td></tr>
+              <tr data-zone="2"><th scope="row"><i style="background: var(--chart-3)"></i>Zone 2</th><td>EH4, EH5, EH8 to EH12, EH15, EH16<small>by van, 13:00 to 17:00</small></td><td class="mono r">10:00 same day</td><td class="mono r">£7</td></tr>
+              <tr data-zone="3"><th scope="row"><i style="background: color-mix(in oklab, var(--chart-3) 40%, var(--surface))"></i>Zone 3</th><td>EH13, EH14, EH17, EH21, EH22, EH28 to EH30<small>by van, 10:00 to 16:00</small></td><td class="mono r">16:00 day before</td><td class="mono r">£9</td></tr>
+            </tbody>
+          </table>
+          <p class="note" style="margin-top: 24px"><b>Free over £60</b>Delivery is free in zones 1 and 2 on orders over £60, and we collect last week’s vase if you leave it out.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tint" id="studio" aria-labelledby="st-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <span class="gnum" aria-hidden="true">04</span>
+        <h2 id="st-h">A former ship chandler’s on Constitution Street</h2>
+      </div>
+      <div class="sec__body">
+        <div class="story">
+          <div class="para"><p class="lead">Isla Moffat and Ruth Okafor opened Petal &amp; Stem in 2019, in a narrow shop that sold rope and lamp oil to Leith’s ships for most of the last century. The hooks are still in the ceiling; we hang eucalyptus from them now.</p><p class="note"><b>Est. 2019</b>14 Constitution Street, Leith, EH6 7BT</p></div>
+          <div class="para"><p>We buy from Scottish growers first. From May to October that means sweet peas from the Borders, dahlias from East Lothian and foliage from a walled garden in Fife. In winter, when Scotland grows almost nothing, we buy from small farms in Cornwall and Lincolnshire, and from the Dutch auction only for what nobody here can grow.</p><p class="note"><b>No floral foam</b>Since 2020. Arrangements sit in moss, chicken wire or water.</p></div>
+          <div class="para"><p>Every bouquet is made the morning it goes out, wrapped in kraft paper and tissue, and carried across town on one of our two cargo bikes. Nothing sits in a cold store overnight.</p><p class="note"><b>2 bikes, 1 van</b>About 140 deliveries in a normal week, 600 in the week before Mother’s Day</p></div>
+        </div>
+
+        <div class="year reveal" style="--i: 0">
+          <div class="year__head"><h3>How much of what we sell is grown in Scotland</h3><p>Share of stems by month, 2026</p></div>
+          <div class="bars" role="img" aria-label="Bar chart of Scottish-grown share of stems by month in 2026: January 4%, February 6%, March 18%, April 34%, May 58%, June 81%, July 92%, August 94%, September 88%, October 63%, November 27%, December estimated 9%.">
+            <span class="bars__grid" aria-hidden="true"></span>
+            <div class="bars__axis" aria-hidden="true"><span style="top: 0">100%</span><span style="top: 50%">50%</span><span style="top: 100%">0</span></div>
+            <div class="bar" style="--v: 4%"><b>4%</b><i></i></div>
+            <div class="bar" style="--v: 6%"><b>6%</b><i></i></div>
+            <div class="bar" style="--v: 18%"><b>18%</b><i></i></div>
+            <div class="bar" style="--v: 34%"><b>34%</b><i></i></div>
+            <div class="bar" style="--v: 58%"><b>58%</b><i></i></div>
+            <div class="bar" style="--v: 81%"><b>81%</b><i></i></div>
+            <div class="bar" style="--v: 92%"><b>92%</b><i></i></div>
+            <div class="bar" style="--v: 94%"><b>94%</b><i></i></div>
+            <div class="bar" style="--v: 88%"><b>88%</b><i></i></div>
+            <div class="bar" style="--v: 63%"><b>63%</b><i></i></div>
+            <div class="bar is-now" style="--v: 27%"><b>27%</b><i></i></div>
+            <div class="bar" style="--v: 9%"><b>9%</b><i style="opacity: 0.45"></i></div>
+          </div>
+          <div class="bars__months" aria-hidden="true"><span></span><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span class="now">N</span><span>D</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="brand" href="#top"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 25V13"/><path class="c" d="M14 13c-3.5 0-6-2.6-6-6.5 2.4 0 4.4 1 5.2 2.6C14 6 15.8 4 18.5 4c.6 4.2-1.4 9-4.5 9z"/><path d="M14 20c-2.6 0-4.6-1.4-5.5-3.6 2.4-.4 4.6.6 5.5 3.6zM14 18c1.4-2.4 3.4-3.2 5.5-2.8-.8 2-2.8 3-5.5 2.8z"/></svg><span>Petal <em>&amp;</em> Stem</span></a>
+        <p style="margin-top: 12px; max-width: 34ch; color: var(--text-muted)">14 Constitution Street, Leith, Edinburgh EH6 7BT. Collection from the shop any time we are open.</p>
+      </div>
+      <div><h4>Shop hours</h4><dl class="hours"><div><dt>Mon to Fri</dt><dd>9:00 to 17:00</dd></div><div><dt>Saturday</dt><dd>9:00 to 15:00</dd></div><div><dt>Sunday</dt><dd>Closed</dd></div></dl></div>
+      <div><h4>Shop</h4><ul><li><a href="#bouquets">This week</a></li><li><a href="#subscription">Subscription</a></li><li><a href="#delivery">Delivery areas</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="tel:+441315550192">0131 555 0192</a></li><li><a href="mailto:hello@petalandstem.co.uk">hello@petalandstem.co.uk</a></li><li><a role="link" aria-disabled="true">Instagram</a></li></ul></div>
+    </div>
+    <div class="foot__base"><span>© 2026 Petal &amp; Stem Ltd, registered in Scotland</span><span>Photographs credited in CREDITS.md</span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" hidden><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span id="toast-text">Added to your basket</span><a role="link" aria-disabled="true">View basket</a></div>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book an appointment, Northside Family Clinic</title>
+<meta name="description" content="Book a GP, nurse or pharmacist appointment at Northside Family Clinic: choose a reason, a clinician, a day and a time.">
+<script>
+  /* Before first paint: light by default for this clinic; ?theme=dark switches. */
+  (function () {
+    var t = new URLSearchParams(location.search).get("theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-left" viewBox="0 0 16 16"><path d="M10 3.5L5.5 8l4.5 4.5"/></symbol>
+  <symbol id="i-right" viewBox="0 0 16 16"><path d="M6 3.5l4.5 4.5L6 12.5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 16 16"><path d="M8 2.5l6 10.5H2z"/><path d="M8 6.5v3M8 11.25v.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 16 16"><path d="M5.2 2.5h-1.7a1 1 0 0 0-1 1.1c.5 5.1 4.8 9.4 9.9 9.9a1 1 0 0 0 1.1-1v-1.7a1 1 0 0 0-.8-1l-2-.5a1 1 0 0 0-1 .3l-.7.8a7.5 7.5 0 0 1-3.4-3.4l.8-.7a1 1 0 0 0 .3-1l-.5-2a1 1 0 0 0-1-.8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5v3l2 1.5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14z"/><circle cx="8" cy="6.5" r="1.5"/></symbol>
+  <symbol id="i-id" viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="9" rx="1.5"/><circle cx="5.75" cy="7.5" r="1.25"/><path d="M4 10.5c.4-.9 1-1.25 1.75-1.25s1.35.35 1.75 1.25M9.5 6.5h3M9.5 9h2"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 16 16"><rect x="2.2" y="5.5" width="11.6" height="5" rx="2.5" transform="rotate(-35 8 8)"/><path d="M6.6 5.9l2.8 4.2"/></symbol>
+</svg>
+
+<header class="bar" id="bar">
+  <div class="bar__in">
+    <a class="brand" href="#main" aria-label="Northside Family Clinic, skip to booking">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="1" y="1" width="30" height="30" rx="9" fill="var(--accent)"/>
+        <path d="M9 22V11.5L16 6l7 5.5V22" fill="none" stroke="var(--accent-text)" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12.5 22v-4.5a3.5 3.5 0 0 1 7 0V22" fill="none" stroke="var(--accent-text)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span><b>Northside Family Clinic</b><span>14 Harrow Lane, Leeds LS6 2QT</span></span>
+    </a>
+    <div class="bar__info">
+      <span class="hide-sm">Open today <b class="num">08:00 to 12:30</b></span>
+      <a href="tel:+441134960734" aria-label="Call the clinic on 0113 496 0734"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span class="num phone-num">0113 496 0734</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="page" id="main">
+  <section id="flow" aria-labelledby="flow-h">
+    <div class="head">
+      <div>
+        <h1 id="flow-h">Book an appointment</h1>
+        <p class="head__sub">Work through the six panels in order, A1 to C2. It takes about two minutes, and your time is held while you fill in your details.</p>
+      </div>
+      <nav class="map" aria-label="Booking progress">
+        <span class="map__label"><b id="map-count" class="num">4 of 6 done</b>Jump to a panel</span>
+        <a href="#p-a1" data-map="a1">A1</a><a href="#p-b1" data-map="b1">B1</a><a href="#p-c1" data-map="c1">C1</a>
+        <a href="#p-a2" data-map="a2">A2</a><a href="#p-b2" data-map="b2">B2</a><a href="#p-c2" data-map="c2">C2</a>
+      </nav>
+    </div>
+    <div class="chips" id="chips" aria-live="polite"></div>
+
+    <form class="board" id="form" novalidate>
+      <div class="col col--a">
+        <section class="panel" id="p-a1" aria-labelledby="a1-h">
+          <div class="panel__head"><span class="coord" aria-hidden="true">A1</span><h2 id="a1-h">What is the appointment for?</h2><span class="panel__meta" id="a1-meta"></span></div>
+          <div class="panel__body">
+            <fieldset>
+              <legend class="sr-only">Reason for the visit</legend>
+              <div class="opts" id="reasons"></div>
+            </fieldset>
+            <p class="alert999"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span><b>Chest pain, trouble breathing or heavy bleeding?</b> Call 999 now. Not sure how urgent it is? Call 111, day or night.</span></p>
+          </div>
+        </section>
+
+        <section class="panel" id="p-a2" aria-labelledby="a2-h">
+          <div class="panel__head"><span class="coord" aria-hidden="true">A2</span><h2 id="a2-h">Who would you like to see?</h2><span class="panel__meta" id="a2-meta"></span></div>
+          <div class="panel__body">
+            <fieldset>
+              <legend class="sr-only">Clinician</legend>
+              <div class="opts" id="clinicians"></div>
+            </fieldset>
+          </div>
+        </section>
+      </div>
+
+      <div class="col col--b">
+        <section class="panel" id="p-b1" aria-labelledby="b1-h">
+          <div class="panel__head">
+            <span class="coord" aria-hidden="true">B1</span>
+            <h2 id="b1-h">Pick a day</h2>
+            <span class="panel__meta num">16 Nov to 27 Dec</span>
+          </div>
+          <div class="panel__body">
+            <table class="cal" aria-labelledby="b1-h">
+              <thead><tr><th scope="col" abbr="Monday">Mon</th><th scope="col" abbr="Tuesday">Tue</th><th scope="col" abbr="Wednesday">Wed</th><th scope="col" abbr="Thursday">Thu</th><th scope="col" abbr="Friday">Fri</th><th scope="col" abbr="Saturday">Sat</th><th scope="col" abbr="Sunday">Sun</th></tr></thead>
+              <tbody id="cal-body"></tbody>
+            </table>
+            <p class="legend" aria-hidden="true"><span><i class="k-free"></i>Free times, count below the date</span><span><i class="k-few"></i>3 or fewer</span><span><i class="k-full"></i>Fully booked</span></p>
+          </div>
+        </section>
+
+        <section class="panel" id="p-b2" aria-labelledby="b2-h">
+          <div class="panel__head"><span class="coord" aria-hidden="true">B2</span><h2 id="b2-h">Choose a time</h2><span class="panel__meta num" id="b2-meta"></span></div>
+          <div class="panel__body" id="times" aria-live="polite"></div>
+        </section>
+      </div>
+
+      <div class="col col--c">
+        <section class="panel" id="p-c1" aria-labelledby="c1-h">
+          <div class="panel__head"><span class="coord" aria-hidden="true">C1</span><h2 id="c1-h">Your details</h2><span class="panel__meta">For the patient</span></div>
+          <div class="panel__body fields">
+            <div class="field">
+              <label for="name">Full name</label>
+              <div class="input"><input id="name" name="name" autocomplete="name" aria-describedby="name-help" value="Rosa Delgado-Whitfield"><span class="input__ok" aria-hidden="true" hidden><svg class="icon"><use href="#i-check"/></svg></span></div>
+              <p class="help" id="name-help" data-help="As it appears on your NHS record.">As it appears on your NHS record.</p>
+            </div>
+            <fieldset class="field" id="dob" aria-describedby="dob-help">
+              <legend>Date of birth</legend>
+              <div class="dob">
+                <div class="field"><label for="dob-d">Day</label><div class="input"><input id="dob-d" name="dob-d" inputmode="numeric" maxlength="2" autocomplete="bday-day" value="31" class="num"></div></div>
+                <div class="field"><label for="dob-m">Month</label><div class="input"><input id="dob-m" name="dob-m" inputmode="numeric" maxlength="2" autocomplete="bday-month" value="02" class="num"></div></div>
+                <div class="field"><label for="dob-y">Year</label><div class="input"><input id="dob-y" name="dob-y" inputmode="numeric" maxlength="4" autocomplete="bday-year" value="1987" class="num"></div></div>
+              </div>
+              <p class="help" id="dob-help" data-help="For example, 27 3 1987.">For example, 27 3 1987.</p>
+            </fieldset>
+            <div class="row2">
+              <div class="field">
+                <label for="phone">Mobile number</label>
+                <div class="input"><input id="phone" name="phone" type="tel" autocomplete="tel" aria-describedby="phone-help" value="0113 49" class="num"><span class="input__ok" aria-hidden="true" hidden><svg class="icon"><use href="#i-check"/></svg></span></div>
+                <p class="help" id="phone-help" data-help="We text the confirmation here.">We text the confirmation here.</p>
+              </div>
+              <div class="field">
+                <div class="field__top"><label for="email">Email</label><span class="field__opt">Optional</span></div>
+                <div class="input"><input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-help" placeholder="name@example.com"><span class="input__ok" aria-hidden="true" hidden><svg class="icon"><use href="#i-check"/></svg></span></div>
+                <p class="help" id="email-help" data-help="For a calendar invite.">For a calendar invite.</p>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field__top"><label for="note">Anything we should know before you come in?</label><span class="field__opt">Optional</span></div>
+              <div class="input input--area"><textarea id="note" name="note" rows="2" placeholder="For example, I use a wheelchair, or I would like a chaperone."></textarea></div>
+            </div>
+            <label class="check"><input class="box" type="checkbox" name="remind" checked><span>Text me a reminder the day before<span>Reply C to that text to cancel.</span></span></label>
+          </div>
+        </section>
+
+        <section class="panel" id="p-c2" aria-labelledby="c2-h">
+          <div class="panel__head"><span class="coord" aria-hidden="true">C2</span><h2 id="c2-h">Check and book</h2><span class="panel__meta">Free on the NHS</span></div>
+          <div class="panel__body">
+            <dl class="sum" id="sum"></dl>
+            <div class="book">
+              <button class="btn btn--primary btn--lg btn--async" type="submit" id="book" data-state="idle">
+                <span class="btn__face" data-face="idle" id="book-label">Book appointment</span>
+                <span class="btn__face" data-face="loading" aria-hidden="true"><svg class="spinner" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Booking</span>
+              </button>
+              <p>By booking you agree to cancel at least 2 hours before if you can’t come, so someone else can have the time.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </form>
+  </section>
+
+  <section id="done" class="done" aria-labelledby="done-h" hidden tabindex="-1">
+    <div class="done__hero enter">
+      <div class="tick" aria-hidden="true"><svg class="icon" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></div>
+      <div><h1 id="done-h">You’re booked in</h1><p id="done-sub">We’ve texted the details to 07700 900412.</p></div>
+    </div>
+    <article class="panel appt enter" style="--i:1" aria-label="Appointment details">
+      <div class="appt__when">
+        <div class="calchip" aria-hidden="true"><span id="d-mon">NOV</span><b id="d-day" class="num">25</b></div>
+        <div>
+          <p class="appt__time num" id="d-time">09:15 <small>to 09:30</small></p>
+          <p class="appt__day" id="d-date">Wednesday 25 November 2026</p>
+        </div>
+      </div>
+      <dl>
+        <div><dt>With</dt><dd id="d-who">Dr Amara Okafor, GP</dd></div>
+        <div><dt>For</dt><dd id="d-why">A new problem</dd></div>
+        <div><dt>Where</dt><dd id="d-room">Room 4, first floor. Lift by the front desk.</dd></div>
+        <div><dt>Patient</dt><dd id="d-pat">Rosa Delgado-Whitfield, born 27 March 1987</dd></div>
+        <div><dt>Reference</dt><dd class="mono" id="d-ref">NFC-4471-26W</dd></div>
+      </dl>
+      <div class="appt__acts">
+        <a class="btn btn--primary" id="ics" download="northside-appointment.ics" href="#done"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Add to calendar</a>
+        <a class="btn" role="link" aria-disabled="true">Change or cancel</a>
+        <button class="btn" type="button" id="again">Book another</button>
+      </div>
+    </article>
+    <div class="side">
+      <section class="panel enter" style="--i:2" aria-labelledby="bring-h">
+        <div class="panel__head"><span class="coord" aria-hidden="true">D1</span><h2 id="bring-h">Before you come</h2></div>
+        <ul class="panel__body todo">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span><b>Arrive 5 minutes early</b>Check in on the screen by the door. If you are more than 10 minutes late we may need to rebook you.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-pill"/></svg><span><b>Bring your medicines</b>Or a photo of the boxes, including anything you buy without a prescription.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-id"/></svg><span><b>No ID needed</b>Just your name and date of birth at the desk.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span><b>Parking</b>Six free spaces behind the clinic, two of them wide. Bus 19 stops outside.</span></li>
+        </ul>
+      </section>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="script.js"></script>
+</body>
+</html>

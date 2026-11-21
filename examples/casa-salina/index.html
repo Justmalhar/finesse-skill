@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Casa Salina: eleven rooms in a salt warehouse near Trapani</title>
+<meta name="description" content="Casa Salina is a hotel of eleven rooms in an 1880 salt warehouse beside the salt pans of Nubia, on the Sicilian coast south of Trapani.">
+<script>
+  /* Before first paint: ?theme=light|dark. Light is the page's home. */
+  (function () {
+    var q = new URLSearchParams(location.search), t = q.get("theme");
+    document.documentElement.dataset.theme = t === "dark" ? "dark" : "light";
+    if (q.get("state")) document.documentElement.dataset.state = q.get("state");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 16 16"><path d="M4.5 6.5l3.5 3.5 3.5-3.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.75"/><path d="M8 1.75v1.5M8 12.75v1.5M1.75 8h1.5M12.75 8h1.5M3.6 3.6l1.05 1.05M11.35 11.35l1.05 1.05M3.6 12.4l1.05-1.05M11.35 4.65l1.05-1.05"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.25 9.6A5.5 5.5 0 0 1 6.4 2.75a5.5 5.5 0 1 0 6.85 6.85z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14s4.5-4.1 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.9 8 14 8 14z"/><circle cx="8" cy="6.5" r="1.5"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" data-nav>
+  <div class="wrap nav__in">
+    <a class="brand" href="#top" aria-label="Casa Salina, back to top">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><path class="brand__roof" d="M3 12L14 5l11 7"/><path d="M5 23h18M7 23v-8M21 23v-8"/><path class="brand__salt" d="M10.5 23l3.5-5 3.5 5"/></svg>
+      <span>Casa Salina</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#rooms">Rooms</a>
+      <a href="#kitchen">Kitchen</a>
+      <a href="#saline">Salt flats</a>
+      <a href="#rates">Rates</a>
+    </nav>
+    <div class="nav__tools">
+      <button class="btn btn--icon btn--quiet" type="button" data-theme-toggle aria-label="Switch to dark theme">
+        <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn--primary" href="#book">Check dates</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <div class="wrap hero__grid">
+      <p class="spine spine--hero" aria-hidden="true">Casa Salina, salt store since 1880</p>
+      <div class="hero__copy">
+        <h1 id="hero-h">Eleven rooms in a salt warehouse on the Trapani coast</h1>
+        <p class="hero__sub">The house was built in 1880 to store the harvest from the pans outside its doors. The walls are a metre of tufa, the floors are the original terracotta, and the sea is 400 metres west.</p>
+        <dl class="leaders hero__facts">
+          <div class="leader"><dt>Rooms</dt><dd class="num">11</dd></div>
+          <div class="leader"><dt>To the salt pans</dt><dd class="num">400 m</dd></div>
+          <div class="leader"><dt>Trapani Birgi airport</dt><dd class="num">14 km</dd></div>
+          <div class="leader"><dt>Open</dt><dd>March to November</dd></div>
+          <div class="leader"><dt>Rates, breakfast included</dt><dd class="num">from €140</dd></div>
+        </dl>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--lg" href="#book">Check dates<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="textlink" href="#rooms">See the rooms</a>
+        </div>
+      </div>
+      <figure class="hero__photo">
+        <img src="img/salt-heaps.jpg" width="1600" height="900" alt="Heaps of drying salt in the foreground, flat pans of brine behind them and a windmill on the horizon under a pale sky." fetchpriority="high">
+        <figcaption class="chip">Salt drying on the Marsala pans in July</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec rooms" id="rooms" aria-labelledby="rooms-h">
+    <div class="wrap sec__grid">
+      <p class="spine" aria-hidden="true">I. Le camere</p>
+      <div class="sec__body">
+        <div class="sec__head">
+          <h2 id="rooms-h">Three kinds of room behind eleven doors</h2>
+          <p>Each room keeps something of the warehouse: a vault, a loading door, the old weighing room. All have air conditioning you will rarely need, linen from Erice and a shower big enough for two.</p>
+        </div>
+
+        <ol class="room-list">
+          <li class="room">
+            <figure class="plan" aria-label="Floor plan of a Magazzino room: one vaulted room with the bed against the back wall, a shower room to the side and a door to the courtyard.">
+              <svg viewBox="0 0 240 180" aria-hidden="true">
+                <rect class="plan__wall" x="20" y="16" width="200" height="140" rx="2"/>
+                <path class="plan__vault" d="M20 52Q120 20 220 52M20 92Q120 60 220 92M20 132Q120 100 220 132"/>
+                <rect class="plan__fill" x="150" y="24" width="62" height="48" rx="2"/>
+                <rect class="plan__bed" x="70" y="24" width="64" height="72" rx="4"/>
+                <path class="plan__wall" d="M150 24v48h62"/>
+                <path class="plan__door" d="M96 156v-22a22 22 0 0 1 22 22"/>
+                <text x="180" y="52" text-anchor="middle">shower</text>
+                <text x="102" y="124" text-anchor="middle">26 m²</text>
+                <text x="120" y="176" text-anchor="middle">courtyard door</text>
+              </svg>
+            </figure>
+            <div class="room__text">
+              <h3>Magazzino</h3>
+              <p>Ground floor, in the old storerooms. A barrel vault 5 metres high keeps the room cool through August, and the loading door opens onto the courtyard fig tree.</p>
+            </div>
+            <dl class="leaders room__spec">
+              <div class="leader"><dt>Rooms</dt><dd class="num">5 of 11</dd></div>
+              <div class="leader"><dt>Size</dt><dd class="num">26 m²</dd></div>
+              <div class="leader"><dt>Sleeps</dt><dd class="num">2</dd></div>
+              <div class="leader"><dt>Looks onto</dt><dd>Courtyard</dd></div>
+              <div class="leader leader--price"><dt>From, a night</dt><dd class="num">€140</dd></div>
+            </dl>
+          </li>
+          <li class="room">
+            <figure class="plan" aria-label="Floor plan of a Terrazza room: a room with the bed facing glass doors that open onto a terrace as deep as the room.">
+              <svg viewBox="0 0 240 180" aria-hidden="true">
+                <rect class="plan__wall" x="20" y="16" width="124" height="140" rx="2"/>
+                <rect class="plan__terrace" x="144" y="16" width="80" height="140" rx="2"/>
+                <rect class="plan__bed" x="36" y="44" width="64" height="72" rx="4"/>
+                <rect class="plan__fill" x="28" y="124" width="52" height="28" rx="2"/>
+                <path class="plan__glass" d="M144 50v76"/>
+                <text x="70" y="140" text-anchor="middle">shower</text>
+                <text x="184" y="80" text-anchor="middle">terrace</text>
+                <text x="184" y="98" text-anchor="middle">14 m²</text>
+                <text x="120" y="176" text-anchor="middle">west to the pans</text>
+              </svg>
+            </figure>
+            <div class="room__text">
+              <h3>Terrazza</h3>
+              <p>First floor, where the salt was sorted. Glass doors fold back onto a private terrace that faces the pans, the mill at Nubia and the sunset over Levanzo.</p>
+            </div>
+            <dl class="leaders room__spec">
+              <div class="leader"><dt>Rooms</dt><dd class="num">4 of 11</dd></div>
+              <div class="leader"><dt>Size</dt><dd class="num">22 + 14 m²</dd></div>
+              <div class="leader"><dt>Sleeps</dt><dd class="num">2</dd></div>
+              <div class="leader"><dt>Looks onto</dt><dd>Salt pans</dd></div>
+              <div class="leader leader--price"><dt>From, a night</dt><dd class="num">€185</dd></div>
+            </dl>
+          </li>
+          <li class="room">
+            <figure class="plan" aria-label="Floor plan of a Torre suite on two levels: a sitting room below and a bedroom above, joined by a stone stair.">
+              <svg viewBox="0 0 240 180" aria-hidden="true">
+                <rect class="plan__wall" x="20" y="16" width="96" height="140" rx="2"/>
+                <rect class="plan__wall" x="124" y="16" width="96" height="140" rx="2"/>
+                <path class="plan__stair" d="M28 128h28M28 136h28M28 144h28M28 120h28"/>
+                <rect class="plan__fill" x="64" y="24" width="44" height="36" rx="2"/>
+                <rect class="plan__bed" x="140" y="40" width="64" height="72" rx="4"/>
+                <rect class="plan__fill" x="132" y="124" width="44" height="28" rx="2"/>
+                <text x="68" y="96" text-anchor="middle">sitting</text>
+                <text x="154" y="143" text-anchor="middle">bath</text>
+                <text x="68" y="176" text-anchor="middle">lower</text>
+                <text x="172" y="176" text-anchor="middle">upper</text>
+              </svg>
+            </figure>
+            <div class="room__text">
+              <h3>Torre</h3>
+              <p>Two suites on two floors in the tower above the weighing room. The upper window looks over the pans to the sea and, on a clear day, the Egadi islands.</p>
+            </div>
+            <dl class="leaders room__spec">
+              <div class="leader"><dt>Rooms</dt><dd class="num">2 of 11</dd></div>
+              <div class="leader"><dt>Size</dt><dd class="num">38 m²</dd></div>
+              <div class="leader"><dt>Sleeps</dt><dd class="num">3</dd></div>
+              <div class="leader"><dt>Looks onto</dt><dd>Sea and islands</dd></div>
+              <div class="leader leader--price"><dt>From, a night</dt><dd class="num">€260</dd></div>
+            </dl>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec kitchen" id="kitchen" aria-labelledby="kitchen-h">
+    <div class="wrap sec__grid">
+      <p class="spine" aria-hidden="true">II. La cucina</p>
+      <div class="sec__body kitchen__grid">
+        <div class="kitchen__photos">
+          <figure class="photo photo--tall">
+            <img src="img/busiate.jpg" width="1200" height="1600" loading="lazy" alt="A close view of twisted busiate pasta coated in a green pesto, on a white plate.">
+          </figure>
+          <figure class="photo photo--plate">
+            <img src="img/pesto.jpg" width="1600" height="1096" loading="lazy" alt="Busiate with a tomato and almond pesto and a basil leaf, on a red plate.">
+            <figcaption class="chip">Busiate, the Trapani way</figcaption>
+          </figure>
+        </div>
+        <div class="kitchen__text">
+          <h2 id="kitchen-h">One table, one sitting, what the boats brought in</h2>
+          <p>Dinner is at eight in the old weighing room, twenty-two seats at one long table. Giusi cooks what the Trapani boats landed that morning and bakes the fish in salt from the pans you can see from your chair.</p>
+          <div class="menu">
+            <p class="menu__head"><span>Tonight</span><span class="num">Friday 21 November</span></p>
+            <dl class="leaders">
+              <div class="leader"><dt>Pane cunzato, tomato, anchovy, pecorino</dt><dd class="num">€9</dd></div>
+              <div class="leader"><dt>Busiate with pesto trapanese</dt><dd class="num">€16</dd></div>
+              <div class="leader"><dt>Fish couscous, the Friday broth</dt><dd class="num">€22</dd></div>
+              <div class="leader"><dt>Sea bream baked in Nubia salt, for two</dt><dd class="num">€58</dd></div>
+              <div class="leader"><dt>Cassatella with ricotta and cinnamon</dt><dd class="num">€8</dd></div>
+            </dl>
+            <p class="menu__foot">Four courses €48. Guests from outside the house are welcome Thursday to Sunday; book by noon.</p>
+          </div>
+          <p class="kitchen__breakfast">Breakfast runs from 8:00 to 10:30 and is in every rate: ricotta from Paceco, almond granita in summer, bread from the oven next door.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec saline" id="saline" aria-labelledby="saline-h">
+    <figure class="band">
+      <img src="img/tiles-dusk.jpg" width="1600" height="860" loading="lazy" alt="Salt pans at dusk under a pink sky, a windmill on the left, and rows of tile-covered salt mounds in the foreground.">
+      <figcaption class="chip">Salt mounds under their tiles at dusk, Marsala</figcaption>
+    </figure>
+    <div class="wrap sec__grid">
+      <p class="spine" aria-hidden="true">III. Le saline</p>
+      <div class="sec__body saline__grid">
+        <div class="saline__text">
+          <h2 id="saline-h">The salt flats change colour with the season</h2>
+          <p>The pans of the Trapani and Paceco reserve start at the garden wall. Sea water is let in each spring, moves pan to pan as it thickens, and turns pink before the salt is raked out by hand in summer.</p>
+          <dl class="leaders walks">
+            <div class="leader"><dt>Salt museum at Nubia</dt><dd class="num">6 min on foot</dd></div>
+            <div class="leader"><dt>Windmill and flamingo hide</dt><dd class="num">12 min on foot</dd></div>
+            <div class="leader"><dt>Ferry to Mozia</dt><dd class="num">18 min by bike</dd></div>
+            <div class="leader"><dt>Trapani old town</dt><dd class="num">15 min by car</dd></div>
+          </dl>
+          <p class="note">Bikes are free for guests. Ask for the dyke path; it is flat all the way to Mozia.</p>
+        </div>
+        <figure class="year" aria-labelledby="year-cap">
+          <figcaption id="year-cap" class="year__head">
+            <span>A year on the pans</span>
+            <span class="year__open"><i></i>House open</span>
+          </figcaption>
+          <div class="year__grid" role="table" aria-label="Seasons on the salt pans by month">
+            <div class="year__months" role="row">
+              <span role="columnheader"><span class="sr-only">Activity</span></span>
+              <span role="columnheader">J</span><span role="columnheader">F</span><span role="columnheader">M</span><span role="columnheader">A</span><span role="columnheader">M</span><span role="columnheader">J</span><span role="columnheader">J</span><span role="columnheader">A</span><span role="columnheader">S</span><span role="columnheader">O</span><span role="columnheader">N</span><span role="columnheader">D</span>
+            </div>
+            <div class="year__row s1" role="row"><span role="rowheader">Pans flooded</span><span role="cell" class="year__bar" style="--from: 3; --to: 5">March to April</span></div>
+            <div class="year__row s2" role="row"><span role="rowheader">Brine turns pink</span><span role="cell" class="year__bar" style="--from: 5; --to: 7">May to June</span></div>
+            <div class="year__row s3" role="row"><span role="rowheader">Harvest by hand</span><span role="cell" class="year__bar" style="--from: 7; --to: 10">July to September</span></div>
+            <div class="year__row s4" role="row"><span role="rowheader">Mounds under tiles</span><span role="cell" class="year__bar" style="--from: 10; --to: 13">October to February</span><span class="year__bar year__bar--echo" aria-hidden="true" style="--from: 1; --to: 3"></span></div>
+            <div class="year__row s5" role="row"><span role="rowheader">Flamingos</span><span role="cell" class="year__bar" style="--from: 11; --to: 13">November to March</span><span class="year__bar year__bar--echo" aria-hidden="true" style="--from: 1; --to: 4"></span></div>
+          </div>
+          <p class="year__note">The shaded band marks the months the house is open, March to November.</p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rates" id="rates" aria-labelledby="rates-h">
+    <div class="wrap sec__grid">
+      <p class="spine" aria-hidden="true">IV. Tariffe</p>
+      <div class="sec__body">
+        <div class="sec__head sec__head--row">
+          <h2 id="rates-h">Rates by season, per room per night</h2>
+          <p>Breakfast is included. Prices are for two people; a third guest in a Torre suite adds €40.</p>
+        </div>
+        <div class="seasons">
+          <article class="season" aria-labelledby="se-low">
+            <h3 id="se-low">Low</h3>
+            <p class="season__when">March and November</p>
+            <dl class="leaders">
+              <div class="leader"><dt>Magazzino</dt><dd class="num">€140</dd></div>
+              <div class="leader"><dt>Terrazza</dt><dd class="num">€185</dd></div>
+              <div class="leader"><dt>Torre</dt><dd class="num">€260</dd></div>
+            </dl>
+          </article>
+          <article class="season" aria-labelledby="se-mid">
+            <h3 id="se-mid">Mid</h3>
+            <p class="season__when">April, May and October</p>
+            <dl class="leaders">
+              <div class="leader"><dt>Magazzino</dt><dd class="num">€165</dd></div>
+              <div class="leader"><dt>Terrazza</dt><dd class="num">€215</dd></div>
+              <div class="leader"><dt>Torre</dt><dd class="num">€300</dd></div>
+            </dl>
+          </article>
+          <article class="season season--pick" aria-labelledby="se-high">
+            <h3 id="se-high">High <span>Harvest weeks</span></h3>
+            <p class="season__when">June and September</p>
+            <dl class="leaders">
+              <div class="leader"><dt>Magazzino</dt><dd class="num">€195</dd></div>
+              <div class="leader"><dt>Terrazza</dt><dd class="num">€250</dd></div>
+              <div class="leader"><dt>Torre</dt><dd class="num">€350</dd></div>
+            </dl>
+          </article>
+          <article class="season" aria-labelledby="se-peak">
+            <h3 id="se-peak">Peak</h3>
+            <p class="season__when">July and August, 3 nights or more</p>
+            <dl class="leaders">
+              <div class="leader"><dt>Magazzino</dt><dd class="num">€230</dd></div>
+              <div class="leader"><dt>Terrazza</dt><dd class="num">€290</dd></div>
+              <div class="leader"><dt>Torre</dt><dd class="num">€410</dd></div>
+            </dl>
+          </article>
+        </div>
+        <ul class="terms">
+          <li>Closed from 1 December to 28 February.</li>
+          <li>Tourist tax of €2.50 per adult per night, paid at the house.</li>
+          <li>Free cancellation until 14 days before arrival; after that, the first night is charged.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec book" id="book" aria-labelledby="book-h">
+    <div class="wrap sec__grid">
+      <p class="spine" aria-hidden="true">V. Prenotare</p>
+      <div class="sec__body book__grid">
+        <div class="book__intro">
+          <h2 id="book-h">Ask for your dates</h2>
+          <p>Pick dates and a room to see the price. Sending the request opens an email to Rosaria at the front desk, who answers within a day and holds the room for 48 hours.</p>
+          <figure class="photo photo--mill">
+          <img src="img/marsala-mill.jpg" width="1200" height="1600" loading="lazy" alt="A sandstone salt works with a red-capped windmill, small white salt heaps beside it and still pans in front.">
+          <figcaption class="chip">A salt works and mill on the Marsala lagoon</figcaption>
+        </figure>
+          <p class="book__contact"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Via delle Saline 7, 91027 Nubia (TP), Sicily<br>+39 0923 867 412, stay@casasalina.it</p>
+        </div>
+
+        <form class="form" novalidate data-form>
+          <div class="form__row">
+            <div class="field" data-field="arrive">
+              <label for="f-arrive">Arrival</label>
+              <div class="input"><input id="f-arrive" name="arrive" type="date" value="2027-05-14" min="2026-11-22" aria-describedby="h-arrive" required></div>
+              <p class="field__help" id="h-arrive">Check-in from 15:00</p>
+            </div>
+            <div class="field" data-field="depart">
+              <label for="f-depart">Departure</label>
+              <div class="input"><input id="f-depart" name="depart" type="date" value="2027-05-18" min="2026-11-23" aria-describedby="h-depart" required></div>
+              <p class="field__help" id="h-depart">Check-out by 11:00</p>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field" data-field="room">
+              <label for="f-room">Room</label>
+              <div class="input select"><select id="f-room" name="room" aria-describedby="h-room">
+                <option value="magazzino">Magazzino, courtyard</option>
+                <option value="terrazza" selected>Terrazza, terrace on the pans</option>
+                <option value="torre">Torre, two-floor suite</option>
+              </select><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></div>
+              <p class="field__help" id="h-room">4 of 11 rooms are this kind</p>
+            </div>
+            <div class="field" data-field="guests">
+              <label for="f-guests">Guests</label>
+              <div class="input select"><select id="f-guests" name="guests" aria-describedby="h-guests">
+                <option value="1">1 adult</option>
+                <option value="2" selected>2 adults</option>
+                <option value="3">3 adults</option>
+              </select><svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></div>
+              <p class="field__help" id="h-guests">Children under 4 stay free</p>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field" data-field="name">
+              <label for="f-name">Your name</label>
+              <div class="input"><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Anna Bianchi" aria-describedby="h-name" required></div>
+              <p class="field__help" id="h-name">As on the passport or ID card</p>
+            </div>
+            <div class="field" data-field="email">
+              <label for="f-email">Email</label>
+              <div class="input"><input id="f-email" name="email" type="email" autocomplete="email" placeholder="anna@example.com" aria-describedby="h-email" required></div>
+              <p class="field__help" id="h-email">Rosaria replies here</p>
+            </div>
+          </div>
+
+          <div class="estimate" aria-live="polite" data-estimate>
+            <p class="estimate__head"><span>Your stay</span><span class="num" data-est-dates>14 to 18 May 2027</span></p>
+            <dl class="leaders" data-est-lines>
+              <div class="leader"><dt>4 nights, Terrazza, mid season</dt><dd class="num">€860</dd></div>
+              <div class="leader"><dt>Tourist tax, 2 adults</dt><dd class="num">€20</dd></div>
+            </dl>
+            <p class="estimate__total"><span>Total</span><span class="num" data-est-total>€880</span></p>
+            <p class="estimate__empty">Choose dates in the open season to see the price.</p>
+          </div>
+
+          <div class="form__actions">
+            <button class="btn btn--primary btn--lg" type="submit" data-submit>
+              <span class="btn__face" data-face="idle">Send booking request</span>
+              <span class="btn__face" data-face="busy" aria-hidden="true"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Opening your email</span>
+              <span class="btn__face" data-face="done" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Request ready to send</span>
+            </button>
+            <p class="form__note" data-form-note>Nothing is charged now.</p>
+          </div>
+          <p class="sr-only" aria-live="polite" data-status></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__about">
+      <a class="brand" href="#top" aria-label="Casa Salina, back to top">
+        <svg viewBox="0 0 28 28" aria-hidden="true"><path class="brand__roof" d="M3 12L14 5l11 7"/><path d="M5 23h18M7 23v-8M21 23v-8"/><path class="brand__salt" d="M10.5 23l3.5-5 3.5 5"/></svg>
+        <span>Casa Salina</span>
+      </a>
+      <p>A salt store from 1880, a hotel since 2019. Run by the Mazzara family, who raked these pans for three generations.</p>
+    </div>
+    <dl class="leaders foot__how">
+      <div class="leader"><dt>From Trapani Birgi airport</dt><dd class="num">18 min by taxi</dd></div>
+      <div class="leader"><dt>From Palermo airport</dt><dd class="num">1 h 10 by car</dd></div>
+      <div class="leader"><dt>From Trapani station</dt><dd class="num">12 min by taxi</dd></div>
+    </dl>
+    <p class="foot__base">Photographs from Wikimedia Commons, credited in CREDITS.md. Set in IBM Plex Mono and IBM Plex Sans.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
