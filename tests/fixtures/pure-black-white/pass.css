@@ -1,0 +1,2 @@
+body { background: oklch(0.985 0.005 250); color: oklch(0.2 0.01 250); }
+@media print { body { background: white; } }

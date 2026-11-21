@@ -1,0 +1,2 @@
+.card { transition: opacity 200ms ease-out, transform 200ms ease-out; }
+.menu { transition: var(--menu-transition); }

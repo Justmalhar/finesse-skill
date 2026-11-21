@@ -1,0 +1,2 @@
+@keyframes shrink { to { transform: scale(0); } }
+.link::after { transform: scaleX(0); }

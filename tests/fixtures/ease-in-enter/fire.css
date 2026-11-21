@@ -1,0 +1,2 @@
+.toast { animation: fadeIn 240ms ease-in; }
+.fade-enter-active { transition: opacity 200ms ease-in; }

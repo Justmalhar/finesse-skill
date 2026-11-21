@@ -1,0 +1,25 @@
+{
+  "name": "finesse-skill",
+  "description": "finesse: an agent skill for distinctive, hand-finished frontend UI.",
+  "owner": {
+    "name": "Malhar Ujawane",
+    "url": "https://github.com/Justmalhar"
+  },
+  "plugins": [
+    {
+      "name": "finesse",
+      "source": "./",
+      "description": "Deals a design direction, sets one number set for type, colour, space and motion, shows the finish to match, and checks the result with a zero-dependency linter.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Malhar Ujawane",
+        "url": "https://github.com/Justmalhar"
+      },
+      "homepage": "https://github.com/Justmalhar/finesse-skill",
+      "repository": "https://github.com/Justmalhar/finesse-skill",
+      "license": "MIT",
+      "keywords": ["design", "frontend", "ui", "css", "tailwind", "skill"],
+      "category": "design"
+    }
+  ]
+}

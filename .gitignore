@@ -1,0 +1,4 @@
+.env
+.finesse/
+node_modules/
+.DS_Store

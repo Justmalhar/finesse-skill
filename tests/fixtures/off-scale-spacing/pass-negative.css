@@ -1,0 +1,4 @@
+.marker { width: 10px; height: 10px; margin: -5px; }
+.dot { height: 14px; margin-top: -7px; }
+.tab { margin-bottom: -1px; margin-inline: -3px; }
+.bleed { margin-inline: -24px; }
