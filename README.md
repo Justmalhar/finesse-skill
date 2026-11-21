@@ -10,32 +10,7 @@ npx skills add Justmalhar/finesse-skill
 
 Works with Claude Code, Codex, Cursor and any agent that reads Agent Skills. Node 18 or later for the scripts. No API keys, nothing to install.
 
-## Same brief, same model, with and without
-
-Each pair below was built by the same model (Claude Opus, high effort) from the same one-paragraph brief. The only difference is whether the finesse skill was loaded. The briefs and all the source are in [`examples/`](examples/README.md), so you can rerun them.
-
-<table>
-<tr>
-<th width="50%">Without a design skill</th>
-<th width="50%">With finesse</th>
-</tr>
-<tr>
-<td><img src="docs/images/ledgerline-without.png" alt="Ledgerline dashboard built without the skill: plain tiles with bare numbers, one green series and single-colour progress bars"></td>
-<td><img src="docs/images/ledgerline-with.png" alt="Ledgerline dashboard built with finesse: four KPI tiles each with a different chart, a cash flow chart with a net line, income by client with a composition bar"></td>
-</tr>
-<tr>
-<td colspan="2"><b>Ledgerline</b>, a dashboard for an invoicing app. Without the skill, each tile is a bare number and every chart is one colour. With it, each figure has a comparison and its own visual, series colours keep one meaning across the screen, and charts sit in sunken wells.</td>
-</tr>
-<tr>
-<td><img src="docs/images/tidewater-without.png" alt="Tidewater landing page built without the skill: cream background, glow blob, uppercase eyebrow, two pill buttons and a rounded card"></td>
-<td><img src="docs/images/tidewater-with.png" alt="Tidewater landing page built with finesse: air mail stripe, Didone headline, a tide chart with a tide-staff ruler as its axis and the best window shaded"></td>
-</tr>
-<tr>
-<td colspan="2"><b>Tidewater</b>, a landing page for a tide and swell forecast app. Without the skill: a cream page, a glow blob, an eyebrow and two pill buttons. With it: a harbour master's tide almanac sent by air mail, with a tide-staff ruler as the chart's real axis.</td>
-</tr>
-</table>
-
-## Twenty briefs, twenty directions
+## Built with finesse
 
 Twenty niches, each built by an agent from a one-paragraph brief with finesse loaded. No two share a palette or a type pairing, because the dealer was told what it had already dealt. Every page is static HTML in [`examples/`](examples/README.md), with its brief.
 
@@ -124,8 +99,6 @@ Twenty niches, each built by an agent from a one-paragraph brief with finesse lo
 
 Photographs are from Wikimedia Commons and Unsplash under their licences, credited in each page's `CREDITS.md`. Everything else is drawn in HTML, CSS, SVG or three.js. Names, places and figures are invented.
 
-## More built with finesse
-
 <table>
 <tr>
 <td width="50%"><img src="docs/images/perigee-hero.png" alt="Perigee launch page: a three.js night sky with a Milky Way band and a 3D star tracker carrying a camera"></td>
@@ -142,6 +115,31 @@ Photographs are from Wikimedia Commons and Unsplash under their licences, credit
 <tr>
 <td><b>Ledgerline</b> in light. Both themes are designed, not inverted.</td>
 <td>The <b>dashboard exemplar</b> that ships inside the skill. Agents read it to see the finish to match, then build something else.</td>
+</tr>
+</table>
+
+## Same brief, same model, with and without
+
+Each pair below was built by the same model (Claude Opus, high effort) from the same one-paragraph brief. The only difference is whether the finesse skill was loaded. The briefs and all the source are in [`examples/`](examples/README.md), so you can rerun them.
+
+<table>
+<tr>
+<th width="50%">Without a design skill</th>
+<th width="50%">With finesse</th>
+</tr>
+<tr>
+<td><img src="docs/images/ledgerline-without.png" alt="Ledgerline dashboard built without the skill: plain tiles with bare numbers, one green series and single-colour progress bars"></td>
+<td><img src="docs/images/ledgerline-with.png" alt="Ledgerline dashboard built with finesse: four KPI tiles each with a different chart, a cash flow chart with a net line, income by client with a composition bar"></td>
+</tr>
+<tr>
+<td colspan="2"><b>Ledgerline</b>, a dashboard for an invoicing app. Without the skill, each tile is a bare number and every chart is one colour. With it, each figure has a comparison and its own visual, series colours keep one meaning across the screen, and charts sit in sunken wells.</td>
+</tr>
+<tr>
+<td><img src="docs/images/tidewater-without.png" alt="Tidewater landing page built without the skill: cream background, glow blob, uppercase eyebrow, two pill buttons and a rounded card"></td>
+<td><img src="docs/images/tidewater-with.png" alt="Tidewater landing page built with finesse: air mail stripe, Didone headline, a tide chart with a tide-staff ruler as its axis and the best window shaded"></td>
+</tr>
+<tr>
+<td colspan="2"><b>Tidewater</b>, a landing page for a tide and swell forecast app. Without the skill: a cream page, a glow blob, an eyebrow and two pill buttons. With it: a harbour master's tide almanac sent by air mail, with a tide-staff ruler as the chart's real axis.</td>
 </tr>
 </table>
 
