@@ -96,10 +96,11 @@ Avoid unless the brief asks. Full catalogue with fixes: `references/slop.md`. De
 7. A tracked uppercase eyebrow over every section, a pill chip above the hero headline.
 8. Flat bordered boxes for everything, a badge on every row of a long table, cards inside cards.
 9. Fade-up on every section, bounce or elastic easing.
-10. Two-tone headlines where the second half is muted or accent coloured.
+10. Two-tone headlines where the second half is muted or accent coloured, and the reflex variant: one key word in the hero headline set in the accent. Set the headline in one colour and let the direction's signature carry the identity; use an accent word only when that word is the product's own mark or a figure the page is about.
 11. Copy tells: seamless, elevate, unlock, effortless; "X. Y." fragment headlines; "It's not just X, it's Y"; em dashes; middle-dot separators. <!-- finesse-ignore slop-copy: catalogue -->
 12. Placeholder residue: lorem ipsum, `[Company Name]`, coloured boxes standing in for images, fake logos, quotes or metrics. <!-- finesse-ignore placeholder-residue: catalogue -->
 13. A product screen that is one table under three numbers: no charts, one colour, one surface level.
+14. Food, drink and hospitality imagery pushed through a duotone or halftone until it no longer reads as appetising. The hero photograph of food stays in full colour; graphic treatments go on secondary images.
 
 ## Routing
 
