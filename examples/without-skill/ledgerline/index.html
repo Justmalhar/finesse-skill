@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Ledgerline</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    (function () {
+      var t = new URLSearchParams(location.search).get('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    })();
+  </script>
+</head>
+<body>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar">
+      <a class="brand" href="?page=overview" data-nav="overview">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="var(--accent)"/>
+          <path d="M9 11h14M9 16h14M9 21h8" stroke="var(--accent-ink)" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <span>Ledgerline</span>
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          <li><a href="?page=overview" data-nav="overview"><span data-icon="dashboard"></span>Overview</a></li>
+          <li><a href="?page=invoices" data-nav="invoices"><span data-icon="file"></span>Invoices</a></li>
+          <li><a href="?page=clients" data-nav="clients"><span data-icon="users"></span>Clients</a></li>
+          <li><a href="?page=expenses" data-nav="expenses"><span data-icon="receipt"></span>Expenses</a></li>
+          <li><a href="?page=reports" data-nav="reports"><span data-icon="chart"></span>Reports</a></li>
+          <li><a href="?page=settings" data-nav="settings"><span data-icon="settings"></span>Settings</a></li>
+        </ul>
+      </nav>
+      <div class="account">
+        <span class="avatar" aria-hidden="true">MR</span>
+        <span class="account-text"><strong>Maya Reyes</strong><span>Independent designer</span></span>
+      </div>
+    </aside>
+    <div class="nav-scrim" id="navScrim"></div>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false"><span data-icon="menu"></span></button>
+        <label class="search">
+          <span data-icon="search"></span>
+          <input id="search" type="search" placeholder="Search invoices or clients" aria-label="Search invoices or clients" autocomplete="off">
+          <kbd aria-hidden="true">/</kbd>
+        </label>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="themeBtn" type="button"></button>
+          <button class="btn btn-primary" id="newInvoice" type="button" data-action="new" aria-label="New invoice"><span data-icon="plus"></span><span class="btn-label">New invoice</span></button>
+        </div>
+      </header>
+      <main class="page" id="page" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <div class="sheet-scrim" id="sheetScrim" hidden></div>
+  <aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden></aside>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

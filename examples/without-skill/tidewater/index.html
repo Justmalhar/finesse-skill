@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tidewater: tide and swell forecasts</title>
+  <meta name="description" content="A 7-day tide, swell and wind forecast for any break or harbour, with a plain-language best window for each day.">
+  <script>
+    (function () {
+      var t = new URLSearchParams(location.search).get('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Tidewater home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="22" cy="9" r="4"/>
+          <path d="M3 19c3.5 0 3.5-3 7-3s3.5 3 7 3 3.5-3 7-3 3.5 3 5 3"/>
+          <path d="M3 25c3.5 0 3.5-3 7-3s3.5 3 7 3 3.5-3 7-3 3.5 3 5 3" opacity=".5"/>
+        </svg>
+        <span>Tidewater</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#forecast">Forecast</a>
+        <a href="#alerts">Alerts</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <a class="btn btn-small" href="#pricing">Start free</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Tide and swell forecasts for surfers and sailors</p>
+          <h1>Know when the water is right.</h1>
+          <p class="lede">Tidewater reads the tide, swell and wind for any break or harbour, then tells you in plain words the best window to be out on each of the next seven days.</p>
+          <div class="cta-row">
+            <a class="btn" href="#pricing">Start free</a>
+            <a class="btn btn-ghost" href="#forecast">See how it reads</a>
+          </div>
+          <p class="fineprint">Free for one saved spot. $4 a month for unlimited spots and alerts.</p>
+        </div>
+
+        <figure class="device" aria-label="Tidewater week view for Kettle Point">
+          <div class="device-screen">
+            <div class="device-head">
+              <div>
+                <p class="spot">Kettle Point</p>
+                <p class="spot-meta">Reef break, faces west</p>
+              </div>
+              <span class="pill">Next 7 days</span>
+            </div>
+            <div class="week-scale" aria-hidden="true">
+              <span></span>
+              <span class="ticks"><i>00</i><i>06</i><i>12</i><i>18</i><i>24</i></span>
+              <span></span>
+            </div>
+            <ol class="week" id="week"></ol>
+            <p class="device-legend"><span class="swatch" aria-hidden="true"></span>Best window, local time</p>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- How the forecast reads -->
+    <section class="section" id="forecast">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">How the forecast reads</p>
+          <h2>Each day, answer first.</h2>
+          <p>Pick a day. The best window comes first, then the tide, swell and wind behind it, so you can check the reasoning or just go.</p>
+        </div>
+
+        <div class="reader">
+          <div class="app">
+            <div class="app-top">
+              <div>
+                <p class="spot">Kettle Point</p>
+                <p class="spot-meta" id="day-date"></p>
+              </div>
+              <span class="pill">Updated 05:00</span>
+            </div>
+
+            <div class="day-tabs" role="tablist" aria-label="Forecast day" id="day-tabs"></div>
+
+            <div class="day-panel" role="tabpanel" id="day-panel" tabindex="0">
+              <div class="best" id="best">
+                <span class="marker" aria-hidden="true">1</span>
+                <p class="label">Best window</p>
+                <p class="best-time" id="best-time"></p>
+                <p class="best-text" id="best-text"></p>
+              </div>
+
+              <figure class="tide">
+                <figcaption class="label"><span class="marker" aria-hidden="true">2</span>Tide, metres</figcaption>
+                <svg id="tide-chart" viewBox="0 0 640 210" role="img" aria-label="Tide curve"></svg>
+              </figure>
+
+              <div class="metrics">
+                <div class="metric">
+                  <span class="marker" aria-hidden="true">3</span>
+                  <p class="label">Swell</p>
+                  <p class="metric-value"><span id="swell-h"></span><small>m</small></p>
+                  <p class="metric-sub" id="swell-sub"></p>
+                  <svg class="arrow" id="swell-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17M6 14l6 6 6-6"/></svg>
+                </div>
+                <div class="metric">
+                  <span class="marker" aria-hidden="true">4</span>
+                  <p class="label">Wind</p>
+                  <p class="metric-value"><span id="wind-s"></span><small>kn</small></p>
+                  <p class="metric-sub" id="wind-sub"></p>
+                  <svg class="arrow" id="wind-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17M6 14l6 6 6-6"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ol class="notes">
+            <li>
+              <span class="marker" aria-hidden="true">1</span>
+              <div>
+                <h3>The best window</h3>
+                <p>The hours worth going, with one sentence on why. When nothing lines up, it says so instead of guessing.</p>
+              </div>
+            </li>
+            <li>
+              <span class="marker" aria-hidden="true">2</span>
+              <div>
+                <h3>The tide curve</h3>
+                <p>Highs and lows with times and heights, and the window marked on the curve, so you know if you are paddling out on the push or the drop.</p>
+              </div>
+            </li>
+            <li>
+              <span class="marker" aria-hidden="true">3</span>
+              <div>
+                <h3>Swell</h3>
+                <p>Height, period and the direction it arrives from. Period tells you how much power sits behind the height.</p>
+              </div>
+            </li>
+            <li>
+              <span class="marker" aria-hidden="true">4</span>
+              <div>
+                <h3>Wind</h3>
+                <p>Speed in knots and where it blows from, labelled offshore, cross or onshore for the way your spot faces.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alerts -->
+    <section class="section section-alt" id="alerts">
+      <div class="wrap alerts-grid">
+        <div class="alerts-copy">
+          <p class="eyebrow">Alerts</p>
+          <h2>Set your conditions once. Tidewater watches for them.</h2>
+          <p>Describe a good session at each spot: swell size and period, how much wind and from where, which part of the tide. When the forecast lines up, you get a notification with the window and the numbers.</p>
+          <ul class="ticks">
+            <li>Rules per spot, so the reef and the harbour each get their own.</li>
+            <li>Surf rules or sailing rules: wind range, tide state, daylight only.</li>
+            <li>Included in Pro, on every spot you save.</li>
+          </ul>
+        </div>
+
+        <div class="alerts-demo">
+          <div class="rule-card">
+            <div class="rule-head">
+              <div>
+                <p class="rule-title">Dawn patrol</p>
+                <p class="spot-meta">Kettle Point</p>
+              </div>
+              <button class="switch" type="button" role="switch" aria-checked="true" aria-label="Dawn patrol alert"><span></span></button>
+            </div>
+            <dl class="rule-list">
+              <div><dt>Swell</dt><dd>1.2 to 2.5 m</dd></div>
+              <div><dt>Period</dt><dd>10 s or longer</dd></div>
+              <div><dt>Wind</dt><dd>Under 12 kn, offshore</dd></div>
+              <div><dt>Tide</dt><dd>Dropping or low</dd></div>
+              <div><dt>Notify</dt><dd>The evening before</dd></div>
+            </dl>
+          </div>
+
+          <ul class="notifs" aria-label="Example alerts">
+            <li class="notif">
+              <span class="notif-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M3 19c3.5 0 3.5-3 7-3s3.5 3 7 3 3.5-3 7-3 3.5 3 5 3"/></svg>
+              </span>
+              <div>
+                <p class="notif-top"><strong>Tidewater</strong><span>18:02</span></p>
+                <p><strong>Kettle Point is on tomorrow.</strong> 06:30 to 10:00, 1.8 m at 13 s, 8 kn offshore.</p>
+              </div>
+            </li>
+            <li class="notif">
+              <span class="notif-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32"><path d="M3 19c3.5 0 3.5-3 7-3s3.5 3 7 3 3.5-3 7-3 3.5 3 5 3"/></svg>
+              </span>
+              <div>
+                <p class="notif-top"><strong>Tidewater</strong><span>Yesterday</span></p>
+                <p><strong>Harbour mouth, Tuesday.</strong> 14 to 18 kn south-westerly with the ebb from 13:40. Good for sailing out.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="eyebrow">Pricing</p>
+          <h2>One spot free. The whole coast for $4.</h2>
+          <p>Start with your home break. Upgrade when you want more spots, or want Tidewater to tell you when they are working.</p>
+        </div>
+        <div class="plans">
+          <article class="plan">
+            <h3>Free</h3>
+            <p class="price"><span>$0</span></p>
+            <p class="plan-sub">Your home break, every day.</p>
+            <ul class="ticks">
+              <li>One saved spot</li>
+              <li>7-day tide, swell and wind</li>
+              <li>Daily best window in plain words</li>
+            </ul>
+            <a class="btn btn-ghost" href="#top">Start free</a>
+          </article>
+          <article class="plan plan-pro">
+            <h3>Pro</h3>
+            <p class="price"><span>$4</span> a month</p>
+            <p class="plan-sub">Every break and harbour you use.</p>
+            <ul class="ticks">
+              <li>Everything in Free</li>
+              <li>Unlimited saved spots</li>
+              <li>Alerts on your own conditions</li>
+            </ul>
+            <a class="btn" href="#top">Go Pro</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <a class="brand" href="#top">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <circle cx="22" cy="9" r="4"/>
+            <path d="M3 19c3.5 0 3.5-3 7-3s3.5 3 7 3 3.5-3 7-3 3.5 3 5 3"/>
+            <path d="M3 25c3.5 0 3.5-3 7-3s3.5 3 7 3 3.5-3 7-3 3.5 3 5 3" opacity=".5"/>
+          </svg>
+          <span>Tidewater</span>
+        </a>
+        <p class="footer-note">Forecasts are guidance, not a guarantee. Look at the water before you go out.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#forecast">Forecast</a>
+        <a href="#alerts">Alerts</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#top">Privacy</a>
+        <a href="#top">Contact</a>
+      </nav>
+      <p class="copyright">&copy; 2026 Tidewater</p>
+    </div>
+  </footer>
+</body>
+</html>

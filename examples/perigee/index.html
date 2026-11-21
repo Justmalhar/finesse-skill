@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Perigee, the pocket star tracker</title>
+<meta name="description" content="Perigee is a 640 g motorised star tracker that counter-rotates your camera against the Earth’s spin. 5 kg payload, 20 hours per charge, self polar-alignment in about 90 seconds. $349, ships in March.">
+<meta name="theme-color" content="#090c11">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@600&family=Funnel+Sans:wght@400;500&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script>
+  /* Before first paint: review hooks. ?motion=reduce forces the reduced path, ?shot renders the scene alone. */
+  (function () {
+    var d = document.documentElement, q = new URLSearchParams(location.search);
+    if (q.get("motion") === "reduce" || matchMedia("(prefers-reduced-motion: reduce)").matches) d.dataset.motion = "reduce";
+    if (q.has("shot")) d.dataset.shot = "";
+  })();
+</script>
+<script src="main.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-rim" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" class="s-rim-a"/><stop offset="1" class="s-rim-b"/></linearGradient>
+    <radialGradient id="g-face" cx="0.36" cy="0.3" r="0.85"><stop offset="0" class="s-face-a"/><stop offset="1" class="s-face-b"/></radialGradient>
+    <linearGradient id="g-ring" x1="0" y1="0" x2="0.25" y2="1"><stop offset="0" class="s-ring-a"/><stop offset="1" class="s-ring-b"/></linearGradient>
+    <linearGradient id="g-disc" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0" class="s-disc-a"/><stop offset="1" class="s-disc-b"/></linearGradient>
+    <radialGradient id="g-plate" cx="0.4" cy="0.32" r="0.8"><stop offset="0" class="s-plate-a"/><stop offset="1" class="s-plate-b"/></radialGradient>
+    <linearGradient id="g-clamp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-clamp-a"/><stop offset="1" class="s-clamp-b"/></linearGradient>
+    <radialGradient id="g-lens" cx="0.4" cy="0.38" r="0.7"><stop offset="0" class="s-lens-a"/><stop offset="1" class="s-lens-b"/></radialGradient>
+    <linearGradient id="g-bracket" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-disc-a"/><stop offset="1" class="s-disc-b"/></linearGradient>
+    <linearGradient id="g-hinge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-clamp-a"/><stop offset="1" class="s-disc-b"/></linearGradient>
+    <filter id="f-mw" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="22"/></filter>
+  </defs>
+  <symbol id="perigee-front" viewBox="0 0 260 300">
+    <path class="pg-bracket" d="M98 196H162V270a10 10 0 0 1-10 10H108a10 10 0 0 1-10-10Z"/>
+    <rect class="pg-hinge" x="62" y="250" width="136" height="26" rx="13"/>
+    <path class="pg-hi" d="M76 253.5H184"/>
+    <circle class="pg-knob" cx="212" cy="263" r="19"/>
+    <circle class="pg-rim" cx="130" cy="130" r="120"/>
+    <path class="pg-hi" d="M24.1 86.6A119 119 0 0 1 172.6 18.8"/>
+    <circle class="pg-face" cx="130" cy="130" r="110"/>
+    <circle class="pg-groove" cx="130" cy="130" r="101"/>
+    <circle class="pg-groove-hi" cx="130" cy="131.5" r="101"/>
+    <circle class="pg-ring" cx="130" cy="130" r="82"/>
+    <path class="pg-hi" d="M66.2 78.4A82 82 0 0 1 166.4 56.5"/>
+    <circle class="pg-shade" cx="131" cy="134" r="75"/>
+    <g class="pg-ra">
+      <circle class="pg-disc" cx="130" cy="130" r="74"/>
+      <circle class="pg-knurl" cx="130" cy="130" r="70"/>
+      <circle class="pg-plate" cx="130" cy="130" r="56"/>
+      <rect class="pg-clamp" x="72" y="111" width="116" height="38" rx="6"/>
+      <rect class="pg-jaw" x="72" y="126" width="116" height="8"/>
+      <path class="pg-hi" d="M78 113H182"/>
+      <circle class="pg-bolt" cx="130" cy="130" r="9"/>
+      <rect class="pg-index" x="127" y="58" width="6" height="12" rx="2"/>
+    </g>
+    <circle class="pg-lens-ring" cx="62.1" cy="62.1" r="11"/>
+    <circle class="pg-lens" cx="62.1" cy="62.1" r="7"/>
+    <ellipse class="pg-glint" cx="59.6" cy="59.4" rx="2.6" ry="1.6" transform="rotate(-40 59.6 59.4)"/>
+    <circle class="pg-led-glow" cx="197.9" cy="197.9" r="7"/>
+    <circle class="pg-led" cx="197.9" cy="197.9" r="3"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></symbol>
+  <symbol id="i-target" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><circle cx="8" cy="8" r="1.5"/><path d="M8 1v2.5M8 12.5V15M1 8h2.5M12.5 8H15"/></symbol>
+  <symbol id="i-batt" viewBox="0 0 16 16"><rect x="1.5" y="4.5" width="11.5" height="7" rx="1.5"/><path d="M14.5 7v2M4 7v2M6.5 7v2M9 7v2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 16 16"><rect x="1.5" y="3.5" width="13" height="9" rx="2"/><path d="M2 4.5l6 4.5 6-4.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5.25v3.25M8 10.75v.01"/></symbol>
+  <symbol id="i-box" viewBox="0 0 16 16"><path d="M2.5 5L8 2.5 13.5 5v6L8 13.5 2.5 11z"/><path d="M2.5 5L8 7.5 13.5 5M8 7.5v6"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="#top" aria-label="Perigee, back to top">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><ellipse class="orbit" cx="15" cy="14" rx="11.5" ry="7" transform="rotate(-24 15 14)"/><circle class="body" cx="15" cy="14" r="3.25"/><circle class="peri" cx="5.3" cy="18.2" r="2.25"/></svg>
+      Perigee
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#specs">Specifications</a>
+    </nav>
+    <a class="btn btn--primary" href="#preorder"><span>Pre-order</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <div class="hero__scene">
+      <img class="hero__poster" src="poster.jpg" alt="The Perigee tracker on a tripod under the Milky Way, its axis pointed at the celestial pole." width="1600" height="1000" fetchpriority="high" decoding="async">
+      <canvas class="hero__canvas" aria-hidden="true"></canvas>
+    </div>
+    <div class="wrap hero__copy">
+      <h1 id="hero-h">The pocket star tracker that turns with the sky</h1>
+      <p class="hero__sub">Perigee is a <b>640 g</b> motorised mount for astrophotography. It counter-rotates your camera against the Earth’s spin, so long exposures keep stars as sharp points instead of streaks.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary btn--lg" href="#preorder"><span>Pre-order for $349</span></a>
+        <a class="textlink" href="#how">See how it tracks<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <p class="hero__fine">
+        <span><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Ships in March</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg>Polar-aligns itself in about 90 s</span>
+        <span><svg class="icon" aria-hidden="true"><use href="#i-batt"/></svg>20 hours per charge</span>
+      </p>
+    </div>
+    <p class="hero__note" aria-hidden="true">Facing south at 36° N<br>Axis on the celestial pole</p>
+  </section>
+
+  <section class="how" id="how" aria-label="How Perigee works">
+    <div class="wrap how__grid">
+      <div class="how__steps">
+        <article class="step sec" data-step="1">
+          <span class="gnum" aria-hidden="true">01</span>
+          <div>
+            <h2>Why stars streak</h2>
+            <p>The Earth turns once a day, so the whole sky wheels around the celestial pole at <b>15 degrees an hour</b>. Leave the shutter open on a fixed tripod and every star draws an arc.</p>
+          </div>
+        </article>
+        <article class="step sec" data-step="2">
+          <span class="gnum" aria-hidden="true">02</span>
+          <div>
+            <h2>Perigee turns the other way</h2>
+            <p>A motor rotates your camera around an axis parallel to the Earth’s, at the sky’s own rate. The stars hold still in the frame, so the exposure gathers faint light instead of smearing it. It carries <b>up to 5 kg</b> of camera and lens.</p>
+          </div>
+        </article>
+        <article class="step sec" data-step="3">
+          <span class="gnum" aria-hidden="true">03</span>
+          <div>
+            <h2>It finds the pole by itself</h2>
+            <p>Tracking only works when that axis points at the celestial pole. Perigee’s built-in camera reads the stars around it and guides you on in <b>about 90 seconds</b>, then tracks for <b>20 hours</b> on one charge.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="how__stage">
+        <figure class="vf" data-step="3" data-aligned>
+          <div class="vf__frame">
+            <svg class="vf__sky" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path class="vf__mw" filter="url(#f-mw)" d="M-60 470C60 380 180 300 300 230S520 90 680 20L700 120C540 180 420 260 320 330S120 460 20 520Z"/>
+              <ellipse class="vf__mw-core" filter="url(#f-mw)" cx="150" cy="380" rx="150" ry="70" transform="rotate(-32 150 380)"/>
+              <g class="vf__trails"><path class="tw" stroke-width="0.75" pathLength="1" d="M-40.0 402.0A459.4 459.4 0 0 0 142.4 554.6"/><path class="tw" stroke-width="0.78" pathLength="1" d="M456.0 215.7A142.9 142.9 0 0 0 478.8 145.3"/><path class="tw" stroke-width="1.41" pathLength="1" d="M473.5 220.6A160.3 160.3 0 0 0 496.3 140.8"/><path class="tw" stroke-width="0.82" pathLength="1" d="M515.4 76.2A189.8 189.8 0 0 0 460.4 -5.3"/><path class="tw" stroke-width="1.40" pathLength="1" d="M434.7 -14.1A181.3 181.3 0 0 0 345.4 -43.1"/><path class="tw" stroke-width="0.70" pathLength="1" d="M587.2 347.6A327.2 327.2 0 0 0 658.4 193.9"/><path class="tw" stroke-width="1.29" pathLength="1" d="M587.8 290.5A294.3 294.3 0 0 0 630.3 144.2"/><path class="tw" stroke-width="0.81" pathLength="1" d="M580.2 396.0A355.2 355.2 0 0 0 676.4 239.4"/><path class="tw" stroke-width="0.71" pathLength="1" d="M529.3 119.5A194.2 194.2 0 0 0 494.1 25.3"/><path class="tw" stroke-width="2.51" pathLength="1" d="M251.4 101.5A92.2 92.2 0 0 0 244.5 148.7"/><path class="tw" stroke-width="0.70" pathLength="1" d="M455.9 381.4A271.3 271.3 0 0 0 561.5 288.8"/><path class="tw" stroke-width="0.86" pathLength="1" d="M341.2 204.2A66.4 66.4 0 0 0 373.6 192.7"/><path class="tw" stroke-width="0.81" pathLength="1" d="M578.1 -13.7A285.7 285.7 0 0 0 469.8 -114.4"/><path class="tb" stroke-width="1.00" pathLength="1" d="M411.8 403.7A276.3 276.3 0 0 0 534.5 330.2"/><path class="tw" stroke-width="0.81" pathLength="1" d="M235.8 96.1A108.6 108.6 0 0 0 228.3 151.8"/><path class="tw" stroke-width="1.21" pathLength="1" d="M186.1 215.2A168.6 168.6 0 0 0 244.8 279.8"/><path class="tw" stroke-width="2.11" pathLength="1" d="M576.4 179.8A244.0 244.0 0 0 0 565.1 54.0"/><path class="tw" stroke-width="0.98" pathLength="1" d="M391.4 207.8A89.1 89.1 0 0 0 418.8 170.8"/><path class="tw" stroke-width="1.48" pathLength="1" d="M598.9 150.4A263.2 263.2 0 0 0 569.9 17.3"/><path class="tw" stroke-width="0.78" pathLength="1" d="M359.1 128.3A25.0 25.0 0 0 0 351.1 118.1"/><path class="tr" stroke-width="0.70" pathLength="1" d="M500.4 381.2A293.6 293.6 0 0 0 600.0 266.4"/><path class="tb" stroke-width="0.71" pathLength="1" d="M12.9 155.3A323.6 323.6 0 0 0 64.8 314.5"/><path class="tb" stroke-width="1.26" pathLength="1" d="M637.4 65.6A310.0 310.0 0 0 0 560.8 -75.4"/><path class="tr" stroke-width="0.71" pathLength="1" d="M270.8 244.6A124.9 124.9 0 0 0 332.9 262.9"/><path class="tr" stroke-width="2.23" pathLength="1" d="M561.5 387.5A336.3 336.3 0 0 0 656.0 241.3"/><path class="tw" stroke-width="0.70" pathLength="1" d="M477.6 92.2A148.8 148.8 0 0 0 435.7 27.6"/><path class="tw" stroke-width="1.22" pathLength="1" d="M11.7 -39.2A369.6 369.6 0 0 0 -33.5 146.7"/><path class="tw" stroke-width="1.41" pathLength="1" d="M464.0 194.9A140.1 140.1 0 0 0 475.3 123.3"/><path class="tr" stroke-width="0.82" pathLength="1" d="M559.8 72.9A233.1 233.1 0 0 0 497.3 -30.3"/><path class="tr" stroke-width="0.70" pathLength="1" d="M40.5 194.8A300.9 300.9 0 0 0 108.5 335.0"/><path class="tr" stroke-width="0.70" pathLength="1" d="M393.1 402.6A270.7 270.7 0 0 0 517.8 338.6"/><path class="tw" stroke-width="1.10" pathLength="1" d="M87.9 425.0A379.3 379.3 0 0 0 264.7 510.6"/><path class="tw" stroke-width="0.72" pathLength="1" d="M141.1 66.9A207.5 207.5 0 0 0 131.6 173.9"/><path class="tw" stroke-width="1.46" pathLength="1" d="M-4.4 329.3A390.5 390.5 0 0 0 136.9 473.9"/><path class="tr" stroke-width="0.70" pathLength="1" d="M298.8 -24.3A166.5 166.5 0 0 0 222.6 16.1"/><path class="tb" stroke-width="2.27" pathLength="1" d="M48.9 290.2A324.9 324.9 0 0 0 163.5 413.3"/><path class="tr" stroke-width="2.85" pathLength="1" d="M560.5 373.5A325.4 325.4 0 0 0 648.2 229.6"/><path class="tw" stroke-width="0.73" pathLength="1" d="M480.1 161.4A146.0 146.0 0 0 0 472.5 86.2"/><path class="tw" stroke-width="0.73" pathLength="1" d="M559.9 151.2A224.3 224.3 0 0 0 536.5 37.5"/><path class="tw" stroke-width="0.80" pathLength="1" d="M563.1 228.2A244.4 244.4 0 0 0 577.8 102.6"/><path class="tw" stroke-width="1.54" pathLength="1" d="M459.7 120.8A124.9 124.9 0 0 0 434.6 61.3"/><path class="tr" stroke-width="2.81" pathLength="1" d="M95.1 109.6A242.6 242.6 0 0 0 113.2 233.9"/><path class="tw" stroke-width="2.40" pathLength="1" d="M390.0 378.7A246.6 246.6 0 0 0 503.1 319.4"/><path class="tw" stroke-width="0.97" pathLength="1" d="M398.7 25.0A129.3 129.3 0 0 0 333.8 8.8"/><path class="tw" stroke-width="0.95" pathLength="1" d="M484.6 414.0A313.4 313.4 0 0 0 602.6 302.7"/><path class="tw" stroke-width="1.34" pathLength="1" d="M263.7 39.7A122.0 122.0 0 0 0 224.3 89.0"/><path class="tw" stroke-width="1.65" pathLength="1" d="M341.8 203.2A65.5 65.5 0 0 0 373.7 191.6"/><path class="tw" stroke-width="0.76" pathLength="1" d="M470.6 -27.5A213.3 213.3 0 0 0 369.8 -72.6"/><path class="tw" stroke-width="0.75" pathLength="1" d="M97.9 307.0A292.0 292.0 0 0 0 214.3 403.4"/><path class="tw" stroke-width="0.70" pathLength="1" d="M408.5 166.0A77.7 77.7 0 0 0 412.8 126.0"/><path class="tw" stroke-width="2.36" pathLength="1" d="M519.5 399.4A319.4 319.4 0 0 0 625.7 272.6"/><path class="tw" stroke-width="1.67" pathLength="1" d="M612.0 -27.9A322.1 322.1 0 0 0 492.1 -143.7"/><path class="tb" stroke-width="0.70" pathLength="1" d="M452.3 391.1A278.6 278.6 0 0 0 563.3 299.0"/><path class="tb" stroke-width="0.70" pathLength="1" d="M14.6 12.0A345.2 345.2 0 0 0 -5.4 189.5"/><path class="tb" stroke-width="0.72" pathLength="1" d="M371.4 414.0A278.2 278.2 0 0 0 504.7 359.3"/><path class="tw" stroke-width="0.73" pathLength="1" d="M97.5 284.0A279.6 279.6 0 0 0 202.4 383.6"/><path class="tw" stroke-width="1.37" pathLength="1" d="M635.9 162.8A300.9 300.9 0 0 0 608.1 9.6"/><path class="tw" stroke-width="0.70" pathLength="1" d="M229.9 159.9A108.4 108.4 0 0 0 255.0 210.0"/><path class="tr" stroke-width="0.71" pathLength="1" d="M509.2 427.7A337.5 337.5 0 0 0 630.8 302.3"/><path class="tw" stroke-width="0.72" pathLength="1" d="M305.9 18.6A123.1 123.1 0 0 0 250.3 49.7"/><path class="tw" stroke-width="0.74" pathLength="1" d="M76.0 -2.5A295.6 295.6 0 0 0 40.5 146.3"/><path class="tb" stroke-width="2.86" pathLength="1" d="M338.2 190.7A52.7 52.7 0 0 0 364.2 182.6"/><path class="tb" stroke-width="0.70" pathLength="1" d="M241.1 110.9A98.7 98.7 0 0 0 240.3 162.0"/><path class="tr" stroke-width="0.73" pathLength="1" d="M241.2 3.8A164.3 164.3 0 0 0 186.8 69.2"/><path class="tr" stroke-width="0.88" pathLength="1" d="M488.7 326.7A242.7 242.7 0 0 0 562.6 225.1"/><path class="tw" stroke-width="1.34" pathLength="1" d="M614.5 344.5A346.7 346.7 0 0 0 680.4 177.6"/><path class="tw" stroke-width="0.97" pathLength="1" d="M196.7 155.4A140.4 140.4 0 0 0 224.0 222.7"/><path class="tw" stroke-width="1.35" pathLength="1" d="M345.8 306.4A168.7 168.7 0 0 0 428.8 279.0"/><path class="tr" stroke-width="2.03" pathLength="1" d="M455.7 384.6A274.1 274.1 0 0 0 562.9 291.7"/><path class="tr" stroke-width="2.63" pathLength="1" d="M257.9 193.8A96.0 96.0 0 0 0 296.2 225.4"/><path class="tr" stroke-width="0.79" pathLength="1" d="M203.3 -2.0A192.9 192.9 0 0 0 151.1 83.1"/><path class="tw" stroke-width="2.62" pathLength="1" d="M441.7 314.3A205.5 205.5 0 0 0 515.7 237.8"/><path class="tb" stroke-width="1.82" pathLength="1" d="M100.8 74.3A243.7 243.7 0 0 0 100.5 200.4"/><path class="tw" stroke-width="1.26" pathLength="1" d="M582.6 344.1A321.4 321.4 0 0 0 652.6 193.2"/><path class="tw" stroke-width="2.16" pathLength="1" d="M324.4 172.7A36.5 36.5 0 0 0 343.3 173.8"/><path class="tw" stroke-width="1.41" pathLength="1" d="M554.1 89.9A223.4 223.4 0 0 0 500.8 -12.7"/><path class="tw" stroke-width="1.15" pathLength="1" d="M228.7 50.0A138.8 138.8 0 0 0 199.0 115.5"/><path class="tw" stroke-width="0.78" pathLength="1" d="M571.2 354.6A319.7 319.7 0 0 0 648.0 208.0"/><path class="tr" stroke-width="0.76" pathLength="1" d="M556.6 15.6A252.3 252.3 0 0 0 465.9 -78.3"/><path class="tb" stroke-width="0.84" pathLength="1" d="M-39.1 23.3A392.3 392.3 0 0 0 -46.2 226.2"/><path class="tw" stroke-width="0.71" pathLength="1" d="M431.1 391.0A270.3 270.3 0 0 0 544.9 309.5"/><path class="tb" stroke-width="0.71" pathLength="1" d="M604.2 295.9A311.2 311.2 0 0 0 647.2 140.7"/><path class="tw" stroke-width="1.88" pathLength="1" d="M386.1 -32.4A177.6 177.6 0 0 0 294.2 -34.6"/><path class="tw" stroke-width="0.78" pathLength="1" d="M470.8 21.5A178.2 178.2 0 0 0 394.4 -30.3"/><path class="tw" stroke-width="1.15" pathLength="1" d="M609.4 223.0A286.3 286.3 0 0 0 615.3 74.9"/><path class="tb" stroke-width="1.17" pathLength="1" d="M437.7 312.2A201.7 201.7 0 0 0 511.1 238.0"/><path class="tw" stroke-width="0.73" pathLength="1" d="M-9.1 254.4A364.2 364.2 0 0 0 95.3 411.4"/><path class="tw" stroke-width="1.22" pathLength="1" d="M130.6 67.1A217.3 217.3 0 0 0 122.7 179.3"/><path class="tb" stroke-width="2.33" pathLength="1" d="M512.7 74.9A187.6 187.6 0 0 0 457.5 -5.0"/><path class="tw" stroke-width="1.79" pathLength="1" d="M429.7 155.2A95.2 95.2 0 0 0 425.7 106.1"/><path class="tw" stroke-width="2.41" pathLength="1" d="M507.2 10.2A213.6 213.6 0 0 0 420.4 -58.2"/><path class="tw" stroke-width="2.13" pathLength="1" d="M519.6 164.0A185.4 185.4 0 0 0 508.0 68.7"/><path class="tw" stroke-width="2.09" pathLength="1" d="M454.4 395.8A283.7 283.7 0 0 0 567.5 302.0"/><path class="tr" stroke-width="0.70" pathLength="1" d="M449.4 34.2A153.7 153.7 0 0 0 382.3 -8.6"/><path class="tw" stroke-width="0.70" pathLength="1" d="M609.3 -12.9A312.1 312.1 0 0 0 497.2 -129.3"/><path class="tw" stroke-width="2.63" pathLength="1" d="M599.7 377.5A356.2 356.2 0 0 0 684.1 213.5"/><path class="tw" stroke-width="0.93" pathLength="1" d="M94.8 -25.7A291.5 291.5 0 0 0 45.3 116.8"/><path class="tw" stroke-width="0.94" pathLength="1" d="M56.3 115.1A280.7 280.7 0 0 0 82.3 258.0"/><path class="tw" stroke-width="0.70" pathLength="1" d="M-2.6 -18.7A373.1 373.1 0 0 0 -35.6 171.6"/><path class="tw" stroke-width="1.55" pathLength="1" d="M278.2 347.9A217.7 217.7 0 0 0 390.9 348.7"/><path class="tr" stroke-width="1.21" pathLength="1" d="M436.3 146.3A100.6 100.6 0 0 0 427.0 95.0"/><path class="tw" stroke-width="1.49" pathLength="1" d="M484.0 421.8A320.1 320.1 0 0 0 606.1 309.7"/><path class="tw" stroke-width="0.70" pathLength="1" d="M505.8 42.2A195.0 195.0 0 0 0 435.2 -29.9"/><path class="tw" stroke-width="1.06" pathLength="1" d="M399.8 167.0A70.0 70.0 0 0 0 405.7 131.2"/><path class="tb" stroke-width="0.70" pathLength="1" d="M296.2 18.5A125.9 125.9 0 0 0 241.8 54.4"/><path class="tw" stroke-width="0.72" pathLength="1" d="M200.9 125.4A135.7 135.7 0 0 0 212.7 194.7"/><path class="tr" stroke-width="0.70" pathLength="1" d="M45.3 -15.0A328.5 328.5 0 0 0 7.8 150.9"/><path class="tw" stroke-width="1.70" pathLength="1" d="M551.2 -18.7A266.2 266.2 0 0 0 444.1 -105.3"/><path class="tb" stroke-width="1.81" pathLength="1" d="M233.6 395.9A277.5 277.5 0 0 0 376.3 412.6"/><path class="tw" stroke-width="1.28" pathLength="1" d="M635.5 58.6A309.8 309.8 0 0 0 555.7 -80.5"/><path class="tw" stroke-width="1.65" pathLength="1" d="M-17.4 42.9A366.0 366.0 0 0 0 -17.6 232.4"/><path class="tw" stroke-width="1.88" pathLength="1" d="M129.4 371.6A311.9 311.9 0 0 0 273.9 443.6"/><path class="tr" stroke-width="0.74" pathLength="1" d="M272.3 103.5A72.5 72.5 0 0 0 263.5 140.0"/><path class="tr" stroke-width="0.97" pathLength="1" d="M551.6 285.5A261.3 261.3 0 0 0 596.5 158.0"/><path class="tr" stroke-width="1.67" pathLength="1" d="M517.4 350.3A279.3 279.3 0 0 0 599.3 231.1"/><path class="tw" stroke-width="1.49" pathLength="1" d="M430.1 97.0A102.7 102.7 0 0 0 397.0 55.4"/><path class="tw" stroke-width="2.03" pathLength="1" d="M547.5 38.2A233.9 233.9 0 0 0 469.3 -54.2"/><path class="tr" stroke-width="1.81" pathLength="1" d="M514.9 184.1A184.7 184.7 0 0 0 514.0 88.5"/><path class="tb" stroke-width="0.72" pathLength="1" d="M-11.1 71.3A353.4 353.4 0 0 0 2.1 253.7"/><path class="tr" stroke-width="1.24" pathLength="1" d="M352.7 349.7A212.4 212.4 0 0 0 456.3 313.0"/><path class="tw" stroke-width="0.72" pathLength="1" d="M548.5 350.4A300.5 300.5 0 0 0 626.3 215.7"/><path class="tw" stroke-width="1.04" pathLength="1" d="M272.6 145.3A63.8 63.8 0 0 0 284.8 176.0"/><path class="tw" stroke-width="0.97" pathLength="1" d="M312.0 144.2A24.8 24.8 0 0 0 318.3 155.4"/><path class="tw" stroke-width="0.76" pathLength="1" d="M438.3 330.4A217.9 217.9 0 0 0 520.8 253.5"/><path class="tw" stroke-width="2.52" pathLength="1" d="M377.5 224.8A96.2 96.2 0 0 0 415.4 192.4"/><path class="tw" stroke-width="1.12" pathLength="1" d="M175.1 248.1A195.0 195.0 0 0 0 251.7 313.8"/><path class="tb" stroke-width="0.72" pathLength="1" d="M348.3 37.5A101.2 101.2 0 0 0 296.4 44.8"/><path class="tw" stroke-width="2.17" pathLength="1" d="M186.8 264.3A195.5 195.5 0 0 0 269.9 322.0"/><path class="tb" stroke-width="0.84" pathLength="1" d="M224.7 126.7A111.9 111.9 0 0 0 234.0 183.9"/><path class="tw" stroke-width="0.94" pathLength="1" d="M65.3 -14.5A310.7 310.7 0 0 0 25.3 141.3"/><path class="tw" stroke-width="0.84" pathLength="1" d="M22.2 264.4A338.3 338.3 0 0 0 127.4 404.4"/><path class="tw" stroke-width="0.75" pathLength="1" d="M27.7 363.3A381.9 381.9 0 0 0 181.7 487.3"/><path class="tw" stroke-width="0.88" pathLength="1" d="M42.6 57.4A304.2 304.2 0 0 0 41.6 214.9"/><path class="tw" stroke-width="1.64" pathLength="1" d="M373.2 237.5A106.2 106.2 0 0 0 417.9 205.6"/><path class="tb" stroke-width="1.41" pathLength="1" d="M294.8 376.1A241.7 241.7 0 0 0 419.4 364.8"/><path class="tw" stroke-width="2.26" pathLength="1" d="M384.3 313.4A181.9 181.9 0 0 0 465.5 265.8"/><path class="tb" stroke-width="2.87" pathLength="1" d="M617.7 99.5A284.3 284.3 0 0 0 560.7 -36.2"/><path class="tr" stroke-width="2.08" pathLength="1" d="M30.2 107.7A307.3 307.3 0 0 0 56.0 264.7"/><path class="tw" stroke-width="0.73" pathLength="1" d="M451.9 222.4A143.4 143.4 0 0 0 478.6 153.1"/><path class="tw" stroke-width="1.88" pathLength="1" d="M488.0 49.0A176.2 176.2 0 0 0 423.2 -15.1"/><path class="tb" stroke-width="0.76" pathLength="1" d="M355.5 416.5A279.2 279.2 0 0 0 492.1 369.4"/><path class="tw" stroke-width="1.21" pathLength="1" d="M459.7 207.1A141.6 141.6 0 0 0 477.6 136.0"/><path class="tr" stroke-width="1.48" pathLength="1" d="M423.6 -18.2A179.0 179.0 0 0 0 333.8 -41.0"/><path class="tw" stroke-width="1.10" pathLength="1" d="M535.0 286.3A248.2 248.2 0 0 0 582.5 166.9"/><path class="tb" stroke-width="0.89" pathLength="1" d="M388.4 232.4A108.0 108.0 0 0 0 428.6 193.5"/><path class="tw" stroke-width="2.75" pathLength="1" d="M546.7 273.4A250.5 250.5 0 0 0 586.2 149.9"/><path class="tw" stroke-width="1.11" pathLength="1" d="M466.1 410.4A301.9 301.9 0 0 0 584.9 308.8"/><path class="tw" stroke-width="0.90" pathLength="1" d="M94.7 76.2A249.1 249.1 0 0 0 96.1 205.1"/><path class="tr" stroke-width="1.75" pathLength="1" d="M-7.9 232.5A356.6 356.6 0 0 0 85.4 391.7"/><path class="tw" stroke-width="1.21" pathLength="1" d="M17.9 106.9A319.6 319.6 0 0 0 44.9 270.1"/><path class="tw" stroke-width="0.70" pathLength="1" d="M175.8 99.2A164.8 164.8 0 0 0 177.9 184.5"/><path class="tw" stroke-width="0.98" pathLength="1" d="M253.8 264.9A151.1 151.1 0 0 0 328.3 288.9"/><path class="tr" stroke-width="2.29" pathLength="1" d="M253.7 259.0A146.3 146.3 0 0 0 325.3 283.9"/><path class="tw" stroke-width="2.78" pathLength="1" d="M274.4 359.6A230.0 230.0 0 0 0 393.5 360.7"/><path class="tw" stroke-width="0.70" pathLength="1" d="M235.1 261.6A159.5 159.5 0 0 0 310.4 295.5"/><path class="tw" stroke-width="0.70" pathLength="1" d="M-20.7 363.5A422.1 422.1 0 0 0 139.8 511.7"/><path class="tb" stroke-width="0.74" pathLength="1" d="M413.2 66.3A105.3 105.3 0 0 0 367.0 37.3"/><path class="tw" stroke-width="1.24" pathLength="1" d="M477.0 107.4A144.2 144.2 0 0 0 442.8 41.0"/><path class="tw" stroke-width="2.36" pathLength="1" d="M-30.3 356.0A426.2 426.2 0 0 0 127.8 509.9"/><path class="tb" stroke-width="0.71" pathLength="1" d="M608.5 -5.2A307.8 307.8 0 0 0 500.4 -122.2"/><path class="tw" stroke-width="0.75" pathLength="1" d="M628.6 188.8A296.9 296.9 0 0 0 614.8 35.7"/><path class="tb" stroke-width="1.79" pathLength="1" d="M528.1 299.8A251.1 251.1 0 0 0 583.2 182.1"/><path class="tb" stroke-width="1.63" pathLength="1" d="M37.9 256.0A320.6 320.6 0 0 0 136.8 389.3"/><path class="tw" stroke-width="1.70" pathLength="1" d="M155.5 154.5A181.2 181.2 0 0 0 188.0 242.6"/><path class="tr" stroke-width="2.47" pathLength="1" d="M389.4 35.3A115.8 115.8 0 0 0 330.9 22.4"/><path class="tr" stroke-width="0.71" pathLength="1" d="M380.5 306.4A174.2 174.2 0 0 0 458.7 261.6"/><path class="tw" stroke-width="1.44" pathLength="1" d="M68.5 125.1A267.8 267.8 0 0 0 97.9 260.5"/><path class="tw" stroke-width="0.90" pathLength="1" d="M275.5 432.8A300.9 300.9 0 0 0 431.0 423.5"/><path class="tw" stroke-width="0.71" pathLength="1" d="M409.3 9.0A148.4 148.4 0 0 0 335.0 -10.4"/><path class="tw" stroke-width="2.87" pathLength="1" d="M529.8 121.5A194.5 194.5 0 0 0 495.5 26.8"/><path class="tb" stroke-width="0.99" pathLength="1" d="M47.5 189.7A293.1 293.1 0 0 0 112.0 327.0"/><path class="tw" stroke-width="0.88" pathLength="1" d="M328.4 353.0A215.2 215.2 0 0 0 436.9 328.0"/><path class="tb" stroke-width="0.88" pathLength="1" d="M5.5 265.0A354.1 354.1 0 0 0 113.2 413.2"/><path class="tw" stroke-width="2.37" pathLength="1" d="M526.3 -30.1A254.0 254.0 0 0 0 416.7 -102.8"/><path class="tr" stroke-width="1.40" pathLength="1" d="M565.1 281.3A270.2 270.2 0 0 0 606.1 147.5"/><path class="tb" stroke-width="0.92" pathLength="1" d="M147.1 284.4A239.0 239.0 0 0 0 245.6 359.2"/><path class="tw" stroke-width="0.70" pathLength="1" d="M43.1 2.8A322.6 322.6 0 0 0 14.8 167.4"/><path class="tw" stroke-width="0.80" pathLength="1" d="M41.3 66.4A303.3 303.3 0 0 0 45.0 223.3"/><path class="tw" stroke-width="1.51" pathLength="1" d="M126.3 77.8A218.2 218.2 0 0 0 124.3 190.7"/><path class="tw" stroke-width="0.71" pathLength="1" d="M422.9 374.1A251.6 251.6 0 0 0 529.4 299.0"/><path class="tw" stroke-width="1.16" pathLength="1" d="M331.8 154.0A16.6 16.6 0 0 0 340.4 154.0"/><path class="tw" stroke-width="2.06" pathLength="1" d="M334.6 381.9A243.9 243.9 0 0 0 456.7 349.9"/><path class="tr" stroke-width="1.59" pathLength="1" d="M203.8 427.1A317.9 317.9 0 0 0 366.0 454.5"/><path class="tw" stroke-width="2.43" pathLength="1" d="M122.4 421.1A354.7 354.7 0 0 0 292.6 490.0"/><path class="tw" stroke-width="2.27" pathLength="1" d="M346.1 271.0A133.3 133.3 0 0 0 411.2 248.1"/><path class="tw" stroke-width="1.71" pathLength="1" d="M287.1 172.0A59.6 59.6 0 0 0 310.7 191.9"/><path class="tw" stroke-width="0.70" pathLength="1" d="M430.5 253.7A149.4 149.4 0 0 0 475.7 191.0"/><path class="tw" stroke-width="0.70" pathLength="1" d="M476.8 229.1A167.7 167.7 0 0 0 503.5 146.5"/><path class="tw" stroke-width="2.60" pathLength="1" d="M590.7 -34.5A307.6 307.6 0 0 0 470.3 -138.8"/><path class="tr" stroke-width="2.39" pathLength="1" d="M332.5 373.1A235.1 235.1 0 0 0 450.5 343.4"/><path class="tw" stroke-width="0.81" pathLength="1" d="M-2.3 322.0A385.1 385.1 0 0 0 135.0 466.5"/><path class="tw" stroke-width="0.70" pathLength="1" d="M20.4 157.8A316.2 316.2 0 0 0 72.6 312.9"/><path class="tb" stroke-width="0.83" pathLength="1" d="M211.3 111.3A127.5 127.5 0 0 0 214.7 177.3"/><path class="tr" stroke-width="1.83" pathLength="1" d="M230.0 160.3A108.4 108.4 0 0 0 255.3 210.4"/><path class="tw" stroke-width="1.11" pathLength="1" d="M-4.5 172.6A342.2 342.2 0 0 0 58.4 338.2"/><path class="tb" stroke-width="0.85" pathLength="1" d="M52.1 16.2A308.9 308.9 0 0 0 29.2 174.5"/><path class="tr" stroke-width="0.71" pathLength="1" d="M148.2 278.8A234.8 234.8 0 0 0 243.8 353.9"/><path class="tw" stroke-width="0.71" pathLength="1" d="M562.3 228.3A243.7 243.7 0 0 0 577.2 103.1"/><path class="tw" stroke-width="0.88" pathLength="1" d="M436.6 96.1A109.0 109.0 0 0 0 402.2 51.4"/><path class="tw" stroke-width="0.70" pathLength="1" d="M225.4 53.9A138.9 138.9 0 0 0 198.2 120.4"/><path class="tr" stroke-width="0.70" pathLength="1" d="M383.6 274.6A144.7 144.7 0 0 0 445.5 232.6"/><path class="tw" stroke-width="1.54" pathLength="1" d="M18.8 11.9A341.4 341.4 0 0 0 -1.8 187.4"/><path class="tb" stroke-width="2.53" pathLength="1" d="M422.2 238.0A132.0 132.0 0 0 0 460.6 181.5"/><path class="tw" stroke-width="0.81" pathLength="1" d="M125.9 39.4A232.0 232.0 0 0 0 104.8 157.7"/><path class="tw" stroke-width="0.71" pathLength="1" d="M97.3 -24.4A288.7 288.7 0 0 0 48.0 116.7"/><path class="tw" stroke-width="1.00" pathLength="1" d="M620.1 33.6A302.7 302.7 0 0 0 529.9 -94.4"/><path class="tw" stroke-width="1.38" pathLength="1" d="M46.5 400.4A390.7 390.7 0 0 0 216.5 510.0"/><path class="tw" stroke-width="0.71" pathLength="1" d="M598.0 291.8A303.9 303.9 0 0 0 639.8 140.2"/><path class="tw" stroke-width="0.71" pathLength="1" d="M263.6 92.3A85.6 85.6 0 0 0 250.4 134.7"/><path class="tr" stroke-width="1.39" pathLength="1" d="M498.2 268.3A208.1 208.1 0 0 0 541.7 169.8"/><path class="tw" stroke-width="0.70" pathLength="1" d="M539.5 218.1A218.7 218.7 0 0 0 552.3 105.6"/><path class="tr" stroke-width="1.58" pathLength="1" d="M612.9 279.7A311.1 311.1 0 0 0 646.7 122.3"/><path class="tw" stroke-width="0.80" pathLength="1" d="M232.9 328.8A216.9 216.9 0 0 0 342.2 354.8"/><path class="tw" stroke-width="0.70" pathLength="1" d="M-30.1 228.8A377.2 377.2 0 0 0 64.3 399.7"/><path class="tw" stroke-width="0.71" pathLength="1" d="M293.5 145.8A43.2 43.2 0 0 0 303.1 166.0"/><path class="tb" stroke-width="0.70" pathLength="1" d="M86.0 214.4A261.4 261.4 0 0 0 157.7 329.1"/><path class="tr" stroke-width="1.86" pathLength="1" d="M483.7 229.9A173.9 173.9 0 0 0 509.8 143.7"/><path class="tw" stroke-width="1.98" pathLength="1" d="M414.8 316.2A194.9 194.9 0 0 0 493.4 252.9"/><path class="tb" stroke-width="0.81" pathLength="1" d="M576.3 139.6A240.3 240.3 0 0 0 544.9 19.2"/><path class="tw" stroke-width="0.70" pathLength="1" d="M15.7 7.9A345.7 345.7 0 0 0 -6.5 185.5"/><path class="tb" stroke-width="0.70" pathLength="1" d="M419.8 56.4A117.0 117.0 0 0 0 367.8 25.5"/><path class="tr" stroke-width="2.23" pathLength="1" d="M430.1 424.5A301.6 301.6 0 0 0 560.8 339.1"/><path class="tw" stroke-width="1.07" pathLength="1" d="M602.6 313.6A319.2 319.2 0 0 0 654.7 156.8"/><path class="tw" stroke-width="0.93" pathLength="1" d="M5.7 132.1A330.3 330.3 0 0 0 47.0 298.0"/><path class="tw" stroke-width="1.28" pathLength="1" d="M309.7 244.8A109.9 109.9 0 0 0 366.6 243.6"/><path class="tb" stroke-width="2.08" pathLength="1" d="M454.0 123.3A118.9 118.9 0 0 0 430.8 66.2"/><path class="tw" stroke-width="2.77" pathLength="1" d="M-12.3 280.6A376.4 376.4 0 0 0 105.6 435.7"/><path class="tw" stroke-width="0.70" pathLength="1" d="M-33.9 63.6A377.3 377.3 0 0 0 -21.5 258.5"/><path class="tr" stroke-width="0.85" pathLength="1" d="M418.1 255.5A143.4 143.4 0 0 0 465.9 198.7"/><path class="tw" stroke-width="2.15" pathLength="1" d="M-14.8 361.1A415.7 415.7 0 0 0 143.7 506.6"/><path class="tb" stroke-width="1.27" pathLength="1" d="M191.8 59.0A164.4 164.4 0 0 0 171.6 141.7"/><path class="tw" stroke-width="0.70" pathLength="1" d="M157.9 277.7A226.4 226.4 0 0 0 251.6 348.0"/><path class="tw" stroke-width="2.35" pathLength="1" d="M590.0 -30.1A304.6 304.6 0 0 0 471.9 -134.6"/><path class="tw" stroke-width="2.27" pathLength="1" d="M369.4 -23.6A165.1 165.1 0 0 0 284.1 -18.7"/><path class="tw" stroke-width="0.79" pathLength="1" d="M133.4 254.5A233.7 233.7 0 0 0 218.8 340.2"/><path class="tr" stroke-width="1.92" pathLength="1" d="M243.7 422.4A299.0 299.0 0 0 0 398.2 430.4"/><path class="tw" stroke-width="0.74" pathLength="1" d="M556.3 -15.4A268.4 268.4 0 0 0 450.1 -105.0"/><path class="tw" stroke-width="1.14" pathLength="1" d="M326.4 20.4A117.9 117.9 0 0 0 268.9 41.0"/><path class="tw" stroke-width="2.01" pathLength="1" d="M228.5 253.4A157.7 157.7 0 0 0 300.6 291.7"/><path class="tb" stroke-width="0.73" pathLength="1" d="M37.5 42.3A313.5 313.5 0 0 0 29.6 204.4"/><path class="tr" stroke-width="1.32" pathLength="1" d="M583.7 311.4A302.3 302.3 0 0 0 637.2 164.3"/><path class="tb" stroke-width="2.17" pathLength="1" d="M6.9 252.9A348.6 348.6 0 0 0 108.4 402.0"/><path class="tw" stroke-width="1.72" pathLength="1" d="M266.2 134.1A69.9 69.9 0 0 0 273.6 169.5"/><path class="tr" stroke-width="0.71" pathLength="1" d="M607.1 -21.5A314.5 314.5 0 0 0 491.0 -135.7"/><path class="tw" stroke-width="0.70" pathLength="1" d="M533.1 257.2A230.4 230.4 0 0 0 566.3 142.7"/><path class="tw" stroke-width="1.30" pathLength="1" d="M263.8 317.2A193.2 193.2 0 0 0 363.0 329.3"/><path class="tr" stroke-width="0.87" pathLength="1" d="M17.3 6.4A344.8 344.8 0 0 0 -5.8 183.3"/><path class="tr" stroke-width="2.37" pathLength="1" d="M410.3 353.9A228.4 228.4 0 0 0 508.3 287.8"/><path class="tw" stroke-width="1.40" pathLength="1" d="M461.7 118.6A127.2 127.2 0 0 0 435.2 58.4"/><path class="tw" stroke-width="1.28" pathLength="1" d="M454.2 204.4A135.6 135.6 0 0 0 471.6 136.4"/><path class="tw" stroke-width="2.21" pathLength="1" d="M361.2 45.0A96.4 96.4 0 0 0 311.3 44.8"/><path class="tr" stroke-width="0.71" pathLength="1" d="M100.8 139.2A235.2 235.2 0 0 0 132.9 256.6"/><path class="tw" stroke-width="2.15" pathLength="1" d="M107.4 134.1A228.6 228.6 0 0 0 136.1 248.9"/><path class="tr" stroke-width="1.37" pathLength="1" d="M463.8 7.5A182.6 182.6 0 0 0 381.4 -38.9"/><path class="tw" stroke-width="0.84" pathLength="1" d="M-39.8 311.6A414.0 414.0 0 0 0 97.3 476.2"/><path class="tr" stroke-width="0.91" pathLength="1" d="M-26.1 68.4A368.7 368.7 0 0 0 -12.4 258.8"/><path class="tw" stroke-width="0.70" pathLength="1" d="M365.2 262.4A127.8 127.8 0 0 0 423.5 231.1"/><path class="tw" stroke-width="0.70" pathLength="1" d="M103.7 419.1A364.7 364.7 0 0 0 275.3 497.6"/><path class="tb" stroke-width="2.57" pathLength="1" d="M397.0 94.7A74.8 74.8 0 0 0 367.2 70.1"/><path class="tr" stroke-width="0.85" pathLength="1" d="M117.1 361.5A312.9 312.9 0 0 0 258.2 441.0"/></g>
+              <circle class="vf__target" cx="336" cy="138" r="16"/>
+              <circle class="vf__polaris" cx="339.5" cy="134.5" r="3.2"/>
+              <g class="vf__ret">
+                <circle cx="336" cy="138" r="26"/>
+                <circle class="faint" cx="336" cy="138" r="9"/>
+                <path d="M336 104v14M336 158v14M302 138h14M356 138h14"/>
+              </g>
+              <path class="vf__marks" d="M12 36V12H36M564 12H588V36M588 364V388H564M36 388H12V364"/>
+            </svg>
+            <div class="vf__hud">
+              <div class="vf__top">
+                <p class="vf__mode">
+                  <span><i></i>Fixed tripod, shutter open</span>
+                  <span><i></i>Perigee tracking</span>
+                  <span><i></i>Polar alignment</span>
+                </p>
+                <p class="vf__read">Star drift<b data-drift>0.0°</b></p>
+              </div>
+              <div></div>
+              <div class="vf__foot">
+                <div class="vf__count">
+                  <span class="vf__left">Seconds to aligned</span>
+                  <span class="vf__done"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Aligned on the pole</span>
+                  <span class="figure" aria-hidden="true">
+                    <span class="roll" data-roll>
+                      <span class="roll__d"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span><span class="roll__d"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span>
+                    </span><small>s</small>
+                  </span>
+                  <span class="sr-only" aria-live="polite" data-roll-live></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="unit" aria-hidden="true"><svg viewBox="0 0 260 300"><use href="#perigee-front"/></svg></div>
+          <figcaption class="sr-only">A camera’s view of the northern sky. On a fixed tripod the stars draw arcs around the pole; with Perigee tracking they stay points; during alignment a reticle settles on the pole.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="specs" id="specs" aria-labelledby="specs-h">
+    <div class="wrap sec">
+      <span class="gnum" aria-hidden="true">04</span>
+      <div>
+        <h2 id="specs-h">Specifications</h2>
+        <p class="lede">The four numbers that decide whether a tracker comes along to a dark site.</p>
+        <dl class="specgrid">
+          <div class="spec">
+            <dt>Weight</dt>
+            <dd class="fig">640<small>g</small></dd>
+            <dd class="ev">
+              <svg class="ev--pocket" viewBox="0 0 88 64" aria-hidden="true"><circle class="puck" cx="44" cy="16" r="13"/><circle class="puck-ring" cx="44" cy="16" r="8"/><path class="cloth" d="M10 20H78V44C78 54 62 60 44 60S10 54 10 44Z"/><path class="cloth" d="M15 25H73V43C73 51 60 55 44 55S15 51 15 43Z" stroke-dasharray="2 3"/></svg>
+            </dd>
+            <dd class="note">Pocket-sized. It rides in a jacket, not a case.</dd>
+          </div>
+          <div class="spec">
+            <dt>Payload</dt>
+            <dd class="fig">5<small>kg</small></dd>
+            <dd class="ev bars" aria-hidden="true">
+              <span class="bar"><span>Perigee</span><i style="--v: 0.128"></i></span>
+              <span class="bar bar--load"><span>Payload</span><i style="--v: 1"></i></span>
+            </dd>
+            <dd class="note"><b>7.8 times</b> its own weight, camera and lens included.</dd>
+          </div>
+          <div class="spec">
+            <dt>Battery</dt>
+            <dd class="fig">20<small>h</small></dd>
+            <dd class="ev ev--ring" aria-hidden="true">
+              <svg class="ring" viewBox="0 0 64 64"><circle class="track" cx="32" cy="32" r="26"/><circle class="val" cx="32" cy="32" r="26" stroke-dasharray="136.1 163.4"/></svg>
+              <span>20 of 24<br>hours</span>
+            </dd>
+            <dd class="note">Tracking time on one charge.</dd>
+          </div>
+          <div class="spec">
+            <dt>Polar alignment</dt>
+            <dd class="fig"><span class="approx">~</span>90<small>s</small></dd>
+            <dd class="ev">
+              <svg class="ev--ret" viewBox="0 0 64 64" aria-hidden="true"><circle class="t" cx="32" cy="32" r="27"/><circle cx="32" cy="32" r="11"/><path d="M32 6v12M32 46v12M6 32h12M46 32h12"/><circle cx="32" cy="32" r="1.5"/></svg>
+            </dd>
+            <dd class="note">Automatic, with the built-in camera. No polar scope to squint through.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="order" id="preorder" aria-labelledby="order-h">
+    <div class="wrap sec">
+      <span class="gnum" aria-hidden="true">05</span>
+      <div>
+        <h2 id="order-h">Pre-order for March</h2>
+        <div class="order__grid">
+          <div class="order__art" aria-hidden="true">
+            <svg class="dial" viewBox="0 0 600 600" data-depth="1">
+              <ellipse class="orbit" cx="300" cy="300" rx="214" ry="120" transform="rotate(-24 300 300)"/>
+              <circle class="peri" cx="104.5" cy="387" r="6"/>
+              <path class="ticks" d="M312.2 20.3L312.7 8.3M324.4 21.1L325.4 9.1M336.5 22.4L338.1 10.5M348.6 24.3L350.7 12.4M360.6 26.6L363.2 14.9M384.2 33.0L387.8 21.5M395.8 36.9L399.9 25.6M407.2 41.3L411.7 30.2M418.3 46.2L423.4 35.4M429.3 51.6L434.8 41.0M450.4 63.9L456.9 53.7M460.6 70.6L467.5 60.8M470.5 77.9L477.8 68.3M480.0 85.5L487.7 76.3M489.2 93.6L497.3 84.7M506.4 110.8L515.3 102.7M514.5 120.0L523.7 112.3M522.1 129.5L531.7 122.2M529.4 139.4L539.2 132.5M536.1 149.6L546.3 143.1M548.4 170.7L559.0 165.2M553.8 181.7L564.6 176.6M558.7 192.8L569.8 188.3M563.1 204.2L574.4 200.1M567.0 215.8L578.5 212.2M573.4 239.4L585.1 236.8M575.7 251.4L587.6 249.3M577.6 263.5L589.5 261.9M578.9 275.6L590.9 274.6M579.7 287.8L591.7 287.3M579.7 312.2L591.7 312.7M578.9 324.4L590.9 325.4M577.6 336.5L589.5 338.1M575.7 348.6L587.6 350.7M573.4 360.6L585.1 363.2M567.0 384.2L578.5 387.8M563.1 395.8L574.4 399.9M558.7 407.2L569.8 411.7M553.8 418.3L564.6 423.4M548.4 429.3L559.0 434.8M536.1 450.4L546.3 456.9M529.4 460.6L539.2 467.5M522.1 470.5L531.7 477.8M514.5 480.0L523.7 487.7M506.4 489.2L515.3 497.3M489.2 506.4L497.3 515.3M480.0 514.5L487.7 523.7M470.5 522.1L477.8 531.7M460.6 529.4L467.5 539.2M450.4 536.1L456.9 546.3M429.3 548.4L434.8 559.0M418.3 553.8L423.4 564.6M407.2 558.7L411.7 569.8M395.8 563.1L399.9 574.4M384.2 567.0L387.8 578.5M360.6 573.4L363.2 585.1M348.6 575.7L350.7 587.6M336.5 577.6L338.1 589.5M324.4 578.9L325.4 590.9M312.2 579.7L312.7 591.7M287.8 579.7L287.3 591.7M275.6 578.9L274.6 590.9M263.5 577.6L261.9 589.5M251.4 575.7L249.3 587.6M239.4 573.4L236.8 585.1M215.8 567.0L212.2 578.5M204.2 563.1L200.1 574.4M192.8 558.7L188.3 569.8M181.7 553.8L176.6 564.6M170.7 548.4L165.2 559.0M149.6 536.1L143.1 546.3M139.4 529.4L132.5 539.2M129.5 522.1L122.2 531.7M120.0 514.5L112.3 523.7M110.8 506.4L102.7 515.3M93.6 489.2L84.7 497.3M85.5 480.0L76.3 487.7M77.9 470.5L68.3 477.8M70.6 460.6L60.8 467.5M63.9 450.4L53.7 456.9M51.6 429.3L41.0 434.8M46.2 418.3L35.4 423.4M41.3 407.2L30.2 411.7M36.9 395.8L25.6 399.9M33.0 384.2L21.5 387.8M26.6 360.6L14.9 363.2M24.3 348.6L12.4 350.7M22.4 336.5L10.5 338.1M21.1 324.4L9.1 325.4M20.3 312.2L8.3 312.7M20.3 287.8L8.3 287.3M21.1 275.6L9.1 274.6M22.4 263.5L10.5 261.9M24.3 251.4L12.4 249.3M26.6 239.4L14.9 236.8M33.0 215.8L21.5 212.2M36.9 204.2L25.6 200.1M41.3 192.8L30.2 188.3M46.2 181.7L35.4 176.6M51.6 170.7L41.0 165.2M63.9 149.6L53.7 143.1M70.6 139.4L60.8 132.5M77.9 129.5L68.3 122.2M85.5 120.0L76.3 112.3M93.6 110.8L84.7 102.7M110.8 93.6L102.7 84.7M120.0 85.5L112.3 76.3M129.5 77.9L122.2 68.3M139.4 70.6L132.5 60.8M149.6 63.9L143.1 53.7M170.7 51.6L165.2 41.0M181.7 46.2L176.6 35.4M192.8 41.3L188.3 30.2M204.2 36.9L200.1 25.6M215.8 33.0L212.2 21.5M239.4 26.6L236.8 14.9M251.4 24.3L249.3 12.4M263.5 22.4L261.9 10.5M275.6 21.1L274.6 9.1M287.8 20.3L287.3 8.3"/><path class="ticks-major" d="M300.0 32.0L300.0 8.0M369.4 41.1L375.6 17.9M434.0 67.9L446.0 47.1M489.5 110.5L506.5 93.5M532.1 166.0L552.9 154.0M558.9 230.6L582.1 224.4M568.0 300.0L592.0 300.0M558.9 369.4L582.1 375.6M532.1 434.0L552.9 446.0M489.5 489.5L506.5 506.5M434.0 532.1L446.0 552.9M369.4 558.9L375.6 582.1M300.0 568.0L300.0 592.0M230.6 558.9L224.4 582.1M166.0 532.1L154.0 552.9M110.5 489.5L93.5 506.5M67.9 434.0L47.1 446.0M41.1 369.4L17.9 375.6M32.0 300.0L8.0 300.0M41.1 230.6L17.9 224.4M67.9 166.0L47.1 154.0M110.5 110.5L93.5 93.5M166.0 67.9L154.0 47.1M230.6 41.1L224.4 17.9"/><text x="300.0" y="67.0" text-anchor="middle">0h</text><text x="469.7" y="137.3" text-anchor="middle">3h</text><text x="540.0" y="307.0" text-anchor="middle">6h</text><text x="469.7" y="476.7" text-anchor="middle">9h</text><text x="300.0" y="547.0" text-anchor="middle">12h</text><text x="130.3" y="476.7" text-anchor="middle">15h</text><text x="60.0" y="307.0" text-anchor="middle">18h</text><text x="130.3" y="137.3" text-anchor="middle">21h</text>
+            </svg>
+            <div class="order__unit" data-depth="0.35"><svg viewBox="0 0 260 300"><use href="#perigee-front"/></svg></div>
+          </div>
+          <div class="panel">
+            <p class="price num"><sup>$</sup>349</p>
+            <p class="ship">
+              <span><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Ships in March</span>
+              <span><svg class="icon" aria-hidden="true"><use href="#i-box"/></svg>640 g, 5 kg payload, 20 h</span>
+            </p>
+            <form class="form" novalidate>
+              <label for="email">Email for your pre-order</label>
+              <div class="input">
+                <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com" aria-describedby="email-help">
+              </div>
+              <p class="help" id="email-help" aria-live="polite"><span>We will write once, when your Perigee ships.</span></p>
+              <button class="btn btn--primary btn--lg" type="submit">
+                <span class="btn__idle">Pre-order for $349</span>
+                <span class="btn__busy"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M14 8a6 6 0 0 0-6-6"/></svg>Reserving</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><ellipse class="orbit" cx="15" cy="14" rx="11.5" ry="7" transform="rotate(-24 15 14)"/><circle class="body" cx="15" cy="14" r="3.25"/><circle class="peri" cx="5.3" cy="18.2" r="2.25"/></svg>
+      Perigee
+    </a>
+    <p>A pocket star tracker for astrophotography.</p>
+    <nav aria-label="Footer">
+      <a href="#how">How it works</a>
+      <a href="#specs">Specifications</a>
+      <a href="#preorder">Pre-order</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
